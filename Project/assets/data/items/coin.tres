@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dwjomx0pywg1n"]
+
+[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_1rbfy"]
+[ext_resource type="Script" path="res://assets/data/model/item.gd" id="1_6mdut"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nlwp"]
+atlas = ExtResource("1_1rbfy")
+region = Rect2(60, 0, 10, 10)
+filter_clip = true
+
+[resource]
+script = ExtResource("1_6mdut")
+name = "Coin"
+icon = SubResource("AtlasTexture_1nlwp")
+stack = 0
+stack_size = 9999

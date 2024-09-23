@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MeleeItem" load_steps=4 format=3 uid="uid://b6iewkldjgof1"]
+
+[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_344xl"]
+[ext_resource type="Script" path="res://assets/data/model/melee_item.gd" id="2_8ulrl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bd75o"]
+atlas = ExtResource("1_344xl")
+region = Rect2(140, 90, 10, 10)
+filter_clip = true
+
+[resource]
+script = ExtResource("2_8ulrl")
+name = "Sword"
+icon = SubResource("AtlasTexture_bd75o")
+stack = 0
+stack_size = 0

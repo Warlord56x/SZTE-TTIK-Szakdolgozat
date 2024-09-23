@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dr8mvhnt8sq40"]
+
+[ext_resource type="Script" path="res://assets/player/wheel.gd" id="1_h501d"]
+[ext_resource type="PackedScene" uid="uid://psxpi7w48ool" path="res://assets/player/wheel_item.tscn" id="2_hlwiv"]
+[ext_resource type="Script" path="res://assets/player/wheel_item.gd" id="3_8mbqn"]
+
+[node name="Wheel" type="Container"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_h501d")
+
+[node name="WheelItem" parent="." instance=ExtResource("2_hlwiv")]
+layout_mode = 2
+script = ExtResource("3_8mbqn")
+item = 1
+
+[node name="WheelItem2" parent="." instance=ExtResource("2_hlwiv")]
+layout_mode = 2
+script = ExtResource("3_8mbqn")
+
+[node name="WheelItem3" parent="." instance=ExtResource("2_hlwiv")]
+layout_mode = 2
+script = ExtResource("3_8mbqn")
+
+[node name="WheelItem4" parent="." instance=ExtResource("2_hlwiv")]
+layout_mode = 2
+script = ExtResource("3_8mbqn")
+item = 2

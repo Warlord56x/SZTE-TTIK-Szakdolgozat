@@ -1,0 +1,134 @@
+[gd_scene load_steps=8 format=3 uid="uid://b48238adp4jvl"]
+
+[ext_resource type="PackedScene" uid="uid://bs3jtxgr4bsgm" path="res://test_ui/item.tscn" id="1_2i3ng"]
+[ext_resource type="Texture2D" uid="uid://b56yuohg3adg7" path="res://nin_sprites.png" id="1_weic0"]
+[ext_resource type="SpriteFrames" uid="uid://b3prc3wyms6o0" path="res://test_ui/item_frames.tres" id="2_5wgov"]
+[ext_resource type="Script" path="res://test_ui/slot.gd" id="2_v1aq1"]
+[ext_resource type="Script" path="res://test_ui/inventory.gd" id="3_1ixlr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyj2m"]
+atlas = ExtResource("1_weic0")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vp785"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyj2m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TestUI2" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/BoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ItemSlots" type="GridContainer" parent="Panel/BoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WeaponSlot" type="Button" parent="Panel/BoxContainer/MarginContainer/HBoxContainer/ItemSlots"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_v1aq1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/BoxContainer/MarginContainer/HBoxContainer/ItemSlots/WeaponSlot"]
+scale = Vector2(5, 5)
+sprite_frames = ExtResource("2_5wgov")
+offset = Vector2(5, 5)
+
+[node name="ArmorSlot" type="Button" parent="Panel/BoxContainer/MarginContainer/HBoxContainer/ItemSlots"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_v1aq1")
+type = 1
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Panel/BoxContainer/MarginContainer/HBoxContainer/ItemSlots/ArmorSlot"]
+scale = Vector2(5, 5)
+sprite_frames = ExtResource("2_5wgov")
+offset = Vector2(5, 5)
+
+[node name="Control" type="Control" parent="Panel/BoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/BoxContainer/MarginContainer/HBoxContainer/Control"]
+scale = Vector2(20, 20)
+sprite_frames = SubResource("SpriteFrames_vp785")
+offset = Vector2(5, 5)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/BoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Inventory" type="GridContainer" parent="Panel/BoxContainer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+columns = 5
+script = ExtResource("3_1ixlr")
+
+[node name="Item" parent="Panel/BoxContainer/ScrollContainer/MarginContainer/Inventory" instance=ExtResource("1_2i3ng")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Sword"
+item_name = "Sword"
+frame = 3
+
+[node name="Item2" parent="Panel/BoxContainer/ScrollContainer/MarginContainer/Inventory" instance=ExtResource("1_2i3ng")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Bow"
+item_name = "Bow"
+frame = 4
+
+[node name="Item3" parent="Panel/BoxContainer/ScrollContainer/MarginContainer/Inventory" instance=ExtResource("1_2i3ng")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Spell"
+item_type = 1
+item_name = "Spell"
+frame = 5

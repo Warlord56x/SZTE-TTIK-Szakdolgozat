@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://ds24204v1omvp"]
+
+[ext_resource type="Script" path="res://assets/objects/trap.gd" id="1_cjih7"]
+[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="2_dx2ra"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wyalo"]
+size = Vector2(8, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_es4bd"]
+atlas = ExtResource("2_dx2ra")
+region = Rect2(140, 10, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m573b"]
+atlas = ExtResource("2_dx2ra")
+region = Rect2(150, 10, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xlvk8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_es4bd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m573b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Trap" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_cjih7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_wyalo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xlvk8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

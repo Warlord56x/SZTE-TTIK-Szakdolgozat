@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bs3jtxgr4bsgm"]
+
+[ext_resource type="Script" path="res://test_ui/item.gd" id="1_v4lq0"]
+[ext_resource type="SpriteFrames" uid="uid://b3prc3wyms6o0" path="res://test_ui/item_frames.tres" id="2_s7llg"]
+
+[node name="Item" type="Button"]
+text = "asd"
+script = ExtResource("1_v4lq0")
+frame = null
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(5, 5)
+sprite_frames = ExtResource("2_s7llg")
+offset = Vector2(5, 5)

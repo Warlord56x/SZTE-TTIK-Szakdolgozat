@@ -1,0 +1,139 @@
+[gd_scene load_steps=20 format=3 uid="uid://d34pc2g4hgfyl"]
+
+[ext_resource type="Script" path="res://assets/enemies/mage/mage.gd" id="1_02mhk"]
+[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_ipxbu"]
+[ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_2w5tj"]
+[ext_resource type="Script" path="res://assets/enemies/states/state_idle.gd" id="3_d63xr"]
+[ext_resource type="Script" path="res://assets/enemies/states/state_combat.gd" id="5_3men6"]
+[ext_resource type="Script" path="res://assets/enemies/states/state_fall.gd" id="6_plq2j"]
+[ext_resource type="Script" path="res://assets/enemies/states/state_chase.gd" id="6_y5woy"]
+[ext_resource type="Shader" path="res://assets/player/test.gdshader" id="7_2a0m2"]
+[ext_resource type="AudioStream" uid="uid://82jihjn8dema" path="res://assets/sounds/568169__merrick079__sword-sound-2.wav" id="9_71hwb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lruuv"]
+size = Vector2(8, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_acyor"]
+shader = ExtResource("7_2a0m2")
+shader_parameter/blend = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j10rx"]
+atlas = ExtResource("1_ipxbu")
+region = Rect2(90, 60, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjiig"]
+atlas = ExtResource("1_ipxbu")
+region = Rect2(110, 60, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1q0qm"]
+atlas = ExtResource("1_ipxbu")
+region = Rect2(90, 60, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nafqg"]
+atlas = ExtResource("1_ipxbu")
+region = Rect2(90, 60, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1nb3"]
+atlas = ExtResource("1_ipxbu")
+region = Rect2(100, 60, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gby2t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j10rx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjiig")
+}],
+"loop": false,
+"name": &"cast",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1q0qm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nafqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1nb3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nafqg")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c5ksi"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o8ani"]
+size = Vector2(100, 100)
+
+[node name="Mage" type="CharacterBody2D"]
+collision_mask = 3
+script = ExtResource("1_02mhk")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_2w5tj")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_d63xr")
+
+[node name="Combat" type="Node" parent="StateMachine"]
+script = ExtResource("5_3men6")
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("6_y5woy")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("6_plq2j")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lruuv")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_acyor")
+sprite_frames = SubResource("SpriteFrames_gby2t")
+animation = &"cast"
+autoplay = "default"
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_c5ksi")
+
+[node name="DetectRange" type="Area2D" parent="."]
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
+shape = SubResource("RectangleShape2D_o8ani")
+
+[node name="AttackTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 1.5
+
+[node name="ChaseTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_71hwb")
+volume_db = -3.0
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]
+[connection signal="body_exited" from="DetectRange" to="." method="_on_detect_range_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="StateMachine/Combat" method="_on_p_timer_timeout"]
+[connection signal="timeout" from="ChaseTimer" to="StateMachine/Chase" method="chase_finished"]

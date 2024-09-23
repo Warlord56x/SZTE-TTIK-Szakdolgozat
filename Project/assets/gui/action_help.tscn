@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpg8ab2biymnb"]
+
+[ext_resource type="Script" path="res://assets/gui/action_help.gd" id="1_i3ubn"]
+[ext_resource type="SpriteFrames" uid="uid://dk6vbx22r2f4q" path="res://assets/gui/resources/action_help.tres" id="2_0b3wp"]
+
+[node name="ActionHelp" type="Control"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_i3ubn")
+
+[node name="Anim" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_0b3wp")
+animation = &"button_a"
+offset = Vector2(4, 4)

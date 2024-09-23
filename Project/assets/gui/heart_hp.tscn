@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://c88pf7h6w1k3u"]
+
+[ext_resource type="Script" path="res://assets/gui/heart.gd" id="1_uddan"]
+[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="2_ttme2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccvcg"]
+atlas = ExtResource("2_ttme2")
+region = Rect2(150, 20, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26jc7"]
+atlas = ExtResource("2_ttme2")
+region = Rect2(100, 20, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecfi3"]
+atlas = ExtResource("2_ttme2")
+region = Rect2(110, 20, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhxl4"]
+atlas = ExtResource("2_ttme2")
+region = Rect2(120, 20, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2pbr"]
+atlas = ExtResource("2_ttme2")
+region = Rect2(130, 20, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54bji"]
+atlas = ExtResource("2_ttme2")
+region = Rect2(140, 20, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dnqcp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ccvcg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26jc7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecfi3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yhxl4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2pbr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_54bji")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="HeartHP" type="Control" node_paths=PackedStringArray("heart")]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 10.0
+offset_bottom = 10.0
+script = ExtResource("1_uddan")
+heart = NodePath("Heart")
+
+[node name="Heart" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dnqcp")
+frame = 4
+offset = Vector2(4, 4)

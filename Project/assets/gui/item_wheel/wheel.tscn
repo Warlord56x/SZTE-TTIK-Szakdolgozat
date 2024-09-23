@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr8mvhnt8sq40"]
+
+[ext_resource type="Script" path="res://assets/gui/item_wheel/wheel.gd" id="1_h501d"]
+[ext_resource type="PackedScene" uid="uid://psxpi7w48ool" path="res://assets/gui/item_wheel/wheel_item.tscn" id="2_hlwiv"]
+
+[node name="Wheel" type="Container"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_h501d")
+
+[node name="WheelItem" parent="." instance=ExtResource("2_hlwiv")]
+layout_mode = 2
+focus = true
+
+[node name="WheelItem2" parent="." instance=ExtResource("2_hlwiv")]
+layout_mode = 2
+
+[node name="WheelItem3" parent="." instance=ExtResource("2_hlwiv")]
+layout_mode = 2
+
+[node name="WheelItem4" parent="." instance=ExtResource("2_hlwiv")]
+layout_mode = 2
+
+[node name="WheelItem5" parent="." instance=ExtResource("2_hlwiv")]
+layout_mode = 2
+
+[node name="WheelItem6" parent="." instance=ExtResource("2_hlwiv")]
+layout_mode = 2
+
+[node name="WheelItem7" parent="." instance=ExtResource("2_hlwiv")]
+layout_mode = 2
+
+[node name="WheelItem8" parent="." instance=ExtResource("2_hlwiv")]
+layout_mode = 2

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://nm700l5u165"]
+
+[ext_resource type="PackedScene" uid="uid://dxhjvt705i3g8" path="res://assets/objects/_ladder.tscn" id="1_4ol02"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3egd8"]
+size = Vector2(10, 1)
+
+[node name="LadderTop" type="Node2D"]
+
+[node name="Ladder" parent="." instance=ExtResource("1_4ol02")]
+ladder_state = 0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_3egd8")
+one_way_collision = true

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RangedItem" load_steps=4 format=3 uid="uid://2nlg1ktbcmbt"]
+
+[ext_resource type="Script" path="res://assets/data/model/ranged_item.gd" id="1_1ffww"]
+[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_bu0uw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0gc8"]
+atlas = ExtResource("1_bu0uw")
+region = Rect2(0, 50, 10, 10)
+filter_clip = true
+
+[resource]
+script = ExtResource("1_1ffww")
+name = "Fireball"
+icon = SubResource("AtlasTexture_w0gc8")
+stack = 0
+stack_size = 0

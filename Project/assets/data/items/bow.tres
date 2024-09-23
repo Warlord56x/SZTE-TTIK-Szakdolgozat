@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RangedItem" load_steps=4 format=3 uid="uid://hd2muhlnrdsc"]
+
+[ext_resource type="Script" path="res://assets/data/model/ranged_item.gd" id="1_b384f"]
+[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_owxrb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ul4yj"]
+atlas = ExtResource("1_owxrb")
+region = Rect2(10, 50, 10, 10)
+filter_clip = true
+
+[resource]
+script = ExtResource("1_b384f")
+name = "Bow"
+icon = SubResource("AtlasTexture_ul4yj")
+stack = 20
+stack_size = 20
