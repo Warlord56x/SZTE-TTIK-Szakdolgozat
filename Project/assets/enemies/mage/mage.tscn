@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d34pc2g4hgfyl"]
+[gd_scene load_steps=19 format=3 uid="uid://d34pc2g4hgfyl"]
 
 [ext_resource type="Script" path="res://assets/enemies/mage/mage.gd" id="1_02mhk"]
 [ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_ipxbu"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://assets/enemies/states/state_fall.gd" id="6_plq2j"]
 [ext_resource type="Script" path="res://assets/enemies/states/state_chase.gd" id="6_y5woy"]
 [ext_resource type="Shader" path="res://assets/player/test.gdshader" id="7_2a0m2"]
-[ext_resource type="AudioStream" uid="uid://82jihjn8dema" path="res://assets/sounds/568169__merrick079__sword-sound-2.wav" id="9_71hwb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lruuv"]
 size = Vector2(8, 8)
@@ -127,10 +126,6 @@ wait_time = 1.5
 
 [node name="ChaseTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("9_71hwb")
-volume_db = -3.0
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]

@@ -17,9 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://bpg8ab2biymnb" path="res://assets/gui/action_help.tscn" id="8_5oe6t"]
 [ext_resource type="Script" path="res://assets/player/states/state_death.gd" id="8_8nrgl"]
 [ext_resource type="Script" path="res://assets/player/states/state_cast.gd" id="9_sy26o"]
-[ext_resource type="AudioStream" uid="uid://15g4sj5tgcno" path="res://assets/sounds/180837__32cheeseman32__swordswing01.wav" id="10_44s4n"]
 [ext_resource type="Script" path="res://assets/player/states/state_climb.gd" id="10_xs81r"]
 [ext_resource type="Script" path="res://assets/player/states/state_interact.gd" id="11_6y0kl"]
+[ext_resource type="AudioStream" uid="uid://82jihjn8dema" path="res://assets/sounds/568169__merrick079__sword-sound-2.wav" id="11_psku0"]
 [ext_resource type="PackedScene" uid="uid://dr8mvhnt8sq40" path="res://assets/gui/item_wheel/wheel.tscn" id="11_xmcr7"]
 [ext_resource type="Script" path="res://assets/player/camera.gd" id="20_w6pmk"]
 [ext_resource type="Shader" path="res://assets/player/test.gdshader" id="21_hreuu"]
@@ -1190,6 +1190,11 @@ wall_drain_time = 0.5
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
+[node name="SwordHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_psku0")
+volume_db = -3.0
+max_polyphony = 4
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_imbft")
 initial_state = NodePath("Default")
@@ -1212,10 +1217,6 @@ script = ExtResource("8_8nrgl")
 
 [node name="Cast" type="Node" parent="StateMachine"]
 script = ExtResource("9_sy26o")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="StateMachine/Cast"]
-stream = ExtResource("10_44s4n")
-volume_db = 8.0
 
 [node name="Climb" type="Node" parent="StateMachine"]
 script = ExtResource("10_xs81r")

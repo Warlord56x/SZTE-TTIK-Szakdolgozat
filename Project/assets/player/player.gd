@@ -61,6 +61,8 @@ enum player_res {
 @onready var health_time_waiter : Timer = Timer.new()
 @onready var health_time : Timer = Timer.new()
 
+@onready var sword_hit: AudioStreamPlayer2D = $SwordHit
+
 @onready var move_direction : Vector2 = Vector2.RIGHT
 
 var watch : Vector2i = Vector2i.ZERO
@@ -341,9 +343,9 @@ func hurt(damage: int, _dealer: Node2D = null) -> void:
 	add_child.call_deferred(damage_number)
 
 
-func knock_back(source_position: Vector2) -> void:
-	pushback_force = -global_position.direction_to(source_position)
-	pushback_force.y = MIN_JUMP_VELOCITY
+func knock_back(source_position: Vector2, intensity: float = 1.0) -> void:
+	pushback_force = -global_position.direction_to(source_position) * intensity
+	pushback_force.y = MIN_JUMP_VELOCITY * intensity
 	pushback_force.x *= SPEED
 
 
@@ -369,7 +371,8 @@ func _on_weapon_hitbox_body_entered(body : Node2D) -> void:
 	if body is Enemy and body.has_method("hurt"):
 		body = body as Enemy
 		body.hurt(1)
-		body.knock_back(global_position)
+		body.knock_back(global_position, 0.5)
+		sword_hit.play()
 
 
 func invincibility_timeout() -> void:

@@ -37,7 +37,6 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body != owner:
 		if body.has_method("hurt"):
 			body.hurt(1, owner)
-			body.knock_back(global_position)
 			print("from projectile: hit")
 
 		velocity = Vector2.ZERO
@@ -45,8 +44,12 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		match type:
 			0:
 				$AnimatedSprite2D.play("a_boom")
+				if body.has_method("knock_back"):
+					body.knock_back(global_position, 0.5)
 			1:
 				$AnimatedSprite2D.play("f_boom")
+				if body.has_method("knock_back"):
+					body.knock_back(global_position, 0.2)
 
 				var tween: Tween = create_tween()
 				tween.tween_property($PointLight2D, "energy", 0.0, 0.3)

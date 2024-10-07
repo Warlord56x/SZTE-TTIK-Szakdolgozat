@@ -102,9 +102,9 @@ func hurt(e_damage: int, _dealer: Node2D) -> void:
 	add_child(splatter)
 
 
-func knock_back(source_position: Vector2) -> void:
-	pushback_force = -global_position.direction_to(source_position)
-	pushback_force.y = min_jump_velocity
+func knock_back(source_position: Vector2, intensity: float = 1.0) -> void:
+	pushback_force = -global_position.direction_to(source_position) * intensity
+	pushback_force.y = min_jump_velocity * intensity
 	pushback_force.x *= movement_speed
 
 

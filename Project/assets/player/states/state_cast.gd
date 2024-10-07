@@ -2,7 +2,7 @@ extends State
 class_name StateCast
 
 const projectile: PackedScene = preload("res://assets/player/projectile.tscn")
-@onready var sword_swing := $AudioStreamPlayer2D
+
 
 @onready var player: Player = owner as Player
 
@@ -69,7 +69,6 @@ func enter() -> void:
 			travel("default")
 			return
 		player.weapon.animation = "sword"
-		sword_swing.play()
 
 		var tween : Tween = get_tree().create_tween()
 		tween.set_trans(Tween.TRANS_ELASTIC)

@@ -7,8 +7,6 @@ var movement_target_position: Vector2
 @onready var state_machine: StateMachine = $StateMachine
 @onready var sprite: AnimatedSprite2D = $Sprite
 
-@onready var sword_hurt: AudioStreamPlayer2D = $AudioStreamPlayer2D
-
 
 #region Navigation setup
 func _ready():
@@ -77,7 +75,6 @@ func hurt(e_damage : int, dealer: Node2D = null) -> void:
 	damage_number.damage_number = damage
 	damage_number.global_position = global_position
 	add_child.call_deferred(damage_number)
-	sword_hurt.play()
 
 	if dealer:
 		target = dealer
