@@ -30,11 +30,17 @@ func enter() -> void:
 	enemy.set_movement_target(enemy.global_position)
 
 
-func physics_process(_delta: float) -> void:
+func physics_process(delta: float) -> void:
 	enemy.move()
 	enemy.move_direction = sign(target.global_position.x - enemy.global_position.x)
+
 	if not enemy.is_on_floor():
-		enemy.state_machine.travel("fall")
+		# Want to avoid changing state since that resets the timer
+		#travel("fall")
+		enemy.velocity.y += enemy.gravity * delta
+
+		if enemy.move_direction:
+			enemy.velocity.x = move_toward(enemy.velocity.x, -enemy.move_direction * enemy.movement_speed, 10)
 
 
 func leave() -> void:

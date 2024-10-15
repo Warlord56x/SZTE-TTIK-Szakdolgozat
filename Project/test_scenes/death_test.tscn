@@ -1,0 +1,119 @@
+[gd_scene load_steps=14 format=3 uid="uid://d4m7xeugvefch"]
+
+[ext_resource type="Shader" path="res://test_scenes/death_test.gdshader" id="1_3hsyc"]
+[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_dxfki"]
+[ext_resource type="Shader" path="res://test_scenes/death_test2.gdshader" id="1_kb1b0"]
+[ext_resource type="Script" path="res://test_scenes/death_test.gd" id="1_v0tlu"]
+[ext_resource type="Texture2D" uid="uid://br6pbn55fcmhh" path="res://test_scenes/fire_ball_only.png" id="4_w4h1t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_raf78"]
+shader = ExtResource("1_3hsyc")
+shader_parameter/transition = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk46f"]
+atlas = ExtResource("1_dxfki")
+region = Rect2(90, 60, 10, 10)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q004g"]
+shader = ExtResource("1_kb1b0")
+shader_parameter/radius = 0.4
+
+[sub_resource type="Animation" id="Animation_neflt"]
+resource_name = "Death"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_sfyip"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t5rj0"]
+_data = {
+"Death": SubResource("Animation_neflt"),
+"RESET": SubResource("Animation_sfyip")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_88gwy"]
+particles_animation = true
+particles_anim_h_frames = 9
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_luto7"]
+particle_flag_disable_z = true
+angle_min = 90.0
+angle_max = 90.0
+orbit_velocity_min = -0.402
+orbit_velocity_max = 0.39
+gravity = Vector3(0, -98, 0)
+radial_accel_min = -9.21
+radial_accel_max = 34.21
+scale_min = 0.6
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+turbulence_enabled = true
+turbulence_noise_strength = 6.23
+turbulence_noise_scale = 0.795
+turbulence_influence_min = 0.111
+turbulence_influence_max = 0.111
+turbulence_initial_displacement_min = 1.49012e-06
+turbulence_initial_displacement_max = 1.49012e-06
+
+[node name="DeathTest" type="Node2D"]
+script = ExtResource("1_v0tlu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.984819)
+material = SubResource("ShaderMaterial_raf78")
+position = Vector2(-3.96339, -1.6594)
+scale = Vector2(0.57149, 1)
+texture = SubResource("AtlasTexture_kk46f")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_q004g")
+texture = ExtResource("1_dxfki")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t5rj0")
+}
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(0.256785, 0.505977, 1, 1)
+material = SubResource("CanvasItemMaterial_88gwy")
+process_material = SubResource("ParticleProcessMaterial_luto7")
+texture = ExtResource("4_w4h1t")
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_right = 241.0
+offset_bottom = 49.0
+text = "NEED TO CHANGE THIS TO SOME SOUL FLAME EFFECT"
+autowrap_mode = 2
+
+[connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]

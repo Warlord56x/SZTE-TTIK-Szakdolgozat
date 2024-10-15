@@ -197,7 +197,6 @@ func _unhandled_input(event : InputEvent) -> void:
 	if event.is_action_pressed("cast_spell"):
 		if not state_machine.get_state("cast").active:
 			state_machine.travel("cast")
-			print("casting!")
 
 	if event.is_action_pressed("dash"):
 		if dash_count == dash_max or stamina == 0 or state_machine.get_state("dash").active:
@@ -370,9 +369,9 @@ func _on_wall_stamina_drain_timeout() -> void:
 func _on_weapon_hitbox_body_entered(body : Node2D) -> void:
 	if body is Enemy and body.has_method("hurt"):
 		body = body as Enemy
-		body.hurt(1)
 		body.knock_back(global_position, 0.5)
-		sword_hit.play()
+		if body.hurt(1):
+			sword_hit.play()
 
 
 func invincibility_timeout() -> void:

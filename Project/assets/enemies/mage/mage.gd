@@ -5,7 +5,6 @@ var movement_target_position: Vector2
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var state_machine: StateMachine = $StateMachine
-@onready var sprite: AnimatedSprite2D = $Sprite
 
 
 #region Navigation setup
@@ -46,9 +45,6 @@ func set_movement_target(movement_target: Vector2):
 
 func physics_process(_delta: float) -> void:
 
-	if health <= 0:
-		queue_free()
-
 	if velocity:
 		if target:
 			move_direction = sign(target.global_position.x - global_position.x)
@@ -58,7 +54,11 @@ func physics_process(_delta: float) -> void:
 	sprite.flip_h = move_direction < 0
 
 
-func hurt(e_damage : int, dealer: Node2D = null) -> void:
+func hurt(e_damage : int, dealer: Node2D = null) -> bool:
+	if invincible:
+		return false
+
+	invincible = true
 	health -= e_damage
 
 	var inv_tween = get_tree().create_tween().set_loops(5)
@@ -79,22 +79,29 @@ func hurt(e_damage : int, dealer: Node2D = null) -> void:
 	if dealer:
 		target = dealer
 		if state_machine.get_state("idle").active:
+			if not ai:
+				return true
 			state_machine.travel("chase")
+	return true
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is Player:
+	if body is Player and not invincible:
 		body.hurt(1)
-		body.knock_back(global_position)
+		body.knock_back(global_position, 0.6)
 
 
 func _on_detect_range_body_entered(body : Node2D) -> void:
 	if body is Player:
 		target = body
+		if not ai:
+			return
 		state_machine.travel("combat")
 
 
 func _on_detect_range_body_exited(body : Node2D) -> void:
 	if body is Player:
 		target = body
+		if not ai:
+			return
 		state_machine.travel("Chase")

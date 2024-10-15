@@ -35,10 +35,6 @@ func _on_free_timer_timeout() -> void:
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body != owner:
-		if body.has_method("hurt"):
-			body.hurt(1, owner)
-			print("from projectile: hit")
-
 		velocity = Vector2.ZERO
 		$Hitbox.set_deferred("monitoring", false)
 		match type:
@@ -53,6 +49,9 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 
 				var tween: Tween = create_tween()
 				tween.tween_property($PointLight2D, "energy", 0.0, 0.3)
+
+		if body.has_method("hurt"):
+			body.hurt(1, owner)
 
 		await $AnimatedSprite2D.animation_finished
 		queue_free()

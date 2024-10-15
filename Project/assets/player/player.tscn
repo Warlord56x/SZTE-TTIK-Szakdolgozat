@@ -1198,7 +1198,6 @@ max_polyphony = 4
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_imbft")
 initial_state = NodePath("Default")
-debug = true
 
 [node name="Default" type="Node" parent="StateMachine"]
 script = ExtResource("3_sadaf")
@@ -1393,6 +1392,7 @@ wait_time = 0.1
 [node name="Weapon" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_ckq3n")
+animation = &"sword"
 
 [node name="WeaponHitbox" type="Area2D" parent="Weapon"]
 collision_layer = 17

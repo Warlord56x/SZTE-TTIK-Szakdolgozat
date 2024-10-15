@@ -5,11 +5,16 @@ class_name Enemy
 const debug_tip : PackedScene = preload("res://assets/enemies/enemy_tool_tip.tscn")
 const SPLATTER := preload("res://assets/effects/splatter.tscn")
 const DAMAGE_NUMBER := preload("res://assets/effects/damage_number.tscn")
+const DEATH_SCENE_TEST := preload("res://test_scenes/death_test.tscn")
 
+@export var sprite: Node2D
 @export var movement_speed: float = 70
 @export var min_jump_velocity: float = -100
 @export var max_health: int = 10
-@export var health: int = 10
+@export var health: int = 10:
+	set=health_set
+
+@export var ai: bool = true
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -22,13 +27,17 @@ var pushback_force: Vector2:
 
 var target: Player
 var tool_tip_node : Control = debug_tip.instantiate()
-
-var invincible_timer: Timer = Timer.new()
-var damage_timer: Timer = Timer.new()
+var invincible: bool = false
 
 @onready var initial_pos: Vector2
 
 var move_direction: float
+
+
+func health_set(h: int) -> void:
+	health = h
+	if health < 0:
+		death()
 
 
 func _init() -> void:
@@ -39,16 +48,6 @@ func _init() -> void:
 	mouse_entered.connect(tool_tip)
 	mouse_exited.connect(tool_tip.bind(false))
 
-	invincible_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
-	invincible_timer.wait_time = 0.1
-	invincible_timer.one_shot = true
-
-	damage_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
-	damage_timer.wait_time = 0.1
-	damage_timer.one_shot = true
-
-	add_child(invincible_timer)
-	add_child(damage_timer)
 	initial_pos = global_position
 
 
@@ -85,10 +84,14 @@ func tool_tip(on: bool = true) -> void:
 
 
 func blinker(val: float):
-	($Sprite.material as ShaderMaterial).set_shader_parameter("blend", val)
+	(sprite.material as ShaderMaterial).set_shader_parameter("blend", val)
 
 
-func hurt(e_damage: int, _dealer: Node2D) -> void:
+func hurt(e_damage: int, _dealer: Node2D) -> bool:
+	if invincible:
+		return false
+
+	invincible = true
 	health -= e_damage
 
 	var inv_tween = get_tree().create_tween().set_loops(5)
@@ -100,13 +103,28 @@ func hurt(e_damage: int, _dealer: Node2D) -> void:
 	var splatter = SPLATTER.instantiate()
 	splatter.global_position = global_position
 	add_child(splatter)
+	return true
 
 
-func knock_back(source_position: Vector2, intensity: float = 1.0) -> void:
+func knock_back(source_position: Vector2, intensity: float = 1.0) -> bool:
+	if invincible:
+		return false
+
 	pushback_force = -global_position.direction_to(source_position) * intensity
 	pushback_force.y = min_jump_velocity * intensity
 	pushback_force.x *= movement_speed
+	return true
 
 
-func invincibility_timeout():
+func invincibility_timeout() -> void:
 	blinker(0.0)
+	invincible = false
+
+
+func death() -> void:
+	sprite.visible = false
+	invincible = true
+	var inst = DEATH_SCENE_TEST.instantiate()
+	add_child(inst)
+	await inst.done
+	queue_free()

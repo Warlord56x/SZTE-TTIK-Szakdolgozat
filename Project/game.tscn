@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://uf631v4f4rfx"]
+[gd_scene load_steps=22 format=4 uid="uid://uf631v4f4rfx"]
 
 [ext_resource type="Texture2D" uid="uid://dufbdy81bhfap" path="res://nin_tiles.png" id="1_3fosb"]
 [ext_resource type="Shader" path="res://assets/shaders/agx.gdshader" id="1_jjdjw"]
@@ -8,6 +8,7 @@
 [ext_resource type="Material" uid="uid://b4q147v40j1vp" path="res://snow.tres" id="10_ole2b"]
 [ext_resource type="Script" path="res://assets/gui/debug.gd" id="11_fah24"]
 [ext_resource type="Script" path="res://world_bound.gd" id="13_ynwvk"]
+[ext_resource type="PackedScene" uid="uid://d4m7xeugvefch" path="res://test_scenes/death_test.tscn" id="14_0ahqq"]
 [ext_resource type="AudioStream" uid="uid://bifbrptpm14hs" path="res://assets/music/nin_music.wav" id="15_jwbu5"]
 [ext_resource type="Shader" path="res://terrain.gdshader" id="15_n4knx"]
 [ext_resource type="Texture2D" uid="uid://d4cojs7o3f304" path="res://assets/backgrounds/level1.png" id="17_i470o"]
@@ -325,8 +326,7 @@ script = ExtResource("19_5t51q")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_hfs6v")
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-visible = false
-position = Vector2(-49, -711)
+[node name="DeathTest" parent="." instance=ExtResource("14_0ahqq")]
+position = Vector2(11, -19)
 
 [connection signal="body_entered" from="WorldBound" to="WorldBound" method="_on_body_entered"]
