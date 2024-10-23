@@ -4,11 +4,10 @@ class_name Mage
 var movement_target_position: Vector2
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
-@onready var state_machine: StateMachine = $StateMachine
 
 
 #region Navigation setup
-func _ready():
+func ready():
 	# Make sure to not await during _ready.
 	actor_setup.call_deferred()
 
@@ -52,37 +51,6 @@ func physics_process(_delta: float) -> void:
 			move_direction = sign(velocity.x)
 
 	sprite.flip_h = move_direction < 0
-
-
-func hurt(e_damage : int, dealer: Node2D = null) -> bool:
-	if invincible:
-		return false
-
-	invincible = true
-	health -= e_damage
-
-	var inv_tween = get_tree().create_tween().set_loops(5)
-	inv_tween.finished.connect(invincibility_timeout)
-
-	inv_tween.tween_method(blinker, 0.0, 1.0, 0.15)
-	inv_tween.tween_method(blinker, 1.0, 0.0, 0.15)
-
-	var splatter = SPLATTER.instantiate()
-	splatter.global_position = global_position
-	add_child(splatter)
-
-	var damage_number = DAMAGE_NUMBER.instantiate()
-	damage_number.damage_number = damage
-	damage_number.global_position = global_position
-	add_child.call_deferred(damage_number)
-
-	if dealer:
-		target = dealer
-		if state_machine.get_state("idle").active:
-			if not ai:
-				return true
-			state_machine.travel("chase")
-	return true
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

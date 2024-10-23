@@ -7,14 +7,16 @@ const SPLATTER := preload("res://assets/effects/splatter.tscn")
 const DAMAGE_NUMBER := preload("res://assets/effects/damage_number.tscn")
 const DEATH_SCENE_TEST := preload("res://test_scenes/death_test.tscn")
 
+@export var state_machine: StateMachine
 @export var sprite: Node2D
 @export var movement_speed: float = 70
 @export var min_jump_velocity: float = -100
 @export var max_health: int = 10
 @export var health: int = 10:
-	set=health_set
+	set = health_set
 
 @export var ai: bool = true
+@export var debug: bool = false
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -26,7 +28,7 @@ var pushback_force: Vector2:
 		pushback_force = value
 
 var target: Player
-var tool_tip_node : Control = debug_tip.instantiate()
+var tool_tip_node: DebugInfo = debug_tip.instantiate()
 var invincible: bool = false
 
 @onready var initial_pos: Vector2
@@ -36,31 +38,41 @@ var move_direction: float
 
 func health_set(h: int) -> void:
 	health = h
-	if health < 0:
+	if health <= 0:
 		death()
 
 
 func _init() -> void:
 
-	input_pickable = true
-
+	tool_tip_node.anchor_point = Vector2(0, -5)
+	tool_tip_node.anchor_preset = Control.PRESET_CENTER_BOTTOM
 	add_child(tool_tip_node)
-	mouse_entered.connect(tool_tip)
-	mouse_exited.connect(tool_tip.bind(false))
 
 	initial_pos = global_position
 
 
+
+func _ready() -> void:
+	tool_tip_node.visible = debug
+	ready()
+
+
+func ready() -> void:
+	pass
+
+
 func _process(_delta : float) -> void:
-	tool_tip_node.tool_tip = str(
-		"Name: ", name, "\n",
-		"Node: ", self, "\n",
-		"\n",
-		"Max health: ", max_health, "\n",
-		"Health: ", health, "\n",
-		"State: ", "No state", "\n",
-		"Position: ", global_position, "\n",
-		)
+	if debug:
+		tool_tip_node.tool_tip = str(
+			"Name: ", name, "\n",
+			"Node: ", self, "\n",
+			"\n",
+			"Health: ", health, "/", max_health, "\n",
+			"State: ", state_machine.current_state.name, "\n",
+			"Position: ", global_position, "\n",
+			"Knock_back: ", pushback_force, "\n",
+			"velocity: ", velocity, "\n",
+			)
 
 
 func _physics_process(delta: float) -> void:
@@ -69,32 +81,28 @@ func _physics_process(delta: float) -> void:
 
 	physics_process(delta)
 	velocity += pushback_force
-	#prints("force:",pushback_force, "before-vel:", velocity - pushback_force, "after-vel:", velocity)
 
 	pushback_force = pushback_force.lerp(Vector2.ZERO, 0.5)
 	move_and_slide()
 
 
+# This function should be overloaded instead of the regular one
 func physics_process(_delta: float) -> void:
 	pass
-
-
-func tool_tip(on: bool = true) -> void:
-	tool_tip_node.visible = on
 
 
 func blinker(val: float):
 	(sprite.material as ShaderMaterial).set_shader_parameter("blend", val)
 
 
-func hurt(e_damage: int, _dealer: Node2D) -> bool:
+func hurt(e_damage: int, dealer: Node2D) -> bool:
 	if invincible:
 		return false
 
 	invincible = true
 	health -= e_damage
 
-	var inv_tween = get_tree().create_tween().set_loops(5)
+	var inv_tween = get_tree().create_tween().set_loops(3)
 	inv_tween.finished.connect(invincibility_timeout)
 
 	inv_tween.tween_method(blinker, 0.0, 1.0, 0.15)
@@ -102,7 +110,14 @@ func hurt(e_damage: int, _dealer: Node2D) -> bool:
 
 	var splatter = SPLATTER.instantiate()
 	splatter.global_position = global_position
-	add_child(splatter)
+	get_tree().root.add_child(splatter)
+
+	if dealer:
+		target = dealer
+		if state_machine.get_state("idle").active:
+			if not ai:
+				return true
+			state_machine.travel("chase")
 	return true
 
 
@@ -122,9 +137,7 @@ func invincibility_timeout() -> void:
 
 
 func death() -> void:
-	sprite.visible = false
-	invincible = true
-	var inst = DEATH_SCENE_TEST.instantiate()
-	add_child(inst)
-	await inst.done
+	var _death = DEATH_SCENE_TEST.instantiate()
+	_death.global_position = global_position
+	get_tree().root.add_child(_death)
 	queue_free()

@@ -231,6 +231,7 @@ follow_viewport_scale = 1.2
 color = Color(0, 0, 0, 1)
 
 [node name="Debuglayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="Debug" type="Label" parent="Debuglayer"]
 custom_minimum_size = Vector2(16, 7)

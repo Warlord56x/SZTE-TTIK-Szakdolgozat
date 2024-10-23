@@ -78,16 +78,17 @@ size = Vector2(10, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o8ani"]
 size = Vector2(100, 100)
 
-[node name="Mage" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[node name="Mage" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "sprite")]
 collision_mask = 3
 script = ExtResource("1_02mhk")
+state_machine = NodePath("StateMachine")
 sprite = NodePath("Sprite")
 ai = false
+debug = true
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_2w5tj")
 initial_state = NodePath("Idle")
-debug = true
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("3_d63xr")

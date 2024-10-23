@@ -2,6 +2,8 @@ extends State
 class_name StateDash
 
 @onready var player: Player = owner as Player
+@onready var col_layer: int = player.collision_layer
+@onready var col_mask: int = player.collision_mask
 
 
 func enter() -> void:
@@ -20,7 +22,7 @@ func physics_process(_delta: float) -> void:
 
 
 func leave() -> void:
-	player.collision_mask = 17
-	player.collision_layer = 1
+	player.collision_mask = col_mask
+	player.collision_layer = col_layer
 	player.dash_count += 1
 	player.stamina -= 2

@@ -370,7 +370,7 @@ func _on_weapon_hitbox_body_entered(body : Node2D) -> void:
 	if body is Enemy and body.has_method("hurt"):
 		body = body as Enemy
 		body.knock_back(global_position, 0.5)
-		if body.hurt(1):
+		if body.hurt(1, self):
 			sword_hit.play()
 
 

@@ -2,6 +2,8 @@ extends State
 class_name StateDeath
 
 @onready var player: Player = owner as Player
+@onready var col_layer: int = player.collision_layer
+
 
 
 func enter() -> void:
@@ -10,7 +12,7 @@ func enter() -> void:
 	await player.anim_tree.animation_finished
 	player.anim_state_m.travel("idle")
 	travel("Fall")
-
+	player.collision_layer = 0
 
 
 func physics_process(delta: float) -> void:
@@ -19,6 +21,7 @@ func physics_process(delta: float) -> void:
 
 
 func leave() -> void:
+	player.collision_layer = col_layer
 	player.health = player.max_health
 	player.stamina = player.max_stamina
 	player.mana = player.max_mana
