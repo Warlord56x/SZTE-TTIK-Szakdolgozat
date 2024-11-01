@@ -37,6 +37,7 @@ func physics_process(delta: float) -> void:
 		enemy.sprite.play("move")
 		enemy.set_movement_target(enemy.target.global_position)
 	enemy.move()
+	enemy.move_direction = sign(target.global_position.x - enemy.global_position.x)
 
 	if not enemy.is_on_floor():
 		# Want to avoid changing state since that resets the timer
@@ -60,5 +61,6 @@ func leave() -> void:
 func _on_weapon_hitbox_body_entered(body: Node2D) -> void:
 	if body is Player:
 		body = body as Player
-		body.hurt(1, enemy)
+		if body.hurt(1, enemy):
+			enemy.sword_hit.play()
 		body.knock_back(enemy.global_position, 0.8)

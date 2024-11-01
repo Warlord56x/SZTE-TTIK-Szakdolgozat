@@ -4,6 +4,7 @@ class_name Swordsman
 @onready var weapon: AnimatedSprite2D = $Weapon
 @onready var weapon_hitbox: Area2D = $Weapon/WeaponHitbox
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sword_hit: AudioStreamPlayer2D = $SwordHit
 
 
 func physics_process(_delta: float) -> void:
