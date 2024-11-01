@@ -68,6 +68,7 @@ func _process(_delta : float) -> void:
 			"Node: ", self, "\n",
 			"\n",
 			"Health: ", health, "/", max_health, "\n",
+			"AI: ", ai,"\n",
 			"State: ", state_machine.current_state.name, "\n",
 			"Position: ", global_position, "\n",
 			"Knock_back: ", pushback_force, "\n",

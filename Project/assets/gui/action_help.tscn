@@ -1,7 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpg8ab2biymnb"]
+[gd_scene load_steps=9 format=3 uid="uid://bpg8ab2biymnb"]
 
 [ext_resource type="Script" path="res://assets/gui/action_help.gd" id="1_i3ubn"]
 [ext_resource type="SpriteFrames" uid="uid://dk6vbx22r2f4q" path="res://assets/gui/resources/action_help.tres" id="2_0b3wp"]
+[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="3_f8724"]
+[ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://spriteTest/nin_font.png" id="3_kad5h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mujuo"]
+atlas = ExtResource("3_f8724")
+region = Rect2(0, 100, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwi05"]
+atlas = ExtResource("3_f8724")
+region = Rect2(0, 110, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jibf8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mujuo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwi05")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tttmq"]
+line_spacing = 0.0
+font = ExtResource("3_kad5h")
+font_size = 6
+font_color = Color(0.333333, 0.419608, 0.521569, 1)
 
 [node name="ActionHelp" type="Control"]
 custom_minimum_size = Vector2(8, 8)
@@ -14,7 +44,20 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_i3ubn")
 
+[node name="BaseButton" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jibf8")
+offset = Vector2(4, 4)
+
 [node name="Anim" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_0b3wp")
 animation = &"button_a"
 offset = Vector2(4, 4)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "a"
+label_settings = SubResource("LabelSettings_tttmq")
+horizontal_alignment = 1
+uppercase = true
