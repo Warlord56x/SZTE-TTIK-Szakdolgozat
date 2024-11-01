@@ -1180,14 +1180,10 @@ size = Vector2(8, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2gbc"]
 size = Vector2(6, 6)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("tool_tip_node")]
+[node name="Player" type="CharacterBody2D"]
 collision_mask = 17
 safe_margin = 0.1
 script = ExtResource("1_0p7ex")
-inventory = ExtResource("2_q0eh7")
-tool_tip_node = NodePath("EnemyToolTip")
-health_regen_wait_time = 1.5
-health_regen_time = 0.5
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 

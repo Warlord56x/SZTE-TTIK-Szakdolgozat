@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://d34pc2g4hgfyl"]
 
+[ext_resource type="Script" path="res://assets/enemies/mage/mage.gd" id="1_02mhk"]
 [ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_ipxbu"]
-[ext_resource type="Script" path="res://assets/enemies/mage/mage.gd" id="1_w332w"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_2w5tj"]
 [ext_resource type="Script" path="res://assets/enemies/mage/states/state_idle.gd" id="3_d63xr"]
 [ext_resource type="Script" path="res://assets/enemies/mage/states/state_combat.gd" id="5_3men6"]
@@ -78,13 +78,11 @@ size = Vector2(10, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o8ani"]
 size = Vector2(100, 100)
 
-[node name="Mage" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite")]
+[node name="Mage" type="CharacterBody2D"]
 collision_mask = 3
-script = ExtResource("1_w332w")
-state_machine = NodePath("StateMachine")
-navigation_agent = NodePath("NavigationAgent2D")
-sprite = NodePath("Sprite")
-limit_nav_axis = Vector2i(1, 0)
+script = ExtResource("1_02mhk")
+ai = false
+debug = true
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_2w5tj")
@@ -136,3 +134,4 @@ one_shot = true
 [connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]
 [connection signal="body_exited" from="DetectRange" to="." method="_on_detect_range_body_exited"]
 [connection signal="timeout" from="AttackTimer" to="StateMachine/Combat" method="_on_p_timer_timeout"]
+[connection signal="timeout" from="ChaseTimer" to="StateMachine/Chase" method="chase_finished"]

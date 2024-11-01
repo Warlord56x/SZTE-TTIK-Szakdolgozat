@@ -1,0 +1,94 @@
+[gd_scene load_steps=14 format=3 uid="uid://cufofyqncxk0k"]
+
+[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_0dun2"]
+[ext_resource type="Script" path="res://assets/enemies/bat/bat.gd" id="1_t6ry7"]
+[ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_hmb65"]
+[ext_resource type="Script" path="res://assets/enemies/bat/states/state_idle.gd" id="3_xpn50"]
+[ext_resource type="Script" path="res://assets/enemies/bat/states/state_chase.gd" id="4_ipeic"]
+[ext_resource type="Shader" path="res://assets/player/test.gdshader" id="5_4wd8i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k2xn2"]
+size = Vector2(2, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_taoku"]
+size = Vector2(50, 50)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tntr2"]
+shader = ExtResource("5_4wd8i")
+shader_parameter/blend = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwoq7"]
+atlas = ExtResource("1_0dun2")
+region = Rect2(110, 70, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32in2"]
+atlas = ExtResource("1_0dun2")
+region = Rect2(120, 70, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v0qph"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwoq7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32in2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vtclc"]
+size = Vector2(8, 7)
+
+[node name="Bat" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite")]
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_t6ry7")
+state_machine = NodePath("StateMachine")
+navigation_agent = NodePath("NavigationAgent2D")
+sprite = NodePath("AnimatedSprite2D")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_hmb65")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_xpn50")
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("4_ipeic")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 10.0
+target_desired_distance = 5.0
+path_postprocessing = 1
+debug_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_k2xn2")
+
+[node name="DetectRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
+shape = SubResource("RectangleShape2D_taoku")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_tntr2")
+sprite_frames = SubResource("SpriteFrames_v0qph")
+autoplay = "default"
+frame_progress = 0.785119
+
+[node name="ChaseTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_vtclc")
+
+[connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]

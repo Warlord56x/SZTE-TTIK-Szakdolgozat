@@ -8,8 +8,10 @@ const DAMAGE_NUMBER := preload("res://assets/effects/damage_number.tscn")
 const DEATH_SCENE_TEST := preload("res://test_scenes/death_test.tscn")
 
 @export var state_machine: StateMachine
+@export var navigation_agent: NavigationAgent2D
 @export var sprite: Node2D
 @export var movement_speed: float = 70
+@export var limit_nav_axis: Vector2i = Vector2i.ONE
 @export var min_jump_velocity: float = -100
 @export var max_health: int = 10
 @export var health: int = 10:
@@ -54,11 +56,47 @@ func _init() -> void:
 
 func _ready() -> void:
 	tool_tip_node.visible = debug
+	actor_setup.call_deferred()
 	ready()
 
 
 func ready() -> void:
 	pass
+
+
+func actor_setup():
+	# Wait for the first physics frame so the NavigationServer can sync.
+	await get_tree().physics_frame
+
+	# Now that the navigation map is no longer empty, set the movement target.
+	initial_pos = global_position
+	set_movement_target(initial_pos)
+
+
+func move() -> void:
+
+	if !navigation_agent.is_navigation_finished():
+
+		var current_agent_position: Vector2 = global_position
+		var next_path_position: Vector2 = navigation_agent.get_next_path_position()
+
+		var new_velocity: Vector2 = current_agent_position.direction_to(next_path_position)
+		new_velocity = new_velocity * movement_speed
+
+		if pushback_force.length() < 0.1:
+			if limit_nav_axis.x == 1:
+				velocity.x = new_velocity.x
+			if limit_nav_axis.y == 1:
+				velocity.y = new_velocity.y
+	else:
+		if limit_nav_axis.x == 1:
+			velocity.x = move_toward(velocity.x, 0, movement_speed)
+		if limit_nav_axis.y == 1:
+			velocity.y = move_toward(velocity.y, 0, movement_speed)
+
+
+func set_movement_target(movement_target: Vector2):
+	navigation_agent.target_position = movement_target
 
 
 func _process(_delta : float) -> void:
@@ -69,10 +107,12 @@ func _process(_delta : float) -> void:
 			"\n",
 			"Health: ", health, "/", max_health, "\n",
 			"AI: ", ai,"\n",
+			"Target: ", target, "\n",
+			"Invincible: ", invincible, "\n",
 			"State: ", state_machine.current_state.name, "\n",
 			"Position: ", global_position, "\n",
 			"Knock_back: ", pushback_force, "\n",
-			"velocity: ", velocity, "\n",
+			"Velocity: ", velocity, "\n",
 			)
 
 
@@ -96,7 +136,7 @@ func blinker(val: float):
 	(sprite.material as ShaderMaterial).set_shader_parameter("blend", val)
 
 
-func hurt(e_damage: int, dealer: Node2D) -> bool:
+func hurt(e_damage: int, dealer: Node2D = null) -> bool:
 	if invincible:
 		return false
 

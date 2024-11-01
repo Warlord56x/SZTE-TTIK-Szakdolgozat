@@ -21,7 +21,7 @@ enum JOY_BUTTONS {
 			await ready
 		joypad_button = jpb
 		button.animation = (JOY_BUTTONS.find_key(jpb) as String).to_lower()
-		key.text = action.as_text()[0]
+		key.text = action.as_text().left(1)
 
 
 func _unhandled_input(event : InputEvent) -> void:

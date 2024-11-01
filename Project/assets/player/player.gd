@@ -31,6 +31,8 @@ enum player_res {
 }
 
 @export var inventory: Inventory
+@export var tool_tip_node: DebugInfo
+@export var debug: bool = false
 
 @onready var state_machine: StateMachine = $StateMachine
 @onready var _coins : Control = %CoinLabel
@@ -71,8 +73,6 @@ var airborne_time : float = 0
 
 var input_direction: float
 
-#var look_axis : Vector2 = Vector2.ZERO
-
 var on_ladder : bool = false
 var ladder_pos : float = 0.0
 
@@ -82,15 +82,11 @@ var checkpoint : Node2D:
 var dash_max : int = 1
 var dash_count : int = 0
 
+
 #region Collectibles
 var max_coins : int = 9999
 @export_range(0, 9999, 1, "suffix:coin") var coins : int = 0:
 	set = set_coins
-
-#@export_category("Arrow")
-#@export_range(0, 100, 1, "suffix:Arrow") var max_arrows : int = 20
-#@export_range(0, 20, 1, "suffix:Arrow") var arrows : int = 20:
-	#set = set_arrows
 #endregion
 
 #region Health Variables
@@ -305,6 +301,8 @@ func is_interaction_available() -> bool:
 
 
 func _ready() -> void:
+	tool_tip_node.visible = debug
+
 	init_regen_timer(player_res.HEALTH, health_regen_wait_time, health_regen_time)
 	init_regen_timer(player_res.MANA, mana_regen_wait_time, mana_regen_time)
 	init_regen_timer(player_res.STAMINA, stamina_regen_wait_time, stamina_regen_time)
@@ -314,16 +312,16 @@ func blinker(val: float):
 	($AnimatedSprite2D.material as ShaderMaterial).set_shader_parameter("blend", val)
 
 
-func hurt(damage: int, _dealer: Node2D = null) -> void:
+func hurt(damage: int, _dealer: Node2D = null) -> bool:
+
+	collision_mask = 8
+	collision_layer = 8
 	health -= damage
 
 	if health <= 0:
 		state_machine.travel("Death")
 
 	camera.add_trauma(0.2, 0.85)
-
-	collision_mask = 8
-	collision_layer = 8
 
 	var inv_tween = get_tree().create_tween().set_loops(5)
 	inv_tween.finished.connect(invincibility_timeout)
@@ -340,12 +338,28 @@ func hurt(damage: int, _dealer: Node2D = null) -> void:
 	damage_number.damage_number = damage
 	damage_number.global_position = global_position
 	add_child.call_deferred(damage_number)
+	return true
 
 
 func knock_back(source_position: Vector2, intensity: float = 1.0) -> void:
 	pushback_force = -global_position.direction_to(source_position) * intensity
 	pushback_force.y = MIN_JUMP_VELOCITY * intensity
 	pushback_force.x *= SPEED
+
+
+func _process(_delta: float) -> void:
+	if debug:
+		tool_tip_node.tool_tip = str(
+			"Name: ", name, "\n",
+			"Node: ", self, "\n",
+			"\n",
+			"Health: ", health, "/", max_health, "\n",
+			"State: ", state_machine.current_state.name, "\n",
+			"Invincible: ", collision_layer == 8, "\n",
+			"Position: ", global_position, "\n",
+			"Knock_back: ", pushback_force, "\n",
+			"Velocity: ", velocity, "\n",
+			)
 
 
 func _physics_process(_delta: float) -> void:

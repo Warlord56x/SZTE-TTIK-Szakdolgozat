@@ -48,11 +48,6 @@ script = ExtResource("1_i3ubn")
 sprite_frames = SubResource("SpriteFrames_jibf8")
 offset = Vector2(4, 4)
 
-[node name="Anim" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("2_0b3wp")
-animation = &"button_a"
-offset = Vector2(4, 4)
-
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_right = 8.0
@@ -61,3 +56,8 @@ text = "a"
 label_settings = SubResource("LabelSettings_tttmq")
 horizontal_alignment = 1
 uppercase = true
+
+[node name="Anim" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_0b3wp")
+animation = &"button_a"
+offset = Vector2(4, 4)
