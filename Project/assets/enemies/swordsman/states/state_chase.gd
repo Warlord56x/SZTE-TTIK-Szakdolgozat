@@ -1,10 +1,9 @@
 extends State
-class_name StateEnemyBatChase
+class_name StateEnemySwmanChase
 
-@onready var enemy: Bat = owner as Bat
+@onready var enemy: Swordsman = owner as Swordsman
 
 @onready var chase_timer: Timer = $"../../ChaseTimer"
-
 
 func _ready() -> void:
 	chase_timer.connect("timeout", chase_finished)
@@ -13,6 +12,7 @@ func _ready() -> void:
 func enter() -> void:
 	if chase_timer.is_inside_tree():
 		chase_timer.start()
+	enemy.sprite.play("move")
 
 
 func chase_finished() -> void:
@@ -24,6 +24,8 @@ func chase_finished() -> void:
 func physics_process(_delta: float) -> void:
 	enemy.set_movement_target(enemy.target.global_position)
 	enemy.move()
+	if not enemy.is_on_floor():
+		enemy.state_machine.travel("fall")
 
 
 func leave() -> void:

@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://assets/enemies/mage/states/state_combat.gd" id="5_3men6"]
 [ext_resource type="Script" path="res://assets/enemies/mage/states/state_fall.gd" id="6_plq2j"]
 [ext_resource type="Script" path="res://assets/enemies/mage/states/state_chase.gd" id="6_y5woy"]
-[ext_resource type="Shader" path="res://assets/player/test.gdshader" id="7_2a0m2"]
+[ext_resource type="Shader" path="res://assets/player/blinker.gdshader" id="7_2a0m2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lruuv"]
 size = Vector2(8, 8)
@@ -135,4 +135,3 @@ one_shot = true
 [connection signal="body_entered" from="Hitbox" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]
 [connection signal="body_exited" from="DetectRange" to="." method="_on_detect_range_body_exited"]
-[connection signal="timeout" from="AttackTimer" to="StateMachine/Combat" method="_on_p_timer_timeout"]

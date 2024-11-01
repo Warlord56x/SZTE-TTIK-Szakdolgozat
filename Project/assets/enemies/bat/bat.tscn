@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_hmb65"]
 [ext_resource type="Script" path="res://assets/enemies/bat/states/state_idle.gd" id="3_xpn50"]
 [ext_resource type="Script" path="res://assets/enemies/bat/states/state_chase.gd" id="4_ipeic"]
-[ext_resource type="Shader" path="res://assets/player/test.gdshader" id="5_4wd8i"]
+[ext_resource type="Shader" path="res://assets/player/blinker.gdshader" id="5_4wd8i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2xn2"]
 size = Vector2(2, 2)

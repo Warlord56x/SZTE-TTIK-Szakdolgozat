@@ -23,7 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://82jihjn8dema" path="res://assets/sounds/568169__merrick079__sword-sound-2.wav" id="11_psku0"]
 [ext_resource type="PackedScene" uid="uid://dr8mvhnt8sq40" path="res://assets/gui/item_wheel/wheel.tscn" id="11_xmcr7"]
 [ext_resource type="Script" path="res://assets/player/camera.gd" id="20_w6pmk"]
-[ext_resource type="Shader" path="res://assets/player/test.gdshader" id="21_hreuu"]
+[ext_resource type="Shader" path="res://assets/player/blinker.gdshader" id="21_hreuu"]
 [ext_resource type="Texture2D" uid="uid://b4s3ar3xvuca5" path="res://assets/light_masks/2d_lights_and_shadows_neutral_point_light.webp" id="21_jh63l"]
 [ext_resource type="Script" path="res://assets/player/interactor.gd" id="23_ken48"]
 

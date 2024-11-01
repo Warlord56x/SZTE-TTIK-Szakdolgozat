@@ -10,6 +10,10 @@ var target: Player = null
 var attack_flag: bool = false
 
 
+func _ready() -> void:
+	projectile_timer.connect("timeout", _on_p_timer_timeout)
+
+
 func attack() -> void:
 	enemy.sprite.play("cast")
 	await enemy.sprite.animation_finished

@@ -1,0 +1,22 @@
+extends State
+class_name StateEnemySwmanFall
+
+@onready var enemy: Swordsman = owner as Swordsman
+
+
+func enter() -> void:
+	enemy.sprite.play("default")
+
+
+func physics_process(delta: float) -> void:
+
+	if enemy.is_on_floor():
+		if get_parent().previous_state and get_parent().previous_state != self:
+			get_parent().back()
+		else:
+			travel("idle")
+
+	enemy.velocity.y += enemy.gravity * delta
+
+	if enemy.move_direction:
+		enemy.velocity.x = move_toward(enemy.velocity.x, -enemy.move_direction * enemy.movement_speed, 10)

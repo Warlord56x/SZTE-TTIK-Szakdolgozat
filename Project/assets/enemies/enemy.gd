@@ -109,6 +109,7 @@ func _process(_delta : float) -> void:
 			"AI: ", ai,"\n",
 			"Target: ", target, "\n",
 			"Invincible: ", invincible, "\n",
+			"Attacking in: ", get_node_or_null("AttackTimer").time_left if get_node_or_null("AttackTimer") else 0, "\n",
 			"State: ", state_machine.current_state.name, "\n",
 			"Position: ", global_position, "\n",
 			"Knock_back: ", pushback_force, "\n",
@@ -153,7 +154,7 @@ func hurt(e_damage: int, dealer: Node2D = null) -> bool:
 	splatter.global_position = global_position
 	get_tree().root.add_child(splatter)
 
-	if dealer:
+	if dealer and dealer is Player:
 		target = dealer
 		if state_machine.get_state("idle").active:
 			if not ai:
