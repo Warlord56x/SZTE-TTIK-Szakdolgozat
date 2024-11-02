@@ -1,9 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://bhxmqg2i48ced"]
+[gd_scene load_steps=23 format=3 uid="uid://bhxmqg2i48ced"]
 
 [ext_resource type="Script" path="res://assets/player/projectile.gd" id="1_jl8yt"]
 [ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="2_7nube"]
 [ext_resource type="Texture2D" uid="uid://b4s3ar3xvuca5" path="res://assets/light_masks/2d_lights_and_shadows_neutral_point_light.webp" id="3_pja8y"]
-[ext_resource type="AudioStream" uid="uid://feaqggn15mqe" path="res://assets/sounds/77691__joelaudio__sfx_magic_fireball_001.wav" id="4_xlb4c"]
+[ext_resource type="AudioStream" uid="uid://dum1chmge16o" path="res://assets/sounds/701804__perduuus__fireball.wav" id="4_fhkfq"]
+[ext_resource type="AudioStream" uid="uid://dcjv6ghjq606o" path="res://assets/sounds/431174__highpixel__fireball-explosion.wav" id="5_5aybg"]
+[ext_resource type="AudioStream" uid="uid://dp2tki63awsmg" path="res://assets/sounds/209399__sgossner__bow-release.mp3" id="6_fhpl1"]
+[ext_resource type="AudioStream" uid="uid://gthgyswsyk5p" path="res://assets/sounds/536066__eminyildirim__bow-impact.wav" id="7_q3x0f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l0nfp"]
 size = Vector2(7, 4)
@@ -154,8 +157,22 @@ texture = ExtResource("3_pja8y")
 position = Vector2(4.5, 0)
 shape = SubResource("RectangleShape2D_fougr")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_xlb4c")
+[node name="FireAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_fhkfq")
+max_distance = 300.0
+
+[node name="FireImpact" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_5aybg")
+max_distance = 300.0
+
+[node name="BowAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_fhpl1")
+max_distance = 300.0
+
+[node name="BowImpact" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_q3x0f")
+volume_db = -8.0
+max_distance = 300.0
 
 [connection signal="timeout" from="FreeTimer" to="." method="_on_free_timer_timeout"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

@@ -20,8 +20,10 @@ func _ready() -> void:
 	match type:
 		0:
 			$AnimatedSprite2D.play("a_default")
+			$BowAudio.play()
 		1:
 			$AnimatedSprite2D.play("f_default")
+			$FireAudio.play()
 
 
 func _physics_process(_delta : float) -> void:
@@ -42,6 +44,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 				$AnimatedSprite2D.play("a_boom")
 				if body.has_method("knock_back"):
 					body.knock_back(global_position, 0.5)
+				$BowImpact.play()
 			1:
 				$AnimatedSprite2D.play("f_boom")
 				if body.has_method("knock_back"):
@@ -49,9 +52,12 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 
 				var tween: Tween = create_tween()
 				tween.tween_property($PointLight2D, "energy", 0.0, 0.3)
+				$FireImpact.play()
 
 		if body.has_method("hurt"):
 			body.hurt(1, owner)
 
-		await $AnimatedSprite2D.animation_finished
+
+		if $AnimatedSprite2D.is_playing():
+			await $AnimatedSprite2D.animation_finished
 		queue_free()

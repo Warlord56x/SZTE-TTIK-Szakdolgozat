@@ -14,7 +14,7 @@ dest_files=["res://.godot/imported/180837__32cheeseman32__swordswing01.wav-665cb
 
 force/8_bit=false
 force/mono=false
-force/max_rate=false
+force/max_rate=true
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false

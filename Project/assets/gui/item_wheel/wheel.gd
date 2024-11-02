@@ -107,7 +107,7 @@ func seek_to_item(idx: int) -> void:
 	var rot = angle + diff
 
 	tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(self, "angle", rot, 1.0)
+	tween.tween_property(self, "angle", rot, 0.2)
 
 
 func get_wheel_selection() -> Item:
