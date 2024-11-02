@@ -1,9 +1,8 @@
 extends Camera2D
+class_name MainCamera
 
-var trauma: float = 0.0
-var intensity: float = 0.0
-
-var look_axis : Vector2 = Vector2.ZERO
+var trauma: float = 0
+var intensity: float = 0
 
 
 func add_trauma(amount: float, _intensity: float) -> void:
@@ -28,6 +27,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 			)
 		tween.play()
 
+
 func _process(delta: float) -> void:
 	var t_inp = Input.get_axis("wheel_down", "wheel_up") * 0.4
 	if t_inp != 0:
@@ -46,6 +46,9 @@ func _process(delta: float) -> void:
 
 	if trauma > 0:
 		trauma -= delta
+		randomize()
+		rotation = randf_range(-intensity * 0.1, intensity * 0.1)
 		offset += Vector2(randf_range(-intensity, intensity), randf_range(-intensity, intensity))
 	else:
+		rotation = 0
 		offset = Vector2.ZERO

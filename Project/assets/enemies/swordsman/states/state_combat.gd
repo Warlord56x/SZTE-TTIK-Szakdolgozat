@@ -14,7 +14,6 @@ func attack() -> void:
 	var tween : Tween = get_tree().create_tween()
 	tween.set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(enemy.weapon, "position", Vector2(enemy.move_direction * 8, 0), 0.3)
-	tween.play()
 	enemy.sprite.play("hit")
 	enemy.animation_player.play("hit")
 
@@ -32,7 +31,7 @@ func enter() -> void:
 	attack_timer.start()
 
 
-func physics_process(delta: float) -> void:
+func physics_process(_delta: float) -> void:
 	if not attacking:
 		enemy.sprite.play("move")
 		enemy.set_movement_target(enemy.target.global_position)
@@ -41,11 +40,11 @@ func physics_process(delta: float) -> void:
 
 	if not enemy.is_on_floor():
 		# Want to avoid changing state since that resets the timer
-		#travel("fall")
-		enemy.velocity.y += enemy.gravity * delta
-
-		if enemy.move_direction:
-			enemy.velocity.x = move_toward(enemy.velocity.x, -enemy.move_direction * enemy.movement_speed, 10)
+		travel("fall")
+		#enemy.velocity.y += enemy.gravity * delta
+#
+		#if enemy.move_direction:
+			#enemy.velocity.x = move_toward(enemy.velocity.x, -enemy.move_direction * enemy.movement_speed, 10)
 	if enemy.target.global_position.distance_to(enemy.global_position) < 10:
 		if not attacking:
 			enemy.sprite.play("default")

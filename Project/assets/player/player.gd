@@ -51,7 +51,7 @@ enum player_res {
 
 @onready var anim_state_m : AnimationNodeStateMachinePlayback = anim_tree["parameters/StateMachine/playback"]
 
-@onready var camera : Camera2D = $Camera
+@onready var camera : MainCamera = $Camera
 
 @onready var stamina_time_waiter : Timer = Timer.new()
 @onready var stamina_time : Timer = Timer.new()
@@ -386,6 +386,7 @@ func _on_weapon_hitbox_body_entered(body : Node2D) -> void:
 		body.knock_back(global_position, 0.5)
 		if body.hurt(1, self):
 			sword_hit.play()
+			camera.add_trauma(0.2, 0.5)
 
 
 func invincibility_timeout() -> void:
