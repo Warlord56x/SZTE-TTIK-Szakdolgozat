@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://bhxmqg2i48ced"]
+[gd_scene load_steps=20 format=3 uid="uid://bhxmqg2i48ced"]
 
 [ext_resource type="Script" path="res://assets/player/projectile.gd" id="1_jl8yt"]
 [ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="2_7nube"]
 [ext_resource type="Texture2D" uid="uid://b4s3ar3xvuca5" path="res://assets/light_masks/2d_lights_and_shadows_neutral_point_light.webp" id="3_pja8y"]
+[ext_resource type="AudioStream" uid="uid://feaqggn15mqe" path="res://assets/sounds/77691__joelaudio__sfx_magic_fireball_001.wav" id="4_xlb4c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l0nfp"]
 size = Vector2(7, 4)
@@ -152,6 +153,9 @@ texture = ExtResource("3_pja8y")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(4.5, 0)
 shape = SubResource("RectangleShape2D_fougr")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_xlb4c")
 
 [connection signal="timeout" from="FreeTimer" to="." method="_on_free_timer_timeout"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

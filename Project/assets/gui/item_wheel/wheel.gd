@@ -95,12 +95,19 @@ func seek_to_item(idx: int) -> void:
 	if tween and tween.is_running():
 		await tween.finished
 
-	var rot = (idx - 1) * 45
-	if rot > 180:
-		rot = -(360 - rot)
+	var target_rot = ((90 + (idx - 1) * 45) % 360 + 360) % 360
 
-	tween = create_tween()
-	tween.tween_property(self, "angle", 90 + rot, 0.2)
+	var diff = target_rot - angle
+
+	if diff > 180:
+		diff -= 360
+	elif diff < -180:
+		diff += 360
+
+	var rot = angle + diff
+
+	tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "angle", rot, 1.0)
 
 
 func get_wheel_selection() -> Item:
