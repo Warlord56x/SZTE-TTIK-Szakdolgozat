@@ -136,7 +136,7 @@ script = ExtResource("1_jl8yt")
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_l0nfp")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w4f70")
 animation = &"f_default"
 

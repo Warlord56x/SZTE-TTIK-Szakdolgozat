@@ -9,11 +9,18 @@ const PROJECTILE := preload("res://assets/player/projectile.tscn")
 var target: Player = null
 var attacking: bool = false
 
+
 func attack() -> void:
+	# Guard case to avoid making the tween
+	# TODO: needs to be tested more
+	if not enemy.weapon:
+		return
+
 	attacking = true
 	var tween : Tween = get_tree().create_tween()
 	tween.set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(enemy.weapon, "position", Vector2(enemy.move_direction * 8, 0), 0.3)
+	$"../../SwordSwing".play()
 	enemy.sprite.play("hit")
 	enemy.animation_player.play("hit")
 
@@ -39,12 +46,8 @@ func physics_process(_delta: float) -> void:
 	enemy.move_direction = sign(target.global_position.x - enemy.global_position.x)
 
 	if not enemy.is_on_floor():
-		# Want to avoid changing state since that resets the timer
 		travel("fall")
-		#enemy.velocity.y += enemy.gravity * delta
-#
-		#if enemy.move_direction:
-			#enemy.velocity.x = move_toward(enemy.velocity.x, -enemy.move_direction * enemy.movement_speed, 10)
+
 	if enemy.target.global_position.distance_to(enemy.global_position) < 10:
 		if not attacking:
 			enemy.sprite.play("default")

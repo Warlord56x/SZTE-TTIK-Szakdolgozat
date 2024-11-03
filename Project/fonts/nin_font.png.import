@@ -1,0 +1,25 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://dlredfj6w44oh"
+path="res://.godot/imported/nin_font.png-b6cadf0d73e4462858cb94d99e11c0be.fontdata"
+
+[deps]
+
+source_file="res://fonts/nin_font.png"
+dest_files=["res://.godot/imported/nin_font.png-b6cadf0d73e4462858cb94d99e11c0be.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray("0-127")
+kerning_pairs=PackedStringArray()
+columns=16
+rows=16
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+ascent=0
+descent=0
+fallbacks=[]
+compress=true
+scaling_mode=2

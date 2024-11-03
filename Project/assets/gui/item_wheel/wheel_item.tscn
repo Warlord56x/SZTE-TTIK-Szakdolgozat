@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://assets/gui/item_wheel/wheel_item.gd" id="1_mqtpe"]
 [ext_resource type="Texture2D" uid="uid://dufbdy81bhfap" path="res://nin_tiles.png" id="2_6pglt"]
-[ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://spriteTest/nin_font.png" id="3_ij7qm"]
+[ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://fonts/nin_font.png" id="3_ij7qm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0o5if"]
 font = ExtResource("3_ij7qm")

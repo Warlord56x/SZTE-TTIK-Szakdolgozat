@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://assets/player/states/state_wall.gd" id="5_mhtgr"]
 [ext_resource type="Script" path="res://assets/gui/label.gd" id="5_pflec"]
 [ext_resource type="Script" path="res://assets/player/states/state_dash.gd" id="6_0fo1b"]
-[ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://spriteTest/nin_font.png" id="6_2mfpg"]
+[ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://fonts/nin_font.png" id="6_2mfpg"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://dqj1t6rwkk2af" path="res://assets/player/player_anim_state_m.tres" id="7_sdq1t"]
 [ext_resource type="PackedScene" uid="uid://bpg8ab2biymnb" path="res://assets/gui/action_help.tscn" id="8_5oe6t"]
 [ext_resource type="Script" path="res://assets/player/states/state_death.gd" id="8_8nrgl"]
@@ -24,7 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://82jihjn8dema" path="res://assets/sounds/568169__merrick079__sword-sound-2.wav" id="11_psku0"]
 [ext_resource type="PackedScene" uid="uid://dr8mvhnt8sq40" path="res://assets/gui/item_wheel/wheel.tscn" id="11_xmcr7"]
 [ext_resource type="Script" path="res://assets/player/camera.gd" id="20_w6pmk"]
-[ext_resource type="Shader" path="res://assets/player/blinker.gdshader" id="21_hreuu"]
+[ext_resource type="Shader" path="res://assets/effects/shaders/blinker.gdshader" id="21_hreuu"]
 [ext_resource type="Texture2D" uid="uid://b4s3ar3xvuca5" path="res://assets/light_masks/2d_lights_and_shadows_neutral_point_light.webp" id="21_jh63l"]
 [ext_resource type="Script" path="res://assets/player/interactor.gd" id="23_ken48"]
 

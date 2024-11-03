@@ -332,7 +332,7 @@ func hurt(damage: int, _dealer: Node2D = null) -> bool:
 	for intensity in damage:
 		var splatter = SPLATTER.instantiate()
 		splatter.global_position = global_position
-		add_child(splatter)
+		get_tree().root.add_child(splatter)
 
 	var damage_number = DAMAGE_NUMBER.instantiate()
 	damage_number.damage_number = damage

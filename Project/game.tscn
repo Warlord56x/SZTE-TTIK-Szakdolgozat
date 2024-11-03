@@ -1,8 +1,8 @@
 [gd_scene load_steps=24 format=4 uid="uid://uf631v4f4rfx"]
 
 [ext_resource type="Texture2D" uid="uid://dufbdy81bhfap" path="res://nin_tiles.png" id="1_3fosb"]
-[ext_resource type="Shader" path="res://assets/shaders/agx.gdshader" id="1_jjdjw"]
-[ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://spriteTest/nin_font.png" id="2_qcju4"]
+[ext_resource type="Shader" path="res://assets/effects/shaders/agx.gdshader" id="1_jjdjw"]
+[ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://fonts/nin_font.png" id="2_qcju4"]
 [ext_resource type="TileSet" uid="uid://3qx3dvf66s68" path="res://tile_sets/default_tile_set.tres" id="2_qonnx"]
 [ext_resource type="PackedScene" uid="uid://b25vye5etxi5" path="res://assets/enemies/swordsman/swordsman.tscn" id="9_80lmc"]
 [ext_resource type="PackedScene" uid="uid://cufofyqncxk0k" path="res://assets/enemies/bat/bat.tscn" id="9_e55gt"]
@@ -188,6 +188,9 @@ tonemap_mode = 3
 
 [node name="Game" type="Node2D"]
 
+[node name="DebugInputs" type="Node" parent="."]
+script = ExtResource("19_5t51q")
+
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -1
 
@@ -312,6 +315,7 @@ position = Vector2(57, -79)
 
 [node name="Mage" parent="Enemies" instance=ExtResource("23_kobi1")]
 position = Vector2(98, -5)
+debug = true
 
 [node name="Snowfall" type="GPUParticles2D" parent="."]
 position = Vector2(997, -986)
@@ -331,9 +335,6 @@ script = ExtResource("13_ynwvk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBound"]
 shape = SubResource("WorldBoundaryShape2D_is7xv")
-
-[node name="DebugInputs" type="Node" parent="."]
-script = ExtResource("19_5t51q")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_hfs6v")

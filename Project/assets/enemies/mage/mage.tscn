@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://assets/enemies/mage/states/state_combat.gd" id="5_3men6"]
 [ext_resource type="Script" path="res://assets/enemies/mage/states/state_fall.gd" id="6_plq2j"]
 [ext_resource type="Script" path="res://assets/enemies/mage/states/state_chase.gd" id="6_y5woy"]
-[ext_resource type="Shader" path="res://assets/player/blinker.gdshader" id="7_2a0m2"]
+[ext_resource type="Shader" path="res://assets/effects/shaders/blinker.gdshader" id="7_2a0m2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lruuv"]
 size = Vector2(8, 8)
@@ -53,7 +53,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1q0qm")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -110,7 +110,6 @@ shape = SubResource("RectangleShape2D_lruuv")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_acyor")
 sprite_frames = SubResource("SpriteFrames_gby2t")
-animation = &"cast"
 autoplay = "default"
 
 [node name="Hitbox" type="Area2D" parent="."]

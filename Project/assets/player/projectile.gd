@@ -10,6 +10,9 @@ var override_speed: int
 var type: int = 0
 
 
+@onready var animation: AnimatedSprite2D = $Animation
+
+
 func _ready() -> void:
 	global_rotation = p_rotation
 	if !override_speed:
@@ -19,10 +22,10 @@ func _ready() -> void:
 	$PointLight2D.visible = bool(type)
 	match type:
 		0:
-			$AnimatedSprite2D.play("a_default")
+			animation.play("a_default")
 			$BowAudio.play()
 		1:
-			$AnimatedSprite2D.play("f_default")
+			animation.play("f_default")
 			$FireAudio.play()
 
 
@@ -41,12 +44,12 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		$Hitbox.set_deferred("monitoring", false)
 		match type:
 			0:
-				$AnimatedSprite2D.play("a_boom")
+				animation.play("a_boom")
 				if body.has_method("knock_back"):
 					body.knock_back(global_position, 0.5)
 				$BowImpact.play()
 			1:
-				$AnimatedSprite2D.play("f_boom")
+				animation.play("f_boom")
 				if body.has_method("knock_back"):
 					body.knock_back(global_position, 0.2)
 
@@ -58,6 +61,6 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 			body.hurt(1, owner)
 
 
-		if $AnimatedSprite2D.is_playing():
-			await $AnimatedSprite2D.animation_finished
+		if animation.is_playing():
+			await animation.animation_finished
 		queue_free()

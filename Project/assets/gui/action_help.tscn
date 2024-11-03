@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://assets/gui/action_help.gd" id="1_i3ubn"]
 [ext_resource type="SpriteFrames" uid="uid://dk6vbx22r2f4q" path="res://assets/gui/resources/action_help.tres" id="2_0b3wp"]
 [ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="3_f8724"]
-[ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://spriteTest/nin_font.png" id="3_kad5h"]
+[ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://fonts/nin_font.png" id="3_kad5h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mujuo"]
 atlas = ExtResource("3_f8724")

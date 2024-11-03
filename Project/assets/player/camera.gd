@@ -46,9 +46,9 @@ func _process(delta: float) -> void:
 
 	if trauma > 0:
 		trauma -= delta
-		randomize()
-		rotation = randf_range(-intensity * 0.1, intensity * 0.1)
+		#TODO: Need to look at why the particles are messed up if the camera is rotated
+		global_rotation = randf_range(-intensity * 0.1, intensity * 0.1)
 		offset += Vector2(randf_range(-intensity, intensity), randf_range(-intensity, intensity))
 	else:
-		rotation = 0
+		global_rotation = 0
 		offset = Vector2.ZERO
