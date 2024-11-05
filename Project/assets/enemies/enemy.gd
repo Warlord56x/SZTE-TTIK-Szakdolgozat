@@ -2,10 +2,11 @@ extends CharacterBody2D
 class_name Enemy
 
 # Debug tool tip
-const debug_tip : PackedScene = preload("res://assets/enemies/enemy_tool_tip.tscn")
+const DEBUG_TIP : PackedScene = preload("res://assets/enemies/enemy_tool_tip.tscn")
 const SPLATTER := preload("res://assets/effects/splatter.tscn")
 const DAMAGE_NUMBER := preload("res://assets/effects/damage_number.tscn")
 const DEATH_SCENE_TEST := preload("res://test_scenes/death_test.tscn")
+const FLOATING_HP_BAR := preload("res://test_scenes/floating_hp_bar.tscn")
 
 @export var state_machine: StateMachine
 @export var navigation_agent: NavigationAgent2D
@@ -15,7 +16,7 @@ const DEATH_SCENE_TEST := preload("res://test_scenes/death_test.tscn")
 @export var min_jump_velocity: float = -100
 @export var max_health: int = 10
 @export var health: int = 10:
-	set = health_set
+	set = set_health
 
 @export var ai: bool = true
 @export var debug: bool = false
@@ -30,7 +31,8 @@ var pushback_force: Vector2:
 		pushback_force = value
 
 var target: Player
-var tool_tip_node: DebugInfo = debug_tip.instantiate()
+var tool_tip_node: DebugInfo = DEBUG_TIP.instantiate()
+var floating_hp_bar: FloatingHpBar = FLOATING_HP_BAR.instantiate()
 var invincible: bool = false
 
 @onready var initial_pos: Vector2
@@ -38,8 +40,9 @@ var invincible: bool = false
 var move_direction: float
 
 
-func health_set(h: int) -> void:
+func set_health(h: int) -> void:
 	health = h
+	floating_hp_bar.value = h
 	if health <= 0:
 		death()
 
@@ -58,6 +61,12 @@ func _ready() -> void:
 	tool_tip_node.visible = debug
 	actor_setup.call_deferred()
 	ready()
+
+	floating_hp_bar.position = Vector2(0, -10)
+	add_child(floating_hp_bar)
+	floating_hp_bar.max_value = max_health
+	floating_hp_bar.value = health
+	floating_hp_bar.effect = true
 
 
 func ready() -> void:

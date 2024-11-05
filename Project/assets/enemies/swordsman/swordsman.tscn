@@ -9,7 +9,7 @@
 [ext_resource type="Shader" path="res://assets/effects/shaders/blinker.gdshader" id="7_e3isw"]
 [ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="7_si21x"]
 [ext_resource type="AudioStream" uid="uid://82jihjn8dema" path="res://assets/sounds/568169__merrick079__sword-sound-2.wav" id="9_vs37d"]
-[ext_resource type="AudioStream" uid="uid://15g4sj5tgcno" path="res://assets/sounds/180837__32cheeseman32__swordswing01.wav" id="10_so4d5"]
+[ext_resource type="AudioStream" uid="uid://dm1uu5hsqy01n" path="res://assets/sounds/362349__beerbelly38__knife-slash-2.wav" id="10_xtmbh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2wfxl"]
 size = Vector2(5, 8)
@@ -266,8 +266,7 @@ libraries = {
 stream = ExtResource("9_vs37d")
 
 [node name="SwordSwing" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_so4d5")
-volume_db = 10.0
+stream = ExtResource("10_xtmbh")
 
 [connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]
 [connection signal="body_exited" from="DetectRange" to="." method="_on_detect_range_body_exited"]

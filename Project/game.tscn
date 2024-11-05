@@ -310,12 +310,11 @@ position = Vector2(25, -20)
 [node name="Swordsman" parent="Enemies" instance=ExtResource("9_80lmc")]
 position = Vector2(361, -7)
 
-[node name="Bat" parent="Enemies" instance=ExtResource("9_e55gt")]
-position = Vector2(57, -79)
-
 [node name="Mage" parent="Enemies" instance=ExtResource("23_kobi1")]
 position = Vector2(98, -5)
-debug = true
+
+[node name="Bat" parent="Enemies" instance=ExtResource("9_e55gt")]
+position = Vector2(57, -79)
 
 [node name="Snowfall" type="GPUParticles2D" parent="."]
 position = Vector2(997, -986)

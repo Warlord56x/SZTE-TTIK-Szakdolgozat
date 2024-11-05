@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="3_fxfhm"]
 [ext_resource type="PackedScene" uid="uid://uvwfpidv7ujl" path="res://assets/gui/bar_mana.tscn" id="3_nro24"]
 [ext_resource type="Script" path="res://assets/player/states/state_default.gd" id="3_sadaf"]
-[ext_resource type="AudioStream" uid="uid://15g4sj5tgcno" path="res://assets/sounds/180837__32cheeseman32__swordswing01.wav" id="4_aixc0"]
 [ext_resource type="PackedScene" uid="uid://bakgosfbeq37h" path="res://assets/gui/bar_stamina.tscn" id="4_mq3j0"]
 [ext_resource type="Script" path="res://assets/player/states/state_fall.gd" id="4_oyygq"]
+[ext_resource type="AudioStream" uid="uid://dm1uu5hsqy01n" path="res://assets/sounds/362349__beerbelly38__knife-slash-2.wav" id="4_v8ma5"]
 [ext_resource type="Script" path="res://assets/player/states/state_wall.gd" id="5_mhtgr"]
 [ext_resource type="Script" path="res://assets/gui/label.gd" id="5_pflec"]
 [ext_resource type="Script" path="res://assets/player/states/state_dash.gd" id="6_0fo1b"]
@@ -1198,8 +1198,7 @@ anchor_point = Vector2(0, -5)
 anchor_preset = 7
 
 [node name="SwordSwing" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_aixc0")
-volume_db = 10.0
+stream = ExtResource("4_v8ma5")
 
 [node name="SwordHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_psku0")

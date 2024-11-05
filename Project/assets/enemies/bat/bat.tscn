@@ -64,7 +64,6 @@ script = ExtResource("4_ipeic")
 path_desired_distance = 10.0
 target_desired_distance = 5.0
 path_postprocessing = 1
-debug_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_k2xn2")
