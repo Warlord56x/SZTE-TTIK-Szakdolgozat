@@ -31,6 +31,12 @@ func set_value(v: float) -> void:
 	tween.tween_property(self, "modulate:a", 1.0, 1.5)
 	tween.tween_property(self, "modulate:a", 0.0, 0.2)
 
+	var test_tween = create_tween()
+	test_tween.parallel().tween_property(self, "rotation_degrees", randi_range(-25, 25), 0.1)
+	test_tween.parallel().tween_property(self, "position:x", randi_range(-8, 8), 0.1)
+	test_tween.tween_property(self, "rotation_degrees", 0, 0.1)
+	test_tween.tween_property(self, "position:x", 0, 0.1)
+
 
 func set_min(v: float) -> void:
 	min_value = v

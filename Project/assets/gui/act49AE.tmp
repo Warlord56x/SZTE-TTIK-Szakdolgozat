@@ -91,13 +91,12 @@ horizontal_alignment = 1
 uppercase = true
 
 [node name="SpecialLetters" type="AnimatedSprite2D" parent="."]
-visible = false
-modulate = Color(0.333333, 0.419608, 0.521569, 1)
 sprite_frames = SubResource("SpriteFrames_o3etq")
 animation = &"shift"
 offset = Vector2(4, 3)
 
 [node name="Anim" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = ExtResource("2_0b3wp")
 animation = &"button_a"
 offset = Vector2(4, 4)
