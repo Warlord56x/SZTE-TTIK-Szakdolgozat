@@ -10,6 +10,5 @@ func _input(event : InputEvent) -> void:
 		if !is_fullscreen:
 			window.set_mode(Window.MODE_FULLSCREEN)
 		else:
-#			window.reset_size()
 			window.set_mode(Window.MODE_WINDOWED)
 		is_fullscreen = !is_fullscreen

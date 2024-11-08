@@ -16,6 +16,12 @@ run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SaveLoader="*res://autoloads/save_loader.gd"
+Settings="*res://autoloads/settings.gd"
+GameEnv="*res://test_scenes/game_env.tscn"
+
 [display]
 
 window/size/viewport_width=255

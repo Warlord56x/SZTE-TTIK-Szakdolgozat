@@ -79,6 +79,7 @@ size = Vector2(10, 10)
 size = Vector2(100, 100)
 
 [node name="Mage" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite")]
+collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_w332w")
 state_machine = NodePath("StateMachine")

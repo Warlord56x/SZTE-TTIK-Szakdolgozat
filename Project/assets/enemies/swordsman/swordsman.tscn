@@ -75,7 +75,7 @@ animations = [{
 size = Vector2(100, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_17m7r"]
-size = Vector2(8, 10)
+size = Vector2(10, 12)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eat7w"]
 atlas = ExtResource("7_si21x")
@@ -203,6 +203,7 @@ sprite = NodePath("AnimatedSprite2D")
 limit_nav_axis = Vector2i(1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_2wfxl")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
@@ -235,6 +236,7 @@ collision_mask = 9
 shape = SubResource("RectangleShape2D_v36c8")
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_17m7r")

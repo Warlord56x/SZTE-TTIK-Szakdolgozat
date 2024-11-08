@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmk3l27wkrb82"]
+
+[ext_resource type="Script" path="res://test_scenes/UI/volume_slider.gd" id="1_ieboo"]
+[ext_resource type="Theme" uid="uid://dqa12gi8o5ol4" path="res://assets/theme/default_theme.tres" id="1_smpmu"]
+[ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://fonts/nin_font.png" id="2_nm08p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q6u7y"]
+line_spacing = 0.0
+font = ExtResource("2_nm08p")
+font_size = 8
+
+[node name="VolumeSlider" type="HBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+mouse_filter = 2
+theme = ExtResource("1_smpmu")
+script = ExtResource("1_ieboo")
+
+[node name="Label" type="Label" parent="."]
+use_parent_material = true
+layout_mode = 2
+text = "Volume:"
+label_settings = SubResource("LabelSettings_q6u7y")
+
+[node name="HSlider" type="HSlider" parent="."]
+use_parent_material = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 50.0
+
+[node name="SpinBox" type="SpinBox" parent="."]
+use_parent_material = true
+layout_mode = 2
+value = 50.0
+suffix = "%"
+
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="SpinBox" to="." method="_on_spin_box_value_changed"]
