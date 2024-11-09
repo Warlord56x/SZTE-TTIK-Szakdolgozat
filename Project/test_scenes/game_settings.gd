@@ -5,16 +5,14 @@ var vsync: DisplayServer.VSyncMode = DisplayServer.VSYNC_DISABLED
 var master_volume: float = 0.5
 
 
-func not_in(any: Variant, arr: Array) -> bool:
-	for a in arr:
-		if a == any:
-			return false
-	return true
-
-
 func to_dict() -> Dictionary:
-	var dict: Dictionary
+	var dict: Dictionary = {}
+	# List of properties to exclude
+	var exclude_list = ["refcounted", "script", "built-in script", "game_settings.gd"]
+
+	# Loop through properties and add only if not in exclude list
 	for prop in get_property_list():
-		if not_in(prop.name.to_lower(), ["refcounted","script","built-in script"]):
-			dict.get_or_add(prop.name, get(prop.name))
+		if prop.name.to_lower() not in exclude_list:
+			dict[prop.name] = get(prop.name)
+			
 	return dict

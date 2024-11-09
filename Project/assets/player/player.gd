@@ -314,8 +314,8 @@ func blinker(val: float):
 
 func hurt(damage: int, _dealer: Node2D = null) -> bool:
 
-	collision_mask = 8
-	collision_layer = 8
+	#collision_mask = 8
+	#collision_layer = 8
 	health -= damage
 
 	if health <= 0:
@@ -390,6 +390,6 @@ func _on_weapon_hitbox_body_entered(body : Node2D) -> void:
 
 
 func invincibility_timeout() -> void:
-	collision_mask = 17
-	collision_layer = 1
+	#collision_mask = 17
+	#collision_layer = 1
 	blinker(0.0)

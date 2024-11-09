@@ -6,7 +6,7 @@ const DEBUG_TIP : PackedScene = preload("res://assets/enemies/enemy_tool_tip.tsc
 const SPLATTER := preload("res://assets/effects/splatter.tscn")
 const DAMAGE_NUMBER := preload("res://assets/effects/damage_number.tscn")
 const DEATH_SCENE_TEST := preload("res://test_scenes/death_test.tscn")
-const FLOATING_HP_BAR := preload("res://test_scenes/floating_hp_bar.tscn")
+const FLOATING_HP_BAR := preload("res://test_scenes/UI/floating_hp_bar.tscn")
 
 @export var state_machine: StateMachine
 @export var navigation_agent: NavigationAgent2D
@@ -147,10 +147,10 @@ func blinker(val: float):
 
 
 func hurt(e_damage: int, dealer: Node2D = null) -> bool:
-	if invincible:
-		return false
+	#if invincible:
+		#return false
 
-	invincible = true
+	#invincible = trues
 	health -= e_damage
 
 	var inv_tween = get_tree().create_tween().set_loops(3)
@@ -173,8 +173,8 @@ func hurt(e_damage: int, dealer: Node2D = null) -> bool:
 
 
 func knock_back(source_position: Vector2, intensity: float = 1.0) -> bool:
-	if invincible:
-		return false
+	#if invincible:
+		#return false
 
 	pushback_force = -global_position.direction_to(source_position) * intensity
 	pushback_force.y = min_jump_velocity * intensity
@@ -184,7 +184,7 @@ func knock_back(source_position: Vector2, intensity: float = 1.0) -> bool:
 
 func invincibility_timeout() -> void:
 	blinker(0.0)
-	invincible = false
+	#invincible = false
 
 
 func death() -> void:

@@ -22,7 +22,7 @@ var min_node: WheelItem
 var tween: Tween
 
 
-func _notification(what : int) -> void:
+func _notification(what: int) -> void:
 	if what == NOTIFICATION_PRE_SORT_CHILDREN:
 
 		coords.clear()
@@ -36,10 +36,9 @@ func _notification(what : int) -> void:
 			coords.append(Vector2(x,y))
 
 	if what == NOTIFICATION_SORT_CHILDREN:
-#		print("sorting...")
 		var center : Vector2 = get_global_rect().get_center()
 		var diff = abs(center - get_rect().get_center()).y
-		var min_y : float = 1000
+		var min_y : float = INF
 		for c in get_child_count():
 			var child: WheelItem = get_children()[c]
 			child.focus = false

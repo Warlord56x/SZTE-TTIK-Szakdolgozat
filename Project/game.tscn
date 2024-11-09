@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://uf631v4f4rfx"]
+[gd_scene load_steps=23 format=4 uid="uid://uf631v4f4rfx"]
 
 [ext_resource type="Texture2D" uid="uid://dufbdy81bhfap" path="res://nin_tiles.png" id="1_3fosb"]
 [ext_resource type="Shader" path="res://assets/effects/shaders/agx.gdshader" id="1_jjdjw"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://d4m7xeugvefch" path="res://test_scenes/death_test.tscn" id="14_0ahqq"]
 [ext_resource type="Shader" path="res://terrain.gdshader" id="15_n4knx"]
 [ext_resource type="Texture2D" uid="uid://d4cojs7o3f304" path="res://assets/backgrounds/level1.png" id="17_i470o"]
-[ext_resource type="AudioStream" uid="uid://cfa0cw21p6d04" path="res://assets/music/650558__stephiequeen__the-song-in-the-trees-song-loop.ogg" id="17_vmvgv"]
 [ext_resource type="Script" path="res://debug/debug_inputs.gd" id="19_5t51q"]
 [ext_resource type="PackedScene" uid="uid://d34pc2g4hgfyl" path="res://assets/enemies/mage/mage.tscn" id="23_kobi1"]
 
@@ -326,11 +325,6 @@ process_material = ExtResource("10_ole2b")
 lifetime = 100.0
 preprocess = 80.0
 visibility_rect = Rect2(-429.035, -10.9836, 869.543, 667.246)
-
-[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("17_vmvgv")
-autoplay = true
-parameters/looping = true
 
 [node name="WorldBound" type="Area2D" parent="."]
 position = Vector2(0, 300)

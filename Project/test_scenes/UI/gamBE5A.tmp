@@ -1,0 +1,128 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2qrpcmioix5b"]
+
+[ext_resource type="PackedScene" uid="uid://dmk3l27wkrb82" path="res://test_scenes/UI/volume_slider.tscn" id="1_0gqsg"]
+[ext_resource type="Theme" uid="uid://dqa12gi8o5ol4" path="res://assets/theme/default_theme.tres" id="1_xwq5v"]
+[ext_resource type="Script" path="res://test_scenes/UI/game_menu.gd" id="2_nsc3q"]
+[ext_resource type="Shader" path="res://test_scenes/UI/ui_dis_test.gdshader" id="3_5sbp6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qr1om"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gap0n"]
+shader = ExtResource("3_5sbp6")
+shader_parameter/progress = 0.0
+shader_parameter/noise_desnity = 30.0
+shader_parameter/beam_size = 0.01
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/corner_radius = 0.01
+
+[sub_resource type="LabelSettings" id="LabelSettings_5jag3"]
+line_spacing = 0.0
+
+[node name="GameMenu" type="Control"]
+material = SubResource("ShaderMaterial_qr1om")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 595.0
+offset_bottom = 336.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+theme = ExtResource("1_xwq5v")
+script = ExtResource("2_nsc3q")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 144)
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="Menu" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+
+[node name="Main" type="PanelContainer" parent="Margin/Menu" groups=["Menus"]]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="Margin/Menu/Main"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/Menu/Main"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Menu/Main/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Menu"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Margin/Menu/Main/VBoxContainer"]
+layout_mode = 2
+
+[node name="Effect2" type="ColorRect" parent="Margin/Menu/Main"]
+material = SubResource("ShaderMaterial_gap0n")
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Settings" type="PanelContainer" parent="Margin/Menu" groups=["Menus"]]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Margin/Menu/Settings"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/Menu/Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Menu/Settings/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_5jag3")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Margin/Menu/Settings/VBoxContainer"]
+layout_mode = 2
+
+[node name="MasterVolumeSlider" parent="Margin/Menu/Settings/VBoxContainer" instance=ExtResource("1_0gqsg")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FullscreenCheck" type="CheckButton" parent="Margin/Menu/Settings/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "FullScreen"
+
+[node name="VsyncCheck" type="CheckButton" parent="Margin/Menu/Settings/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Vsync"
+
+[node name="Spacer" type="Control" parent="Margin/Menu/Settings/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Apply" type="Button" parent="Margin/Menu/Settings/VBoxContainer"]
+layout_mode = 2
+text = "apply"
+
+[node name="Effect" type="ColorRect" parent="Margin/Menu/Settings"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_gap0n")
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="volume_changed" from="Margin/Menu/Settings/VBoxContainer/MasterVolumeSlider" to="." method="_on_volume_slider_volume_changed"]
+[connection signal="toggled" from="Margin/Menu/Settings/VBoxContainer/FullscreenCheck" to="." method="_on_fullscreen_check_toggled"]
+[connection signal="toggled" from="Margin/Menu/Settings/VBoxContainer/VsyncCheck" to="." method="_on_vsync_check_toggled"]
+[connection signal="pressed" from="Margin/Menu/Settings/VBoxContainer/Apply" to="." method="_on_apply_pressed"]
