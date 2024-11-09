@@ -3,6 +3,8 @@ extends Node
 @onready var world_environment: WorldEnvironment = $WorldEnvironment
 @onready var background_music: AudioStreamPlayer = $BackgroundMusic
 
+var input_process: bool = true
+
 
 func _ready() -> void:
 	start_bg_music()

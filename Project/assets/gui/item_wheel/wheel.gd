@@ -75,7 +75,9 @@ func _get_minimum_size() -> Vector2:
 	return ((ch.size / 2) + Vector2(r, r)) * 2
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_key_input(event: InputEvent) -> void:
+	if not GameEnv.input_process:
+		return
 	if event.is_action_pressed("wheel_plus") or event.is_action_pressed("wheel_minus"):
 		turn_wheel(round(Input.get_axis("wheel_plus", "wheel_minus")))
 

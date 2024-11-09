@@ -13,7 +13,8 @@ extends Control
 @onready var effects: Array = _effect_nodes.map(func(n): return n.material as ShaderMaterial)
 
 
-var main_open: bool = false
+var main_open: bool = false:
+	set = set_main
 
 
 func _ready() -> void:
@@ -30,14 +31,20 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("menu"):
-		GameEnv.set_blur(!main_open, 0.7)
-		if not main_open:
-			open(menus[0])
-		else:
-			for menu in menus_reversed:
-				if menu.visible:
-					close(menu)
 		main_open = !main_open
+
+
+func set_main(_open: bool) -> void:
+	GameEnv.set_blur(_open, 0.7)
+	GameEnv.input_process = !_open
+
+	if _open:
+		open(menus[0])
+	else:
+		for menu in menus_reversed:
+			if menu.visible:
+				close(menu)
+	main_open = _open
 
 
 func open(menu: Control) -> void:
@@ -95,10 +102,7 @@ func _on_apply_pressed() -> void:
 
 #region Main events
 func _on_continue_pressed() -> void:
-	GameEnv.set_blur(false, 0.7)
-	for menu in menus_reversed:
-		if menu.visible:
-			close(menu)
+	main_open = false
 
 
 func _on_save_pressed() -> void:

@@ -122,7 +122,8 @@ var max_stamina : int = 20
 	set = set_stamina
 @export_range(0.1, 2.0, 0.1, "suffix:s") var wall_drain_time : float = 0.1:
 	set(t):
-		await ready
+		if not is_node_ready():
+			await ready
 		stamina_wall_drainer.wait_time = t
 		wall_drain_time = t
 #endregion
@@ -168,12 +169,6 @@ func set_stamina(s : int) -> void:
 		stamina_time_waiter.stop()
 
 
-#func set_arrows(a : int) -> void:
-	#a = clamp(a, 0, max_arrows)
-	#arrows = a
-	#arrow_count.text = str(a)
-
-
 func set_coins(c : int) -> void:
 	clamp(c, 0, 9999)
 	coins = c
@@ -188,7 +183,9 @@ func set_checkpoint(c : Node2D) -> void:
 #endregion
 
 
-func _unhandled_input(event : InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
+	if not GameEnv.input_process:
+		return
 
 	if event.is_action_pressed("cast_spell"):
 		if not state_machine.get_state("cast").active:

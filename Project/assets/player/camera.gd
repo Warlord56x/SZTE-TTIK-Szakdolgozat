@@ -13,6 +13,7 @@ func add_trauma(amount: float, _intensity: float) -> void:
 func _unhandled_input(_event: InputEvent) -> void:
 
 	var t_inp = Input.get_axis("wheel_down", "wheel_up")
+	
 	if t_inp:
 		var tween = get_tree().create_tween()
 		tween.tween_property(
