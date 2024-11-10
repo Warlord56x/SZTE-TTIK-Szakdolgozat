@@ -2,11 +2,11 @@ extends CharacterBody2D
 class_name Enemy
 
 # Debug tool tip
-const DEBUG_TIP : PackedScene = preload("res://assets/enemies/enemy_tool_tip.tscn")
+const DEBUG_TIP : PackedScene = preload("res://debug/debug_info.tscn")
 const SPLATTER := preload("res://assets/effects/splatter.tscn")
 const DAMAGE_NUMBER := preload("res://assets/effects/damage_number.tscn")
-const DEATH_SCENE_TEST := preload("res://test_scenes/death_test.tscn")
-const FLOATING_HP_BAR := preload("res://test_scenes/UI/floating_hp_bar.tscn")
+const DEATH_SCENE_TEST := preload("res://assets/effects/death_effect.tscn")
+const FLOATING_HP_BAR := preload("res://assets/gui/floating_bar/floating_hp_bar.tscn")
 
 @export var state_machine: StateMachine
 @export var navigation_agent: NavigationAgent2D
