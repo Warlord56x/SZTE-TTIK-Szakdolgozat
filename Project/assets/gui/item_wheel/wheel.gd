@@ -79,10 +79,11 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if not GameEnv.input_process:
 		return
 	if event.is_action_pressed("wheel_plus") or event.is_action_pressed("wheel_minus"):
-		turn_wheel(round(Input.get_axis("wheel_plus", "wheel_minus")))
+		turn_wheel(sign(Input.get_axis("wheel_plus", "wheel_minus")))
 
-	if event.is_action_pressed("item_actions"):
-		seek_to_item(event.as_text() as int)
+	for i in range(1, 9):
+		if event.is_action_pressed(str("wheel_item_",i)):
+			seek_to_item(i)
 
 
 func turn_wheel(dir: int) -> void:

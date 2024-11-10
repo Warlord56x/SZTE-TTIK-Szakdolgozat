@@ -10,10 +10,11 @@ func add_trauma(amount: float, _intensity: float) -> void:
 	intensity = _intensity
 
 
-func _unhandled_input(_event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
+	if not GameEnv.input_process:
+		return
 
-	var t_inp = Input.get_axis("wheel_down", "wheel_up")
-	
+	var t_inp = event.get_action_strength("wheel_up") - event.get_action_strength("wheel_down")
 	if t_inp:
 		var tween = get_tree().create_tween()
 		tween.tween_property(
@@ -31,7 +32,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	var t_inp = Input.get_axis("wheel_down", "wheel_up") * 0.4
-	if t_inp != 0:
+	if t_inp != 0 and not GameEnv.input_process:
 		var tween = get_tree().create_tween()
 		tween.tween_property(
 			self,

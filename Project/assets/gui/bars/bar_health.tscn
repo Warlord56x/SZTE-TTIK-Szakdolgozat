@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm4lu0fwgsv75"]
+
+[ext_resource type="Script" path="res://assets/gui/bars/bar.gd" id="1_jkvtb"]
+[ext_resource type="PackedScene" uid="uid://c88pf7h6w1k3u" path="res://assets/gui/hearts/heart_hp.tscn" id="2_4434t"]
+
+[node name="BarHealth" type="GridContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 10
+script = ExtResource("1_jkvtb")
+heart = ExtResource("2_4434t")

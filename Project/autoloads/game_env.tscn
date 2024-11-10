@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://beullbbmtqwww"]
+
+[ext_resource type="Script" path="res://autoloads/game_env.gd" id="1_emsl1"]
+[ext_resource type="AudioStream" uid="uid://cfa0cw21p6d04" path="res://assets/music/650558__stephiequeen__the-song-in-the-trees-song-loop.ogg" id="2_lxf3p"]
+
+[sub_resource type="Environment" id="Environment_1o8hs"]
+background_mode = 3
+background_canvas_max_layer = 2
+tonemap_mode = 3
+glow_enabled = true
+glow_normalized = true
+glow_mix = 0.0
+glow_bloom = 1.0
+glow_blend_mode = 4
+
+[node name="GameEnv" type="Node"]
+script = ExtResource("1_emsl1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1o8hs")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_lxf3p")
+parameters/looping = true

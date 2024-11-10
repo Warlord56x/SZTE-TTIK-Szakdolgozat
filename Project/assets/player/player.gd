@@ -64,6 +64,7 @@ enum player_res {
 @onready var health_time : Timer = Timer.new()
 
 @onready var sword_hit: AudioStreamPlayer2D = $SwordHit
+@onready var sword_swing: AudioStreamPlayer2D = $SwordSwing
 
 @onready var move_direction : Vector2 = Vector2.RIGHT
 
@@ -292,11 +293,6 @@ func request_interaction_visible(b : bool) -> void:
 	$Label.visible = b
 
 
-func is_interaction_available() -> bool:
-	print("NO DON'T USE THIS, YOU'RE DUMB")
-	return $Label.visible
-
-
 func _ready() -> void:
 	tool_tip_node.visible = debug
 
@@ -384,6 +380,7 @@ func _on_weapon_hitbox_body_entered(body : Node2D) -> void:
 		if body.hurt(1, self):
 			sword_hit.play()
 			camera.add_trauma(0.2, 0.5)
+			GameEnv.slow_time(0.5, 0.07)
 
 
 func invincibility_timeout() -> void:

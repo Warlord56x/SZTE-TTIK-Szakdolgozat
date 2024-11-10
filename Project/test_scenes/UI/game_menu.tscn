@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dmk3l27wkrb82" path="res://test_scenes/UI/volume_slider.tscn" id="1_0gqsg"]
 [ext_resource type="Theme" uid="uid://dqa12gi8o5ol4" path="res://assets/theme/default_theme.tres" id="1_xwq5v"]
 [ext_resource type="Script" path="res://test_scenes/UI/game_menu.gd" id="2_nsc3q"]
-[ext_resource type="Shader" path="res://test_scenes/UI/ui_dis_test.gdshader" id="3_5sbp6"]
+[ext_resource type="Shader" path="res://test_scenes/UI/ui_dissolve.gdshader" id="3_5sbp6"]
 [ext_resource type="Script" path="res://test_scenes/UI/menu_container.gd" id="3_x1cqt"]
 [ext_resource type="Script" path="res://test_scenes/UI/menu.gd" id="4_gd12f"]
 [ext_resource type="Script" path="res://test_scenes/UI/save_list.gd" id="6_t4epa"]

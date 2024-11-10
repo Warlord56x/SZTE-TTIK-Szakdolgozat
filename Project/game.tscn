@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b25vye5etxi5" path="res://assets/enemies/swordsman/swordsman.tscn" id="9_80lmc"]
 [ext_resource type="PackedScene" uid="uid://cufofyqncxk0k" path="res://assets/enemies/bat/bat.tscn" id="9_e55gt"]
 [ext_resource type="PackedScene" uid="uid://diq8ndw4ll1rm" path="res://assets/player/player.tscn" id="9_rfqiq"]
-[ext_resource type="Material" uid="uid://b4q147v40j1vp" path="res://snow.tres" id="10_ole2b"]
+[ext_resource type="Material" uid="uid://b4q147v40j1vp" path="res://assets/effects/snow.tres" id="10_ole2b"]
 [ext_resource type="Script" path="res://assets/gui/debug.gd" id="11_fah24"]
 [ext_resource type="Script" path="res://world_bound.gd" id="13_ynwvk"]
 [ext_resource type="Shader" path="res://terrain.gdshader" id="15_n4knx"]

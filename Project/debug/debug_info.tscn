@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://b488vmoc2emb0"]
+
+[ext_resource type="Script" path="res://debug/debug_info.gd" id="1_jygyo"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ca5d2"]
+light_mode = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_h6j3c"]
+line_spacing = 0.0
+font_size = 4
+
+[node name="EnemyToolTip" type="Control"]
+z_index = 1000
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jygyo")
+
+[node name="Label" type="Label" parent="."]
+material = SubResource("CanvasItemMaterial_ca5d2")
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -7.0
+offset_right = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 1
+text = "ABC"
+label_settings = SubResource("LabelSettings_h6j3c")
+
+[node name="Panel" type="Panel" parent="Label"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

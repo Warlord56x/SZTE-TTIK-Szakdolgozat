@@ -73,7 +73,7 @@ func enter() -> void:
 		var tween : Tween = get_tree().create_tween()
 		tween.set_trans(Tween.TRANS_ELASTIC)
 		tween.tween_property(player.weapon, "position", Vector2(player.move_direction.x * 8, 0), 0.3)
-		$"../../SwordSwing".play()
+		player.sword_swing.play()
 
 		anim_state_m.travel("hit")
 		player.weapon.flip_h = player.move_direction.x < 0

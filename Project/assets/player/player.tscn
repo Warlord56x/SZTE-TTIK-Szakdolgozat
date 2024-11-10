@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://assets/player/player.gd" id="1_0p7ex"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="2_imbft"]
-[ext_resource type="PackedScene" uid="uid://dm4lu0fwgsv75" path="res://assets/gui/bar_health.tscn" id="2_n15yp"]
-[ext_resource type="PackedScene" uid="uid://b488vmoc2emb0" path="res://assets/enemies/enemy_tool_tip.tscn" id="2_p0eb3"]
+[ext_resource type="PackedScene" uid="uid://dm4lu0fwgsv75" path="res://assets/gui/bars/bar_health.tscn" id="2_n15yp"]
+[ext_resource type="PackedScene" uid="uid://b488vmoc2emb0" path="res://debug/debug_info.tscn" id="2_p0eb3"]
 [ext_resource type="Resource" uid="uid://cvc8mxoyf2775" path="res://assets/data/player_inventory.tres" id="2_q0eh7"]
 [ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="3_fxfhm"]
-[ext_resource type="PackedScene" uid="uid://uvwfpidv7ujl" path="res://assets/gui/bar_mana.tscn" id="3_nro24"]
+[ext_resource type="PackedScene" uid="uid://uvwfpidv7ujl" path="res://assets/gui/bars/bar_mana.tscn" id="3_nro24"]
 [ext_resource type="Script" path="res://assets/player/states/state_default.gd" id="3_sadaf"]
-[ext_resource type="PackedScene" uid="uid://bakgosfbeq37h" path="res://assets/gui/bar_stamina.tscn" id="4_mq3j0"]
+[ext_resource type="PackedScene" uid="uid://bakgosfbeq37h" path="res://assets/gui/bars/bar_stamina.tscn" id="4_mq3j0"]
 [ext_resource type="Script" path="res://assets/player/states/state_fall.gd" id="4_oyygq"]
 [ext_resource type="AudioStream" uid="uid://dm1uu5hsqy01n" path="res://assets/sounds/362349__beerbelly38__knife-slash-2.wav" id="4_v8ma5"]
 [ext_resource type="Script" path="res://assets/player/states/state_wall.gd" id="5_mhtgr"]
@@ -1406,8 +1406,6 @@ sprite_frames = SubResource("SpriteFrames_ckq3n")
 animation = &"sword"
 
 [node name="WeaponHitbox" type="Area2D" parent="Weapon"]
-collision_layer = 17
-collision_mask = 17
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/WeaponHitbox"]

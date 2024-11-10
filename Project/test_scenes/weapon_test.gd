@@ -3,7 +3,8 @@ class_name WeaponExperimental
 
 
 @export var hitbox: bool = false
-@export var direction: float = 1
+@export var direction: float = 1:
+	set(dir): flip_h = dir > 0
 signal hit(body: Node2D)
 
 
