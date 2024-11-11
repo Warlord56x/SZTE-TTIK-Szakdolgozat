@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b25vye5etxi5"]
+[gd_scene load_steps=30 format=3 uid="uid://b25vye5etxi5"]
 
 [ext_resource type="Script" path="res://assets/enemies/swordsman/swordsman.gd" id="1_6tos1"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="2_8i2l2"]
@@ -8,7 +8,9 @@
 [ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_combat.gd" id="6_njad8"]
 [ext_resource type="Shader" path="res://assets/effects/shaders/blinker.gdshader" id="7_e3isw"]
 [ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="7_si21x"]
+[ext_resource type="Script" path="res://test_scenes/hitbox.gd" id="9_q8lhd"]
 [ext_resource type="AudioStream" uid="uid://82jihjn8dema" path="res://assets/sounds/568169__merrick079__sword-sound-2.wav" id="9_vs37d"]
+[ext_resource type="Script" path="res://test_scenes/hurtbox.gd" id="10_xrarh"]
 [ext_resource type="AudioStream" uid="uid://dm1uu5hsqy01n" path="res://assets/sounds/362349__beerbelly38__knife-slash-2.wav" id="10_xtmbh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2wfxl"]
@@ -106,9 +108,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_302u5"]
-size = Vector2(8, 8)
-
 [sub_resource type="Animation" id="Animation_82swx"]
 length = 0.001
 tracks/0/type = "value"
@@ -126,7 +125,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Weapon/WeaponHitbox:monitoring")
+tracks/1/path = NodePath("Weapon:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -138,14 +137,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Weapon:visible")
+tracks/2/path = NodePath("Weapon/Hitbox:monitorable")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_w4vrw"]
@@ -166,26 +165,26 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Weapon/WeaponHitbox:monitoring")
+tracks/1/path = NodePath("Weapon:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Weapon:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Weapon/Hitbox:monitorable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rstr4"]
@@ -195,7 +194,8 @@ _data = {
 }
 
 [node name="Swordsman" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite")]
-collision_mask = 3
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_6tos1")
 state_machine = NodePath("StateMachine")
 navigation_agent = NodePath("NavigationAgent2D")
@@ -235,21 +235,45 @@ collision_mask = 9
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
 shape = SubResource("RectangleShape2D_v36c8")
 
-[node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 0
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("parent_ref")]
+collision_layer = 64
+collision_mask = 0
+monitoring = false
+script = ExtResource("9_q8lhd")
+parent_ref = NodePath("..")
+damage = 1
+knock_back_strength = 0.6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_17m7r")
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("parent_ref")]
+collision_layer = 0
+collision_mask = 64
+monitorable = false
+script = ExtResource("10_xrarh")
+parent_ref = NodePath("..")
+ignore_enemy = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_17m7r")
 
 [node name="Weapon" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_b2g1y")
 
-[node name="WeaponHitbox" type="Area2D" parent="Weapon"]
+[node name="Hitbox" type="Area2D" parent="Weapon" node_paths=PackedStringArray("parent_ref", "sound_on_hit")]
+collision_layer = 64
+collision_mask = 0
 monitoring = false
+script = ExtResource("9_q8lhd")
+parent_ref = NodePath("../..")
+damage = 1
+knock_back_strength = 0.5
+sound_on_hit = NodePath("../../SwordHit")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/WeaponHitbox"]
-shape = SubResource("RectangleShape2D_302u5")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/Hitbox"]
+shape = SubResource("RectangleShape2D_17m7r")
 
 [node name="ChaseTimer" type="Timer" parent="."]
 wait_time = 4.0
@@ -272,5 +296,3 @@ stream = ExtResource("10_xtmbh")
 
 [connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]
 [connection signal="body_exited" from="DetectRange" to="." method="_on_detect_range_body_exited"]
-[connection signal="body_entered" from="Hitbox" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="Weapon/WeaponHitbox" to="StateMachine/Combat" method="_on_weapon_hitbox_body_entered"]

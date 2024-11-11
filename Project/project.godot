@@ -271,12 +271,13 @@ wheel_item_8={
 
 [layer_names]
 
-2d_physics/layer_1="Entities"
+2d_physics/layer_1="Player"
 2d_physics/layer_2="Terrain"
-2d_physics/layer_3="Navigation"
+2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Invincibility"
 2d_physics/layer_5="Platform"
 2d_physics/layer_6="Projectiles"
+2d_physics/layer_7="Hit/Hurtboxes"
 
 [rendering]
 

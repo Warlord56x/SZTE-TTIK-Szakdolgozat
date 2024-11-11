@@ -163,6 +163,11 @@ func hurt(e_damage: int, dealer: Node2D = null) -> bool:
 	splatter.global_position = global_position
 	get_tree().root.add_child(splatter)
 
+	var damage_number = DAMAGE_NUMBER.instantiate()
+	damage_number.damage_number = damage
+	damage_number.global_position = global_position
+	add_child.call_deferred(damage_number)
+
 	if dealer and dealer is Player:
 		target = dealer
 		if state_machine.get_state("idle").active:

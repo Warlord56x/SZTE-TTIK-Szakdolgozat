@@ -41,8 +41,8 @@ func enter() -> void:
 		var target = player.global_position + player.move_direction
 		projectile_instance.p_rotation = player.global_position.angle_to_point(target)
 		projectile_instance.position = player.position
+		projectile_instance.parent_ref = player
 		player.add_child(projectile_instance)
-		projectile_instance.owner = player
 
 	if item and item.name.to_lower() == "hammer":
 		if player.stamina == 0:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bhxmqg2i48ced"]
+[gd_scene load_steps=24 format=3 uid="uid://bhxmqg2i48ced"]
 
 [ext_resource type="Script" path="res://assets/player/projectile.gd" id="1_jl8yt"]
 [ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="2_7nube"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dcjv6ghjq606o" path="res://assets/sounds/431174__highpixel__fireball-explosion.wav" id="5_5aybg"]
 [ext_resource type="AudioStream" uid="uid://dp2tki63awsmg" path="res://assets/sounds/209399__sgossner__bow-release.mp3" id="6_fhpl1"]
 [ext_resource type="AudioStream" uid="uid://gthgyswsyk5p" path="res://assets/sounds/536066__eminyildirim__bow-impact.wav" id="7_q3x0f"]
+[ext_resource type="Script" path="res://test_scenes/hitbox.gd" id="8_dbsx6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l0nfp"]
 size = Vector2(7, 4)
@@ -124,7 +125,7 @@ size = Vector2(3, 4)
 [node name="Projectile" type="CharacterBody2D"]
 top_level = true
 collision_layer = 32
-collision_mask = 0
+collision_mask = 18
 motion_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 3.14159
@@ -174,5 +175,12 @@ stream = ExtResource("7_q3x0f")
 volume_db = -8.0
 max_distance = 300.0
 
+[node name="Hitbox2" type="Area2D" parent="."]
+script = ExtResource("8_dbsx6")
+damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox2"]
+position = Vector2(4.5, 0)
+shape = SubResource("RectangleShape2D_fougr")
+
 [connection signal="timeout" from="FreeTimer" to="." method="_on_free_timer_timeout"]
-[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

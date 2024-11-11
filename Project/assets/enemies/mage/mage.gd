@@ -13,12 +13,6 @@ func physics_process(_delta: float) -> void:
 	sprite.flip_h = move_direction < 0
 
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is Player and not invincible:
-		body.hurt(1, self)
-		body.knock_back(global_position, 0.6)
-
-
 func _on_detect_range_body_entered(body : Node2D) -> void:
 	if body is Player:
 		target = body

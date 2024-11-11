@@ -32,7 +32,7 @@ func attack() -> void:
 	projectile.global_position = enemy.global_position
 	projectile.type = 1
 	enemy.add_child(projectile)
-	projectile.owner = enemy
+	projectile.parent_ref = enemy
 	enemy.sprite.play("default")
 	attack_flag = false
 

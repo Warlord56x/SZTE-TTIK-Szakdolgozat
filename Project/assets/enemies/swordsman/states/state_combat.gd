@@ -14,10 +14,15 @@ func attack() -> void:
 	# Guard case to avoid making the tween
 	# TODO: needs to be tested more
 	if not enemy.weapon:
+		print("avoided")
 		return
 
 	attacking = true
 	var tween : Tween = get_tree().create_tween()
+	if not enemy.weapon:
+		print("killed tween")
+		tween.kill()
+		return
 	tween.set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(enemy.weapon, "position", Vector2(enemy.move_direction * 8, 0), 0.3)
 	$"../../SwordSwing".play()

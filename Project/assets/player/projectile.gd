@@ -9,7 +9,9 @@ var p_rotation: float
 var override_speed: int
 var type: int = 0
 
+var parent_ref: Node2D
 
+@onready var hitbox: Hitbox = $Hitbox2
 @onready var animation: AnimatedSprite2D = $Animation
 
 
@@ -24,12 +26,20 @@ func _ready() -> void:
 		0:
 			animation.play("a_default")
 			$BowAudio.play()
+			hitbox.sound_on_hit = $BowImpact
+			hitbox.knock_back_strength = 0.4
 		1:
 			animation.play("f_default")
 			$FireAudio.play()
+			hitbox.sound_on_hit = $FireImpact
+			hitbox.knock_back_strength = 0.2
+	hitbox.parent_ref = parent_ref
+	hitbox.hit_callback = finished_callback
 
 
 func _physics_process(_delta : float) -> void:
+	if get_last_slide_collision() != null:
+		finished_callback()
 	move_and_slide()
 
 
@@ -38,29 +48,11 @@ func _on_free_timer_timeout() -> void:
 	queue_free()
 
 
-func _on_hitbox_body_entered(body: Node2D) -> void:
-	if body != owner:
-		velocity = Vector2.ZERO
-		$Hitbox.set_deferred("monitoring", false)
-		match type:
-			0:
-				animation.play("a_boom")
-				if body.has_method("knock_back"):
-					body.knock_back(global_position, 0.5)
-				$BowImpact.play()
-			1:
-				animation.play("f_boom")
-				if body.has_method("knock_back"):
-					body.knock_back(global_position, 0.2)
-
-				var tween: Tween = create_tween()
-				tween.tween_property($PointLight2D, "energy", 0.0, 0.3)
-				$FireImpact.play()
-
-		if body.has_method("hurt"):
-			body.hurt(1, owner)
-
-
-		if animation.is_playing():
-			await animation.animation_finished
-		queue_free()
+func finished_callback() -> void:
+	velocity = Vector2.ZERO
+	animation.play("f_boom" if type else "a_boom")
+	var tween: Tween = create_tween()
+	tween.tween_property($PointLight2D, "energy", 0.0, 0.3)
+	if animation.is_playing():
+		await animation.animation_finished
+	queue_free()

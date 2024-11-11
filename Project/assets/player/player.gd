@@ -37,7 +37,7 @@ enum player_res {
 @onready var state_machine: StateMachine = $StateMachine
 @onready var _coins : Control = %CoinLabel
 @onready var weapon : AnimatedSprite2D = $Weapon
-@onready var weapon_hitbox: Area2D = $Weapon/WeaponHitbox
+@onready var weapon_hitbox: Area2D = $Weapon/Hitbox
 @onready var interactor: Interactor = $Interactor
 
 @onready var health_bar : Bar = %HealthBar
@@ -373,14 +373,15 @@ func _on_wall_stamina_drain_timeout() -> void:
 	stamina -= 1
 
 
-func _on_weapon_hitbox_body_entered(body : Node2D) -> void:
-	if body is Enemy and body.has_method("hurt"):
-		body = body as Enemy
-		body.knock_back(global_position, 0.5)
-		if body.hurt(1, self):
-			sword_hit.play()
-			camera.add_trauma(0.2, 0.5)
-			GameEnv.slow_time(0.5, 0.07)
+#func _on_weapon_hitbox_body_entered(body : Node2D) -> void:
+	#return
+	#if body is Enemy and body.has_method("hurt"):
+		#body = body as Enemy
+		#body.knock_back(global_position, 0.5)
+		#if body.hurt(1, self):
+			#sword_hit.play()
+			#camera.add_trauma(0.2, 0.5)
+			#GameEnv.slow_time(0.5, 0.07)
 
 
 func invincibility_timeout() -> void:
