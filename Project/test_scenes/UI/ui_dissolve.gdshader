@@ -13,6 +13,7 @@ uniform float progress : hint_range(0.0, 1.0);
 uniform float noise_desnity = 60;
 uniform float beam_size : hint_range(0.01, 0.15);
 uniform vec4 color : source_color = vec4(0.0, 1.02, 1.2, 1.0);
+uniform float pixel_size: hint_range(0.0, 1.0, 0.01) = 0.01;
 uniform float corner_radius : hint_range(0.0, 0.5) = 0.1;
 
 
@@ -39,12 +40,14 @@ float noise(vec2 uv) {
 
 void fragment()
 {
-	vec4 tex = texture(TEXTURE, UV);
+	vec2 pixelatedUV = floor(UV / pixel_size) * pixel_size;
+	vec4 tex = texture(TEXTURE, pixelatedUV);
 	
-	float noise = noise(UV * noise_desnity) * UV.x;
+	float noise = noise(pixelatedUV * noise_desnity) * pixelatedUV.x;
 	
-	float d1 = step(noise, progress);
-	float d2 = step(noise, progress - beam_size);
+	float epsilon = 0.001;
+	float d1 = step(noise, progress - epsilon);
+	float d2 = step(noise, progress - beam_size - epsilon);
 	
 	vec3 beam = vec3(d1 - d2) * color.rgb;
 	
@@ -64,12 +67,12 @@ void fragment()
 	float dist_br = distance(UV, limit_br);
 	
 	// Discard pixels outside the rounded corners
-	if ((UV.x < corner_radius && UV.y < corner_radius && dist_tl > corner_radius) || 
-			(UV.x > limit_tr.x && UV.y < corner_radius && dist_tr > corner_radius) || 
-			(UV.x < corner_radius && UV.y > limit_bl.y && dist_bl > corner_radius) || 
-			(UV.x > limit_br.x && UV.y > limit_br.y && dist_br > corner_radius)) {
+	if ((pixelatedUV.x < corner_radius && pixelatedUV.y < corner_radius && dist_tl > corner_radius) || 
+			(pixelatedUV.x > limit_tr.x && pixelatedUV.y < corner_radius && dist_tr > corner_radius) || 
+			(pixelatedUV.x < corner_radius && pixelatedUV.y > limit_bl.y && dist_bl > corner_radius) || 
+			(pixelatedUV.x > limit_br.x && pixelatedUV.y > limit_br.y && dist_br > corner_radius)) {
 		discard;
 	} else {
-	    COLOR = tex;
+		COLOR = tex;
 	}
 }

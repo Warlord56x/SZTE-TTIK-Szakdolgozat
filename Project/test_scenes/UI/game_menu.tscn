@@ -19,6 +19,7 @@ shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
 shader_parameter/beam_size = 0.01
 shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pixel_size = 0.01
 shader_parameter/corner_radius = 0.01
 
 [sub_resource type="LabelSettings" id="LabelSettings_5jag3"]
@@ -30,6 +31,7 @@ shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
 shader_parameter/beam_size = 0.01
 shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pixel_size = 0.01
 shader_parameter/corner_radius = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i1o6x"]
@@ -38,6 +40,7 @@ shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
 shader_parameter/beam_size = 0.01
 shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pixel_size = 0.01
 shader_parameter/corner_radius = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sn4o6"]
@@ -46,6 +49,7 @@ shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
 shader_parameter/beam_size = 0.01
 shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pixel_size = 0.01
 shader_parameter/corner_radius = 0.01
 
 [node name="GameMenu" type="Control"]

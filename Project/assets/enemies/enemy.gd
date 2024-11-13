@@ -75,8 +75,7 @@ func ready() -> void:
 
 
 func actor_setup():
-	# Wait for the first physics frame so the NavigationServer can sync.
-	await get_tree().physics_frame
+	# Wait for the NavigationServer to sync.
 	await NavigationServer2D.map_changed
 	navmap_ready = true
 

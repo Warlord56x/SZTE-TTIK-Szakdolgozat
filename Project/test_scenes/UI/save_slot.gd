@@ -3,17 +3,19 @@ class_name SaveSlot
 
 var name: String = ""
 var saves: Array[Save] = []
+var at: int
 
 
 func _init(_name: String) -> void:
 	if not DirAccess.dir_exists_absolute(SaveManager.default_path + _name):
 		DirAccess.make_dir_recursive_absolute(SaveManager.default_path + _name)
+	at = FileAccess.get_modified_time(SaveManager.default_path + _name)
 	name = _name
 	saves = _get_saves()
 
 
 ## Makes a new save to the slots folder
-func new_save(_name: String, _data: Dictionary = {}) -> void:
+func new_save(_name: String, _data: Array = []) -> void:
 	if _name.get_extension() == "":
 		_name += ".save"
 	if saves.any(func(s: Save): return s.name == _name):
@@ -49,5 +51,5 @@ func _get_saves() -> Array[Save]:
 
 
 ## Sort saves based on save date
-func time_sort(a: Save, b: Save) -> bool:
+static func time_sort(a, b) -> bool:
 	return a.at > b.at

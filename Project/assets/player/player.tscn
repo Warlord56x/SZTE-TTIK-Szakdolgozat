@@ -1187,7 +1187,7 @@ size = Vector2(6, 6)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mirti"]
 size = Vector2(6, 6)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("tool_tip_node")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("tool_tip_node") groups=["Persistent"]]
 collision_mask = 17
 safe_margin = 0.1
 script = ExtResource("1_0p7ex")

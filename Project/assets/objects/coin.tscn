@@ -64,7 +64,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gsmkm"]
 size = Vector2(6, 6)
 
-[node name="Coin" type="Area2D"]
+[node name="Coin" type="Area2D" groups=["Persistent"]]
 collision_layer = 0
 collision_mask = 9
 script = ExtResource("1_l7sap")
@@ -78,4 +78,3 @@ autoplay = "default"
 shape = SubResource("RectangleShape2D_gsmkm")
 
 [connection signal="body_entered" from="." to="." method="_on_player_entered"]
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

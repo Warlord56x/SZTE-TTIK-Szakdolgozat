@@ -1,7 +1,7 @@
 class_name Save
 
 var slot: SaveSlot = null
-var data: Dictionary = {}
+var data: Array = []
 var at: int = 0
 var screen_shot: Texture2D = null
 var name: String = ""
@@ -9,7 +9,7 @@ var name: String = ""
 var _path: String = ""
 
 
-func _init(_name: String, _slot: SaveSlot, _data: Dictionary = {}) -> void:
+func _init(_name: String, _slot: SaveSlot, _data: Array = []) -> void:
 	name = _name
 	if name.get_extension() == "":
 		name += ".save"
@@ -24,7 +24,7 @@ func _init(_name: String, _slot: SaveSlot, _data: Dictionary = {}) -> void:
 
 func save_data() -> void:
 	var file := FileAccess.open(_path, FileAccess.WRITE)
-	file.store_line(JSON.stringify(data))
+	file.store_line(JSON.stringify(data, "\t"))
 	file.close()
 	at = FileAccess.get_modified_time(_path)
 

@@ -2,7 +2,6 @@ extends ScrollContainer
 
 
 const ELEMENT := preload("res://test_scenes/UI/save_element.tscn")
-@export var slot: int = 0
 
 
 func _init() -> void:

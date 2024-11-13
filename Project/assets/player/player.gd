@@ -185,10 +185,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not GameEnv.input_process:
 		return
 
-	var left := event.get_action_strength("move_left")
-	var right := event.get_action_strength("move_right")
-	input_direction = right - left
-
 	if event.is_action_pressed("cast_spell"):
 		if not state_machine.get_state("cast").active:
 			state_machine.travel("cast")
@@ -290,6 +286,22 @@ func request_interaction_visible(b: bool) -> void:
 	$Label.visible = b
 
 
+func save() -> Dictionary:
+	var ch_pos: Vector2
+	if checkpoint:
+		ch_pos = checkpoint.global_position
+	else:
+		ch_pos = DEFAULT_SPAWN_POINT
+	return {
+		"filename" : get_scene_file_path(),
+		"parent": get_parent().get_path(),
+		"health" : health,
+		"mana" : mana,
+		"coins" : coins,
+		"checkpoint" : SaveManager.vector2_to_array(ch_pos),
+	}
+
+
 func _ready() -> void:
 	tool_tip_node.visible = debug
 
@@ -351,6 +363,9 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if GameEnv.input_process:
+		input_direction = Input.get_axis("move_left", "move_right")
+
 	if input_direction:
 		move_direction.x = sign(input_direction)
 

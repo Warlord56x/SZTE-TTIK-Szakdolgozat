@@ -20,7 +20,8 @@ shader = ExtResource("3_7erxc")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
 shader_parameter/beam_size = 0.01
-shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/color = Color(0.987591, 0.960164, 1, 1)
+shader_parameter/pixel_size = 0.01
 shader_parameter/corner_radius = 0.0
 
 [node name="GameEnv" type="Node"]
