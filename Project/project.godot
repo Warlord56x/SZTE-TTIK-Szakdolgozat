@@ -30,6 +30,11 @@ window/size/window_width_override=1152
 window/size/window_height_override=648
 window/stretch/mode="canvas_items"
 
+[global_group]
+
+Persistent="Saveable nodes"
+Checkpoint="Essentially a \"bonfire\" from ds"
+
 [input]
 
 ui_accept={

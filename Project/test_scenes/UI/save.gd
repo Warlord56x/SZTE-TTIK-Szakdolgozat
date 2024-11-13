@@ -9,11 +9,12 @@ var name: String = ""
 var _path: String = ""
 
 
-func _init(_name: String, _slot: SaveSlot) -> void:
+func _init(_name: String, _slot: SaveSlot, _data: Dictionary = {}) -> void:
 	name = _name
 	if name.get_extension() == "":
 		name += ".save"
 	slot = _slot
+	data = _data
 	_path = SaveManager.default_path + "{0}/{1}".format([slot.name, name])
 	if FileAccess.file_exists(_path):
 		load_data()
@@ -22,10 +23,10 @@ func _init(_name: String, _slot: SaveSlot) -> void:
 
 
 func save_data() -> void:
-	var file := FileAccess.open(_path + ".save", FileAccess.WRITE)
+	var file := FileAccess.open(_path, FileAccess.WRITE)
 	file.store_line(JSON.stringify(data))
 	file.close()
-	at = FileAccess.get_modified_time(_path + ".save")
+	at = FileAccess.get_modified_time(_path)
 
 
 func load_data() -> void:

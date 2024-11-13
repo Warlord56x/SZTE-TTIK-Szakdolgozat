@@ -10,6 +10,9 @@ func get_interaction_type() -> InteractionArea.INTERACTION_TYPE:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if not GameEnv.input_process:
+		return
+
 	if event.is_action_pressed("interact") and interaction_target:
 		if not interaction_target.interact():
 			player.request_interaction_visible(false)

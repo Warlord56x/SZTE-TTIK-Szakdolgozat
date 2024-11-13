@@ -13,12 +13,12 @@ func _init(_name: String) -> void:
 
 
 ## Makes a new save to the slots folder
-func new_save(_name: String) -> void:
+func new_save(_name: String, _data: Dictionary = {}) -> void:
 	if _name.get_extension() == "":
 		_name += ".save"
 	if saves.any(func(s: Save): return s.name == _name):
 		return
-	saves.push_front(Save.new(_name, self))
+	saves.push_front(Save.new(_name, self, _data))
 
 
 ## TODO: Loading of the save

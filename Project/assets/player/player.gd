@@ -1,28 +1,16 @@
 extends CharacterBody2D
 class_name Player
 
-const SPEED := 80.0
-
+const DAMAGE_NUMBER := preload("res://assets/effects/damage_number.tscn")
+const SPLATTER := preload("res://assets/effects/splatter.tscn")
 const DROP := preload("res://assets/loot/pick_up.tscn")
 
-const SPLATTER := preload("res://assets/effects/splatter.tscn")
-const DAMAGE_NUMBER := preload("res://assets/effects/damage_number.tscn")
-
+const SPEED := 80.0
 const MIN_JUMP_VELOCITY := -100.0
 const MAX_JUMP_VELOCITY := -200.0
-
 const MIN_AIRBORNE_TIME := 0.2
 
 const DEFAULT_SPAWN_POINT := Vector2i(25, -20)
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
-var pushback_force: Vector2 = Vector2.ZERO:
-	set(value):
-		# Make sure it goes to 0 0 not to -0 -0
-		value -= Vector2.ONE
-		value += Vector2.ONE
-		pushback_force = value
 
 enum player_res {
 	HEALTH,
@@ -35,93 +23,102 @@ enum player_res {
 @export var debug: bool = false
 
 @onready var state_machine: StateMachine = $StateMachine
-@onready var _coins : Control = %CoinLabel
-@onready var weapon : AnimatedSprite2D = $Weapon
+@onready var _coins: Control = %CoinLabel
+@onready var weapon: AnimatedSprite2D = $Weapon
 @onready var weapon_hitbox: Area2D = $Weapon/Hitbox
 @onready var interactor: Interactor = $Interactor
 
-@onready var health_bar : Bar = %HealthBar
-@onready var mana_bar : Bar = %ManaBar
-@onready var stamina_bar : Bar = %StaminaBar
+@onready var health_bar: Bar = %HealthBar
+@onready var mana_bar: Bar = %ManaBar
+@onready var stamina_bar: Bar = %StaminaBar
 
-@onready var action_wheel : Container = %Wheel
+@onready var action_wheel: ItemWheel = %Wheel
 
-@onready var anim_sprite : AnimatedSprite2D = $AnimatedSprite2D
-@onready var anim_tree : AnimationTree = $AnimationTree
+@onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var anim_tree: AnimationTree = $AnimationTree
 
-@onready var anim_state_m : AnimationNodeStateMachinePlayback = anim_tree["parameters/StateMachine/playback"]
+@onready var anim_state_m: AnimationNodeStateMachinePlayback = anim_tree["parameters/StateMachine/playback"]
 
-@onready var camera : MainCamera = $Camera
+@onready var camera: MainCamera = $Camera
 
-@onready var stamina_time_waiter : Timer = Timer.new()
-@onready var stamina_time : Timer = Timer.new()
-@onready var stamina_wall_drainer : Timer = $WallStaminaDrain
+@onready var stamina_time_waiter: Timer = Timer.new()
+@onready var stamina_time: Timer = Timer.new()
+@onready var stamina_wall_drainer: Timer = $WallStaminaDrain
 
-@onready var mana_time_waiter : Timer = Timer.new()
-@onready var mana_time : Timer = Timer.new()
+@onready var mana_time_waiter: Timer = Timer.new()
+@onready var mana_time: Timer = Timer.new()
 
-@onready var health_time_waiter : Timer = Timer.new()
-@onready var health_time : Timer = Timer.new()
+@onready var health_time_waiter: Timer = Timer.new()
+@onready var health_time: Timer = Timer.new()
 
 @onready var sword_hit: AudioStreamPlayer2D = $SwordHit
 @onready var sword_swing: AudioStreamPlayer2D = $SwordSwing
 
-@onready var move_direction : Vector2 = Vector2.RIGHT
+@onready var move_direction: Vector2 = Vector2.RIGHT
 
-var watch : Vector2i = Vector2i.ZERO
-var crouch : bool = false
-var airborne_time : float = 0
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+var pushback_force: Vector2 = Vector2.ZERO:
+	set(value):
+		# Make sure it goes to 0 0 not to -0 -0
+		value -= Vector2.ONE
+		value += Vector2.ONE
+		pushback_force = value
+
+var watch: Vector2i = Vector2i.ZERO
+var crouch: bool = false
+var airborne_time: float = 0
 
 var input_direction: float
 
-var on_ladder : bool = false
-var ladder_pos : float = 0.0
+var on_ladder: bool = false
+var ladder_pos: float = 0.0
 
-var checkpoint : Node2D:
+var checkpoint: Checkpoint:
 	set = set_checkpoint
 
-var dash_max : int = 1
-var dash_count : int = 0
+var dash_max: int = 1
+var dash_count: int = 0
 
 
 #region Collectibles
-var max_coins : int = 9999
-@export_range(0, 9999, 1, "suffix:coin") var coins : int = 0:
+var max_coins: int = 9999
+@export_range(0, 9999, 1, "suffix:coin") var coins: int = 0:
 	set = set_coins
 #endregion
 
 #region Health Variables
 @export_category("Health")
-var max_health : int = 20
-@export_range(0.1, 2.0, 0.1, "suffix:s") var health_regen_wait_time : float = 1.0
-@export_range(0.1, 2.0, 0.1, "suffix:s") var health_regen_time : float = 0.2
-@export_range(0, 20, 1, "suffix:Health") var max_health_regen : int = 12
-@export_range(0, 20, 1, "suffix:/interval") var health_regen : int = 1
-@export_range(0, 20, 1, "suffix:Health") var health : int = 20:
+var max_health: int = 20
+@export_range(0.1, 2.0, 0.1, "suffix:s") var health_regen_wait_time: float = 1.0
+@export_range(0.1, 2.0, 0.1, "suffix:s") var health_regen_time: float = 0.2
+@export_range(0, 20, 1, "suffix:Health") var max_health_regen: int = 12
+@export_range(0, 20, 1, "suffix:/interval") var health_regen: int = 1
+@export_range(0, 20, 1, "suffix:Health") var health: int = 20:
 	set = set_health
 #endregion
 
 #region Mana Variables
 @export_category("Mana")
-var max_mana : int = 20
-@export_range(0.1, 2.0, 0.1, "suffix:s") var mana_regen_wait_time : float = 1.0
-@export_range(0.1, 2.0, 0.1, "suffix:s") var mana_regen_time : float = 0.2
-@export_range(0, 20, 1, "suffix:Mana") var max_mana_regen : int = 4
-@export_range(0, 20, 1, "suffix:/interval") var mana_regen : int = 1
-@export_range(0, 20, 1, "suffix:Mana") var mana : int = 20:
+var max_mana: int = 20
+@export_range(0.1, 2.0, 0.1, "suffix:s") var mana_regen_wait_time: float = 1.0
+@export_range(0.1, 2.0, 0.1, "suffix:s") var mana_regen_time: float = 0.2
+@export_range(0, 20, 1, "suffix:Mana") var max_mana_regen: int = 4
+@export_range(0, 20, 1, "suffix:/interval") var mana_regen: int = 1
+@export_range(0, 20, 1, "suffix:Mana") var mana: int = 20:
 	set = set_mana
 #endregion
 
 #region Stamina Variables
 @export_category("Stamina")
 var max_stamina : int = 20
-@export_range(0.1, 2.0, 0.1, "suffix:s") var stamina_regen_wait_time : float = 0.5
-@export_range(0.1, 2.0, 0.1, "suffix:s") var stamina_regen_time : float = 0.1
-@export_range(0, 20, 1, "suffix:Stamina") var max_stamina_regen : int = 20
-@export_range(0, 20, 1, "suffix:/interval") var stamina_regen : int = 1
-@export_range(0, 20, 1, "suffix:Stamina") var stamina : int = 20:
+@export_range(0.1, 2.0, 0.1, "suffix:s") var stamina_regen_wait_time: float = 0.5
+@export_range(0.1, 2.0, 0.1, "suffix:s") var stamina_regen_time: float = 0.1
+@export_range(0, 20, 1, "suffix:Stamina") var max_stamina_regen: int = 20
+@export_range(0, 20, 1, "suffix:/interval") var stamina_regen: int = 1
+@export_range(0, 20, 1, "suffix:Stamina") var stamina: int = 20:
 	set = set_stamina
-@export_range(0.1, 2.0, 0.1, "suffix:s") var wall_drain_time : float = 0.1:
+@export_range(0.1, 2.0, 0.1, "suffix:s") var wall_drain_time: float = 0.1:
 	set(t):
 		if not is_node_ready():
 			await ready
@@ -131,7 +128,7 @@ var max_stamina : int = 20
 
 
 #region Setters
-func set_mana(m : int) -> void:
+func set_mana(m: int) -> void:
 	m = clamp(m, 0, max_mana)
 	if mana > m:
 		mana_time.stop()
@@ -144,7 +141,7 @@ func set_mana(m : int) -> void:
 		mana_time_waiter.stop()
 
 
-func set_health(h : int) -> void:
+func set_health(h: int) -> void:
 	h = clamp(h, 0, max_health)
 	if health > h:
 		health_time.stop()
@@ -157,7 +154,7 @@ func set_health(h : int) -> void:
 		health_time_waiter.stop()
 
 
-func set_stamina(s : int) -> void:
+func set_stamina(s: int) -> void:
 	s = clamp(s, 0, max_stamina)
 	if stamina > s:
 		stamina_time.stop()
@@ -170,23 +167,27 @@ func set_stamina(s : int) -> void:
 		stamina_time_waiter.stop()
 
 
-func set_coins(c : int) -> void:
+func set_coins(c: int) -> void:
 	clamp(c, 0, 9999)
 	coins = c
 	_coins.value = c
 
 
-func set_checkpoint(c : Node2D) -> void:
+func set_checkpoint(c: Checkpoint) -> void:
 	if checkpoint:
 		checkpoint.deactivate()
-	c.activate()
 	checkpoint = c
+	c.activate()
 #endregion
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not GameEnv.input_process:
 		return
+
+	var left := event.get_action_strength("move_left")
+	var right := event.get_action_strength("move_right")
+	input_direction = right - left
 
 	if event.is_action_pressed("cast_spell"):
 		if not state_machine.get_state("cast").active:
@@ -219,11 +220,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		position.y += 1
 
 
-	if event.is_action_pressed("test"):
-		pass
-
-
-func default_process(dir : float) -> void:
+func default_process(dir: float) -> void:
 	if dir:
 		velocity.x = dir * SPEED if watch.y == 0 else (dir * SPEED) * 0.5
 	else:
@@ -261,22 +258,22 @@ func default_animations(dir: float) -> void:
 	anim_tree["parameters/speed/scale"] = dir
 
 
-func regener(res : player_res) -> void:
-	var res_string : String = player_res.keys()[res].to_lower()
+func regener(res: player_res) -> void:
+	var res_string: String = player_res.keys()[res].to_lower()
 	set(res_string, get(res_string) + get(res_string+"_regen"))
 
 
-func regener_waiter(res : player_res) -> void:
-	var res_string : String = player_res.keys()[res].to_lower()
-	var timer : Timer = get(res_string+"_time")
+func regener_waiter(res: player_res) -> void:
+	var res_string: String = player_res.keys()[res].to_lower()
+	var timer: Timer = get(res_string+"_time")
 	timer.start()
 
 
-func init_regen_timer(res : player_res, waiter_time : float, regen_time : float) -> void:
-	var res_string : String = player_res.keys()[res].to_lower()
+func init_regen_timer(res: player_res, waiter_time: float, regen_time: float) -> void:
+	var res_string: String = player_res.keys()[res].to_lower()
 
-	var time_waiter : Timer = get(res_string + "_time_waiter")
-	var time_regener : Timer = get(res_string + "_time")
+	var time_waiter: Timer = get(res_string + "_time_waiter")
+	var time_regener: Timer = get(res_string + "_time")
 
 	time_waiter.wait_time = waiter_time
 	time_waiter.one_shot = true
@@ -289,7 +286,7 @@ func init_regen_timer(res : player_res, waiter_time : float, regen_time : float)
 	add_child(time_regener)
 
 
-func request_interaction_visible(b : bool) -> void:
+func request_interaction_visible(b: bool) -> void:
 	$Label.visible = b
 
 
@@ -307,8 +304,6 @@ func blinker(val: float):
 
 func hurt(damage: int, _dealer: Node2D = null) -> bool:
 
-	#collision_mask = 8
-	#collision_layer = 8
 	health -= damage
 
 	if health <= 0:
@@ -356,7 +351,6 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	input_direction = Input.get_axis("move_left", "move_right")
 	if input_direction:
 		move_direction.x = sign(input_direction)
 
@@ -373,18 +367,5 @@ func _on_wall_stamina_drain_timeout() -> void:
 	stamina -= 1
 
 
-#func _on_weapon_hitbox_body_entered(body : Node2D) -> void:
-	#return
-	#if body is Enemy and body.has_method("hurt"):
-		#body = body as Enemy
-		#body.knock_back(global_position, 0.5)
-		#if body.hurt(1, self):
-			#sword_hit.play()
-			#camera.add_trauma(0.2, 0.5)
-			#GameEnv.slow_time(0.5, 0.07)
-
-
 func invincibility_timeout() -> void:
-	#collision_mask = 17
-	#collision_layer = 1
 	blinker(0.0)

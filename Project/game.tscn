@@ -252,7 +252,7 @@ tile_set = SubResource("TileSet_pc6ag")
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
 
-[node name="Player" parent="." instance=ExtResource("9_rfqiq")]
+[node name="Player" parent="." groups=["Persistent"] instance=ExtResource("9_rfqiq")]
 position = Vector2(25, -20)
 
 [node name="Enemies" type="Node" parent="."]
