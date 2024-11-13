@@ -126,6 +126,13 @@ func _on_settings_pressed() -> void:
 		open(menus[1])
 
 
+func _on_back_pressed() -> void:
+	GameEnv.fade_in_out(0.3)
+	await GameEnv.fade_step2
+	GameEnv.set_blur(false)
+	get_tree().change_scene_to_packed(GameEnv.MAIN_MENU)
+
+
 func _on_exit_pressed() -> void:
 	get_tree().quit()
 #endregion

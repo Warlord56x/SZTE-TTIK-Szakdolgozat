@@ -133,6 +133,11 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
+[node name="Back" type="Button" parent="Margin/MenuContainer/Main/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Back to Menu"
+
 [node name="Exit" type="Button" parent="Margin/MenuContainer/Main/VBoxContainer"]
 layout_mode = 2
 text = "Exit"
@@ -273,6 +278,7 @@ color = Color(0, 0, 0, 1)
 [connection signal="pressed" from="Margin/MenuContainer/Main/VBoxContainer/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="Margin/MenuContainer/Main/VBoxContainer/Load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="Margin/MenuContainer/Main/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Margin/MenuContainer/Main/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Margin/MenuContainer/Main/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="volume_changed" from="Margin/MenuContainer/Settings/VBoxContainer/MasterVolumeSlider" to="." method="_on_volume_slider_volume_changed"]
 [connection signal="toggled" from="Margin/MenuContainer/Settings/VBoxContainer/FullscreenCheck" to="." method="_on_fullscreen_check_toggled"]

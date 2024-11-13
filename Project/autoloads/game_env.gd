@@ -1,9 +1,17 @@
 extends Node
 
+
+const MAIN_MENU := preload("res://test_scenes/UI/main_menu.tscn")
+
 @onready var world_environment: WorldEnvironment = $WorldEnvironment
 @onready var background_music: AudioStreamPlayer = $BackgroundMusic
+@onready var effect: ShaderMaterial = $ScreenEffectLayer/Effect.material as ShaderMaterial
 
 var input_process: bool = true
+
+signal fade_step1
+signal fade_step2
+signal fade_step3
 
 
 func slow_time(slow_for: float, slow: float) -> void:
@@ -14,6 +22,24 @@ func slow_time(slow_for: float, slow: float) -> void:
 
 func _ready() -> void:
 	start_bg_music()
+
+
+func fade_in_out(fade_for: float) -> void:
+	var tween := get_tree().create_tween()
+	tween.tween_method(_progress, 0.0, 1.0, 0.5)
+	tween.tween_method(_progress, 1.0, 1.0, fade_for)
+	tween.tween_method(_progress, 1.0, 0.0, 0.5)
+
+	await tween.step_finished
+	fade_step1.emit()
+	await tween.step_finished
+	fade_step2.emit()
+	await tween.step_finished
+	fade_step3.emit()
+
+
+func _progress(f: float) -> void:
+	effect.set_shader_parameter("progress", f)
 
 
 func start_bg_music() -> void:

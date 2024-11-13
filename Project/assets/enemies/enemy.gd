@@ -34,6 +34,7 @@ var target: Player
 var tool_tip_node: DebugInfo = DEBUG_TIP.instantiate()
 var floating_hp_bar: FloatingHpBar = FLOATING_HP_BAR.instantiate()
 var invincible: bool = false
+var navmap_ready: bool = false
 
 @onready var initial_pos: Vector2
 
@@ -76,6 +77,8 @@ func ready() -> void:
 func actor_setup():
 	# Wait for the first physics frame so the NavigationServer can sync.
 	await get_tree().physics_frame
+	await NavigationServer2D.map_changed
+	navmap_ready = true
 
 	# Now that the navigation map is no longer empty, set the movement target.
 	initial_pos = global_position
@@ -83,6 +86,8 @@ func actor_setup():
 
 
 func move() -> void:
+	if not navmap_ready:
+		return
 
 	if !navigation_agent.is_navigation_finished():
 
