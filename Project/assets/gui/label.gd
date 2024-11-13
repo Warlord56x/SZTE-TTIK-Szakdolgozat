@@ -22,6 +22,6 @@ func set_value(v : int) -> void:
 
 
 func _ready() -> void:
-	var tween = create_tween()
-	tween.tween_property(parent, "scale", Vector2.ZERO, 0.01)
 	parent.pivot_offset.x = parent.size.x / 2
+	var tween = create_tween()
+	tween.tween_property(parent, "scale", Vector2.ZERO, 0.1)

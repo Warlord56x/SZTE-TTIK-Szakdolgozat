@@ -7,8 +7,10 @@ class_name SaveElement
 @onready var time_label: Label = %TimeLabel
 
 var time: String
+var test: String
 
 
 func _ready() -> void:
 	time_label.text = time
 	%Button.button_group = button_group
+	$GridContainer/Label.text = test

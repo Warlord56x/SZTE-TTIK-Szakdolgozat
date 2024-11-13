@@ -11,7 +11,14 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	var save_slot := SaveManager.save_slots[slot]
+	init_list()
+
+
+func init_list() -> void:
+	if not SaveManager.current_slot:
+		return
+
+	var save_slot := SaveManager.current_slot
 	var group := ButtonGroup.new()
 	var box := get_child(0)
 
@@ -20,4 +27,5 @@ func _ready() -> void:
 		element.time = s.get_saved_at()
 		element.screen_shot = s.screen_shot
 		element.button_group = group
+		element.test = s.name
 		box.add_child(element)
