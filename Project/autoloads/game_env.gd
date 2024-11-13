@@ -5,7 +5,8 @@ const MAIN_MENU := preload("res://test_scenes/UI/main_menu.tscn")
 
 @onready var world_environment: WorldEnvironment = $WorldEnvironment
 @onready var background_music: AudioStreamPlayer = $BackgroundMusic
-@onready var effect: ShaderMaterial = $ScreenEffectLayer/Effect.material as ShaderMaterial
+@onready var effect: ShaderMaterial = $ScreenEffectLayer/Control/Effect.material as ShaderMaterial
+@onready var label: Label = $ScreenEffectLayer/Control/Label
 
 var input_process: bool = true
 
@@ -24,11 +25,17 @@ func _ready() -> void:
 	start_bg_music()
 
 
-func fade_in_out(fade_for: float) -> void:
+func fade_in_out(fade_for: float, label_text: String = "") -> void:
+	label.text = label_text
+
 	var tween := get_tree().create_tween()
-	tween.tween_method(_progress, 0.0, 1.0, 0.5)
+	tween.tween_property(label, "modulate:a", 1.0, 0.2)
+	tween.parallel().tween_method(_progress, 0.0, 1.0, 0.5)
+
 	tween.tween_method(_progress, 1.0, 1.0, fade_for)
-	tween.tween_method(_progress, 1.0, 0.0, 0.5)
+
+	tween.tween_property(label, "modulate:a", 0.0, 0.2)
+	tween.parallel().tween_method(_progress, 1.0, 0.0, 0.5)
 
 	await tween.step_finished
 	fade_step1.emit()

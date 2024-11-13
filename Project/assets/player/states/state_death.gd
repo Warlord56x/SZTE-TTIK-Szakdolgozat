@@ -9,7 +9,8 @@ func enter() -> void:
 	player.anim_tree["parameters/speed/scale"] = 1
 	player.anim_state_m.travel("death")
 	await player.anim_tree.animation_finished
-	await get_tree().create_timer(0.2).timeout
+	GameEnv.fade_in_out(0.3, "You Died")
+	await GameEnv.fade_step2
 	player.anim_state_m.travel("idle")
 	travel("Fall")
 
