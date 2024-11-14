@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://dax01kvdrllj1"]
+
+[ext_resource type="Theme" uid="uid://dqa12gi8o5ol4" path="res://assets/theme/default_theme.tres" id="1_aqgs1"]
+[ext_resource type="Script" path="res://test_scenes/UI/main_menu.gd" id="2_0mh3k"]
+[ext_resource type="Texture2D" uid="uid://d4cojs7o3f304" path="res://assets/backgrounds/level1.png" id="2_jaj5p"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_aqgs1")
+script = ExtResource("2_0mh3k")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_jaj5p")
+expand_mode = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 595.0
+offset_bottom = 336.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Continue" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="NewGame" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "New Game"
+
+[node name="LoadGame" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Load Game"
+
+[node name="ProgressBar" type="ProgressBar" parent="CenterContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]

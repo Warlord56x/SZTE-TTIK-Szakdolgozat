@@ -194,6 +194,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		state_machine.travel("dash")
 
+	if event.is_action_pressed("move_drop") and is_on_floor() and watch.y == -1:
+		position.y += 1
+		return
+
 	if event.is_action_pressed("jump") and is_on_floor() and stamina != 0:
 		velocity.y = MAX_JUMP_VELOCITY
 		stamina -= 2
@@ -211,9 +215,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if watch.y == 0:
 		watch.y = sign(Input.get_axis("crouch", "stand"))
 	watch.x = sign(Input.get_axis("look_left", "look_right"))
-
-	if event.is_action_pressed("move_drop") and is_on_floor() and watch.y == -1:
-		position.y += 1
 
 
 func default_process(dir: float) -> void:
