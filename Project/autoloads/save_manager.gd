@@ -13,12 +13,13 @@ func _ready() -> void:
 	for dir in DirAccess.get_directories_at(default_path):
 		save_slots.append(SaveSlot.new(dir))
 	save_slots.sort_custom(SaveSlot.time_sort)
-	current_slot = save_slots.front()
+	if save_slots.size() > 0:
+		current_slot = save_slots.front()
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("test"):
-		save_game(str(i))
+		save_game(str(i), current_slot)
 		i+= 1
 	if event.is_action_pressed("test_2"):
 		load_game(save_slots[0])
@@ -40,7 +41,7 @@ func array_to_vector2(a: Array) -> Vector2:
 	return Vector2(a[0], a[1])
 
 
-func save_game(_name: String) -> void:
+func save_game(_name: String, slot: SaveSlot) -> void:
 	var save_data: Array
 	var nodes = get_tree().get_nodes_in_group("Persistent")
 
@@ -49,10 +50,10 @@ func save_game(_name: String) -> void:
 			save_data.append(node.call("save"))
 		else:
 			print("Persistent node '%s' does not have a save() function" % node.name)
-	current_slot.new_save(_name, save_data)
+	slot.new_save(_name, save_data)
 
 
-func change_to_loaded_game(scene: PackedScene, slot: SaveSlot) -> void:
+func change_to_loaded_game(scene: PackedScene, slot: SaveSlot = current_slot) -> void:
 	GameEnv.fade_in_out(0.3)
 	await GameEnv.fade_step1
 	get_tree().change_scene_to_packed(scene)
@@ -60,9 +61,22 @@ func change_to_loaded_game(scene: PackedScene, slot: SaveSlot) -> void:
 	load_game(slot)
 
 
-func load_game(slot: SaveSlot) -> void:
+func change_to_new_game(scene: PackedScene) -> void:
+	GameEnv.fade_in_out(0.3)
+	await GameEnv.fade_step1
+	get_tree().change_scene_to_packed(scene)
+	await GameEnv.fade_step2
+	new_game("default_slot")
+	save_game("default_new_game", current_slot)
+
+
+func load_game(slot: SaveSlot = current_slot) -> void:
 	var key_exclude := ["filename", "parent", "checkpoint", "position"]
 	var nodes = get_tree().get_nodes_in_group("Persistent")
+	if slot.saves.is_empty():
+		print("There is no save in slot 's%'." % slot.name)
+		return
+
 	var data = slot.saves[0].data
 	for node in nodes:
 		node.queue_free()

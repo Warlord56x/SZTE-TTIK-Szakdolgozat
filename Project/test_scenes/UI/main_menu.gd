@@ -29,22 +29,13 @@ func _process(_delta: float) -> void:
 
 func _on_continue_pressed() -> void:
 	ResourceLoader.load_threaded_request(GAME_SCENE, "PackedScene")
-	done.connect(test2)
+	await done
+	SaveManager.change_to_loaded_game(scene)
 	print("Continue...")
 
 
 func _on_new_game_pressed() -> void:
 	ResourceLoader.load_threaded_request(GAME_SCENE, "PackedScene")
-	done.connect(test1)
+	await done
+	SaveManager.change_to_new_game(scene)
 	print("new game...")
-
-
-func test1() -> void:
-	GameEnv.fade_in_out(0.3)
-	await GameEnv.fade_step2
-	SaveManager.new_game("slot0")
-	get_tree().change_scene_to_packed(scene)
-
-
-func test2() -> void:
-	SaveManager.change_to_loaded_game(scene, SaveManager.save_slots[0])
