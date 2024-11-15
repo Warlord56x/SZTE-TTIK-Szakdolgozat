@@ -3,7 +3,9 @@ extends Control
 const GAME_SCENE := "res://game.tscn"
 
 @onready var progress_bar: ProgressBar = %ProgressBar
-@onready var continue_button: Button = $CenterContainer/PanelContainer/VBoxContainer/Continue
+@onready var continue_button: Button = %ContinueButton
+@onready var settings_menu: SettingsGameMenu = %Settings
+@onready var new_game_menu: Menu = %NewGameMenu
 
 var progress: Array = []
 var scene: PackedScene
@@ -27,7 +29,7 @@ func _process(_delta: float) -> void:
 		progress_bar.value = 100
 
 
-func _on_continue_pressed() -> void:
+func _on_continue_button_pressed() -> void:
 	ResourceLoader.load_threaded_request(GAME_SCENE, "PackedScene")
 	await done
 	SaveManager.change_to_loaded_game(scene)
@@ -39,3 +41,11 @@ func _on_new_game_pressed() -> void:
 	await done
 	SaveManager.change_to_new_game(scene)
 	print("new game...")
+
+
+func _on_settings_button_pressed() -> void:
+	settings_menu.switch()
+
+
+func _on_load_game_pressed() -> void:
+	new_game_menu.switch()

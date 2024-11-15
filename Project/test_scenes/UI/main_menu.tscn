@@ -1,8 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://dax01kvdrllj1"]
+[gd_scene load_steps=15 format=3 uid="uid://dax01kvdrllj1"]
 
 [ext_resource type="Theme" uid="uid://dqa12gi8o5ol4" path="res://assets/theme/default_theme.tres" id="1_aqgs1"]
 [ext_resource type="Script" path="res://test_scenes/UI/main_menu.gd" id="2_0mh3k"]
 [ext_resource type="Texture2D" uid="uid://d4cojs7o3f304" path="res://assets/backgrounds/level1.png" id="2_jaj5p"]
+[ext_resource type="Script" path="res://test_scenes/UI/menu_container.gd" id="4_3e0ys"]
+[ext_resource type="Script" path="res://test_scenes/UI/effect_layer.gd" id="5_2fc8d"]
+[ext_resource type="Shader" path="res://test_scenes/UI/ui_dissolve.gdshader" id="5_slrmh"]
+[ext_resource type="Script" path="res://test_scenes/UI/menu.gd" id="5_vppl2"]
+[ext_resource type="Script" path="res://test_scenes/UI/settings_game_menu.gd" id="8_14y8b"]
+[ext_resource type="PackedScene" uid="uid://dmk3l27wkrb82" path="res://test_scenes/UI/volume_slider.tscn" id="8_lppk2"]
+[ext_resource type="Script" path="res://test_scenes/UI/new_game_menu.gd" id="10_krkvj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_t43vf"]
+line_spacing = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x2nrb"]
+shader = ExtResource("5_slrmh")
+shader_parameter/progress = 0.0
+shader_parameter/noise_desnity = 30.0
+shader_parameter/beam_size = 0.01
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pixel_size = 0.01
+shader_parameter/corner_radius = 0.01
+shader_parameter/invert = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_xmybq"]
+line_spacing = 0.0
+font_size = 8
+font_color = Color(0.637843, 0.637843, 0.637843, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h22n4"]
+shader = ExtResource("5_slrmh")
+shader_parameter/progress = 0.0
+shader_parameter/noise_desnity = 30.0
+shader_parameter/beam_size = 0.01
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pixel_size = 0.01
+shader_parameter/corner_radius = 0.01
+shader_parameter/invert = false
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -24,43 +59,190 @@ grow_vertical = 2
 texture = ExtResource("2_jaj5p")
 expand_mode = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 595.0
-offset_bottom = 336.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 850.0
+offset_bottom = 480.0
 scale = Vector2(0.3, 0.3)
-metadata/_edit_use_anchors_ = true
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+[node name="MenuContainer" type="Container" parent="MarginContainer"]
+layout_mode = 2
+script = ExtResource("4_3e0ys")
+
+[node name="Settings" type="PanelContainer" parent="MarginContainer/MenuContainer" node_paths=PackedStringArray("focus_target", "effect")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("8_14y8b")
+focus_target = NodePath("MarginContainer/VBoxContainer/FullscreenCheck")
+effect = NodePath("Effect")
+
+[node name="Panel" type="Panel" parent="MarginContainer/MenuContainer/Settings"]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="CenterContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MenuContainer/Settings"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuContainer/Settings/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MenuContainer/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_t43vf")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/MenuContainer/Settings/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="Continue" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "Continue"
-
-[node name="NewGame" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "New Game"
-
-[node name="LoadGame" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-disabled = true
-text = "Load Game"
-
-[node name="ProgressBar" type="ProgressBar" parent="CenterContainer/PanelContainer/VBoxContainer"]
+[node name="MasterVolumeSlider" parent="MarginContainer/MenuContainer/Settings/MarginContainer/VBoxContainer" instance=ExtResource("8_lppk2")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
+[node name="FullscreenCheck" type="CheckButton" parent="MarginContainer/MenuContainer/Settings/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "FullScreen"
+
+[node name="VsyncCheck" type="CheckButton" parent="MarginContainer/MenuContainer/Settings/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Apply")
+theme_override_font_sizes/font_size = 8
+text = "Vsync"
+
+[node name="Spacer" type="Control" parent="MarginContainer/MenuContainer/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Apply" type="Button" parent="MarginContainer/MenuContainer/Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../VsyncCheck")
+text = "apply"
+
+[node name="Effect" type="ColorRect" parent="MarginContainer/MenuContainer/Settings"]
+material = SubResource("ShaderMaterial_x2nrb")
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("5_2fc8d")
+corner_radius = 0.01
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/MenuContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Menu" type="PanelContainer" parent="MarginContainer/MenuContainer/CenterContainer" node_paths=PackedStringArray("focus_target")]
+layout_mode = 2
+script = ExtResource("5_vppl2")
+focus_target = NodePath("MarginContainer/VBoxContainer/ContinueButton")
+visible_default = true
+
+[node name="Panel" type="Panel" parent="MarginContainer/MenuContainer/CenterContainer/Menu"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MenuContainer/CenterContainer/Menu"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuContainer/CenterContainer/Menu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="ContinueButton" type="Button" parent="MarginContainer/MenuContainer/CenterContainer/Menu/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Continue"
+
+[node name="NewGameButton" type="Button" parent="MarginContainer/MenuContainer/CenterContainer/Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "New Game"
+
+[node name="LoadGame" type="Button" parent="MarginContainer/MenuContainer/CenterContainer/Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Load Game"
+
+[node name="SettingsButton" type="Button" parent="MarginContainer/MenuContainer/CenterContainer/Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/MenuContainer/CenterContainer/Menu/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="NewGameMenu" type="PanelContainer" parent="MarginContainer/MenuContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("10_krkvj")
+invert = true
+
+[node name="Panel" type="Panel" parent="MarginContainer/MenuContainer/NewGameMenu"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MenuContainer/NewGameMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuContainer/NewGameMenu/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MenuContainer/NewGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "New Game"
+label_settings = SubResource("LabelSettings_t43vf")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/MenuContainer/NewGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/MenuContainer/NewGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Slot name"
+max_length = 10
+caret_blink = true
+
+[node name="Label2" type="Label" parent="MarginContainer/MenuContainer/NewGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "max 10 characters"
+label_settings = SubResource("LabelSettings_xmybq")
+
+[node name="CreatePlay" type="Button" parent="MarginContainer/MenuContainer/NewGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Create & Play"
+
+[node name="Effect" type="ColorRect" parent="MarginContainer/MenuContainer/NewGameMenu"]
+material = SubResource("ShaderMaterial_h22n4")
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("5_2fc8d")
+corner_radius = 0.01
+
+[connection signal="volume_changed" from="MarginContainer/MenuContainer/Settings/MarginContainer/VBoxContainer/MasterVolumeSlider" to="MarginContainer/MenuContainer/Settings" method="_on_master_volume_slider_volume_changed"]
+[connection signal="toggled" from="MarginContainer/MenuContainer/Settings/MarginContainer/VBoxContainer/FullscreenCheck" to="MarginContainer/MenuContainer/Settings" method="_on_fullscreen_check_toggled"]
+[connection signal="toggled" from="MarginContainer/MenuContainer/Settings/MarginContainer/VBoxContainer/VsyncCheck" to="MarginContainer/MenuContainer/Settings" method="_on_vsync_check_toggled"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/Settings/MarginContainer/VBoxContainer/Apply" to="MarginContainer/MenuContainer/Settings" method="_on_apply_pressed"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/CenterContainer/Menu/MarginContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/CenterContainer/Menu/MarginContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/CenterContainer/Menu/MarginContainer/VBoxContainer/LoadGame" to="." method="_on_load_game_pressed"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/CenterContainer/Menu/MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="text_changed" from="MarginContainer/MenuContainer/NewGameMenu/MarginContainer/VBoxContainer/LineEdit" to="MarginContainer/MenuContainer/NewGameMenu" method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="MarginContainer/MenuContainer/NewGameMenu/MarginContainer/VBoxContainer/LineEdit" to="MarginContainer/MenuContainer/NewGameMenu" method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/NewGameMenu/MarginContainer/VBoxContainer/CreatePlay" to="MarginContainer/MenuContainer/NewGameMenu" method="_on_create_play_pressed"]

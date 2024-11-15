@@ -66,7 +66,6 @@ var pushback_force: Vector2 = Vector2.ZERO:
 		pushback_force = value
 
 var watch: Vector2i = Vector2i.ZERO
-var crouch: bool = false
 var airborne_time: float = 0
 
 var input_direction: float
@@ -219,7 +218,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func default_process(dir: float) -> void:
 	if dir:
-		velocity.x = dir * SPEED if watch.y == 0 else (dir * SPEED) * 0.5
+		var base_speed = dir * SPEED
+		velocity.x = base_speed if watch.y == 0 else base_speed * 0.5
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	dash_count = 0
