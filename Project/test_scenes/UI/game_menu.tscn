@@ -15,7 +15,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_m2vsl"]
 line_spacing = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jinj8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u4lbt"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -28,7 +28,7 @@ shader_parameter/invert = false
 [sub_resource type="LabelSettings" id="LabelSettings_5jag3"]
 line_spacing = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_skn70"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qy72k"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -38,7 +38,7 @@ shader_parameter/pixel_size = 0.01
 shader_parameter/corner_radius = 0.01
 shader_parameter/invert = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_28pkh"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u7h20"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -146,7 +146,7 @@ layout_mode = 2
 text = "Exit"
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/Main"]
-material = SubResource("ShaderMaterial_jinj8")
+material = SubResource("ShaderMaterial_u4lbt")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -211,7 +211,7 @@ focus_neighbor_top = NodePath("../VsyncCheck")
 text = "apply"
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/Settings"]
-material = SubResource("ShaderMaterial_skn70")
+material = SubResource("ShaderMaterial_qy72k")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -260,7 +260,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/SaveGame"]
-material = SubResource("ShaderMaterial_28pkh")
+material = SubResource("ShaderMaterial_u7h20")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

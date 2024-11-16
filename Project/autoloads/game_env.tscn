@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://beullbbmtqwww"]
+[gd_scene load_steps=15 format=3 uid="uid://beullbbmtqwww"]
 
 [ext_resource type="Script" path="res://autoloads/game_env.gd" id="1_emsl1"]
 [ext_resource type="AudioStream" uid="uid://cfa0cw21p6d04" path="res://assets/music/650558__stephiequeen__the-song-in-the-trees-song-loop.ogg" id="2_lxf3p"]
 [ext_resource type="Shader" path="res://test_scenes/UI/ui_dissolve.gdshader" id="3_7erxc"]
 [ext_resource type="Theme" uid="uid://dqa12gi8o5ol4" path="res://assets/theme/default_theme.tres" id="3_pm0tk"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="5_3icuv"]
 
 [sub_resource type="Environment" id="Environment_1o8hs"]
 background_mode = 3
@@ -24,6 +25,56 @@ shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/pixel_size = 0.01
 shader_parameter/corner_radius = 0.0
 shader_parameter/invert = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q14im"]
+atlas = ExtResource("5_3icuv")
+region = Rect2(50, 100, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcuho"]
+atlas = ExtResource("5_3icuv")
+region = Rect2(60, 100, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yirm4"]
+atlas = ExtResource("5_3icuv")
+region = Rect2(70, 100, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mw7pt"]
+atlas = ExtResource("5_3icuv")
+region = Rect2(80, 100, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5k3m"]
+atlas = ExtResource("5_3icuv")
+region = Rect2(90, 100, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fkre"]
+atlas = ExtResource("5_3icuv")
+region = Rect2(100, 100, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f6m7e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q14im")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcuho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yirm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mw7pt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5k3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fkre")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="GameEnv" type="Node"]
 script = ExtResource("1_emsl1")
@@ -60,11 +111,31 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="ScreenEffectLayer/Control"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+text = "Loading..."
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Control" type="Control" parent="ScreenEffectLayer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="LoadIconSprite" type="AnimatedSprite2D" parent="ScreenEffectLayer/Control/Control"]
+modulate = Color(1, 1, 1, 0)
+sprite_frames = SubResource("SpriteFrames_f6m7e")
+autoplay = "default"
+frame = 3
+frame_progress = 0.0937557
+offset = Vector2(-5, -5)

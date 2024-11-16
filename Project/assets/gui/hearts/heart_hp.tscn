@@ -64,5 +64,5 @@ heart = NodePath("Heart")
 
 [node name="Heart" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dnqcp")
-frame = 4
-offset = Vector2(4, 4)
+frame = 5
+offset = Vector2(5, 5)

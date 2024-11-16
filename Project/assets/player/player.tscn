@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dm4lu0fwgsv75" path="res://assets/gui/bars/bar_health.tscn" id="2_n15yp"]
 [ext_resource type="PackedScene" uid="uid://b488vmoc2emb0" path="res://debug/debug_info.tscn" id="2_p0eb3"]
 [ext_resource type="Resource" uid="uid://cvc8mxoyf2775" path="res://assets/data/player_inventory.tres" id="2_q0eh7"]
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="3_fxfhm"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="3_fxfhm"]
 [ext_resource type="PackedScene" uid="uid://uvwfpidv7ujl" path="res://assets/gui/bars/bar_mana.tscn" id="3_nro24"]
 [ext_resource type="Script" path="res://assets/player/states/state_default.gd" id="3_sadaf"]
 [ext_resource type="PackedScene" uid="uid://bakgosfbeq37h" path="res://assets/gui/bars/bar_stamina.tscn" id="4_mq3j0"]

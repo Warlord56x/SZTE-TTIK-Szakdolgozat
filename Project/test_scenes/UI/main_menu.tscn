@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dax01kvdrllj1"]
+[gd_scene load_steps=19 format=3 uid="uid://dax01kvdrllj1"]
 
 [ext_resource type="Theme" uid="uid://dqa12gi8o5ol4" path="res://assets/theme/default_theme.tres" id="1_aqgs1"]
 [ext_resource type="Script" path="res://test_scenes/UI/main_menu.gd" id="2_0mh3k"]
@@ -10,11 +10,13 @@
 [ext_resource type="Script" path="res://test_scenes/UI/settings_game_menu.gd" id="8_14y8b"]
 [ext_resource type="PackedScene" uid="uid://dmk3l27wkrb82" path="res://test_scenes/UI/volume_slider.tscn" id="8_lppk2"]
 [ext_resource type="Script" path="res://test_scenes/UI/new_game_menu.gd" id="10_krkvj"]
+[ext_resource type="Script" path="res://test_scenes/UI/save_list.gd" id="10_n7fjc"]
+[ext_resource type="Script" path="res://test_scenes/UI/load_game_menu.gd" id="10_wiy0f"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_t43vf"]
 line_spacing = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x2nrb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x6we7"]
 shader = ExtResource("5_slrmh")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -24,12 +26,27 @@ shader_parameter/pixel_size = 0.01
 shader_parameter/corner_radius = 0.01
 shader_parameter/invert = false
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wutt7"]
+shader = ExtResource("5_slrmh")
+shader_parameter/progress = 0.0
+shader_parameter/noise_desnity = 30.0
+shader_parameter/beam_size = 0.01
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pixel_size = 0.01
+shader_parameter/corner_radius = 0.01
+shader_parameter/invert = true
+
 [sub_resource type="LabelSettings" id="LabelSettings_xmybq"]
 line_spacing = 0.0
 font_size = 8
 font_color = Color(0.637843, 0.637843, 0.637843, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_h22n4"]
+[sub_resource type="LabelSettings" id="LabelSettings_wglqf"]
+line_spacing = 0.0
+font_size = 10
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w2nkw"]
 shader = ExtResource("5_slrmh")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -60,21 +77,25 @@ texture = ExtResource("2_jaj5p")
 expand_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 850.0
-offset_bottom = 480.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 595.0
+offset_bottom = 336.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.3, 0.3)
 
 [node name="MenuContainer" type="Container" parent="MarginContainer"]
 layout_mode = 2
 script = ExtResource("4_3e0ys")
 
-[node name="Settings" type="PanelContainer" parent="MarginContainer/MenuContainer" node_paths=PackedStringArray("focus_target", "effect")]
+[node name="Settings" type="PanelContainer" parent="MarginContainer/MenuContainer" node_paths=PackedStringArray("effect")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("8_14y8b")
-focus_target = NodePath("MarginContainer/VBoxContainer/FullscreenCheck")
 effect = NodePath("Effect")
 
 [node name="Panel" type="Panel" parent="MarginContainer/MenuContainer/Settings"]
@@ -128,7 +149,7 @@ focus_neighbor_top = NodePath("../VsyncCheck")
 text = "apply"
 
 [node name="Effect" type="ColorRect" parent="MarginContainer/MenuContainer/Settings"]
-material = SubResource("ShaderMaterial_x2nrb")
+material = SubResource("ShaderMaterial_x6we7")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -182,11 +203,191 @@ text = "Settings"
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="NewGameMenu" type="PanelContainer" parent="MarginContainer/MenuContainer"]
+[node name="LoadGameMenu" type="PanelContainer" parent="MarginContainer/MenuContainer" node_paths=PackedStringArray("effect")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("10_wiy0f")
+effect = NodePath("Effect")
+invert = true
+
+[node name="Panel" type="Panel" parent="MarginContainer/MenuContainer/LoadGameMenu"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MenuContainer/LoadGameMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Load Game"
+label_settings = SubResource("LabelSettings_t43vf")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SaveList" type="ScrollContainer" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+script = ExtResource("10_n7fjc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button2" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button3" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button4" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button5" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button6" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button7" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button8" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button9" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button10" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button11" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button12" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button13" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button14" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button15" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button16" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button17" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button18" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button19" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button20" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button21" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button22" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button23" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button24" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button25" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button26" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button27" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button28" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button29" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button30" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button31" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/SaveList/VBoxContainer"]
+layout_mode = 2
+text = "Button"
+
+[node name="LoadButton" type="Button" parent="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Load"
+
+[node name="Effect" type="ColorRect" parent="MarginContainer/MenuContainer/LoadGameMenu"]
+material = SubResource("ShaderMaterial_wutt7")
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("5_2fc8d")
+corner_radius = 0.01
+invert = true
+
+[node name="NewGameMenu" type="PanelContainer" parent="MarginContainer/MenuContainer" node_paths=PackedStringArray("effect")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("10_krkvj")
+effect = NodePath("Effect")
 invert = true
 
 [node name="Panel" type="Panel" parent="MarginContainer/MenuContainer/NewGameMenu"]
@@ -214,6 +415,7 @@ layout_mode = 2
 
 [node name="LineEdit" type="LineEdit" parent="MarginContainer/MenuContainer/NewGameMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../CreatePlay")
 placeholder_text = "Slot name"
 max_length = 10
 caret_blink = true
@@ -223,12 +425,27 @@ layout_mode = 2
 text = "max 10 characters"
 label_settings = SubResource("LabelSettings_xmybq")
 
+[node name="Error" type="Label" parent="MarginContainer/MenuContainer/NewGameMenu/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+text = "Slot Already exists"
+label_settings = SubResource("LabelSettings_wglqf")
+autowrap_mode = 3
+uppercase = true
+
+[node name="Control" type="Control" parent="MarginContainer/MenuContainer/NewGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
 [node name="CreatePlay" type="Button" parent="MarginContainer/MenuContainer/NewGameMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../LineEdit")
 text = "Create & Play"
 
 [node name="Effect" type="ColorRect" parent="MarginContainer/MenuContainer/NewGameMenu"]
-material = SubResource("ShaderMaterial_h22n4")
+material = SubResource("ShaderMaterial_w2nkw")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -243,6 +460,7 @@ corner_radius = 0.01
 [connection signal="pressed" from="MarginContainer/MenuContainer/CenterContainer/Menu/MarginContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="MarginContainer/MenuContainer/CenterContainer/Menu/MarginContainer/VBoxContainer/LoadGame" to="." method="_on_load_game_pressed"]
 [connection signal="pressed" from="MarginContainer/MenuContainer/CenterContainer/Menu/MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/LoadGameMenu/MarginContainer/VBoxContainer/LoadButton" to="MarginContainer/MenuContainer/LoadGameMenu" method="_on_load_button_pressed"]
 [connection signal="text_changed" from="MarginContainer/MenuContainer/NewGameMenu/MarginContainer/VBoxContainer/LineEdit" to="MarginContainer/MenuContainer/NewGameMenu" method="_on_line_edit_text_changed"]
 [connection signal="text_submitted" from="MarginContainer/MenuContainer/NewGameMenu/MarginContainer/VBoxContainer/LineEdit" to="MarginContainer/MenuContainer/NewGameMenu" method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="MarginContainer/MenuContainer/NewGameMenu/MarginContainer/VBoxContainer/CreatePlay" to="MarginContainer/MenuContainer/NewGameMenu" method="_on_create_play_pressed"]

@@ -67,4 +67,4 @@ heart = NodePath("StaminaHeart")
 [node name="StaminaHeart" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_mpc0m")
 frame = 5
-offset = Vector2(4, 4)
+offset = Vector2(5, 5)

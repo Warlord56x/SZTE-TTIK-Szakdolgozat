@@ -8,9 +8,18 @@ class_name SaveElement
 
 var time: String
 var test: String
+var slot: SaveSlot
+
+signal pressed(s: SaveSlot)
 
 
 func _ready() -> void:
 	time_label.text = time
 	%Button.button_group = button_group
 	$GridContainer/Label.text = test
+	if slot:
+		pass
+
+
+func _on_button_pressed() -> void:
+	pressed.emit(slot)

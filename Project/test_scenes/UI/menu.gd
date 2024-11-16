@@ -27,7 +27,7 @@ func ready() -> void:
 
 
 func vis_changed() -> void:
-	if focus_target:
+	if focus_target and visible:
 		focus_target.grab_focus()
 
 

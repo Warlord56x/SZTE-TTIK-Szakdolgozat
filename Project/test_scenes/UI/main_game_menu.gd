@@ -45,7 +45,7 @@ func _on_settings_pressed() -> void:
 
 func _on_back_pressed() -> void:
 	GameEnv.fade_in_out(0.3)
-	await GameEnv.fade_step2
+	await GameEnv.fade_step_wait
 	GameEnv.set_blur(false)
 	get_tree().change_scene_to_packed(GameEnv.MAIN_MENU)
 

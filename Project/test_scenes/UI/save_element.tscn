@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3x4vqllq1yty"]
+[gd_scene load_steps=6 format=3 uid="uid://b3x4vqllq1yty"]
 
+[ext_resource type="Theme" uid="uid://dqa12gi8o5ol4" path="res://assets/theme/default_theme.tres" id="1_20kuv"]
 [ext_resource type="Script" path="res://test_scenes/UI/save_element.gd" id="1_pct7a"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c5nnq"]
@@ -9,24 +10,36 @@ size = Vector2(32, 32)
 line_spacing = 0.0
 font_size = 8
 
+[sub_resource type="LabelSettings" id="LabelSettings_0a6em"]
+line_spacing = 0.0
+font_size = 8
+
 [node name="SaveElement" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_20kuv")
 script = ExtResource("1_pct7a")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2
 mouse_filter = 2
 
+[node name="Button" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ScreenShot" type="TextureRect" parent="GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 texture = SubResource("PlaceholderTexture2D_c5nnq")
 stretch_mode = 2
 
@@ -40,9 +53,6 @@ horizontal_alignment = 2
 
 [node name="Label" type="Label" parent="GridContainer"]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_0a6em")
 
-[node name="Button" type="Button" parent="."]
-unique_name_in_owner = true
-layout_mode = 2
-toggle_mode = true
-flat = true
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

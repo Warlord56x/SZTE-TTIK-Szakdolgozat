@@ -14,6 +14,19 @@ func _init(_name: String) -> void:
 	saves = _get_saves()
 
 
+## Gets the first [Save] in the [param saves] array.
+func get_last_saved() -> Save:
+	if saves.is_empty():
+		return null
+	return saves[0]
+
+
+## Returns the time the directory was last modified.
+func get_saved_at() -> String:
+	var bias: int = Time.get_time_zone_from_system().bias * 60
+	return Time.get_datetime_string_from_unix_time(at + bias, true)
+
+
 ## Makes a new save to the slots folder
 func new_save(_name: String, _data: Array = []) -> void:
 	if _name.get_extension() == "":
@@ -21,11 +34,6 @@ func new_save(_name: String, _data: Array = []) -> void:
 	if saves.any(func(s: Save): return s.name == _name):
 		return
 	saves.push_front(Save.new(_name, self, _data))
-
-
-## TODO: Loading of the save
-func load_save() -> void:
-	pass
 
 
 ## Saves list for this slot, in last edited order

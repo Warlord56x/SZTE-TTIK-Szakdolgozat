@@ -63,4 +63,4 @@ heart = NodePath("ManaHeart")
 [node name="ManaHeart" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ealus")
 frame = 5
-offset = Vector2(4, 4)
+offset = Vector2(5, 5)

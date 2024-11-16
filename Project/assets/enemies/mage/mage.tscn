@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://d34pc2g4hgfyl"]
 
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_ipxbu"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_ipxbu"]
 [ext_resource type="Script" path="res://assets/enemies/mage/mage.gd" id="1_w332w"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_2w5tj"]
 [ext_resource type="Script" path="res://assets/enemies/mage/states/state_idle.gd" id="3_d63xr"]
