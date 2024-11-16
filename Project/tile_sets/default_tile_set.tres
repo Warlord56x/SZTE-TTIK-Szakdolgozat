@@ -1,7 +1,8 @@
-[gd_resource type="TileSet" load_steps=30 format=3 uid="uid://3qx3dvf66s68"]
+[gd_resource type="TileSet" load_steps=31 format=3 uid="uid://3qx3dvf66s68"]
 
 [ext_resource type="Texture2D" uid="uid://dufbdy81bhfap" path="res://nin_tiles.png" id="1_0tyon"]
 [ext_resource type="PackedScene" uid="uid://bbyw8sy2nr4wl" path="res://assets/objects/braizier.tscn" id="2_r8b3c"]
+[ext_resource type="PackedScene" uid="uid://cxfpj6kbgacng" path="res://test_scenes/camp.tscn" id="3_hux1x"]
 [ext_resource type="PackedScene" uid="uid://bya7v0widd40m" path="res://assets/objects/chest.tscn" id="3_qrhnp"]
 [ext_resource type="PackedScene" uid="uid://ds24204v1omvp" path="res://assets/objects/trap.tscn" id="4_k5j0x"]
 [ext_resource type="PackedScene" uid="uid://dfwa6vext6tuf" path="res://assets/objects/heart.tscn" id="5_1huxs"]
@@ -723,6 +724,7 @@ scenes/6/scene = ExtResource("7_miyhq")
 scenes/7/scene = ExtResource("8_rrmsb")
 scenes/8/scene = ExtResource("9_1aowp")
 scenes/9/scene = ExtResource("10_a6tww")
+scenes/10/scene = ExtResource("3_hux1x")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_iwsp1"]
 resource_name = "Ladders"

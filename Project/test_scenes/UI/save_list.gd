@@ -20,14 +20,14 @@ func init_list() -> void:
 	var group := ButtonGroup.new()
 	var box := get_child(0)
 
-	#for s: SaveSlot in SaveManager.save_slots:
-		#var element := ELEMENT.instantiate()
-		#element.time = s.get_saved_at()
-		#element.slot = s
-		#element.button_group = group
-		#element.test = s.name
-		#box.add_child(element)
-		#element.pressed.connect(item_checked)
+	for s: SaveSlot in SaveManager.save_slots:
+		var element := ELEMENT.instantiate()
+		element.time = s.get_saved_at()
+		element.slot = s
+		element.button_group = group
+		element.test = s.name
+		box.add_child(element)
+		element.pressed.connect(item_checked)
 
 
 func item_checked(item_slot: SaveSlot):

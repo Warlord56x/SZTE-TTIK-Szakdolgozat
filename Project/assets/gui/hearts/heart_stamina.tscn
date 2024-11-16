@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dhihbcv2grl0l"]
 
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_j550n"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_j550n"]
 [ext_resource type="Script" path="res://assets/gui/hearts/heart.gd" id="1_sg17r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_40crq"]
@@ -54,17 +54,16 @@ animations = [{
 }]
 
 [node name="HeartStamina" type="Control" node_paths=PackedStringArray("heart")]
-custom_minimum_size = Vector2(10, 10)
+custom_minimum_size = Vector2(20, 20)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 20.0
+offset_bottom = 20.0
 script = ExtResource("1_sg17r")
 heart = NodePath("StaminaHeart")
 
 [node name="StaminaHeart" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_mpc0m")
 frame = 5
 offset = Vector2(5, 5)

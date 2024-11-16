@@ -58,3 +58,7 @@ func _on_settings_button_pressed() -> void:
 
 func _on_load_game_pressed() -> void:
 	load_game_menu.switch()
+
+
+func _on_exit_pressed() -> void:
+	get_tree().quit()

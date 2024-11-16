@@ -5,11 +5,12 @@
 [ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://fonts/nin_font.png" id="3_ij7qm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0o5if"]
+line_spacing = 0.0
 font = ExtResource("3_ij7qm")
-font_size = 2
+font_size = 4
 
 [node name="WheelItem" type="Control"]
-custom_minimum_size = Vector2(10, 10)
+custom_minimum_size = Vector2(20, 20)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 10.0
@@ -19,6 +20,7 @@ script = ExtResource("1_mqtpe")
 metadata/_edit_group_ = true
 
 [node name="BackGround" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
 texture = ExtResource("2_6pglt")
 offset = Vector2(5, 5)
 region_enabled = true
@@ -27,6 +29,7 @@ region_filter_clip_enabled = true
 
 [node name="ForGround" type="Sprite2D" parent="."]
 visible = false
+scale = Vector2(2, 2)
 texture = ExtResource("2_6pglt")
 offset = Vector2(5, 5)
 region_enabled = true
@@ -35,14 +38,13 @@ region_filter_clip_enabled = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 10.0
-offset_bottom = 10.0
+offset_right = 20.0
+offset_bottom = 20.0
 
 [node name="Label" type="Label" parent="."]
-visible = false
 layout_mode = 0
-offset_right = 10.0
-offset_bottom = 9.0
+offset_right = 20.0
+offset_bottom = 17.0
 text = "999
 "
 label_settings = SubResource("LabelSettings_0o5if")

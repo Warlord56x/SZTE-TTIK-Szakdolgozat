@@ -8,7 +8,7 @@ var is_fullscreen : bool = false
 func _input(event : InputEvent) -> void:
 	if event.is_action_pressed("debug_fullscreen"):
 		if !is_fullscreen:
-			window.set_mode(Window.MODE_FULLSCREEN)
+			window.set_mode(Window.MODE_EXCLUSIVE_FULLSCREEN)
 		else:
 			window.set_mode(Window.MODE_WINDOWED)
 		is_fullscreen = !is_fullscreen

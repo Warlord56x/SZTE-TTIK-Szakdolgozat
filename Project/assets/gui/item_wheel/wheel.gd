@@ -2,7 +2,7 @@
 extends Container
 class_name ItemWheel
 
-@export_range(10, 30, 1) var r: int = 15:
+@export_range(10, 60, 1) var r: int = 30:
 	set(_r):
 		if is_node_ready():
 			queue_sort()
@@ -26,26 +26,25 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_PRE_SORT_CHILDREN:
 
 		coords.clear()
-		var center : Vector2 = get_global_rect().get_center()
+		var center: Vector2 = get_rect().size / 2
 		var delta_theta = 2 * PI / get_child_count()
-		for i in range(0, get_child_count()):
+		for i in get_child_count():
 			var theta = i * delta_theta - deg_to_rad(angle)
 
 			var x = center.x + r * cos(theta)
 			var y = center.y + r * sin(theta)
-			coords.append(Vector2(x,y))
+			coords.append(Vector2(x,y) - get_child(i).size / 2)
 
 	if what == NOTIFICATION_SORT_CHILDREN:
-		var center : Vector2 = get_global_rect().get_center()
-		var diff = abs(center - get_rect().get_center()).y
-		var min_y : float = INF
+
+		var min_y: float = INF
 		for c in get_child_count():
 			var child: WheelItem = get_children()[c]
 			child.focus = false
-			child.global_position = (coords[c]) - Vector2(diff,diff)
-			if child.global_position.y < min_y:
+			child.position = (coords[c])
+			if child.position.y < min_y:
 				min_node = child
-				min_y = child.global_position.y
+				min_y = child.position.y
 		min_node.focus = true
 
 
@@ -69,13 +68,14 @@ func update_wheel() -> void:
 
 
 func _get_minimum_size() -> Vector2:
-	var ch = get_child(0)
+	var ch: Control = get_child(0)
 	if ch == null:
 		return Vector2(0,0)
-	return ((ch.size / 2) + Vector2(r, r)) * 2
+	var ch_size = ch.size / 2 * get_child_count()
+	return ch_size
 
 
-func _unhandled_key_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not GameEnv.input_process:
 		return
 	if event.is_action_pressed("wheel_plus") or event.is_action_pressed("wheel_minus"):

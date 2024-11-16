@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c88pf7h6w1k3u"]
 
 [ext_resource type="Script" path="res://assets/gui/hearts/heart.gd" id="1_uddan"]
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="2_ttme2"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="2_ttme2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ccvcg"]
 atlas = ExtResource("2_ttme2")
@@ -54,7 +54,7 @@ animations = [{
 }]
 
 [node name="HeartHP" type="Control" node_paths=PackedStringArray("heart")]
-custom_minimum_size = Vector2(10, 10)
+custom_minimum_size = Vector2(20, 20)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 10.0
@@ -63,6 +63,7 @@ script = ExtResource("1_uddan")
 heart = NodePath("Heart")
 
 [node name="Heart" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_dnqcp")
 frame = 5
 offset = Vector2(5, 5)

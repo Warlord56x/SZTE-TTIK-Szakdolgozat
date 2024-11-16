@@ -1308,6 +1308,7 @@ alignment = 2
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
+alignment = 1
 
 [node name="Control" type="Control" parent="HUD/Control/HBoxContainer/VBoxContainer/Coins"]
 custom_minimum_size = Vector2(8, 0)
@@ -1349,27 +1350,31 @@ alignment = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control/HBoxContainer2"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 1
 alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control/HBoxContainer2/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="HUD/Control/HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(80, 76)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control/HBoxContainer2/VBoxContainer/CenterContainer"]
 custom_minimum_size = Vector2(40, 24)
 layout_mode = 2
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="ActionHelp" parent="HUD/Control/HBoxContainer2/VBoxContainer/HBoxContainer" instance=ExtResource("8_5oe6t")]
+[node name="ActionHelp" parent="HUD/Control/HBoxContainer2/VBoxContainer/CenterContainer/HBoxContainer" instance=ExtResource("8_5oe6t")]
 layout_mode = 2
 action = SubResource("InputEventAction_mptw6")
 joypad_button = 4
 
-[node name="ActionHelp2" parent="HUD/Control/HBoxContainer2/VBoxContainer/HBoxContainer" instance=ExtResource("8_5oe6t")]
+[node name="ActionHelp2" parent="HUD/Control/HBoxContainer2/VBoxContainer/CenterContainer/HBoxContainer" instance=ExtResource("8_5oe6t")]
 layout_mode = 2
 action = SubResource("InputEventAction_jgwt8")
 joypad_button = 5
 
 [node name="Camera" type="Camera2D" parent="."]
 ignore_rotation = false
+zoom = Vector2(3, 3)
 process_callback = 0
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true

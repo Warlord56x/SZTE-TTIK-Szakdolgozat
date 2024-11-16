@@ -1,15 +1,15 @@
 extends InteractionArea
 
-var lit : bool = false
+var lit: bool = false
 
 
-func _on_body_entered(body : Node2D) -> void:
+func _on_body_entered(body: Node2D) -> void:
 	if body is Projectile and body.type == 1:
 		if !lit:
 			interact()
 
 
-func interact() -> bool:
+func interact(_player: Player = null) -> bool:
 	if lit:
 		$Anim.play_backwards("activate")
 	else:

@@ -76,6 +76,9 @@ var ladder_pos: float = 0.0
 var checkpoint: Checkpoint:
 	set = set_checkpoint
 
+var camp: Camp = null:
+	set = set_camp
+
 var dash_max: int = 1
 var dash_count: int = 0
 
@@ -176,6 +179,13 @@ func set_checkpoint(c: Checkpoint) -> void:
 	if checkpoint:
 		checkpoint.deactivate()
 	checkpoint = c
+	c.activate()
+
+
+func set_camp(c: Camp) -> void:
+	if camp:
+		camp.deactivate()
+	camp = c
 	c.activate()
 #endregion
 
@@ -289,8 +299,8 @@ func request_interaction_visible(b: bool) -> void:
 
 func save() -> Dictionary:
 	var ch_pos: Vector2
-	if checkpoint:
-		ch_pos = checkpoint.global_position
+	if camp:
+		ch_pos = camp.global_position
 	else:
 		ch_pos = DEFAULT_SPAWN_POINT
 	return {
@@ -299,7 +309,7 @@ func save() -> Dictionary:
 		"health" : health,
 		"mana" : mana,
 		"coins" : coins,
-		"checkpoint" : SaveManager.vector2_to_array(ch_pos),
+		"camp" : SaveManager.vector2_to_array(ch_pos),
 	}
 
 

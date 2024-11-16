@@ -29,7 +29,9 @@ func leave() -> void:
 	player.velocity = Vector2.ZERO
 	player.pushback_force = Vector2.ZERO
 
-	if player.checkpoint:
+	if player.camp:
+		player.global_position = player.camp.global_position
+	elif player.checkpoint:
 		player.global_position = player.checkpoint.global_position
 	else:
 		player.global_position = player.DEFAULT_SPAWN_POINT

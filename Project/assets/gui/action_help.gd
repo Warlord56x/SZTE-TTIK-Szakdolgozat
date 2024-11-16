@@ -49,9 +49,9 @@ func _unhandled_input(event : InputEvent) -> void:
 		button.frame = 1
 		baseAnim.frame = 1
 		key.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		$SpecialLetters.offset.y = 4
+		$SpecialLetters.offset.y = 5
 	if event.is_action_released(action.action):
 		button.frame = 0
 		baseAnim.frame = 0
-		$SpecialLetters.offset.y = 3
+		$SpecialLetters.offset.y = 4
 		key.vertical_alignment = VERTICAL_ALIGNMENT_TOP

@@ -38,7 +38,7 @@ func _init() -> void:
 	type = INTERACTION_TYPE.LADDER
 
 
-func interact() -> bool:
+func interact(_player: Player = null) -> bool:
 	if not interactor.player.on_ladder:
 		interactor.player.ladder_pos = global_position.x
 		interactor.player.on_ladder = true

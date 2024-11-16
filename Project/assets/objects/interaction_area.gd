@@ -9,9 +9,9 @@ enum INTERACTION_TYPE {
 
 signal interaction_done
 
-var type: INTERACTION_TYPE = INTERACTION_TYPE.DEAFULT
-var interactable: bool = true
+@export var type: INTERACTION_TYPE = INTERACTION_TYPE.DEAFULT
+@export var interactable: bool = true
 
-func interact() -> bool: 
+func interact(player: Player = null) -> bool: 
 	interaction_done.emit()
 	return interactable

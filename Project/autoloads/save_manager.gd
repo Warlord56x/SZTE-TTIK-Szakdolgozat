@@ -73,8 +73,8 @@ func load_game(slot: SaveSlot = current_slot) -> bool:
 
 	for node_data in data:
 		var new_object = load(node_data["filename"]).instantiate()
-		if "checkpoint" in node_data:
-			new_object.global_position = array_to_vector2(node_data["checkpoint"])
+		if "camp" in node_data:
+			new_object.global_position = array_to_vector2(node_data["camp"])
 		if "position" in node_data:
 			new_object.position = array_to_vector2(node_data["position"])
 		get_node(node_data["parent"]).add_child(new_object, true)

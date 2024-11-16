@@ -14,7 +14,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed("interact") and interaction_target:
-		if not interaction_target.interact():
+		if not interaction_target.interact(player):
 			player.request_interaction_visible(false)
 			await interaction_target.interaction_done
 			interaction_target = null

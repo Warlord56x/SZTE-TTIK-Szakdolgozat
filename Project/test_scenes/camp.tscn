@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://cxfpj6kbgacng"]
+
+[ext_resource type="Script" path="res://test_scenes/camp.gd" id="1_hw7vp"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="2_k0lgi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmi2s"]
+atlas = ExtResource("2_k0lgi")
+region = Rect2(50, 90, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfp1i"]
+atlas = ExtResource("2_k0lgi")
+region = Rect2(60, 90, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mf8e"]
+atlas = ExtResource("2_k0lgi")
+region = Rect2(70, 90, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ddpk"]
+atlas = ExtResource("2_k0lgi")
+region = Rect2(80, 90, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qq5pc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qmi2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfp1i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mf8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ddpk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1m45"]
+size = Vector2(10, 10)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xi5l2"]
+load_path = "res://.godot/imported/2d_lights_and_shadows_neutral_point_light.webp-75f08da48e77c418c0e4c68f7863b944.ctex"
+
+[node name="Camp" type="Area2D"]
+script = ExtResource("1_hw7vp")
+
+[node name="Anim" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qq5pc")
+autoplay = "default"
+frame_progress = 0.00016022
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_c1m45")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.5
+range_layer_min = -1
+texture = SubResource("CompressedTexture2D_xi5l2")
+texture_scale = 0.5
+
+[node name="CampMenu" type="VBoxContainer" parent="."]
+visible = false
+offset_left = -20.0
+offset_top = -39.0
+offset_right = 20.0
+offset_bottom = -5.0
+
+[node name="RestButton" type="Button" parent="CampMenu"]
+layout_mode = 2
+text = "Rest"
+
+[connection signal="pressed" from="CampMenu/RestButton" to="." method="_on_rest_button_pressed"]

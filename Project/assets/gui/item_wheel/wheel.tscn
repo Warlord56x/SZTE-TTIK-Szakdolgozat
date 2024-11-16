@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://psxpi7w48ool" path="res://assets/gui/item_wheel/wheel_item.tscn" id="2_hlwiv"]
 
 [node name="Wheel" type="Container"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 70.0
+offset_bottom = 70.0
 script = ExtResource("1_h501d")
 
 [node name="WheelItem" parent="." instance=ExtResource("2_hlwiv")]

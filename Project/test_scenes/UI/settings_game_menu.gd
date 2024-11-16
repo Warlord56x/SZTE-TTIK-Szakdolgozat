@@ -19,7 +19,7 @@ func _on_master_volume_slider_volume_changed(value: float) -> void:
 
 func _on_fullscreen_check_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		Settings.settings.fullscreen = Window.MODE_FULLSCREEN
+		Settings.settings.fullscreen = Window.MODE_EXCLUSIVE_FULLSCREEN
 	else:
 		Settings.settings.fullscreen = Window.MODE_WINDOWED
 

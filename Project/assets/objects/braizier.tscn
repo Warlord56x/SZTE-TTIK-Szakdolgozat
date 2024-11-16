@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://bbyw8sy2nr4wl"]
 
 [ext_resource type="Script" path="res://assets/objects/braizier.gd" id="1_22aw7"]
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_ewmuf"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_ewmuf"]
 [ext_resource type="Texture2D" uid="uid://b4s3ar3xvuca5" path="res://assets/light_masks/2d_lights_and_shadows_neutral_point_light.webp" id="3_1s7a8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xa7v2"]

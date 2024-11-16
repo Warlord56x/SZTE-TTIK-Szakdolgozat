@@ -5,13 +5,11 @@ const DROP := preload("res://assets/loot/pick_up.tscn")
 @export var _loot: Item
 @export var _animation: SpriteFrames
 
-var is_open : bool = false
-var inside : bool = false
-
-var player : Player
+var is_open: bool = false
+var inside: bool = false
 
 
-func interact() -> bool:
+func interact(_player: Player = null) -> bool:
 	if !is_open:
 		$AnimatedSprite2D.play("open")
 		is_open = true

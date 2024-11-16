@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MeleeItem" load_steps=4 format=3 uid="uid://b6iewkldjgof1"]
 
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_344xl"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_344xl"]
 [ext_resource type="Script" path="res://assets/data/model/melee_item.gd" id="2_8ulrl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bd75o"]
