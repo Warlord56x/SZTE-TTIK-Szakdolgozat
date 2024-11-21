@@ -34,6 +34,7 @@ window/stretch/scale_mode="integer"
 
 Persistent="Saveable nodes"
 Checkpoint="Essentially a \"bonfire\" from ds"
+Respawnable="Enemies that will respawn on rest"
 
 [gui]
 

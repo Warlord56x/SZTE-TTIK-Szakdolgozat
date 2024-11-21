@@ -2,7 +2,7 @@ extends InteractionArea
 class_name Camp
 
 
-@onready var camp_menu: VBoxContainer = $CampMenu
+@onready var camp_menu: VBoxContainer = %CampMenu
 
 var active: bool = false
 static var i := 0
@@ -33,4 +33,5 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_rest_button_pressed() -> void:
 	SaveManager.save_game(str(i))
+	GameEnv.respawn_enemies()
 	i += 1

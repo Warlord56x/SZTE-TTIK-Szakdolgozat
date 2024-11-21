@@ -31,8 +31,8 @@ func attack() -> void:
 	projectile.p_rotation = enemy.global_position.angle_to_point(target.global_position)
 	projectile.global_position = enemy.global_position
 	projectile.type = 1
-	enemy.add_child(projectile)
 	projectile.parent_ref = enemy
+	enemy.add_child(projectile)
 	enemy.sprite.play("default")
 	attack_flag = false
 

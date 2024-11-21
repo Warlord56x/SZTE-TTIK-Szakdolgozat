@@ -309,7 +309,7 @@ func save() -> Dictionary:
 		"health" : health,
 		"mana" : mana,
 		"coins" : coins,
-		"camp" : SaveManager.vector2_to_array(ch_pos),
+		"camp" : SaveManager.vector2_to_array(ch_pos + Vector2(0, -2)),
 	}
 
 

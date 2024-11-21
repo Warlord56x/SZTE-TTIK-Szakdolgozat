@@ -11,19 +11,34 @@ const MAIN_MENU := preload("res://test_scenes/UI/main_menu.tscn")
 
 var input_process: bool = true
 
+var nodes_to_respawn: Array[Dictionary]
+
 signal fade_step_in
 signal fade_step_wait
 signal fade_step_out
+
+
+func _ready() -> void:
+	start_bg_music()
+
+
+func respawn_enemies() -> void:
+	for enemy in nodes_to_respawn:
+		var e = load(enemy.filename).instantiate()
+		e.global_position = enemy.position
+		get_node(enemy.parent).add_child(e)
+		e.add_to_group("Respawnable")
+		print("respawned 1 enemy")
+	for enemy in get_tree().get_nodes_in_group("Respawnable"):
+		enemy.health = enemy.max_health
+		enemy.global_position = enemy.initial_pos
+	nodes_to_respawn.clear()
 
 
 func slow_time(slow_for: float, slow: float) -> void:
 	Engine.time_scale = slow
 	await get_tree().create_timer(slow_for * slow).timeout
 	Engine.time_scale = 1.0
-
-
-func _ready() -> void:
-	start_bg_music()
 
 
 func fade_in_out(fade_for: float, label_text: String = "") -> void:

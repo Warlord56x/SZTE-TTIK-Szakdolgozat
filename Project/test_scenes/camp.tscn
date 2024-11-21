@@ -62,15 +62,28 @@ range_layer_min = -1
 texture = SubResource("CompressedTexture2D_xi5l2")
 texture_scale = 0.5
 
-[node name="CampMenu" type="VBoxContainer" parent="."]
-visible = false
-offset_left = -20.0
-offset_top = -39.0
-offset_right = 20.0
-offset_bottom = -5.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 4
 
-[node name="RestButton" type="Button" parent="CampMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_bottom = 40
+
+[node name="CampMenu" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="RestButton" type="Button" parent="CanvasLayer/MarginContainer/CampMenu"]
 layout_mode = 2
 text = "Rest"
 
-[connection signal="pressed" from="CampMenu/RestButton" to="." method="_on_rest_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/CampMenu/RestButton" to="." method="_on_rest_button_pressed"]

@@ -49,18 +49,16 @@ func set_health(h: int) -> void:
 
 
 func _init() -> void:
-
 	tool_tip_node.anchor_point = Vector2(0, -5)
 	tool_tip_node.anchor_preset = Control.PRESET_CENTER_BOTTOM
 	add_child(tool_tip_node)
-
-	initial_pos = global_position
 
 
 
 func _ready() -> void:
 	tool_tip_node.visible = debug
 	actor_setup.call_deferred()
+	initial_pos = global_position
 	ready()
 
 	floating_hp_bar.position = Vector2(0, -10)
@@ -76,7 +74,8 @@ func ready() -> void:
 
 func actor_setup():
 	# Wait for the NavigationServer to sync.
-	await NavigationServer2D.map_changed
+	if NavigationServer2D.get_maps().is_empty():
+		await NavigationServer2D.map_changed
 	navmap_ready = true
 
 	# Now that the navigation map is no longer empty, set the movement target.
@@ -200,4 +199,6 @@ func death() -> void:
 	var _death = DEATH_SCENE_TEST.instantiate()
 	_death.global_position = global_position
 	get_tree().root.add_child(_death)
+	var data := {"position": initial_pos, "filename": scene_file_path, "parent": get_parent().get_path()}
+	GameEnv.nodes_to_respawn.append(data)
 	queue_free()

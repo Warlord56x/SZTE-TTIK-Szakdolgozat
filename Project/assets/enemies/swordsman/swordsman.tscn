@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_fall.gd" id="5_fqqg6"]
 [ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_combat.gd" id="6_njad8"]
 [ext_resource type="Shader" path="res://assets/effects/shaders/blinker.gdshader" id="7_e3isw"]
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="7_si21x"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="7_si21x"]
 [ext_resource type="Script" path="res://test_scenes/hitbox.gd" id="9_q8lhd"]
 [ext_resource type="AudioStream" uid="uid://82jihjn8dema" path="res://assets/sounds/568169__merrick079__sword-sound-2.wav" id="9_vs37d"]
 [ext_resource type="Script" path="res://test_scenes/hurtbox.gd" id="10_xrarh"]
@@ -193,7 +193,7 @@ _data = {
 "hit": SubResource("Animation_w4vrw")
 }
 
-[node name="Swordsman" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite")]
+[node name="Swordsman" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite") groups=["Respawnable"]]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_6tos1")
