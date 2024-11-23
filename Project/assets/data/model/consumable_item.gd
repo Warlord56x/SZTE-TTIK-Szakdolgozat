@@ -1,13 +1,17 @@
 extends Item
 class_name ConsumableItem
 
-@export var effect_time: float = 0.0
-@export var effect: bool
+const test := preload("res://test_scenes/buff.tscn")
+
+@export var effect_time: float
+@export var effect_interval: float
 
 
 func consume(consumer: Node2D) -> void:
-	pass
+	if stack <= 0:
+		return
 
-
-func restore(consumer: Node2D) -> void:
-	pass
+	var t = test.instantiate()
+	t.buff_time = effect_time
+	t.buff_interval = effect_interval
+	consumer.add_child(t)

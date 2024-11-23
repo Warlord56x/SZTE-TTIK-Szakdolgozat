@@ -28,6 +28,8 @@ enum player_res {
 @onready var weapon_hitbox: Hitbox = %Weapon/Hitbox
 @onready var interactor: Interactor = $Interactor
 
+@onready var buff_display: HBoxContainer = %BuffDisplay
+
 @onready var health_bar: Bar = %HealthBar
 @onready var mana_bar: Bar = %ManaBar
 @onready var stamina_bar: Bar = %StaminaBar
@@ -411,3 +413,10 @@ func blinker_timeout() -> void:
 func invincibility_timeout() -> void:
 	if has_node("HurtBox"):
 		$HurtBox.set_deferred("monitoring", true)
+
+
+func _on_child_entered_tree(node: Node) -> void:
+	if node is Buff:
+		var b = node as Buff
+		var new_label = BuffLabel.new(b)
+		%BuffDisplay.add_child(new_label)

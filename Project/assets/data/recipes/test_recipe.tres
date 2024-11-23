@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=2 format=3 uid="uid://dt7crhvm1gahw"]
+
+[ext_resource type="Script" path="res://assets/data/model/recipe.gd" id="1_1gd8f"]
+
+[resource]
+script = ExtResource("1_1gd8f")
+required_items = {}

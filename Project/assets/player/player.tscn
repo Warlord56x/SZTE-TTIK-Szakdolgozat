@@ -1283,7 +1283,6 @@ layout_mode = 2
 
 [node name="CV" type="VBoxContainer" parent="HUD/Control/C"]
 layout_mode = 2
-size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
 [node name="HealthBar" parent="HUD/Control/C/CV" instance=ExtResource("2_n15yp")]
@@ -1298,6 +1297,15 @@ size_flags_vertical = 1
 
 [node name="StaminaBar" parent="HUD/Control/C/CV" instance=ExtResource("4_mq3j0")]
 unique_name_in_owner = true
+layout_mode = 2
+
+[node name="BuffDisplay" type="HBoxContainer" parent="HUD/Control/C"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="HUD/Control/C/BuffDisplay"]
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control"]
@@ -1491,6 +1499,7 @@ parent_ref = NodePath("..")
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_mirti")
 
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="timeout" from="WallStaminaDrain" to="." method="_on_wall_stamina_drain_timeout"]
 [connection signal="area_entered" from="Interactor" to="Interactor" method="_on_area_entered"]
 [connection signal="area_exited" from="Interactor" to="Interactor" method="_on_area_exited"]

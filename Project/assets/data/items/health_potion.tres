@@ -10,6 +10,8 @@ filter_clip = true
 
 [resource]
 script = ExtResource("2_swgpg")
+effect_time = 0.0
+effect_interval = 0.0
 name = "Health Potion"
 icon = SubResource("AtlasTexture_t8vdo")
 stack = 5

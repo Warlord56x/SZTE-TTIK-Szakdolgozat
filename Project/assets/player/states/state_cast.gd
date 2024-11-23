@@ -71,7 +71,11 @@ func enter() -> void:
 		player.stamina -= 1
 
 	if item is ConsumableItem:
+		if item.stack == 0:
+			travel("default")
+			return
 		item.consume(player)
+		player.inventory.remove_item(item)
 
 	travel("default")
 

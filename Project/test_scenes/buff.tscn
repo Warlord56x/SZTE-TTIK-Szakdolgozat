@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://b12df8iisfaos"]
+
+[ext_resource type="Script" path="res://test_scenes/buff.gd" id="1_nlvio"]
+
+[node name="Buff" type="Node2D"]
+script = ExtResource("1_nlvio")
+
+[node name="BuffTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="IntervalTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="BuffTimer" to="." method="_on_buff_timer_timeout"]
+[connection signal="timeout" from="IntervalTimer" to="." method="_on_interval_timer_timeout"]
