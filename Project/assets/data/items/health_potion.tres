@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ConsumableItem" load_steps=4 format=3 uid="uid://blbhq7hm0wb8q"]
 
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_mlky0"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_mlky0"]
 [ext_resource type="Script" path="res://assets/data/model/consumable_item.gd" id="2_swgpg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t8vdo"]
@@ -12,3 +12,5 @@ filter_clip = true
 script = ExtResource("2_swgpg")
 name = "Health Potion"
 icon = SubResource("AtlasTexture_t8vdo")
+stack = 5
+stack_size = 10

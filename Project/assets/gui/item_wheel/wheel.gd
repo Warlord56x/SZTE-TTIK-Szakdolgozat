@@ -50,10 +50,7 @@ func _notification(what: int) -> void:
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
-		for item_idx in len(inventory.get_items()):
-			var wheel_slot: WheelItem = get_child(item_idx)
-			if wheel_slot:
-				wheel_slot.item = inventory.get_item(item_idx)
+		update_wheel()
 		inventory.items_changed.connect(update_wheel)
 
 
@@ -63,8 +60,15 @@ func update_wheel() -> void:
 
 	for item_idx in len(inventory.get_items()):
 		var wheel_slot: WheelItem = get_child(item_idx)
-		if wheel_slot:
-			wheel_slot.item = inventory.get_item(item_idx)
+		if not wheel_slot:
+			continue
+		var item = inventory.get_item(item_idx)
+
+		var is_weapon := item is WeaponItem
+		var is_consumable := item is ConsumableItem
+
+		if (is_weapon or is_consumable):
+			wheel_slot.item = item
 
 
 func _get_minimum_size() -> Vector2:

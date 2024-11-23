@@ -10,6 +10,6 @@ func ready() -> void:
 
 
 func _on_detect_range_body_entered(body : Node2D) -> void:
-	if body is Player:
+	if body is Player and ai:
 		target = body
 		state_machine.travel("Chase")

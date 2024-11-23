@@ -24,8 +24,8 @@ enum player_res {
 
 @onready var state_machine: StateMachine = $StateMachine
 @onready var _coins: Control = %CoinLabel
-@onready var weapon: AnimatedSprite2D = $Weapon
-@onready var weapon_hitbox: Area2D = $Weapon/Hitbox
+@onready var weapon: AnimatedSprite2D = %Weapon
+@onready var weapon_hitbox: Hitbox = %Weapon/Hitbox
 @onready var interactor: Interactor = $Interactor
 
 @onready var health_bar: Bar = %HealthBar
@@ -196,6 +196,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	#if not GameEnv.input_process:
 		#return
 
+	if event.is_action_pressed("test"):
+		pass
+
 	if event.is_action_pressed("cast_spell"):
 		if not state_machine.get_state("cast").active:
 			state_machine.travel("cast")
@@ -334,11 +337,12 @@ func hurt(damage: int, _dealer: Node2D = null) -> bool:
 	health -= damage
 
 	if health <= 0:
-		state_machine.travel("Death")
+		if state_machine.current_state.name.to_lower() != "death":
+			state_machine.travel("Death")
 
 	camera.add_trauma(0.2, 0.85)
 
-	var inv_tween = create_tween().set_loops(10)
+	var inv_tween = create_tween().set_loops(3)
 	var inv_timer = get_tree().create_timer(inv_time)
 	inv_tween.finished.connect(blinker_timeout)
 	inv_timer.timeout.connect(invincibility_timeout)

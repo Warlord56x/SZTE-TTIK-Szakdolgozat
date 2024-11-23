@@ -7,7 +7,7 @@ class_name Item
 @export var stack: int:
 	set(s):
 		stack = s
-		used.emit()
+		stack_changed.emit()
 @export var stack_size: int
 
-signal used
+signal stack_changed

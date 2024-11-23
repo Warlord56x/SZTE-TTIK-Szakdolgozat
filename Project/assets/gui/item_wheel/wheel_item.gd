@@ -2,20 +2,28 @@
 extends Control
 class_name WheelItem
 
+
+@onready var back_ground: Sprite2D = $BackGround
+@onready var label: Label = $Label
+@onready var panel: Panel = $Label/Panel
+@onready var for_ground: Sprite2D = $ForGround
+@onready var item_rect: TextureRect = $ItemRect
+
+
 @export var item : Item = null:
 	set(it):
 		if it:
-			$TextureRect.texture = it.icon
+			item_rect.texture = it.icon
 		else:
-			$TextureRect.texture = null
+			item_rect.texture = null
 
 		if item != null:
-			if item.used.is_connected(refresh_label):
-				item.used.disconnect(refresh_label)
+			if item.stack_changed.is_connected(refresh_label):
+				item.stack_changed.disconnect(refresh_label)
 			item = it
 
 			if it:
-				item.used.connect(refresh_label)
+				item.stack_changed.connect(refresh_label)
 		else:
 			item = it
 		refresh_label()
@@ -23,7 +31,9 @@ class_name WheelItem
 
 @export var focus : bool = false:
 	set(f):
-		$ForGround.visible = f
+		if not is_node_ready():
+			await ready
+		for_ground.visible = f
 		focus = f
 
 
@@ -33,7 +43,7 @@ func _ready() -> void:
 
 func refresh_label() -> void:
 	if item:
-		$Label.text = str(item.stack)
-		$Label.visible = item.stack_size != 0 and item.stack != 0
+		label.text = str(item.stack)
+		label.visible = item.stack_size != 0 and item.stack != 0
 	else:
-		$Label.visible = false
+		label.visible = false

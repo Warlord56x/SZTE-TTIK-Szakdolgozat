@@ -4,6 +4,9 @@ class_name MainCamera
 var trauma: float = 0
 var intensity: float = 0
 
+@export var minimum_zoom: Vector2
+@export var maximum_zoom: Vector2
+
 
 func add_trauma(amount: float, _intensity: float) -> void:
 	trauma = amount
@@ -22,8 +25,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			"zoom",
 			clamp(
 				zoom + (Vector2(0.1,0.1) * t_inp),
-				Vector2(0.1,0.1),
-				Vector2(2.0, 2.0)
+				minimum_zoom,
+				maximum_zoom
 				),
 			0.1
 			)
@@ -39,8 +42,8 @@ func _process(delta: float) -> void:
 			"zoom",
 			clamp(
 				zoom + (Vector2.ONE * t_inp),
-				Vector2(1.0,1.0),
-				Vector2(2.0,2.0)
+				minimum_zoom,
+				maximum_zoom
 				),
 			0.1
 			)

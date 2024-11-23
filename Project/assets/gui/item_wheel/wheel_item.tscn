@@ -27,6 +27,31 @@ region_enabled = true
 region_rect = Rect2(0, 80, 8, 8)
 region_filter_clip_enabled = true
 
+[node name="ItemRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+text = "999"
+label_settings = SubResource("LabelSettings_0o5if")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Panel" type="Panel" parent="Label"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="ForGround" type="Sprite2D" parent="."]
 visible = false
 scale = Vector2(2, 2)
@@ -35,18 +60,3 @@ offset = Vector2(5, 5)
 region_enabled = true
 region_rect = Rect2(8, 86, 10, 10)
 region_filter_clip_enabled = true
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 20.0
-offset_bottom = 20.0
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_right = 20.0
-offset_bottom = 17.0
-text = "999
-"
-label_settings = SubResource("LabelSettings_0o5if")
-horizontal_alignment = 1
-vertical_alignment = 2

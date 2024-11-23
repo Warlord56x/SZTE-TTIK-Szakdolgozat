@@ -4,10 +4,11 @@ class_name Projectile
 
 const PROJECTILE_SPEED: int = 300
 
-var direction: Vector2
-var p_rotation: float
-var override_speed: int
-var type: int = 0
+@export var direction: Vector2
+@export var p_rotation: float
+@export var override_speed: int
+@export var type: int = 0
+@export var damage: int = 1
 
 var parent_ref: Node2D
 
@@ -35,6 +36,7 @@ func _ready() -> void:
 			hitbox.knock_back_strength = 0.2
 	hitbox.parent_ref = parent_ref
 	hitbox.hit_callback = finished_callback
+	hitbox.damage = damage
 
 
 func _physics_process(_delta : float) -> void:

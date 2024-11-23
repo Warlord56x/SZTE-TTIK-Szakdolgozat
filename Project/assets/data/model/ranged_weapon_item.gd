@@ -1,0 +1,2 @@
+extends WeaponItem
+class_name RangedWeaponItem

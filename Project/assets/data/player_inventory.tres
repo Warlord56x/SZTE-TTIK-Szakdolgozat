@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Inventory" load_steps=7 format=3 uid="uid://cvc8mxoyf2775"]
+[gd_resource type="Resource" script_class="Inventory" load_steps=8 format=3 uid="uid://cvc8mxoyf2775"]
 
 [ext_resource type="Script" path="res://assets/data/model/inventory.gd" id="1_701ov"]
 [ext_resource type="Script" path="res://assets/data/model/item.gd" id="1_tril3"]
@@ -6,7 +6,8 @@
 [ext_resource type="Resource" uid="uid://2nlg1ktbcmbt" path="res://assets/data/items/fireball.tres" id="3_nar2o"]
 [ext_resource type="Resource" uid="uid://hd2muhlnrdsc" path="res://assets/data/items/bow.tres" id="4_ul074"]
 [ext_resource type="Resource" uid="uid://7q383kvqnpb1" path="res://assets/data/items/hammer.tres" id="5_iq7o2"]
+[ext_resource type="Resource" uid="uid://blbhq7hm0wb8q" path="res://assets/data/items/health_potion.tres" id="6_uy3fc"]
 
 [resource]
 script = ExtResource("1_701ov")
-_items = Array[ExtResource("1_tril3")]([ExtResource("2_dp7lp"), ExtResource("3_nar2o"), ExtResource("4_ul074"), ExtResource("5_iq7o2")])
+_items = Array[ExtResource("1_tril3")]([ExtResource("2_dp7lp"), ExtResource("3_nar2o"), ExtResource("4_ul074"), ExtResource("5_iq7o2"), ExtResource("6_uy3fc")])

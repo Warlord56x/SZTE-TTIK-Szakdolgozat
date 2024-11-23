@@ -6,7 +6,7 @@ const default_path := "user://saves/"
 
 var save_slots: Array[SaveSlot] = []
 var current_slot: SaveSlot = null
-var i = 0
+#var i = 0
 
 
 func _ready() -> void:
@@ -19,12 +19,12 @@ func _ready() -> void:
 		current_slot = save_slots.front()
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("test"):
-		save_game(str(i), current_slot)
-		i+= 1
-	if event.is_action_pressed("test_2"):
-		load_game(save_slots[0])
+#func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed("test"):
+		#save_game(str(i), current_slot)
+		#i+= 1
+	#if event.is_action_pressed("test_2"):
+		#load_game(save_slots[0])
 
 
 ## Checks if a slot with the name [param slot_name] already exists in [member SaveSlot.saves_array]
