@@ -45,7 +45,7 @@ size = Vector2(10, 10)
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xi5l2"]
 load_path = "res://.godot/imported/2d_lights_and_shadows_neutral_point_light.webp-75f08da48e77c418c0e4c68f7863b944.ctex"
 
-[node name="Camp" type="Area2D"]
+[node name="Camp" type="Area2D" groups=["Camp"]]
 script = ExtResource("1_hw7vp")
 
 [node name="Anim" type="AnimatedSprite2D" parent="."]
@@ -61,29 +61,3 @@ energy = 0.5
 range_layer_min = -1
 texture = SubResource("CompressedTexture2D_xi5l2")
 texture_scale = 0.5
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_bottom = 40
-
-[node name="CampMenu" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-
-[node name="RestButton" type="Button" parent="CanvasLayer/MarginContainer/CampMenu"]
-layout_mode = 2
-text = "Rest"
-
-[connection signal="pressed" from="CanvasLayer/MarginContainer/CampMenu/RestButton" to="." method="_on_rest_button_pressed"]

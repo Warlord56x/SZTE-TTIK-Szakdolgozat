@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=3 uid="uid://bhxmqg2i48ced"]
 
 [ext_resource type="Script" path="res://assets/player/projectile.gd" id="1_jl8yt"]
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="2_7nube"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="2_7nube"]
 [ext_resource type="Texture2D" uid="uid://b4s3ar3xvuca5" path="res://assets/light_masks/2d_lights_and_shadows_neutral_point_light.webp" id="3_pja8y"]
 [ext_resource type="AudioStream" uid="uid://dum1chmge16o" path="res://assets/sounds/701804__perduuus__fireball.wav" id="4_fhkfq"]
 [ext_resource type="AudioStream" uid="uid://dcjv6ghjq606o" path="res://assets/sounds/431174__highpixel__fireball-explosion.wav" id="5_5aybg"]
@@ -152,12 +152,6 @@ energy = 0.5
 range_layer_min = -1
 texture = ExtResource("3_pja8y")
 
-[node name="Hitbox" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(4.5, 0)
-shape = SubResource("RectangleShape2D_fougr")
-
 [node name="FireAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_fhkfq")
 max_distance = 300.0
@@ -175,11 +169,12 @@ stream = ExtResource("7_q3x0f")
 volume_db = -8.0
 max_distance = 300.0
 
-[node name="Hitbox2" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
+monitoring = false
 script = ExtResource("8_dbsx6")
 damage = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(4.5, 0)
 shape = SubResource("RectangleShape2D_fougr")
 

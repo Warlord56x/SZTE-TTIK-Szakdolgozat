@@ -1193,6 +1193,7 @@ safe_margin = 0.1
 script = ExtResource("1_0p7ex")
 inventory = ExtResource("2_q0eh7")
 tool_tip_node = NodePath("EnemyToolTip")
+inv_time = 0.3
 health_regen_wait_time = 1.5
 health_regen_time = 0.5
 metadata/_edit_group_ = true

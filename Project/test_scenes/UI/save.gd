@@ -22,9 +22,9 @@ func _init(_name: String, _slot: SaveSlot, _data: Array = []) -> void:
 		save_data()
 
 
-func save_data() -> void:
+func save_data(_data: Array = data) -> void:
 	var file := FileAccess.open(_path, FileAccess.WRITE)
-	file.store_line(JSON.stringify(data, "\t"))
+	file.store_line(JSON.stringify(_data, "\t"))
 	file.close()
 	at = FileAccess.get_modified_time(_path)
 

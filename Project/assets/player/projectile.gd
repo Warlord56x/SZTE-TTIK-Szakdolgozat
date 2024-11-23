@@ -11,7 +11,7 @@ var type: int = 0
 
 var parent_ref: Node2D
 
-@onready var hitbox: Hitbox = $Hitbox2
+@onready var hitbox: Hitbox = $Hitbox
 @onready var animation: AnimatedSprite2D = $Animation
 
 
@@ -49,6 +49,7 @@ func _on_free_timer_timeout() -> void:
 
 
 func finished_callback() -> void:
+	hitbox.set_deferred("monitorable", false)
 	velocity = Vector2.ZERO
 	animation.play("f_boom" if type else "a_boom")
 	var tween: Tween = create_tween()

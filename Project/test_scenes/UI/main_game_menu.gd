@@ -12,7 +12,7 @@ var main_open: bool = false:
 	set = set_main
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("menu"):
 		main_open = !main_open
 

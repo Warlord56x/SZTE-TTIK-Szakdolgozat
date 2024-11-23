@@ -1,6 +1,7 @@
 extends State
 class_name StateEnemySwmanCombat
 
+
 const PROJECTILE := preload("res://assets/player/projectile.tscn")
 
 @onready var enemy: Swordsman = owner as Swordsman
@@ -11,18 +12,10 @@ var attacking: bool = false
 
 
 func attack() -> void:
-	# Guard case to avoid making the tween
-	# TODO: needs to be tested more
-	if not enemy.weapon:
-		print("avoided")
-		return
-
 	attacking = true
-	var tween : Tween = get_tree().create_tween()
-	if not enemy.weapon:
-		print("killed tween")
-		tween.kill()
-		return
+	# Simply make the tween on the node so that it'll be bound to it,
+	# getting freed when the node stops existing
+	var tween: Tween = create_tween()
 	tween.set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(enemy.weapon, "position", Vector2(enemy.move_direction * 8, 0), 0.3)
 	$"../../SwordSwing".play()

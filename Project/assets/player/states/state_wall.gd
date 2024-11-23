@@ -30,9 +30,6 @@ func physics_process(_delta: float) -> void:
 		travel("Fall")
 		return
 
-	if player.input_direction:
-		player.velocity.x = player.input_direction
-
 	player.dash_count = 0
 	if Input.is_action_just_pressed("jump"):
 		var wall_normal = player.get_wall_normal()

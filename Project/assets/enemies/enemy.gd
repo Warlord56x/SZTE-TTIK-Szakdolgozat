@@ -15,6 +15,7 @@ const FLOATING_HP_BAR := preload("res://assets/gui/floating_bar/floating_hp_bar.
 @export var limit_nav_axis: Vector2i = Vector2i.ONE
 @export var min_jump_velocity: float = -100
 @export var max_health: int = 10
+@export var inv_time: float = 0.3
 @export var health: int = 10:
 	set = set_health
 
@@ -150,14 +151,15 @@ func blinker(val: float):
 
 
 func hurt(e_damage: int, dealer: Node2D = null) -> bool:
-	#if invincible:
-		#return false
+	if has_node("HurtBox"):
+		$HurtBox.set_deferred("monitoring", false)
 
-	#invincible = trues
 	health -= e_damage
 
-	var inv_tween = get_tree().create_tween().set_loops(3)
-	inv_tween.finished.connect(invincibility_timeout)
+	var inv_tween = create_tween().set_loops(3)
+	var inv_timer = get_tree().create_timer(inv_time)
+	inv_tween.finished.connect(blinker_timeout)
+	inv_timer.timeout.connect(invincibility_timeout)
 
 	inv_tween.tween_method(blinker, 0.0, 1.0, 0.15)
 	inv_tween.tween_method(blinker, 1.0, 0.0, 0.15)
@@ -181,8 +183,6 @@ func hurt(e_damage: int, dealer: Node2D = null) -> bool:
 
 
 func knock_back(source_position: Vector2, intensity: float = 1.0) -> bool:
-	#if invincible:
-		#return false
 
 	pushback_force = -global_position.direction_to(source_position) * intensity
 	pushback_force.y = min_jump_velocity * intensity
@@ -190,9 +190,12 @@ func knock_back(source_position: Vector2, intensity: float = 1.0) -> bool:
 	return true
 
 
-func invincibility_timeout() -> void:
+func blinker_timeout() -> void:
 	blinker(0.0)
-	#invincible = false
+
+
+func invincibility_timeout() -> void:
+	$HurtBox.set_deferred("monitoring", true)
 
 
 func death() -> void:

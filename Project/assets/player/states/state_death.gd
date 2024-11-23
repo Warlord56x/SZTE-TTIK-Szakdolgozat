@@ -2,10 +2,11 @@ extends State
 class_name StateDeath
 
 @onready var player: Player = owner as Player
-@onready var col_layer: int = 1
 
 
 func enter() -> void:
+	if player.has_node("Hurtbox"):
+		player.get_node("Hurtbox").set_deferred("monitoring", false)
 	player.anim_tree["parameters/speed/scale"] = 1
 	player.anim_state_m.travel("death")
 	await player.anim_tree.animation_finished
@@ -21,7 +22,8 @@ func physics_process(delta: float) -> void:
 
 
 func leave() -> void:
-	player.collision_layer = col_layer
+	if player.has_node("Hurtbox"):
+		player.get_node("Hurtbox").set_deferred("monitoring", true)
 	player.health = player.max_health
 	player.stamina = player.max_stamina
 	player.mana = player.max_mana

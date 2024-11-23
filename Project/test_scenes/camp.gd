@@ -2,10 +2,9 @@ extends InteractionArea
 class_name Camp
 
 
-@onready var camp_menu: VBoxContainer = %CampMenu
-
 var active: bool = false
-static var i := 0
+
+signal _interact(b: bool)
 
 
 func activate() -> void:
@@ -18,20 +17,16 @@ func deactivate() -> void:
 
 func interact(player: Player = null) -> bool:
 	player.camp = self
-	camp_menu.visible = true
-	camp_menu.get_child(0).grab_focus()
+	_interact.emit(true)
 	GameEnv.input_process = false
 	return interactable
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		interaction_done.emit()
-		GameEnv.input_process = true
-		camp_menu.visible = false
-
-
-func _on_rest_button_pressed() -> void:
-	SaveManager.save_game(str(i))
-	GameEnv.respawn_enemies()
-	i += 1
+		if active:
+			interaction_done.emit()
+			_interact.emit(false)
+			GameEnv.input_process = true
+			get_window().set_input_as_handled()
+			deactivate()

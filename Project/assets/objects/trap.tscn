@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ds24204v1omvp"]
 
 [ext_resource type="Script" path="res://assets/objects/trap.gd" id="1_cjih7"]
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="2_dx2ra"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="2_dx2ra"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wyalo"]
 size = Vector2(8, 4)
@@ -28,9 +28,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Trap" type="Area2D"]
+[node name="Trap" type="Area2D" node_paths=PackedStringArray("parent_ref")]
 collision_layer = 0
+collision_mask = 64
+monitoring = false
 script = ExtResource("1_cjih7")
+parent_ref = NodePath(".")
+damage = 1
+knock_back_strength = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
@@ -38,5 +43,3 @@ shape = SubResource("RectangleShape2D_wyalo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xlvk8")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

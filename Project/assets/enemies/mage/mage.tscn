@@ -14,7 +14,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lruuv"]
 size = Vector2(8, 8)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_acyor"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2tidv"]
 shader = ExtResource("7_2a0m2")
 shader_parameter/blend = 0.0
 
@@ -111,7 +111,7 @@ script = ExtResource("6_plq2j")
 shape = SubResource("RectangleShape2D_lruuv")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_acyor")
+material = SubResource("ShaderMaterial_2tidv")
 sprite_frames = SubResource("SpriteFrames_gby2t")
 autoplay = "default"
 

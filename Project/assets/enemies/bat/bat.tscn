@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://cufofyqncxk0k"]
 
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_0dun2"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_0dun2"]
 [ext_resource type="Script" path="res://assets/enemies/bat/bat.gd" id="1_t6ry7"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_hmb65"]
 [ext_resource type="Script" path="res://assets/enemies/bat/states/state_idle.gd" id="3_xpn50"]
@@ -15,7 +15,7 @@ size = Vector2(2, 2)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_taoku"]
 size = Vector2(50, 50)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tntr2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ovv0"]
 shader = ExtResource("5_4wd8i")
 shader_parameter/blend = 0.0
 
@@ -44,7 +44,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtclc"]
 size = Vector2(8, 7)
 
-[node name="Bat" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite")]
+[node name="Bat" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite") groups=["Respawnable"]]
 collision_layer = 4
 collision_mask = 3
 motion_mode = 1
@@ -77,7 +77,7 @@ shape = SubResource("RectangleShape2D_k2xn2")
 shape = SubResource("RectangleShape2D_taoku")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_tntr2")
+material = SubResource("ShaderMaterial_6ovv0")
 sprite_frames = SubResource("SpriteFrames_v0qph")
 autoplay = "default"
 frame_progress = 0.785119

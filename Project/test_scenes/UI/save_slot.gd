@@ -29,10 +29,14 @@ func get_saved_at() -> String:
 
 ## Makes a new save to the slots folder
 func new_save(_name: String, _data: Array = []) -> void:
+	if _name.is_empty():
+		_name = str(saves.size())
 	if _name.get_extension() == "":
 		_name += ".save"
-	if saves.any(func(s: Save): return s.name == _name):
-		return
+	var any = saves.filter(func(s: Save): return s.name == _name)
+	if not any.is_empty():
+		(any.front() as Save).save_data()
+		return 
 	saves.push_front(Save.new(_name, self, _data))
 
 

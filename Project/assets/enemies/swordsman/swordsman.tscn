@@ -16,7 +16,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2wfxl"]
 size = Vector2(5, 8)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g3os3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iorbs"]
 shader = ExtResource("7_e3isw")
 shader_parameter/blend = 0.0
 
@@ -223,7 +223,7 @@ script = ExtResource("5_fqqg6")
 script = ExtResource("6_njad8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_g3os3")
+material = SubResource("ShaderMaterial_iorbs")
 sprite_frames = SubResource("SpriteFrames_4narl")
 animation = &"hit"
 

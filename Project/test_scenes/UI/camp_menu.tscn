@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4tbr1nbwy7tb"]
+
+[ext_resource type="Script" path="res://test_scenes/UI/camp_menu.gd" id="1_ea34l"]
+
+[node name="CampMenu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ea34l")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Panel" type="Panel" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="CampMenu" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="RestButton" type="Button" parent="PanelContainer/MarginContainer/CampMenu"]
+layout_mode = 2
+text = "Rest"
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/CampMenu"]
+layout_mode = 2
+text = "button"
+
+[node name="Button2" type="Button" parent="PanelContainer/MarginContainer/CampMenu"]
+layout_mode = 2
+text = "button"
+
+[node name="Button3" type="Button" parent="PanelContainer/MarginContainer/CampMenu"]
+layout_mode = 2
+text = "button"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/CampMenu/RestButton" to="." method="_on_rest_button_pressed"]

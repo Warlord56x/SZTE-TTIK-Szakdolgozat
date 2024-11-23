@@ -58,12 +58,12 @@ enum player_res {
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
-var pushback_force: Vector2 = Vector2.ZERO:
-	set(value):
-		# Make sure it goes to 0 0 not to -0 -0
-		value -= Vector2.ONE
-		value += Vector2.ONE
-		pushback_force = value
+var pushback_force: Vector2 = Vector2.ZERO#:
+	#set(value):
+		## Make sure it goes to 0 0 not to -0 -0
+		#value -= Vector2.ONE
+		#value += Vector2.ONE
+		#pushback_force = value
 
 var watch: Vector2i = Vector2i.ZERO
 var airborne_time: float = 0
@@ -81,6 +81,8 @@ var camp: Camp = null:
 
 var dash_max: int = 1
 var dash_count: int = 0
+
+@export var inv_time = 0.1
 
 
 #region Collectibles
@@ -191,8 +193,8 @@ func set_camp(c: Camp) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not GameEnv.input_process:
-		return
+	#if not GameEnv.input_process:
+		#return
 
 	if event.is_action_pressed("cast_spell"):
 		if not state_machine.get_state("cast").active:
@@ -326,6 +328,8 @@ func blinker(val: float):
 
 
 func hurt(damage: int, _dealer: Node2D = null) -> bool:
+	if has_node("HurtBox"):
+		$HurtBox.set_deferred("monitoring", false)
 
 	health -= damage
 
@@ -334,8 +338,10 @@ func hurt(damage: int, _dealer: Node2D = null) -> bool:
 
 	camera.add_trauma(0.2, 0.85)
 
-	var inv_tween = get_tree().create_tween().set_loops(5)
-	inv_tween.finished.connect(invincibility_timeout)
+	var inv_tween = create_tween().set_loops(10)
+	var inv_timer = get_tree().create_timer(inv_time)
+	inv_tween.finished.connect(blinker_timeout)
+	inv_timer.timeout.connect(invincibility_timeout)
 
 	inv_tween.tween_method(blinker, 0.0, 1.0, 0.15)
 	inv_tween.tween_method(blinker, 1.0, 0.0, 0.15)
@@ -352,10 +358,11 @@ func hurt(damage: int, _dealer: Node2D = null) -> bool:
 	return true
 
 
-func knock_back(source_position: Vector2, intensity: float = 1.0) -> void:
+func knock_back(source_position: Vector2, intensity: float = 1.0) -> bool:
 	pushback_force = -global_position.direction_to(source_position) * intensity
 	pushback_force.y = MIN_JUMP_VELOCITY * intensity
 	pushback_force.x *= SPEED
+	return true
 
 
 func _process(_delta: float) -> void:
@@ -393,5 +400,10 @@ func _on_wall_stamina_drain_timeout() -> void:
 	stamina -= 1
 
 
-func invincibility_timeout() -> void:
+func blinker_timeout() -> void:
 	blinker(0.0)
+
+
+func invincibility_timeout() -> void:
+	if has_node("HurtBox"):
+		$HurtBox.set_deferred("monitoring", true)
