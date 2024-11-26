@@ -15,3 +15,4 @@ name = "Sword"
 icon = SubResource("AtlasTexture_bd75o")
 stack = 0
 stack_size = 0
+cooldown = 0.5

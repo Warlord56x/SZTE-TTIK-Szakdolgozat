@@ -169,7 +169,7 @@ func hurt(e_damage: int, dealer: Node2D = null) -> bool:
 	get_tree().root.add_child(splatter)
 
 	var damage_number = DAMAGE_NUMBER.instantiate()
-	damage_number.damage_number = damage
+	damage_number.damage_number = e_damage
 	damage_number.global_position = global_position
 	add_child.call_deferred(damage_number)
 

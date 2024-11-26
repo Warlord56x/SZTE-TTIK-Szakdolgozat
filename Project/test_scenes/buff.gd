@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 class_name Buff
 
 @onready var buff_timer: Timer = $BuffTimer
@@ -6,6 +6,10 @@ class_name Buff
 
 @export var buff_time: float
 @export var buff_interval: float
+
+@export var buff_icon: Texture2D
+
+@export var apply_to: Node
 
 
 func _ready() -> void:
@@ -20,5 +24,5 @@ func _on_buff_timer_timeout() -> void:
 
 
 func _on_interval_timer_timeout() -> void:
-	get_parent().health += 1
-	print("buff")
+	apply_to.health += 1
+	print("buff effect = health +1")

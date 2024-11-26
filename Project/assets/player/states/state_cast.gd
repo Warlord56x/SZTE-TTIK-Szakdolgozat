@@ -16,10 +16,15 @@ func enter() -> void:
 
 	player.anim_tree["parameters/speed/scale"] = 1
 
+	if not item or (item and item.used):
+		travel("default")
+		return
+	item.used = true
+
 	if item is WeaponItem:
 		player.weapon_hitbox.damage = item.damage
 
-	if item and item.name.to_lower() == "fireball":
+	if item.name.to_lower() == "fireball":
 		if player.mana == 0:
 			travel("default")
 			return
@@ -27,7 +32,7 @@ func enter() -> void:
 		await anim_tree.animation_finished
 		player.mana -= 1
 
-	if item and item.name.to_lower() == "bow":
+	if item.name.to_lower() == "bow":
 		if player.stamina == 0 or item.stack == 0:
 			travel("default")
 			return
@@ -37,7 +42,7 @@ func enter() -> void:
 		player.inventory.remove_item(item)
 
 	# Prep the Projectile
-	if item and item is RangedWeaponItem:
+	if item is RangedWeaponItem:
 		projectile_instance = PROJECTILE.instantiate() as Projectile
 		projectile_instance.type = int(item.name.to_lower() == "fireball")
 		projectile_instance.direction = player.move_direction
@@ -49,7 +54,7 @@ func enter() -> void:
 		projectile_instance.damage = item.damage
 		player.add_child(projectile_instance)
 
-	if item and item.name.to_lower() == "hammer":
+	if item.name.to_lower() == "hammer":
 		if player.stamina == 0:
 			travel("default")
 			return
@@ -59,7 +64,7 @@ func enter() -> void:
 
 		player.stamina -= 1
 
-	if item and item.name.to_lower() == "sword":
+	if item.name.to_lower() == "sword":
 		if player.stamina == 0:
 			travel("default")
 			return

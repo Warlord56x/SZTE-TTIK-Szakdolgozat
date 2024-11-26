@@ -5,27 +5,26 @@ class_name WheelItem
 
 @onready var back_ground: Sprite2D = $BackGround
 @onready var label: Label = $Label
-@onready var panel: Panel = $Label/Panel
 @onready var for_ground: Sprite2D = $ForGround
 @onready var item_rect: TextureRect = $ItemRect
+
+@onready var cooldown_mat: ShaderMaterial = $CooldownRect.material as ShaderMaterial
 
 
 @export var item : Item = null:
 	set(it):
-		if it:
-			item_rect.texture = it.icon
-		else:
-			item_rect.texture = null
-
-		if item != null:
+		if item:
 			if item.stack_changed.is_connected(refresh_label):
 				item.stack_changed.disconnect(refresh_label)
+			if item._used.is_connected(_used):
+				item._used.disconnect(_used)
+		if it:
 			item = it
-
-			if it:
-				item.stack_changed.connect(refresh_label)
+			item_rect.texture = it.icon
+			item.stack_changed.connect(refresh_label)
+			item._used.connect(_used)
 		else:
-			item = it
+			item_rect.texture = null
 		refresh_label()
 
 
@@ -39,6 +38,16 @@ class_name WheelItem
 
 func _ready() -> void:
 	refresh_label()
+
+
+func _used(used: bool) -> void:
+	if item and used:
+		cooldown_mat.set_shader_parameter("cooldown_progress", 0.0)
+		var tween = create_tween()
+		tween.tween_property(cooldown_mat, "shader_parameter/cooldown_progress", 1.0, item.cooldown)
+		await tween.finished
+		cooldown_mat.set_shader_parameter("cooldown_progress", 0.0)
+		item.used = false
 
 
 func refresh_label() -> void:

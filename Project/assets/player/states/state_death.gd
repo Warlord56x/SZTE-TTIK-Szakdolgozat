@@ -11,6 +11,7 @@ func enter() -> void:
 	player.anim_state_m.travel("death")
 	await player.anim_tree.animation_finished
 	GameEnv.fade_in_out(0.3, "You Died")
+	GameEnv.respawn_enemies()
 	await GameEnv.fade_step_wait
 	player.anim_state_m.travel("idle")
 	travel("default")

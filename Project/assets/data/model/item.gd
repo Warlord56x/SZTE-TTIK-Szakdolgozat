@@ -9,5 +9,13 @@ class_name Item
 		stack = s
 		stack_changed.emit()
 @export var stack_size: int
+@export var cooldown: float
+@export var pickup_animation: SpriteFrames
 
+var used: bool = false:
+	set(u):
+		used = u
+		_used.emit(u)
+
+signal _used(u: bool)
 signal stack_changed

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn55xdm33nshm"]
+
+[ext_resource type="Script" path="res://test_scenes/UI/buff_element.gd" id="1_j3ssv"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_yv7xq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfw8k"]
+atlas = ExtResource("1_yv7xq")
+region = Rect2(40, 80, 10, 10)
+filter_clip = true
+
+[node name="BuffElement" type="HBoxContainer"]
+offset_right = 378.0
+offset_bottom = 14.0
+script = ExtResource("1_j3ssv")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_rfw8k")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "5"

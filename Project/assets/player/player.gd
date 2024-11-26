@@ -301,7 +301,8 @@ func init_regen_timer(res: player_res, waiter_time: float, regen_time: float) ->
 
 
 func request_interaction_visible(b: bool) -> void:
-	$Label.visible = b
+	#$Label.visible = b
+	%InteractHelper.visible = b
 
 
 func save() -> Dictionary:
@@ -413,10 +414,3 @@ func blinker_timeout() -> void:
 func invincibility_timeout() -> void:
 	if has_node("HurtBox"):
 		$HurtBox.set_deferred("monitoring", true)
-
-
-func _on_child_entered_tree(node: Node) -> void:
-	if node is Buff:
-		var b = node as Buff
-		var new_label = BuffLabel.new(b)
-		%BuffDisplay.add_child(new_label)

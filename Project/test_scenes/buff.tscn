@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://test_scenes/buff.gd" id="1_nlvio"]
 
-[node name="Buff" type="Node2D"]
+[node name="Buff" type="Node"]
 script = ExtResource("1_nlvio")
 
 [node name="BuffTimer" type="Timer" parent="."]

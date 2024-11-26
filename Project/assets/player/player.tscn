@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=3 uid="uid://diq8ndw4ll1rm"]
+[gd_scene load_steps=107 format=3 uid="uid://diq8ndw4ll1rm"]
 
 [ext_resource type="Script" path="res://assets/player/player.gd" id="1_0p7ex"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="2_imbft"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="3_fxfhm"]
 [ext_resource type="PackedScene" uid="uid://uvwfpidv7ujl" path="res://assets/gui/bars/bar_mana.tscn" id="3_nro24"]
 [ext_resource type="Script" path="res://assets/player/states/state_default.gd" id="3_sadaf"]
+[ext_resource type="Script" path="res://test_scenes/buff_component.gd" id="3_yjybh"]
 [ext_resource type="PackedScene" uid="uid://bakgosfbeq37h" path="res://assets/gui/bars/bar_stamina.tscn" id="4_mq3j0"]
 [ext_resource type="Script" path="res://assets/player/states/state_fall.gd" id="4_oyygq"]
 [ext_resource type="AudioStream" uid="uid://dm1uu5hsqy01n" path="res://assets/sounds/362349__beerbelly38__knife-slash-2.wav" id="4_v8ma5"]
@@ -33,6 +34,9 @@
 [sub_resource type="LabelSettings" id="LabelSettings_nd3cp"]
 font = ExtResource("6_2mfpg")
 font_size = 6
+
+[sub_resource type="InputEventAction" id="InputEventAction_ycvyp"]
+action = &"interact"
 
 [sub_resource type="InputEventAction" id="InputEventAction_m7hdm"]
 action = &"dash"
@@ -1067,85 +1071,6 @@ nodes/speed/node = SubResource("AnimationNodeTimeScale_mhgmp")
 nodes/speed/position = Vector2(100, 100)
 node_connections = [&"output", 0, &"speed", &"speed", 0, &"StateMachine"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o11xe"]
-atlas = ExtResource("3_fxfhm")
-region = Rect2(20, 80, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5mne0"]
-atlas = ExtResource("3_fxfhm")
-region = Rect2(20, 90, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qd1h0"]
-atlas = ExtResource("3_fxfhm")
-region = Rect2(30, 80, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ug07w"]
-atlas = ExtResource("3_fxfhm")
-region = Rect2(30, 90, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kb53y"]
-atlas = ExtResource("3_fxfhm")
-region = Rect2(0, 80, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hx5sf"]
-atlas = ExtResource("3_fxfhm")
-region = Rect2(0, 90, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c7isp"]
-atlas = ExtResource("3_fxfhm")
-region = Rect2(10, 80, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1e16f"]
-atlas = ExtResource("3_fxfhm")
-region = Rect2(10, 90, 10, 10)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_dlncs"]
-animations = [{
-"frames": [{
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_o11xe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5mne0")
-}],
-"loop": true,
-"name": &"button_a",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_qd1h0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ug07w")
-}],
-"loop": true,
-"name": &"button_b",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_kb53y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hx5sf")
-}],
-"loop": true,
-"name": &"button_x",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_c7isp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1e16f")
-}],
-"loop": true,
-"name": &"button_y",
-"speed": 5.0
-}]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2ijd"]
 atlas = ExtResource("3_fxfhm")
 region = Rect2(0, 10, 10, 10)
@@ -1221,6 +1146,11 @@ health_regen_wait_time = 1.5
 health_regen_time = 0.5
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
+
+[node name="BuffComponent" type="Node" parent="." node_paths=PackedStringArray("display_element", "apply_to")]
+script = ExtResource("3_yjybh")
+display_element = NodePath("../HUD/Control/C/BuffDisplay")
+apply_to = NodePath("..")
 
 [node name="EnemyToolTip" parent="." instance=ExtResource("2_p0eb3")]
 visible = false
@@ -1305,55 +1235,70 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="HUD/Control/C/BuffDisplay"]
-layout_mode = 2
-
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HUD/Control/HBoxContainer"]
+[node name="Right" type="VBoxContainer" parent="HUD/Control/HBoxContainer"]
 layout_mode = 2
 alignment = 2
 
-[node name="ButtonHelpAdd" type="HBoxContainer" parent="HUD/Control/HBoxContainer/VBoxContainer2"]
+[node name="ButtonHelpAdd" type="HBoxContainer" parent="HUD/Control/HBoxContainer/Right"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="HUD/Control/HBoxContainer/VBoxContainer2/ButtonHelpAdd"]
+[node name="InteractHelper" type="HBoxContainer" parent="HUD/Control/HBoxContainer/Right/ButtonHelpAdd"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HUD/Control/HBoxContainer/Right/ButtonHelpAdd/InteractHelper"]
+layout_mode = 2
+text = "Interact"
+label_settings = SubResource("LabelSettings_nd3cp")
+
+[node name="ActionHelp" parent="HUD/Control/HBoxContainer/Right/ButtonHelpAdd/InteractHelper" instance=ExtResource("8_5oe6t")]
+layout_mode = 2
+action = SubResource("InputEventAction_ycvyp")
+joypad_button = 3
+
+[node name="Label" type="Label" parent="HUD/Control/HBoxContainer/Right/ButtonHelpAdd"]
 layout_mode = 2
 text = "Dash"
 label_settings = SubResource("LabelSettings_nd3cp")
 
-[node name="ActionHelp" parent="HUD/Control/HBoxContainer/VBoxContainer2/ButtonHelpAdd" instance=ExtResource("8_5oe6t")]
+[node name="ActionHelp" parent="HUD/Control/HBoxContainer/Right/ButtonHelpAdd" instance=ExtResource("8_5oe6t")]
 layout_mode = 2
 action = SubResource("InputEventAction_m7hdm")
 joypad_button = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control/HBoxContainer"]
+[node name="RightMost" type="VBoxContainer" parent="HUD/Control/HBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 1
 alignment = 2
 
-[node name="Coins" type="HBoxContainer" parent="HUD/Control/HBoxContainer/VBoxContainer"]
+[node name="Coins" type="HBoxContainer" parent="HUD/Control/HBoxContainer/RightMost"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Control" type="Control" parent="HUD/Control/HBoxContainer/VBoxContainer/Coins"]
-custom_minimum_size = Vector2(8, 0)
+[node name="Control" type="Control" parent="HUD/Control/HBoxContainer/RightMost/Coins"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HUD/Control/HBoxContainer/VBoxContainer/Coins/Control"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HUD/Control/HBoxContainer/RightMost/Coins/Control"]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_fby1l")
 autoplay = "default"
 offset = Vector2(4, 4)
 
-[node name="CoinLabel" type="Label" parent="HUD/Control/HBoxContainer/VBoxContainer/Coins"]
+[node name="CoinLabel" type="Label" parent="HUD/Control/HBoxContainer/RightMost/Coins"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
@@ -1361,17 +1306,17 @@ text = "0000"
 label_settings = SubResource("LabelSettings_0g1ml")
 script = ExtResource("5_pflec")
 
-[node name="ButtonHelpAdd" type="HBoxContainer" parent="HUD/Control/HBoxContainer/VBoxContainer"]
+[node name="ButtonHelpAdd" type="HBoxContainer" parent="HUD/Control/HBoxContainer/RightMost"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="ActionHelp" parent="HUD/Control/HBoxContainer/VBoxContainer/ButtonHelpAdd" instance=ExtResource("8_5oe6t")]
+[node name="ActionHelp" parent="HUD/Control/HBoxContainer/RightMost/ButtonHelpAdd" instance=ExtResource("8_5oe6t")]
 layout_mode = 2
 action = SubResource("InputEventAction_2b412")
 joypad_button = 2
 
-[node name="Wheel" parent="HUD/Control/HBoxContainer/VBoxContainer" instance=ExtResource("11_xmcr7")]
+[node name="Wheel" parent="HUD/Control/HBoxContainer/RightMost" instance=ExtResource("11_xmcr7")]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
@@ -1438,13 +1383,6 @@ tree_root = SubResource("AnimationNodeBlendTree_nbwgx")
 anim_player = NodePath("../AnimationPlayer")
 parameters/speed/scale = 1.0
 
-[node name="Label" type="AnimatedSprite2D" parent="."]
-visible = false
-sprite_frames = SubResource("SpriteFrames_dlncs")
-animation = &"button_y"
-autoplay = "button_y"
-offset = Vector2(0, -10)
-
 [node name="WallStaminaDrain" type="Timer" parent="."]
 process_callback = 0
 wait_time = 0.1
@@ -1499,7 +1437,6 @@ parent_ref = NodePath("..")
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_mirti")
 
-[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="timeout" from="WallStaminaDrain" to="." method="_on_wall_stamina_drain_timeout"]
 [connection signal="area_entered" from="Interactor" to="Interactor" method="_on_area_entered"]
 [connection signal="area_exited" from="Interactor" to="Interactor" method="_on_area_exited"]

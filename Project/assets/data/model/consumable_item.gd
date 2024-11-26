@@ -14,4 +14,8 @@ func consume(consumer: Node2D) -> void:
 	var t = test.instantiate()
 	t.buff_time = effect_time
 	t.buff_interval = effect_interval
-	consumer.add_child(t)
+	t.buff_icon = icon
+	if consumer.has_node("BuffComponent"):
+		var buff_component = consumer.get_node("BuffComponent")
+		t.apply_to = buff_component.apply_to
+		buff_component.add_child(t)
