@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dufbdy81bhfap" path="res://nin_tiles.png" id="1_3fosb"]
 [ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://fonts/nin_font.png" id="2_qcju4"]
 [ext_resource type="TileSet" uid="uid://3qx3dvf66s68" path="res://tile_sets/default_tile_set.tres" id="2_qonnx"]
-[ext_resource type="PackedScene" uid="uid://b2qrpcmioix5b" path="res://test_scenes/UI/game_menu.tscn" id="3_fxh5a"]
+[ext_resource type="PackedScene" uid="uid://b2qrpcmioix5b" path="res://assets/gui/menus/game_menu/game_menu.tscn" id="3_fxh5a"]
 [ext_resource type="PackedScene" uid="uid://b4tbr1nbwy7tb" path="res://test_scenes/UI/camp_menu.tscn" id="3_vtc0b"]
 [ext_resource type="Script" path="res://test_scenes/labeldebug.gd" id="4_d83g2"]
 [ext_resource type="PackedScene" uid="uid://b25vye5etxi5" path="res://assets/enemies/swordsman/swordsman.tscn" id="9_80lmc"]

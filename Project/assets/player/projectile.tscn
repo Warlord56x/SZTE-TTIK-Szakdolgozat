@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dcjv6ghjq606o" path="res://assets/sounds/431174__highpixel__fireball-explosion.wav" id="5_5aybg"]
 [ext_resource type="AudioStream" uid="uid://dp2tki63awsmg" path="res://assets/sounds/209399__sgossner__bow-release.mp3" id="6_fhpl1"]
 [ext_resource type="AudioStream" uid="uid://gthgyswsyk5p" path="res://assets/sounds/536066__eminyildirim__bow-impact.wav" id="7_q3x0f"]
-[ext_resource type="Script" path="res://test_scenes/hitbox.gd" id="8_dbsx6"]
+[ext_resource type="Script" path="res://helper_classes/hitbox.gd" id="8_dbsx6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l0nfp"]
 size = Vector2(7, 4)

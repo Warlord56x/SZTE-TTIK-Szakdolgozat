@@ -1,6 +1,6 @@
 extends Label
 
-const MAX_VALUE : int = 9999
+const MAX_VALUE: int = 9999
 
 @onready var parent: HBoxContainer = get_parent()
 
@@ -9,7 +9,7 @@ var value : int = 0:
 	set = set_value
 
 
-func set_value(v : int) -> void:
+func set_value(v: int) -> void:
 	v = clamp(v, 0, MAX_VALUE)
 	var num = str(v).lpad(4, "0")
 	text = num

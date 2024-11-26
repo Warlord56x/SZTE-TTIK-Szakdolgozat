@@ -2,32 +2,14 @@ extends Control
 
 const GAME_SCENE := "res://game.tscn"
 
-@onready var progress_bar: ProgressBar = %ProgressBar
 @onready var continue_button: Button = %ContinueButton
 @onready var settings_menu: SettingsGameMenu = %Settings
 @onready var new_game_menu: Menu = %NewGameMenu
 @onready var load_game_menu: Menu = %LoadGameMenu
 
-var progress: Array = []
-var _scene: PackedScene
-
-signal done
-
 
 func _ready() -> void:
 	continue_button.disabled = SaveManager.save_slots.is_empty()
-
-
-func _process(_delta: float) -> void:
-	var status := ResourceLoader.load_threaded_get_status(GAME_SCENE, progress)
-
-	progress_bar.value = progress[0] * 100
-	if status == ResourceLoader.THREAD_LOAD_LOADED and not _scene:
-		_scene = ResourceLoader.load_threaded_get(GAME_SCENE)
-		done.emit()
-		GameEnv.input_process = true
-	if _scene:
-		progress_bar.value = 100
 
 
 func _on_continue_button_pressed() -> void:

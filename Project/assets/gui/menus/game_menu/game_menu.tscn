@@ -1,14 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://b2qrpcmioix5b"]
+[gd_scene load_steps=13 format=3 uid="uid://b2qrpcmioix5b"]
 
-[ext_resource type="PackedScene" uid="uid://dmk3l27wkrb82" path="res://test_scenes/UI/volume_slider.tscn" id="1_0gqsg"]
+[ext_resource type="PackedScene" uid="uid://dmk3l27wkrb82" path="res://assets/gui/menus/menu_elements/volume_slider.tscn" id="1_0gqsg"]
 [ext_resource type="Theme" uid="uid://dqa12gi8o5ol4" path="res://assets/theme/default_theme.tres" id="1_xwq5v"]
-[ext_resource type="Shader" path="res://test_scenes/UI/ui_dissolve.gdshader" id="3_5sbp6"]
-[ext_resource type="Script" path="res://test_scenes/UI/menu_container.gd" id="3_x1cqt"]
-[ext_resource type="Script" path="res://test_scenes/UI/main_game_menu.gd" id="4_f786d"]
-[ext_resource type="Script" path="res://test_scenes/UI/menu.gd" id="4_gd12f"]
-[ext_resource type="Script" path="res://test_scenes/UI/settings_game_menu.gd" id="6_s16td"]
-[ext_resource type="Script" path="res://test_scenes/UI/save_list.gd" id="6_t4epa"]
-[ext_resource type="Script" path="res://test_scenes/UI/effect_layer.gd" id="6_wtw0d"]
+[ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_5sbp6"]
+[ext_resource type="Script" path="res://assets/gui/menus/menu_container.gd" id="3_x1cqt"]
+[ext_resource type="Script" path="res://assets/gui/menus/game_menu/main_game_menu.gd" id="4_f786d"]
+[ext_resource type="Script" path="res://assets/gui/menus/game_menu/settings_game_menu.gd" id="6_s16td"]
+[ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="6_wtw0d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qr1om"]
 
@@ -16,7 +14,7 @@
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_subsr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8go1"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -30,17 +28,7 @@ shader_parameter/invert = false
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5le0h"]
-shader = ExtResource("3_5sbp6")
-shader_parameter/progress = 0.0
-shader_parameter/noise_desnity = 30.0
-shader_parameter/beam_size = 0.01
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/pixel_size = 0.01
-shader_parameter/corner_radius = 0.01
-shader_parameter/invert = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_75opj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f3q8u"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -121,11 +109,6 @@ mouse_filter = 2
 layout_mode = 2
 text = "Continue"
 
-[node name="Save" type="Button" parent="Margin/MenuContainer/Main/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Save
-"
-
 [node name="Settings" type="Button" parent="Margin/MenuContainer/Main/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
@@ -141,10 +124,10 @@ text = "Back to Menu"
 
 [node name="Exit" type="Button" parent="Margin/MenuContainer/Main/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Exit"
+text = "Save & Exit"
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/Main"]
-material = SubResource("ShaderMaterial_subsr")
+material = SubResource("ShaderMaterial_g8go1")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -206,56 +189,7 @@ focus_neighbor_top = NodePath("../VsyncCheck")
 text = "apply"
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/Settings"]
-material = SubResource("ShaderMaterial_5le0h")
-layout_mode = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-script = ExtResource("6_wtw0d")
-corner_radius = 0.01
-
-[node name="SaveGame" type="PanelContainer" parent="Margin/MenuContainer" node_paths=PackedStringArray("effect")]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("4_gd12f")
-effect = NodePath("Effect")
-
-[node name="Panel" type="Panel" parent="Margin/MenuContainer/SaveGame"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Margin/MenuContainer/SaveGame"]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Margin/MenuContainer/SaveGame/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Margin/MenuContainer/SaveGame/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Save Game"
-horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="Margin/MenuContainer/SaveGame/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="SaveList" type="ScrollContainer" parent="Margin/MenuContainer/SaveGame/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-follow_focus = true
-horizontal_scroll_mode = 0
-script = ExtResource("6_t4epa")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Margin/MenuContainer/SaveGame/MarginContainer/VBoxContainer/SaveList"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Effect" type="ColorRect" parent="Margin/MenuContainer/SaveGame"]
-material = SubResource("ShaderMaterial_75opj")
+material = SubResource("ShaderMaterial_f3q8u")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -263,7 +197,6 @@ script = ExtResource("6_wtw0d")
 corner_radius = 0.01
 
 [connection signal="pressed" from="Margin/MenuContainer/Main/MarginContainer/VBoxContainer/Continue" to="Margin/MenuContainer/Main" method="_on_continue_pressed"]
-[connection signal="pressed" from="Margin/MenuContainer/Main/MarginContainer/VBoxContainer/Save" to="Margin/MenuContainer/Main" method="_on_save_pressed"]
 [connection signal="pressed" from="Margin/MenuContainer/Main/MarginContainer/VBoxContainer/Settings" to="Margin/MenuContainer/Main" method="_on_settings_pressed"]
 [connection signal="pressed" from="Margin/MenuContainer/Main/MarginContainer/VBoxContainer/Back" to="Margin/MenuContainer/Main" method="_on_back_pressed"]
 [connection signal="pressed" from="Margin/MenuContainer/Main/MarginContainer/VBoxContainer/Exit" to="Margin/MenuContainer/Main" method="_on_exit_pressed"]

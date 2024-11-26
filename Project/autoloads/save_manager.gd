@@ -44,7 +44,7 @@ func new_game(slot_name: String) -> bool:
 
 
 ## Makes a new save in [param slot] and appends it to the front of the it's [member SaveSlot.saves_array]
-func save_game(_name: String, slot: SaveSlot = current_slot) -> void:
+func save_game(_name: String = "", slot: SaveSlot = current_slot) -> void:
 	var save_data: Array
 	var nodes = get_tree().get_nodes_in_group("Persistent")
 

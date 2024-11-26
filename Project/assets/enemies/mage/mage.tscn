@@ -8,8 +8,8 @@
 [ext_resource type="Script" path="res://assets/enemies/mage/states/state_fall.gd" id="6_plq2j"]
 [ext_resource type="Script" path="res://assets/enemies/mage/states/state_chase.gd" id="6_y5woy"]
 [ext_resource type="Shader" path="res://assets/effects/shaders/blinker.gdshader" id="7_2a0m2"]
-[ext_resource type="Script" path="res://test_scenes/hurtbox.gd" id="9_uf5br"]
-[ext_resource type="Script" path="res://test_scenes/hitbox.gd" id="10_5pppn"]
+[ext_resource type="Script" path="res://helper_classes/hurtbox.gd" id="9_uf5br"]
+[ext_resource type="Script" path="res://helper_classes/hitbox.gd" id="10_5pppn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lruuv"]
 size = Vector2(8, 8)

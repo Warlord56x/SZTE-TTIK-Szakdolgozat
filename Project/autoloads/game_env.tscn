@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://autoloads/game_env.gd" id="1_emsl1"]
 [ext_resource type="AudioStream" uid="uid://cfa0cw21p6d04" path="res://assets/music/650558__stephiequeen__the-song-in-the-trees-song-loop.ogg" id="2_lxf3p"]
-[ext_resource type="Shader" path="res://test_scenes/UI/ui_dissolve.gdshader" id="3_7erxc"]
+[ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_7erxc"]
 [ext_resource type="Theme" uid="uid://dqa12gi8o5ol4" path="res://assets/theme/default_theme.tres" id="3_pm0tk"]
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="5_3icuv"]
 

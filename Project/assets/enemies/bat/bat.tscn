@@ -6,8 +6,8 @@
 [ext_resource type="Script" path="res://assets/enemies/bat/states/state_idle.gd" id="3_xpn50"]
 [ext_resource type="Script" path="res://assets/enemies/bat/states/state_chase.gd" id="4_ipeic"]
 [ext_resource type="Shader" path="res://assets/effects/shaders/blinker.gdshader" id="5_4wd8i"]
-[ext_resource type="Script" path="res://test_scenes/hurtbox.gd" id="7_6s6v0"]
-[ext_resource type="Script" path="res://test_scenes/hitbox.gd" id="8_sdxv4"]
+[ext_resource type="Script" path="res://helper_classes/hurtbox.gd" id="7_6s6v0"]
+[ext_resource type="Script" path="res://helper_classes/hitbox.gd" id="8_sdxv4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2xn2"]
 size = Vector2(2, 2)

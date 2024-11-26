@@ -2,7 +2,7 @@
 extends ColorRect
 class_name EffectLayer
 
-const SHADER := preload("res://test_scenes/UI/ui_dissolve.gdshader")
+const SHADER := preload("res://assets/effects/shaders/ui_dissolve.gdshader")
 
 
 @export_range(0.0, 1.0, 0.001) var progress: float = 0.0:

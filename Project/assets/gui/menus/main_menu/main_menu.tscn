@@ -2,23 +2,23 @@
 
 [ext_resource type="Theme" uid="uid://dwervey06e5is" path="res://assets/theme/menu_theme.tres" id="1_33roa"]
 [ext_resource type="Theme" uid="uid://dqa12gi8o5ol4" path="res://assets/theme/default_theme.tres" id="1_aqgs1"]
-[ext_resource type="Script" path="res://test_scenes/UI/main_menu.gd" id="2_0mh3k"]
+[ext_resource type="Script" path="res://assets/gui/menus/main_menu/main_menu.gd" id="2_0mh3k"]
 [ext_resource type="Texture2D" uid="uid://d4cojs7o3f304" path="res://assets/backgrounds/level1.png" id="2_jaj5p"]
-[ext_resource type="Script" path="res://test_scenes/UI/menu_container.gd" id="4_3e0ys"]
-[ext_resource type="Script" path="res://test_scenes/UI/effect_layer.gd" id="5_2fc8d"]
-[ext_resource type="Shader" path="res://test_scenes/UI/ui_dissolve.gdshader" id="5_slrmh"]
-[ext_resource type="Script" path="res://test_scenes/UI/menu.gd" id="5_vppl2"]
-[ext_resource type="Script" path="res://test_scenes/UI/settings_game_menu.gd" id="8_14y8b"]
-[ext_resource type="PackedScene" uid="uid://dmk3l27wkrb82" path="res://test_scenes/UI/volume_slider.tscn" id="8_lppk2"]
-[ext_resource type="Script" path="res://test_scenes/UI/new_game_menu.gd" id="10_krkvj"]
-[ext_resource type="Script" path="res://test_scenes/UI/save_list.gd" id="10_n7fjc"]
-[ext_resource type="Script" path="res://test_scenes/UI/load_game_menu.gd" id="10_wiy0f"]
+[ext_resource type="Script" path="res://assets/gui/menus/menu_container.gd" id="4_3e0ys"]
+[ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="5_2fc8d"]
+[ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="5_slrmh"]
+[ext_resource type="Script" path="res://assets/gui/menus/menu.gd" id="5_vppl2"]
+[ext_resource type="Script" path="res://assets/gui/menus/game_menu/settings_game_menu.gd" id="8_14y8b"]
+[ext_resource type="PackedScene" uid="uid://dmk3l27wkrb82" path="res://assets/gui/menus/menu_elements/volume_slider.tscn" id="8_lppk2"]
+[ext_resource type="Script" path="res://assets/gui/menus/main_menu/new_game_menu.gd" id="10_krkvj"]
+[ext_resource type="Script" path="res://assets/gui/menus/menu_elements/save_list.gd" id="10_n7fjc"]
+[ext_resource type="Script" path="res://assets/gui/menus/main_menu/load_game_menu.gd" id="10_wiy0f"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ru560"]
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ba72"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_djy1f"]
 shader = ExtResource("5_slrmh")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -32,7 +32,7 @@ shader_parameter/invert = false
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rpyp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hk58q"]
 shader = ExtResource("5_slrmh")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -52,7 +52,7 @@ line_spacing = 0.0
 font_size = 10
 font_color = Color(1, 0, 0, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hpjn6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jtlns"]
 shader = ExtResource("5_slrmh")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -151,7 +151,7 @@ focus_neighbor_top = NodePath("../VsyncCheck")
 text = "apply"
 
 [node name="Effect" type="ColorRect" parent="MarginContainer/MenuContainer/Settings"]
-material = SubResource("ShaderMaterial_6ba72")
+material = SubResource("ShaderMaterial_djy1f")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -200,10 +200,6 @@ text = "Load Game"
 [node name="SettingsButton" type="Button" parent="MarginContainer/MenuContainer/CenterContainer/Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
-
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/MenuContainer/CenterContainer/Menu/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
 
 [node name="Exit" type="Button" parent="MarginContainer/MenuContainer/CenterContainer/Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -256,7 +252,7 @@ layout_mode = 2
 text = "Load"
 
 [node name="Effect" type="ColorRect" parent="MarginContainer/MenuContainer/LoadGameMenu"]
-material = SubResource("ShaderMaterial_4rpyp")
+material = SubResource("ShaderMaterial_hk58q")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -327,7 +323,7 @@ focus_neighbor_top = NodePath("../LineEdit")
 text = "Create & Play"
 
 [node name="Effect" type="ColorRect" parent="MarginContainer/MenuContainer/NewGameMenu"]
-material = SubResource("ShaderMaterial_hpjn6")
+material = SubResource("ShaderMaterial_jtlns")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

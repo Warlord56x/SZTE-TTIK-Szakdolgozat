@@ -1,6 +1,5 @@
 class_name SaveSlot
 
-
 var name: String = ""
 var saves: Array[Save] = []
 var at: int

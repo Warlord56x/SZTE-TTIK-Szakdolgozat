@@ -28,8 +28,8 @@
 [ext_resource type="Shader" path="res://assets/effects/shaders/blinker.gdshader" id="21_hreuu"]
 [ext_resource type="Texture2D" uid="uid://b4s3ar3xvuca5" path="res://assets/light_masks/2d_lights_and_shadows_neutral_point_light.webp" id="21_jh63l"]
 [ext_resource type="Script" path="res://assets/player/interactor.gd" id="23_ken48"]
-[ext_resource type="Script" path="res://test_scenes/hitbox.gd" id="26_3ibsb"]
-[ext_resource type="Script" path="res://test_scenes/hurtbox.gd" id="28_80a7v"]
+[ext_resource type="Script" path="res://helper_classes/hitbox.gd" id="26_3ibsb"]
+[ext_resource type="Script" path="res://helper_classes/hurtbox.gd" id="28_80a7v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_nd3cp"]
 font = ExtResource("6_2mfpg")

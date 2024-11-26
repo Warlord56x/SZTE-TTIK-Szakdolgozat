@@ -2,10 +2,9 @@ extends Menu
 class_name MainGameMenu
 
 @onready var settings: Menu = $"../Settings"
-@onready var save_game: Menu = $"../SaveGame"
 
-@onready var menus: Array[Menu] = [self, settings, save_game]
-@onready var menus_reversed: Array[Menu] = [save_game, settings, self]
+@onready var menus: Array[Menu] = [self, settings]
+@onready var menus_reversed: Array[Menu] = [settings, self]
 
 
 var main_open: bool = false:
@@ -35,15 +34,12 @@ func _on_continue_pressed() -> void:
 	main_open = false
 
 
-func _on_save_pressed() -> void:
-	save_game.switch()
-
-
 func _on_settings_pressed() -> void:
 	settings.switch()
 
 
 func _on_back_pressed() -> void:
+	SaveManager.save_game()
 	GameEnv.fade_in_out(0.3)
 	await GameEnv.fade_step_wait
 	GameEnv.set_blur(false)
@@ -51,5 +47,6 @@ func _on_back_pressed() -> void:
 
 
 func _on_exit_pressed() -> void:
+	SaveManager.save_game()
 	get_tree().quit()
 #endregion

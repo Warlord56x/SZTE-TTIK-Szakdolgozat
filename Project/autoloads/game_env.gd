@@ -1,7 +1,7 @@
 extends Node
 
 
-const MAIN_MENU := preload("res://test_scenes/UI/main_menu.tscn")
+const MAIN_MENU := preload("res://assets/gui/menus/main_menu/main_menu.tscn")
 
 @onready var world_environment: WorldEnvironment = $WorldEnvironment
 @onready var background_music: AudioStreamPlayer = $BackgroundMusic
