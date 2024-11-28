@@ -1,24 +1,24 @@
 [gd_scene load_steps=9 format=3 uid="uid://cd1nb61y8aiy"]
 
 [ext_resource type="Script" path="res://assets/objects/cherry.gd" id="1_d7bkl"]
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_mfk5f"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_mfk5f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gamdx"]
 size = Vector2(8, 8)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ajmn5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyjbt"]
 atlas = ExtResource("1_mfk5f")
 region = Rect2(60, 30, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_atosm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2n7s"]
 atlas = ExtResource("1_mfk5f")
 region = Rect2(70, 30, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ey3yb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8nj2"]
 atlas = ExtResource("1_mfk5f")
 region = Rect2(80, 30, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_k0vlb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pla18"]
 atlas = ExtResource("1_mfk5f")
 region = Rect2(90, 30, 10, 10)
 
@@ -26,16 +26,16 @@ region = Rect2(90, 30, 10, 10)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ajmn5")
+"texture": SubResource("AtlasTexture_uyjbt")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_atosm")
+"texture": SubResource("AtlasTexture_g2n7s")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ey3yb")
+"texture": SubResource("AtlasTexture_l8nj2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_k0vlb")
+"texture": SubResource("AtlasTexture_pla18")
 }],
 "loop": true,
 "name": &"default",

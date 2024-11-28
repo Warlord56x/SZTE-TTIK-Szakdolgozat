@@ -1,20 +1,20 @@
 [gd_scene load_steps=8 format=3 uid="uid://dfwa6vext6tuf"]
 
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_2vegq"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_2vegq"]
 [ext_resource type="Script" path="res://assets/objects/heart.gd" id="1_cr6ka"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2sxc"]
 size = Vector2(8, 8)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8s2e6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tmo2"]
 atlas = ExtResource("1_2vegq")
 region = Rect2(90, 0, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ci342"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcomb"]
 atlas = ExtResource("1_2vegq")
 region = Rect2(100, 0, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gf4uy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_23f63"]
 atlas = ExtResource("1_2vegq")
 region = Rect2(110, 0, 10, 10)
 
@@ -22,13 +22,13 @@ region = Rect2(110, 0, 10, 10)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8s2e6")
+"texture": SubResource("AtlasTexture_8tmo2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ci342")
+"texture": SubResource("AtlasTexture_mcomb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gf4uy")
+"texture": SubResource("AtlasTexture_23f63")
 }],
 "loop": true,
 "name": &"default",

@@ -1,64 +1,35 @@
-[gd_scene load_steps=11 format=3 uid="uid://dks0apcmtlgrf"]
+[gd_scene load_steps=8 format=3 uid="uid://dks0apcmtlgrf"]
 
 [ext_resource type="Script" path="res://assets/objects/coin.gd" id="1_l7sap"]
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="2_fnurg"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="2_fnurg"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lycf1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_coj4s"]
 atlas = ExtResource("2_fnurg")
 region = Rect2(60, 0, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ugasx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_of4cn"]
 atlas = ExtResource("2_fnurg")
 region = Rect2(70, 0, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7ugv7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vcl4"]
 atlas = ExtResource("2_fnurg")
 region = Rect2(80, 0, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gk8yl"]
-atlas = ExtResource("2_fnurg")
-region = Rect2(48, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0c06c"]
-atlas = ExtResource("2_fnurg")
-region = Rect2(56, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_up860"]
-atlas = ExtResource("2_fnurg")
-region = Rect2(64, 0, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nnour"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lycf1")
+"texture": SubResource("AtlasTexture_coj4s")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ugasx")
+"texture": SubResource("AtlasTexture_of4cn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7ugv7")
+"texture": SubResource("AtlasTexture_2vcl4")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gk8yl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0c06c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_up860")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0c06c")
-}],
-"loop": false,
-"name": &"disappear",
-"speed": 6.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gsmkm"]

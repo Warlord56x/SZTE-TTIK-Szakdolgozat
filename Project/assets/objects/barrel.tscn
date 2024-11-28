@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://h47sebfygmui"]
 
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_5lwd1"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_5lwd1"]
 
 [node name="Barrel" type="Node2D"]
 
@@ -8,3 +8,4 @@
 texture = ExtResource("1_5lwd1")
 region_enabled = true
 region_rect = Rect2(50, 60, 10, 10)
+region_filter_clip_enabled = true

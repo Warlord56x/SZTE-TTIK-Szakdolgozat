@@ -1,24 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxrjnblnsb0de"]
+[gd_scene load_steps=3 format=3 uid="uid://bxrjnblnsb0de"]
 
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_4k3vm"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_4k3vm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vbiap"]
 size = Vector2(8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pufds"]
-atlas = ExtResource("1_4k3vm")
-region = Rect2(50, 50, 10, 10)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_1t0fb"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pufds")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [node name="Create" type="StaticBody2D"]
 collision_layer = 11
@@ -27,5 +12,8 @@ collision_mask = 11
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_vbiap")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_1t0fb")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4k3vm")
+region_enabled = true
+region_rect = Rect2(50, 50, 10, 10)
+region_filter_clip_enabled = true
