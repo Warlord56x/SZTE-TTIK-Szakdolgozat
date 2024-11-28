@@ -6,7 +6,6 @@ const default_path := "user://saves/"
 
 var save_slots: Array[SaveSlot] = []
 var current_slot: SaveSlot = null
-#var i = 0
 
 
 func _ready() -> void:
@@ -17,14 +16,6 @@ func _ready() -> void:
 	save_slots.sort_custom(SaveSlot.time_sort)
 	if not save_slots.is_empty():
 		current_slot = save_slots.front()
-
-
-#func _input(event: InputEvent) -> void:
-	#if event.is_action_pressed("test"):
-		#save_game(str(i), current_slot)
-		#i+= 1
-	#if event.is_action_pressed("test_2"):
-		#load_game(save_slots[0])
 
 
 ## Checks if a slot with the name [param slot_name] already exists in [member SaveSlot.saves_array]
@@ -62,7 +53,7 @@ func load_game(slot: SaveSlot = current_slot) -> bool:
 	var key_exclude := ["filename", "parent", "checkpoint", "position"]
 	var nodes = get_tree().get_nodes_in_group("Persistent")
 	if slot.saves.is_empty():
-		printerr("There is no save in slot 's%'." % slot.name)
+		printerr("There is no save in slot '%s'." % slot.name)
 		return false
 	if slot != current_slot:
 		current_slot = slot
@@ -74,7 +65,13 @@ func load_game(slot: SaveSlot = current_slot) -> bool:
 	for node_data in data:
 		var new_object = load(node_data["filename"]).instantiate()
 		if "camp" in node_data:
-			new_object.global_position = array_to_vector2(node_data["camp"])
+			var camps = get_tree().get_nodes_in_group("Camp")
+			var camp_filtered = camps.filter(func(x): return x.camp_name == StringName(node_data["camp"]))
+			var camp = null if camp_filtered.is_empty() else camp_filtered.front()
+
+			if camp:
+				new_object.global_position = camp.global_position
+				new_object.camp = camp
 		if "position" in node_data:
 			new_object.position = array_to_vector2(node_data["position"])
 		get_node(node_data["parent"]).add_child(new_object, true)

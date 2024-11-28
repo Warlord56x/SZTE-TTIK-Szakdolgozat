@@ -60,12 +60,12 @@ enum player_res {
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
-var pushback_force: Vector2 = Vector2.ZERO#:
-	#set(value):
-		## Make sure it goes to 0 0 not to -0 -0
-		#value -= Vector2.ONE
-		#value += Vector2.ONE
-		#pushback_force = value
+var pushback_force: Vector2 = Vector2.ZERO:
+	set(value):
+		# Make sure it goes to 0 0 not to -0 -0
+		value -= Vector2.ONE
+		value += Vector2.ONE
+		pushback_force = value
 
 var watch: Vector2i = Vector2i.ZERO
 var airborne_time: float = 0
@@ -195,8 +195,8 @@ func set_camp(c: Camp) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	#if not GameEnv.input_process:
-		#return
+	if not GameEnv.input_process:
+		return
 
 	if event.is_action_pressed("test"):
 		pass
@@ -221,11 +221,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		if velocity.y < MIN_JUMP_VELOCITY:
 			velocity.y = MIN_JUMP_VELOCITY
 
-	if event.is_action_pressed("interact"):
-		if not state_machine.get_state("climb").active and on_ladder:
-			state_machine.travel("climb")
-		if interactor.get_interaction_type() == InteractionArea.INTERACTION_TYPE.DEAFULT:
-			state_machine.travel("interact")
+	#if event.is_action_pressed("interact"):
+		#if not state_machine.get_state("climb").active and on_ladder:
+			#state_machine.travel("climb")
+		##if interactor.get_interaction_type() == InteractionArea.INTERACTION_TYPE.DEAFULT:
+			##state_machine.travel("interact")
 
 	watch.y = sign(Input.get_axis("look_down", "look_up"))
 	if watch.y == 0:
@@ -301,27 +301,23 @@ func init_regen_timer(res: player_res, waiter_time: float, regen_time: float) ->
 
 
 func request_interaction_visible(b: bool) -> void:
-	#$Label.visible = b
 	%InteractHelper.visible = b
 
 
 func save() -> Dictionary:
-	var ch_pos: Vector2
-	if camp:
-		ch_pos = camp.global_position
-	else:
-		ch_pos = DEFAULT_SPAWN_POINT
 	return {
 		"filename" : get_scene_file_path(),
 		"parent": get_parent().get_path(),
 		"health" : health,
 		"mana" : mana,
 		"coins" : coins,
-		"camp" : SaveManager.vector2_to_array(ch_pos + Vector2(0, -2)),
+		"camp" : camp.camp_name if camp else &"",
 	}
 
 
 func _ready() -> void:
+	if global_position == Vector2.ZERO:
+		global_position = DEFAULT_SPAWN_POINT
 	tool_tip_node.visible = debug
 
 	init_regen_timer(player_res.HEALTH, health_regen_wait_time, health_regen_time)
@@ -380,6 +376,7 @@ func _process(_delta: float) -> void:
 			"\n",
 			"Health: ", health, "/", max_health, "\n",
 			"State: ", state_machine.current_state.name, "\n",
+			"State: ", anim_state_m.get_current_node(), "\n",
 			"Invincible: ", collision_layer == 8, "\n",
 			"Position: ", global_position, "\n",
 			"Knock_back: ", pushback_force, "\n",
@@ -394,7 +391,7 @@ func _physics_process(_delta: float) -> void:
 	if input_direction:
 		move_direction.x = sign(input_direction)
 
-	if pushback_force.length() > 0.1:
+	if pushback_force.length() > 0.01:
 		input_direction = 0.0
 
 	velocity += pushback_force

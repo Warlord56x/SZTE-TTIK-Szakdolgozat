@@ -134,8 +134,8 @@ grow_vertical = 0
 
 [node name="LoadIconSprite" type="AnimatedSprite2D" parent="ScreenEffectLayer/Control/Control"]
 modulate = Color(1, 1, 1, 0)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_f6m7e")
 autoplay = "default"
-frame = 3
-frame_progress = 0.0937557
+frame_progress = 0.955182
 offset = Vector2(-5, -5)

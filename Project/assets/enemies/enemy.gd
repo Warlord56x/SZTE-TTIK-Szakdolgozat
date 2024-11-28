@@ -57,8 +57,8 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	tool_tip_node.visible = debug
 	actor_setup.call_deferred()
+	tool_tip_node.visible = debug
 	initial_pos = global_position
 	ready()
 
@@ -77,6 +77,8 @@ func actor_setup():
 	# Wait for the NavigationServer to sync.
 	if NavigationServer2D.get_maps().is_empty():
 		await NavigationServer2D.map_changed
+	await get_tree().physics_frame
+	await get_tree().physics_frame
 	navmap_ready = true
 
 	# Now that the navigation map is no longer empty, set the movement target.
@@ -187,6 +189,7 @@ func knock_back(source_position: Vector2, intensity: float = 1.0) -> bool:
 	pushback_force = -global_position.direction_to(source_position) * intensity
 	pushback_force.y = min_jump_velocity * intensity
 	pushback_force.x *= movement_speed
+	pushback_force *= Vector2(limit_nav_axis)
 	return true
 
 

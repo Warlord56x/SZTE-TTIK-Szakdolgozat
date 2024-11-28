@@ -1,12 +1,12 @@
 extends MarginContainer
-class_name ClassMenu
+class_name CampMenu
 
+@onready var camp_name: Label = %CampName
+@onready var menu: Menu = $Menu
 
-var i := 0
-
-
-func _init() -> void:
-	visible = false
+#
+#func _init() -> void:
+	#visible = false
 
 
 func _ready() -> void:
@@ -17,15 +17,16 @@ func _ready() -> void:
 		camp._interact.connect(camp_menu_controller)
 
 
-func camp_menu_controller(b: bool) -> void:
+func camp_menu_controller(b: bool, camp: Camp = null) -> void:
 	if b:
-		visible = true
-		%CampMenu.get_child(0).grab_focus()
+		camp_name.text = camp.camp_name
+		#visible = true
+		menu.open()
+		#%RestButton.grab_focus()
 	else:
-		visible = false
+		menu.close()
 
 
 func _on_rest_button_pressed() -> void:
-	SaveManager.save_game("")
+	SaveManager.save_game()
 	GameEnv.respawn_enemies()
-	i += 1

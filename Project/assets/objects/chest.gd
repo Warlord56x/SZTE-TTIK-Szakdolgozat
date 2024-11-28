@@ -11,21 +11,21 @@ const LOOT_TABLE := [BOW, HEALTH_POTION, COIN]
 @onready var animation: AnimatedSprite2D = $Animation
 
 var is_open: bool = false
-var inside: bool = false
 
 
 func interact(_player: Player = null) -> bool:
 	if !is_open:
 		animation.play("open")
 		is_open = true
-		interactable = false
+		set_deferred("monitorable", false)
+		await get_tree().create_timer(0.2).timeout
+		interaction_done.emit()
 	return interactable
 
 
 func _on_animated_sprite_2d_animation_finished():
 	if animation.animation == "open":
 		interaction_done.emit()
-
 		for i in randi_range(4, 10):
 			var loot = DROP.instantiate()
 			var choice: Item = LOOT_TABLE.pick_random()

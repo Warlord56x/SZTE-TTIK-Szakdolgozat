@@ -14,11 +14,13 @@ func interact(_player: Player = null) -> bool:
 		$Anim.play_backwards("activate")
 	else:
 		$Anim.play("activate")
+	await get_tree().create_timer(0.2).timeout
 	interaction_done.emit()
 	return interactable
 
 
 func _on_anim_animation_finished():
+	
 	if $Anim.animation == "activate":
 		var lighter = create_tween()
 		if !lit:

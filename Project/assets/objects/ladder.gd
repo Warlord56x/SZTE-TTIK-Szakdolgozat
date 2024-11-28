@@ -1,7 +1,6 @@
 @tool
 extends InteractionArea
-
-@onready var interactor: Interactor = null
+class_name Ladder
 
 enum ladder_states {
 	LADDERTOP,
@@ -38,26 +37,24 @@ func _init() -> void:
 	type = INTERACTION_TYPE.LADDER
 
 
-func interact(_player: Player = null) -> bool:
-	if not interactor.player.on_ladder:
-		interactor.player.ladder_pos = global_position.x
-		interactor.player.on_ladder = true
+func interact(player: Player = null) -> bool:
+	if not player.on_ladder:
+		player.ladder_pos = global_position.x
+		player.on_ladder = true
 	else:
-		interactor.player.on_ladder = false
+		player.on_ladder = false
 	interaction_done.emit()
 	return interactable
 
 
 func _on_area_entered(area: Area2D) -> void:
-	if area is Interactor:
-		interactor = area
+	pass
 
 
 func _on_area_exited(area: Area2D) -> void:
-	if area is Interactor and area == interactor:
-		var player = interactor.player
-		interactor = null
-		var top_cond : bool = ladder_state == ladder_states.LADDERTOP and player.velocity.y < 0
-		var base_cond : bool = ladder_state == ladder_states.LADDERBASE and player.velocity.y > 0
+	if area is Interactor:
+		var player = area.player
+		var top_cond: bool = ladder_state == ladder_states.LADDERTOP and player.velocity.y < 0
+		var base_cond: bool = ladder_state == ladder_states.LADDERBASE and player.velocity.y > 0
 		if top_cond or base_cond:
 			player.on_ladder = false

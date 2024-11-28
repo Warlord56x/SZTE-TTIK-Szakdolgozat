@@ -5,7 +5,7 @@ class_name StateDefault
 
 
 func enter() -> void:
-	pass
+	player.anim_state_m.travel("idle")
 
 
 func physics_process(_delta: float) -> void:

@@ -31,6 +31,9 @@
 [ext_resource type="Script" path="res://helper_classes/hitbox.gd" id="26_3ibsb"]
 [ext_resource type="Script" path="res://helper_classes/hurtbox.gd" id="28_80a7v"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2gbc"]
+size = Vector2(6, 6)
+
 [sub_resource type="LabelSettings" id="LabelSettings_nd3cp"]
 font = ExtResource("6_2mfpg")
 font_size = 6
@@ -1065,6 +1068,7 @@ _data = {
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_mhgmp"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nbwgx"]
+graph_offset = Vector2(-343, 20)
 nodes/StateMachine/node = ExtResource("7_sdq1t")
 nodes/StateMachine/position = Vector2(-220, 100)
 nodes/speed/node = SubResource("AnimationNodeTimeScale_mhgmp")
@@ -1129,9 +1133,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1us6n"]
 size = Vector2(8, 8)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2gbc"]
-size = Vector2(6, 6)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mirti"]
 size = Vector2(6, 6)
 
@@ -1140,7 +1141,7 @@ collision_mask = 17
 safe_margin = 0.1
 script = ExtResource("1_0p7ex")
 inventory = ExtResource("2_q0eh7")
-tool_tip_node = NodePath("EnemyToolTip")
+tool_tip_node = NodePath("DebugTooltip")
 inv_time = 0.3
 health_regen_wait_time = 1.5
 health_regen_time = 0.5
@@ -1152,7 +1153,14 @@ script = ExtResource("3_yjybh")
 display_element = NodePath("../HUD/Control/C/BuffDisplay")
 apply_to = NodePath("..")
 
-[node name="EnemyToolTip" parent="." instance=ExtResource("2_p0eb3")]
+[node name="Interactor" type="Area2D" parent="."]
+script = ExtResource("23_ken48")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_p2gbc")
+
+[node name="DebugTooltip" parent="." instance=ExtResource("2_p0eb3")]
 visible = false
 anchor_point = Vector2(0, -5)
 anchor_preset = 7
@@ -1363,7 +1371,6 @@ minimum_zoom = Vector2(0.1, 0.1)
 maximum_zoom = Vector2(4, 4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_upy7n")
 
@@ -1417,16 +1424,7 @@ sound_on_hit = NodePath("../../../SwordHit")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/Weapon/Hitbox"]
 shape = SubResource("RectangleShape2D_1us6n")
 
-[node name="Interactor" type="Area2D" parent="."]
-visible = false
-script = ExtResource("23_ken48")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor"]
-position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_p2gbc")
-
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("parent_ref")]
-visible = false
 collision_layer = 0
 collision_mask = 64
 monitorable = false
@@ -1437,6 +1435,6 @@ parent_ref = NodePath("..")
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_mirti")
 
-[connection signal="timeout" from="WallStaminaDrain" to="." method="_on_wall_stamina_drain_timeout"]
 [connection signal="area_entered" from="Interactor" to="Interactor" method="_on_area_entered"]
 [connection signal="area_exited" from="Interactor" to="Interactor" method="_on_area_exited"]
+[connection signal="timeout" from="WallStaminaDrain" to="." method="_on_wall_stamina_drain_timeout"]

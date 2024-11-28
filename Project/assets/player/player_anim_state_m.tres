@@ -140,7 +140,6 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_calgi"]
 switch_mode = 2
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xlh1y"]
 
@@ -176,7 +175,7 @@ states/idle_crouch/position = Vector2(-10, 289)
 states/idle_look_up/node = SubResource("AnimationNodeAnimation_bcsyj")
 states/idle_look_up/position = Vector2(-10, 4)
 states/interact/node = SubResource("AnimationNodeAnimation_4neru")
-states/interact/position = Vector2(538, 289)
+states/interact/position = Vector2(551, 365)
 states/run/node = SubResource("AnimationNodeAnimation_hs4vf")
 states/run/position = Vector2(292, -112)
 states/run_crouch/node = SubResource("AnimationNodeAnimation_g2ett")
@@ -186,4 +185,4 @@ states/run_look_up/position = Vector2(-10, -112)
 states/wall_slide/node = SubResource("AnimationNodeAnimation_4nbda")
 states/wall_slide/position = Vector2(736, -112)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_jqtrw"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_jxlsg"), "idle", "End", SubResource("AnimationNodeStateMachineTransition_hd1ek"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_8758w"), "hit", "run", SubResource("AnimationNodeStateMachineTransition_03qjn"), "run", "hit", SubResource("AnimationNodeStateMachineTransition_7wc6u"), "idle", "climb_idle", SubResource("AnimationNodeStateMachineTransition_n8ph5"), "climb_idle", "climb", SubResource("AnimationNodeStateMachineTransition_fpadp"), "climb", "climb_idle", SubResource("AnimationNodeStateMachineTransition_ilrgx"), "climb_idle", "idle", SubResource("AnimationNodeStateMachineTransition_64jt3"), "idle", "wall_slide", SubResource("AnimationNodeStateMachineTransition_1yw51"), "wall_slide", "idle", SubResource("AnimationNodeStateMachineTransition_c83e1"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_aet4r"), "idle", "idle_crouch", SubResource("AnimationNodeStateMachineTransition_lty6i"), "idle_crouch", "climb_idle_crouch", SubResource("AnimationNodeStateMachineTransition_3fx2i"), "climb_idle_crouch", "idle_crouch", SubResource("AnimationNodeStateMachineTransition_x7ak5"), "climb_idle_crouch", "climb", SubResource("AnimationNodeStateMachineTransition_gvojx"), "climb", "climb_idle_crouch", SubResource("AnimationNodeStateMachineTransition_7se2k"), "idle_crouch", "run_crouch", SubResource("AnimationNodeStateMachineTransition_5ryax"), "run_crouch", "idle_crouch", SubResource("AnimationNodeStateMachineTransition_7rou8"), "idle_crouch", "idle", SubResource("AnimationNodeStateMachineTransition_jpofu"), "run", "dash", SubResource("AnimationNodeStateMachineTransition_lrp1u"), "dash", "run", SubResource("AnimationNodeStateMachineTransition_hcajl"), "death", "idle", SubResource("AnimationNodeStateMachineTransition_ssh5t"), "idle", "dash", SubResource("AnimationNodeStateMachineTransition_6m7cu"), "idle", "cast_spell", SubResource("AnimationNodeStateMachineTransition_5sppw"), "cast_spell", "idle", SubResource("AnimationNodeStateMachineTransition_ql4ld"), "idle", "idle_look_up", SubResource("AnimationNodeStateMachineTransition_oknlt"), "idle_look_up", "idle", SubResource("AnimationNodeStateMachineTransition_ewn2m"), "idle_look_up", "climb_idle_look_up", SubResource("AnimationNodeStateMachineTransition_is5aw"), "idle_look_up", "run_look_up", SubResource("AnimationNodeStateMachineTransition_84ewc"), "run_look_up", "idle_look_up", SubResource("AnimationNodeStateMachineTransition_58d70"), "climb", "climb_idle_look_up", SubResource("AnimationNodeStateMachineTransition_1psw0"), "climb_idle_look_up", "climb", SubResource("AnimationNodeStateMachineTransition_tmx2v"), "dash", "idle", SubResource("AnimationNodeStateMachineTransition_baliv"), "idle", "fire_bow", SubResource("AnimationNodeStateMachineTransition_txhro"), "fire_bow", "idle", SubResource("AnimationNodeStateMachineTransition_fhu05"), "idle", "interact", SubResource("AnimationNodeStateMachineTransition_nq6i4"), "interact", "idle", SubResource("AnimationNodeStateMachineTransition_calgi"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_xlh1y"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_e4xbw")]
-graph_offset = Vector2(-325, -161)
+graph_offset = Vector2(-341, 143)

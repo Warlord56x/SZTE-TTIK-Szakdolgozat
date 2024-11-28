@@ -5,7 +5,7 @@ class_name StateClimb
 
 
 func enter() -> void:
-	player.position.x = player.ladder_pos
+	#player.position.x = player.ladder_pos
 	player.velocity = Vector2.ZERO
 	player.position.x = player.ladder_pos
 
@@ -31,6 +31,8 @@ func physics_process(_delta: float) -> void:
 	if climb:
 		player.velocity.y = climb * -50
 		player.anim_state_m.travel("climb")
+		if player.velocity.y > 0:
+			player.global_position.y += 1
 	else:
 		player.velocity.y = move_toward(player.velocity.y, 0, 50)
 		player.anim_state_m.travel("climb_idle")
@@ -38,6 +40,8 @@ func physics_process(_delta: float) -> void:
 	player.anim_tree["parameters/speed/scale"] = climb
 
 	if !player.on_ladder:
+		travel("default")
+	if player.velocity.x != 0:
 		travel("default")
 
 	player.move_and_slide()

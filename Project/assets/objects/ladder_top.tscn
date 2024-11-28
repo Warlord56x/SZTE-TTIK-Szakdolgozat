@@ -9,6 +9,7 @@ size = Vector2(10, 1)
 
 [node name="Ladder" parent="." instance=ExtResource("1_4ol02")]
 ladder_state = 0
+type = 1
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

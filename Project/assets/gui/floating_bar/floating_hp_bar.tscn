@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://0iac6qukikeg"]
+[gd_scene load_steps=7 format=3 uid="uid://0iac6qukikeg"]
 
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="1_2ij80"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_2ij80"]
 [ext_resource type="Script" path="res://assets/gui/floating_bar/floating_hp_bar.gd" id="1_hftse"]
-[ext_resource type="Script" path="res://test_scenes/UI/fluid.gd" id="3_fvti5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bjdt1"]
 
@@ -67,16 +66,5 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 axis_stretch_horizontal = 1
-
-[node name="Fluid" type="Area2D" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.341176)
-scale = Vector2(0.1, 0.1)
-script = ExtResource("3_fvti5")
-wave_height = 0.01
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Fluid"]
-polygon = PackedVector2Array(-100, 0, 110, 0, 110, 30, -100, 30)
-metadata/_edit_lock_ = true
 
 [connection signal="value_changed" from="TextureProgressBar" to="." method="_on_texture_progress_bar_value_changed"]
