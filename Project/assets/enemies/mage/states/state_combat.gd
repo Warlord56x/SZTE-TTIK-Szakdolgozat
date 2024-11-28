@@ -59,6 +59,8 @@ func leave() -> void:
 	# Need to avoid stopping the timer,
 	# otherwise the attacks can be interrupted indefinitely
 	projectile_timer.paused = true
+	if enemy.sprite.animation == "cast" and enemy.sprite.is_playing():
+		await enemy.sprite.animation_finished
 
 
 func _on_p_timer_timeout() -> void:

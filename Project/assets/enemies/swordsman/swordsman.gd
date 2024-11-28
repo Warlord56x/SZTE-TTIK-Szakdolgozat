@@ -1,7 +1,8 @@
 extends Enemy
 class_name Swordsman
 
-@onready var weapon: AnimatedSprite2D = $Weapon
+@onready var weapon: AnimatedSprite2D = %Weapon
+@onready var weapon_pivot: Node2D = %WeaponPivot
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sword_hit: AudioStreamPlayer2D = $SwordHit
 

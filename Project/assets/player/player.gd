@@ -221,12 +221,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if velocity.y < MIN_JUMP_VELOCITY:
 			velocity.y = MIN_JUMP_VELOCITY
 
-	#if event.is_action_pressed("interact"):
-		#if not state_machine.get_state("climb").active and on_ladder:
-			#state_machine.travel("climb")
-		##if interactor.get_interaction_type() == InteractionArea.INTERACTION_TYPE.DEAFULT:
-			##state_machine.travel("interact")
-
 	watch.y = sign(Input.get_axis("look_down", "look_up"))
 	if watch.y == 0:
 		watch.y = sign(Input.get_axis("crouch", "stand"))

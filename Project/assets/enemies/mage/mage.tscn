@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d34pc2g4hgfyl"]
+[gd_scene load_steps=20 format=3 uid="uid://d34pc2g4hgfyl"]
 
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_ipxbu"]
 [ext_resource type="Script" path="res://assets/enemies/mage/mage.gd" id="1_w332w"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://assets/enemies/mage/states/state_chase.gd" id="6_y5woy"]
 [ext_resource type="Shader" path="res://assets/effects/shaders/blinker.gdshader" id="7_2a0m2"]
 [ext_resource type="Script" path="res://helper_classes/hurtbox.gd" id="9_uf5br"]
-[ext_resource type="Script" path="res://helper_classes/hitbox.gd" id="10_5pppn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lruuv"]
 size = Vector2(8, 8)
@@ -137,15 +136,6 @@ parent_ref = NodePath("..")
 ignore_enemy = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-shape = SubResource("RectangleShape2D_c5ksi")
-
-[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("parent_ref")]
-script = ExtResource("10_5pppn")
-parent_ref = NodePath("..")
-damage = 1
-knock_back_strength = 0.6
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_c5ksi")
 
 [connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]

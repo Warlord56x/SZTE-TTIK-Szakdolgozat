@@ -113,7 +113,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Weapon:frame")
+tracks/0/path = NodePath("WeaponPivot/Weapon:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -125,7 +125,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Weapon:visible")
+tracks/1/path = NodePath("WeaponPivot/Weapon:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -137,7 +137,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Weapon/Hitbox:monitorable")
+tracks/2/path = NodePath("WeaponPivot/Weapon/Hitbox:monitorable")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -146,6 +146,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponPivot/Weapon:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_w4vrw"]
 resource_name = "hit"
@@ -153,7 +165,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Weapon:frame")
+tracks/0/path = NodePath("WeaponPivot/Weapon:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -165,7 +177,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Weapon:visible")
+tracks/1/path = NodePath("WeaponPivot/Weapon:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -177,7 +189,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Weapon/Hitbox:monitorable")
+tracks/2/path = NodePath("WeaponPivot/Weapon/Hitbox:monitorable")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -185,6 +197,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponPivot/Weapon:position")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -8), Vector2(8, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rstr4"]
@@ -235,18 +259,6 @@ collision_mask = 9
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
 shape = SubResource("RectangleShape2D_v36c8")
 
-[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("parent_ref")]
-collision_layer = 64
-collision_mask = 0
-monitoring = false
-script = ExtResource("9_q8lhd")
-parent_ref = NodePath("..")
-damage = 1
-knock_back_strength = 0.6
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("RectangleShape2D_17m7r")
-
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("parent_ref")]
 collision_layer = 0
 collision_mask = 64
@@ -258,21 +270,25 @@ ignore_enemy = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_17m7r")
 
-[node name="Weapon" type="AnimatedSprite2D" parent="."]
+[node name="WeaponPivot" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Weapon" type="AnimatedSprite2D" parent="WeaponPivot"]
+unique_name_in_owner = true
 visible = false
 sprite_frames = SubResource("SpriteFrames_b2g1y")
 
-[node name="Hitbox" type="Area2D" parent="Weapon" node_paths=PackedStringArray("parent_ref", "sound_on_hit")]
+[node name="Hitbox" type="Area2D" parent="WeaponPivot/Weapon" node_paths=PackedStringArray("parent_ref", "sound_on_hit")]
 collision_layer = 64
 collision_mask = 0
 monitoring = false
 script = ExtResource("9_q8lhd")
-parent_ref = NodePath("../..")
+parent_ref = NodePath("../../..")
 damage = 1
 knock_back_strength = 0.5
-sound_on_hit = NodePath("../../SwordHit")
+sound_on_hit = NodePath("../../../SwordHit")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/Weapon/Hitbox"]
 shape = SubResource("RectangleShape2D_17m7r")
 
 [node name="ChaseTimer" type="Timer" parent="."]
