@@ -1,17 +1,17 @@
 [gd_scene load_steps=8 format=3 uid="uid://dxhjvt705i3g8"]
 
 [ext_resource type="Script" path="res://assets/objects/ladder.gd" id="1_uqkod"]
-[ext_resource type="Texture2D" uid="uid://hgqfwqtlkqpn" path="res://nin_sprites.png" id="2_com3p"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="2_com3p"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ulgfa"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1va5"]
 atlas = ExtResource("2_com3p")
 region = Rect2(40, 50, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_23cku"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrbtu"]
 atlas = ExtResource("2_com3p")
 region = Rect2(40, 60, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lc46f"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_68yrf"]
 atlas = ExtResource("2_com3p")
 region = Rect2(40, 70, 10, 10)
 
@@ -19,13 +19,13 @@ region = Rect2(40, 70, 10, 10)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ulgfa")
+"texture": SubResource("AtlasTexture_r1va5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_23cku")
+"texture": SubResource("AtlasTexture_yrbtu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lc46f")
+"texture": SubResource("AtlasTexture_68yrf")
 }],
 "loop": true,
 "name": &"default",
@@ -40,7 +40,6 @@ script = ExtResource("1_uqkod")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o1ho4")
-frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fgu17")

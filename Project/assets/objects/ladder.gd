@@ -23,8 +23,11 @@ var col_states = {
 	},
 }
 
-@export var ladder_state : ladder_states = ladder_states.LADDER:
-	set(state):
+@export var ladder_state: ladder_states = ladder_states.LADDER:
+	set = set_ladder_state
+
+
+func set_ladder_state(state) -> void:
 		ladder_state = state
 		$AnimatedSprite2D.frame = state
 		var shape = RectangleShape2D.new()
@@ -33,8 +36,8 @@ var col_states = {
 		$CollisionShape2D.position = col_states[state].Position
 
 
-func _init() -> void:
-	type = INTERACTION_TYPE.LADDER
+func _ready() -> void:
+	set_ladder_state(ladder_state)
 
 
 func interact(player: Player = null) -> bool:
@@ -47,7 +50,7 @@ func interact(player: Player = null) -> bool:
 	return interactable
 
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_area_entered(_area: Area2D) -> void:
 	pass
 
 

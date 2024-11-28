@@ -5,4 +5,3 @@
 [node name="Ladder" type="Node2D"]
 
 [node name="Ladder" parent="." instance=ExtResource("1_sw2kl")]
-type = 1

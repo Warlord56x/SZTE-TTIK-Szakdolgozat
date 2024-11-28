@@ -5,10 +5,6 @@ class_name Interactor
 @onready var interaction_target: InteractionArea = null
 
 
-func get_interaction_type() -> InteractionArea.INTERACTION_TYPE:
-	return interaction_target.type if interaction_target else InteractionArea.INTERACTION_TYPE.NONE
-
-
 func _unhandled_input(event: InputEvent) -> void:
 	#if not GameEnv.input_process:
 		#return
