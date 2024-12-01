@@ -9,17 +9,22 @@ func _unhandled_input(event: InputEvent) -> void:
 	#if not GameEnv.input_process:
 		#return
 
-	if event.is_action_pressed("interact") and interaction_target and player.state_machine.current_state.name != "Interact":
+	if event.is_action_pressed("interact") and (
+		interaction_target and
+		not player.state_machine.get_state("interact").active
+		):
 
-		player.request_interaction_visible(false)
-		interaction_target.interact(player)
+		var interactable := interaction_target.interact(player)
+		player.request_interaction_visible(interactable)
 		if interaction_target is Ladder:
 			player.state_machine.travel("Climb")
 		else:
 			player.state_machine.travel("Interact")
 		await interaction_target.interaction_done
 		player.state_machine.travel("Default")
-		#interaction_target = null
+		if interactable:
+			return
+		interaction_target = null
 
 
 func _on_area_entered(area: Area2D) -> void:

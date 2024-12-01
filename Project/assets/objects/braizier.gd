@@ -10,17 +10,15 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func interact(_player: Player = null) -> bool:
+	interaction_done.emit()
 	if lit:
 		$Anim.play_backwards("activate")
 	else:
 		$Anim.play("activate")
-	await get_tree().create_timer(0.2).timeout
-	interaction_done.emit()
 	return interactable
 
 
 func _on_anim_animation_finished():
-	
 	if $Anim.animation == "activate":
 		var lighter = create_tween()
 		if !lit:
@@ -30,3 +28,4 @@ func _on_anim_animation_finished():
 			lighter.tween_property($PointLight2D, "energy", 0.0, 0.2)
 			$Anim.play("default")
 		lit = !lit
+	interaction_done.emit()

@@ -13,6 +13,9 @@ func _ready() -> void:
 
 func child_entered(buff: Node) -> void:
 	if buff is Buff:
+		buff.apply_to = apply_to
+		if not display_element:
+			return
 		if not buff.is_node_ready():
 			await buff.ready
 		var b_element = BUFF_ELEMENT.instantiate()

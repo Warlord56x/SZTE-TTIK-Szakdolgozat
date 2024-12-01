@@ -1,7 +1,7 @@
 extends Item
 class_name ConsumableItem
 
-const test := preload("res://test_scenes/buff.tscn")
+@export var _effect: GDScript
 
 @export var effect_time: float
 @export var effect_interval: float
@@ -10,12 +10,14 @@ const test := preload("res://test_scenes/buff.tscn")
 func consume(consumer: Node2D) -> void:
 	if stack <= 0:
 		return
+	if not consumer.has_node("BuffComponent"):
+		return
 
-	var t = test.instantiate()
-	t.buff_time = effect_time
-	t.buff_interval = effect_interval
-	t.buff_icon = icon
-	if consumer.has_node("BuffComponent"):
-		var buff_component = consumer.get_node("BuffComponent")
-		t.apply_to = buff_component.apply_to
-		buff_component.add_child(t)
+	var buff_component = consumer.get_node("BuffComponent")
+	var effect = _effect.new()
+	effect.buff_time = effect_time
+	effect.buff_interval = effect_interval
+	effect.buff_icon = icon
+
+	effect.apply_to = buff_component.apply_to
+	buff_component.add_child(effect)

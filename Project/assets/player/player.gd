@@ -198,8 +198,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not GameEnv.input_process:
 		return
 
+# Should do a parry
 	if event.is_action_pressed("test"):
-		pass
+		if not state_machine.get_state("parry").active:
+			state_machine.travel("parry")
 
 	if event.is_action_pressed("cast_spell"):
 		if not state_machine.get_state("cast").active:

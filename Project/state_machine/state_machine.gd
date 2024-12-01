@@ -49,6 +49,17 @@ func get_state(state: String) -> State:
 	return states.get(state)
 
 
+func has_state(state: String) -> bool:
+	return states.has(state)
+
+
+func is_active(state: String) -> bool:
+	var st: State = states.get(state)
+	if not st:
+		return false
+	return st.active
+
+
 func on_back(from: State) -> void:
 	on_state_changed(from, previous_state.name)
 
@@ -70,7 +81,7 @@ func on_state_changed(from: State, to: String) -> void:
 		previous_state = current_state
 		current_state.active = false
 		
-		#Ignore the warning because the 'leave()' can be async
+		#Ignore the warning because the 'leave()' method can be async
 		@warning_ignore("redundant_await")
 		await current_state.leave()
 		if debug and owner and from:
