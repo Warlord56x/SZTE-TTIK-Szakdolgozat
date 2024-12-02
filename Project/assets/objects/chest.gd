@@ -18,8 +18,7 @@ func interact(_player: Player = null) -> bool:
 		animation.play("open")
 		is_open = true
 		set_deferred("monitorable", false)
-		await get_tree().create_timer(0.2).timeout
-		interaction_done.emit()
+		interactable = false
 	return interactable
 
 

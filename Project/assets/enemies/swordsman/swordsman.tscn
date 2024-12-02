@@ -1,12 +1,14 @@
-[gd_scene load_steps=30 format=3 uid="uid://b25vye5etxi5"]
+[gd_scene load_steps=32 format=3 uid="uid://b25vye5etxi5"]
 
 [ext_resource type="Script" path="res://assets/enemies/swordsman/swordsman.gd" id="1_6tos1"]
+[ext_resource type="Script" path="res://test_scenes/buff_component.gd" id="2_0phdp"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="2_8i2l2"]
 [ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_idle.gd" id="3_c8dnd"]
 [ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_chase.gd" id="4_75o1n"]
 [ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_fall.gd" id="5_fqqg6"]
 [ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_combat.gd" id="6_njad8"]
 [ext_resource type="Shader" path="res://assets/effects/shaders/blinker.gdshader" id="7_e3isw"]
+[ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_stun.gd" id="7_nmiy0"]
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="7_si21x"]
 [ext_resource type="Script" path="res://helper_classes/hitbox.gd" id="9_q8lhd"]
 [ext_resource type="AudioStream" uid="uid://82jihjn8dema" path="res://assets/sounds/568169__merrick079__sword-sound-2.wav" id="9_vs37d"]
@@ -226,6 +228,10 @@ navigation_agent = NodePath("NavigationAgent2D")
 sprite = NodePath("AnimatedSprite2D")
 limit_nav_axis = Vector2i(1, 0)
 
+[node name="BuffComponent" type="Node" parent="." node_paths=PackedStringArray("apply_to")]
+script = ExtResource("2_0phdp")
+apply_to = NodePath("..")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_2wfxl")
@@ -245,6 +251,9 @@ script = ExtResource("5_fqqg6")
 
 [node name="Combat" type="Node" parent="StateMachine"]
 script = ExtResource("6_njad8")
+
+[node name="Stun" type="Node" parent="StateMachine"]
+script = ExtResource("7_nmiy0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_iorbs")
@@ -297,6 +306,7 @@ one_shot = true
 
 [node name="AttackTimer" type="Timer" parent="."]
 process_callback = 0
+wait_time = 1.5
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

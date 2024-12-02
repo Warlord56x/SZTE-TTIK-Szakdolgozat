@@ -193,6 +193,14 @@ func knock_back(source_position: Vector2, intensity: float = 1.0) -> bool:
 	return true
 
 
+func stun() -> void:
+	var buff_component = get_node_or_null("BuffComponent")
+	if buff_component:
+		var stun_buff = BuffStun.new()
+		stun_buff.duration = 2.0
+		buff_component.add_child(stun_buff)
+
+
 func blinker_timeout() -> void:
 	blinker(0.0)
 
