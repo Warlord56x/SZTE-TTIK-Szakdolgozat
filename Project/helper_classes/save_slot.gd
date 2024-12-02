@@ -28,14 +28,16 @@ func get_saved_at() -> String:
 
 ## Makes a new save to the slots folder
 func new_save(_name: String, _data: Array = []) -> void:
+	if saves.size() >= 5:
+		saves.pop_back().delete()
 	if _name.is_empty():
-		_name = str(saves.size())
+		_name = str(saves.size() + 1)
 	if _name.get_extension() == "":
 		_name += ".save"
 	var any = saves.filter(func(s: Save): return s.name == _name)
 	if not any.is_empty():
 		(any.front() as Save).save_data()
-		return 
+		return
 	saves.push_front(Save.new(_name, self, _data))
 
 

@@ -1,14 +1,14 @@
 @tool
 extends Control
 
-enum JOY_BUTTONS {
-	BUTTON_A,
-	BUTTON_B,
-	BUTTON_X,
-	BUTTON_Y,
-	DPAD_LEFT,
-	DPAD_RIGHT
-}
+#enum JOY_BUTTONS {
+	#BUTTON_A,
+	#BUTTON_B,
+	#BUTTON_X,
+	#BUTTON_Y,
+	#DPAD_LEFT,
+	#DPAD_RIGHT
+#}
 
 @onready var special: bool = false
 @onready var special_letters: AnimatedSprite2D = $SpecialLetters
@@ -18,22 +18,33 @@ enum JOY_BUTTONS {
 @onready var baseAnim: AnimatedSprite2D = $BaseButton
 
 @export var action: InputEventAction
-@export var joypad_button: JOY_BUTTONS:
-	set(jpb):
-		if !is_node_ready():
-			await ready
+@export var joypad_button: JoyButton= JOY_BUTTON_A:
+	set = set_joy_button
+
+
+func set_joy_button(jpb: JoyButton) -> void:
 		joypad_button = jpb
-		button.animation = (JOY_BUTTONS.find_key(jpb) as String).to_lower()
+		if Engine.is_editor_hint() and is_node_ready():
+			refresh_label()
+
+
+func _ready() -> void:
+	refresh_label()
+
+
+func refresh_label() -> void:
+	button.animation = str(joypad_button)
+	if key:
 		key.text = action.as_text().left(1)
 
-		if action.as_text().containsn("shift"):
-			special = true
-			special_letters.visible = true
-			special_letters.animation = "shift"
-		if action.as_text().containsn("mouse"):
-			special = true
-			special_letters.visible = true
-			special_letters.animation = "click"
+	if action.as_text().containsn("shift"):
+		special = true
+		special_letters.visible = true
+		special_letters.animation = "shift"
+	if action.as_text().containsn("mouse"):
+		special = true
+		special_letters.visible = true
+		special_letters.animation = "click"
 
 
 func _unhandled_input(event : InputEvent) -> void:

@@ -1353,12 +1353,12 @@ alignment = 1
 [node name="ActionHelp" parent="HUD/Control/HBoxContainer2/VBoxContainer/CenterContainer/HBoxContainer" instance=ExtResource("8_5oe6t")]
 layout_mode = 2
 action = SubResource("InputEventAction_mptw6")
-joypad_button = 4
+joypad_button = 13
 
 [node name="ActionHelp2" parent="HUD/Control/HBoxContainer2/VBoxContainer/CenterContainer/HBoxContainer" instance=ExtResource("8_5oe6t")]
 layout_mode = 2
 action = SubResource("InputEventAction_jgwt8")
-joypad_button = 5
+joypad_button = 14
 
 [node name="Camera" type="Camera2D" parent="."]
 ignore_rotation = false

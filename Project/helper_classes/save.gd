@@ -38,3 +38,22 @@ func load_data() -> void:
 func get_saved_at() -> String:
 	var bias: int = Time.get_time_zone_from_system().bias * 60
 	return Time.get_datetime_string_from_unix_time(at + bias, true)
+
+
+func rename(_name: String) -> void:
+	name = _name
+	DirAccess.rename_absolute(_path, SaveManager.default_path + "{0}/{1}.save".format([slot.name, name]))
+
+
+func delete() -> void:
+	DirAccess.remove_absolute(_path)
+
+
+func _to_string() -> String:
+	var _str = ""
+	_str += "Class: " + get_class() + "\n"
+	_str += "Save name: " + name + "\n"
+	_str += "Slot name: " + slot.name + "\n"
+	_str += "Save path: " + _path + "\n"
+	_str += "Save data: " + str(data) + "\n"
+	return _str

@@ -98,5 +98,5 @@ offset = Vector2(5, 4)
 [node name="Anim" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("2_0b3wp")
-animation = &"button_a"
+animation = &"0"
 offset = Vector2(5, 5)
