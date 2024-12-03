@@ -1,5 +1,7 @@
 class_name SaveSlot
 
+const MAX_SAVES := 5
+
 var name: String = ""
 var saves: Array[Save] = []
 var at: int
@@ -28,10 +30,12 @@ func get_saved_at() -> String:
 
 ## Makes a new save to the slots folder
 func new_save(_name: String, _data: Array = []) -> void:
-	if saves.size() >= 5:
+	if saves.size() >= MAX_SAVES:
 		saves.pop_back().delete()
 	if _name.is_empty():
-		_name = str(saves.size() + 1)
+		var crypto := Crypto.new()
+		var random_bytes := crypto.generate_random_bytes(MAX_SAVES)
+		_name = str("NINSAVE_", random_bytes.hex_encode())
 	if _name.get_extension() == "":
 		_name += ".save"
 	var any = saves.filter(func(s: Save): return s.name == _name)

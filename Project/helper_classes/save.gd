@@ -42,7 +42,9 @@ func get_saved_at() -> String:
 
 func rename(_name: String) -> void:
 	name = _name
-	DirAccess.rename_absolute(_path, SaveManager.default_path + "{0}/{1}.save".format([slot.name, name]))
+	if name.get_extension() == "":
+		name += ".save"
+	DirAccess.rename_absolute(_path, SaveManager.default_path + "{0}/{1}".format([slot.name, name]))
 
 
 func delete() -> void:
