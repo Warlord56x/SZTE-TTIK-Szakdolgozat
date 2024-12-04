@@ -1,7 +1,7 @@
 class_name Save
 
 var slot: SaveSlot = null
-var data: Array = []
+var data: SaveFile = null
 var at: int = 0
 var screen_shot: Texture2D = null
 var name: String = ""
@@ -9,10 +9,10 @@ var name: String = ""
 var _path: String = ""
 
 
-func _init(_name: String, _slot: SaveSlot, _data: Array = []) -> void:
+func _init(_name: String, _slot: SaveSlot, _data: SaveFile = null) -> void:
 	name = _name
 	if name.get_extension() == "":
-		name += ".save"
+		name += ".tres"
 	slot = _slot
 	data = _data
 	_path = SaveManager.default_path + "{0}/{1}".format([slot.name, name])
@@ -22,16 +22,16 @@ func _init(_name: String, _slot: SaveSlot, _data: Array = []) -> void:
 		save_data()
 
 
-func save_data(_data: Array = data) -> void:
-	var file := FileAccess.open(_path, FileAccess.WRITE)
-	file.store_line(JSON.stringify(_data, "\t"))
-	file.close()
+func save_data(_data: SaveFile = data) -> void:
+	var saved = ResourceSaver.save(data, _path)
+	if saved != OK:
+		printerr("Saving data has failed with error code: ", saved)
+		return
 	at = FileAccess.get_modified_time(_path)
 
 
 func load_data() -> void:
-	var file := FileAccess.open(_path, FileAccess.READ)
-	data = JSON.parse_string(file.get_as_text())
+	data = ResourceLoader.load(_path)
 	at = FileAccess.get_modified_time(_path)
 
 
@@ -43,7 +43,7 @@ func get_saved_at() -> String:
 func rename(_name: String) -> void:
 	name = _name
 	if name.get_extension() == "":
-		name += ".save"
+		name += ".tres"
 	DirAccess.rename_absolute(_path, SaveManager.default_path + "{0}/{1}".format([slot.name, name]))
 
 

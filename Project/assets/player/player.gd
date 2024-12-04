@@ -176,7 +176,7 @@ func set_stamina(s: int) -> void:
 func set_coins(c: int) -> void:
 	clamp(c, 0, 9999)
 	coins = c
-	_coins.value = c
+	#_coins.value = c
 
 
 func set_checkpoint(c: Checkpoint) -> void:
@@ -187,8 +187,6 @@ func set_checkpoint(c: Checkpoint) -> void:
 
 
 func set_camp(c: Camp) -> void:
-	if camp:
-		camp.deactivate()
 	camp = c
 	c.activate()
 #endregion
@@ -308,6 +306,7 @@ func save() -> Dictionary:
 		"mana" : mana,
 		"coins" : coins,
 		"camp" : camp.camp_name if camp else &"",
+		"inventory" : inventory
 	}
 
 
@@ -319,6 +318,16 @@ func _ready() -> void:
 	init_regen_timer(player_res.HEALTH, health_regen_wait_time, health_regen_time)
 	init_regen_timer(player_res.MANA, mana_regen_wait_time, mana_regen_time)
 	init_regen_timer(player_res.STAMINA, stamina_regen_wait_time, stamina_regen_time)
+
+	if inventory:
+		action_wheel.inventory = inventory
+		inventory.items_changed.connect(items_changed)
+
+
+func items_changed() -> void:
+	for item in inventory.get_items():
+		if item.name.to_lower() == "coin":
+			_coins.value = item.stack
 
 
 func blinker(val: float):

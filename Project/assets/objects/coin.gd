@@ -6,7 +6,7 @@ func save() -> Dictionary:
 	return {
 		"filename": get_scene_file_path(),
 		"parent": get_parent().get_path(),
-		"position": SaveManager.vector2_to_array(position)
+		"position": position
 	}
 
 

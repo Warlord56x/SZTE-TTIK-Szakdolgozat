@@ -7,6 +7,8 @@ const default_path := "user://saves/"
 var save_slots: Array[SaveSlot] = []
 var current_slot: SaveSlot = null
 
+var version := "1"
+
 
 func _ready() -> void:
 	if not DirAccess.dir_exists_absolute(default_path):
@@ -36,7 +38,8 @@ func new_game(slot_name: String) -> bool:
 
 ## Makes a new save in [param slot] and appends it to the front of the it's [member SaveSlot.saves_array]
 func save_game(_name: String = "", slot: SaveSlot = current_slot) -> void:
-	var save_data: Array
+	var save_file: SaveFile = SaveFile.new()
+	var save_data: Array = save_file.data
 	var nodes = get_tree().get_nodes_in_group("Persistent")
 
 	for node in nodes:
@@ -44,7 +47,7 @@ func save_game(_name: String = "", slot: SaveSlot = current_slot) -> void:
 			save_data.append(node.call("save"))
 		else:
 			print("Persistent node '%s' does not have a save() function" % node.name)
-	slot.new_save(_name, save_data)
+	slot.new_save(_name, save_file)
 
 
 ## If there are no saves in a slot (see [member SaveSlot.saves]), returns [code]false[/code],
@@ -52,13 +55,14 @@ func save_game(_name: String = "", slot: SaveSlot = current_slot) -> void:
 func load_game(slot: SaveSlot = current_slot) -> bool:
 	var key_exclude := ["filename", "parent", "checkpoint", "position"]
 	var nodes = get_tree().get_nodes_in_group("Persistent")
+
 	if slot.saves.is_empty():
 		printerr("There is no save in slot '%s'." % slot.name)
 		return false
 	if slot != current_slot:
 		current_slot = slot
 
-	var data = slot.saves[0].data
+	var data = slot.saves[0].data.data
 	for node in nodes:
 		node.queue_free()
 
@@ -73,7 +77,7 @@ func load_game(slot: SaveSlot = current_slot) -> bool:
 				new_object.global_position = camp.global_position
 				new_object.camp = camp
 		if "position" in node_data:
-			new_object.position = array_to_vector2(node_data["position"])
+			new_object.position = node_data["position"]
 		get_node(node_data["parent"]).add_child(new_object, true)
 		new_object.add_to_group("Persistent")
 
@@ -103,17 +107,3 @@ func change_to_new_game(scene: PackedScene, slot_name: String) -> bool:
 		save_game("default_new_game", current_slot)
 		return true
 	return false
-
-
-## This is a helper function to to help with storing vectors in [JSON].[br]
-## Since [JSON] does not support vectors. (See [url=https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html]Saving in godot[/url]) 
-func vector2_to_array(v: Vector2) -> Array:
-	return [v.x, v.y]
-
-
-## This is a helper function to to help with storing vectors in [JSON].[br]
-## Since [JSON] does not support vectors. (See [url=https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html]Saving in godot[/url]) 
-func array_to_vector2(a: Array) -> Vector2:
-	if a.size() != 2:
-		return Vector2.ZERO
-	return Vector2(a[0], a[1])

@@ -22,6 +22,7 @@ SaveManager="*res://autoloads/save_manager.gd"
 Settings="*res://autoloads/settings.gd"
 GameEnv="*res://autoloads/game_env.tscn"
 NodeLoader="*res://autoloads/node_loader.gd"
+ItemLoader="*res://autoloads/item_loader.gd"
 
 [display]
 

@@ -29,7 +29,7 @@ func get_saved_at() -> String:
 
 
 ## Makes a new save to the slots folder
-func new_save(_name: String, _data: Array = []) -> void:
+func new_save(_name: String, _data: SaveFile) -> void:
 	if saves.size() >= MAX_SAVES:
 		saves.pop_back().delete()
 	if _name.is_empty():
@@ -37,7 +37,7 @@ func new_save(_name: String, _data: Array = []) -> void:
 		var random_bytes := crypto.generate_random_bytes(MAX_SAVES)
 		_name = str("NINSAVE_", random_bytes.hex_encode())
 	if _name.get_extension() == "":
-		_name += ".save"
+		_name += ".tres"
 	var any = saves.filter(func(s: Save): return s.name == _name)
 	if not any.is_empty():
 		(any.front() as Save).save_data()
@@ -57,7 +57,7 @@ func _get_saves() -> Array[Save]:
 
 	if dir:
 		for file_name: String in dir.get_files():
-			if ".save" in file_name:
+			if ".tres" in file_name and "NINSAVE" in file_name:
 				var _save := Save.new(file_name, self)
 				_saves.append(_save)
 	else:
