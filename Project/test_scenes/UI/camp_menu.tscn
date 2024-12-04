@@ -1,11 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4tbr1nbwy7tb"]
+[gd_scene load_steps=8 format=3 uid="uid://b4tbr1nbwy7tb"]
 
 [ext_resource type="Script" path="res://test_scenes/UI/camp_menu.gd" id="1_ea34l"]
+[ext_resource type="Script" path="res://assets/gui/menus/menu_container.gd" id="2_jxgan"]
 [ext_resource type="Script" path="res://assets/gui/menus/menu.gd" id="2_kouvb"]
 [ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_g52xf"]
 [ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="4_s1lth"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ysaax"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2nb4v"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -15,74 +16,127 @@ shader_parameter/pixel_size = 0.01
 shader_parameter/corner_radius = 0.01
 shader_parameter/invert = false
 
-[node name="CampMenu" type="MarginContainer"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lvvrb"]
+shader = ExtResource("3_g52xf")
+shader_parameter/progress = 0.0
+shader_parameter/noise_desnity = 30.0
+shader_parameter/beam_size = 0.01
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pixel_size = 0.01
+shader_parameter/corner_radius = 0.1
+shader_parameter/invert = false
+
+[node name="CampMenu" type="Control"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -220.0
+offset_right = -240.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_ea34l")
 
-[node name="Menu" type="PanelContainer" parent="." node_paths=PackedStringArray("focus_target", "effect")]
-layout_mode = 2
+[node name="MenuContainer" type="Container" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = -69.0
+offset_right = 74.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+script = ExtResource("2_jxgan")
+
+[node name="CMenu" type="PanelContainer" parent="MenuContainer" node_paths=PackedStringArray("focus_target", "effect")]
+unique_name_in_owner = true
+layout_mode = 2
 mouse_filter = 2
 script = ExtResource("2_kouvb")
 focus_target = NodePath("MarginContainer/CampMenu/RestButton")
 effect = NodePath("EffectLayer")
 
-[node name="Panel" type="Panel" parent="Menu"]
+[node name="Panel" type="Panel" parent="MenuContainer/CMenu"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+[node name="MarginContainer" type="MarginContainer" parent="MenuContainer/CMenu"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="CampMenu" type="VBoxContainer" parent="Menu/MarginContainer"]
+[node name="CampMenu" type="VBoxContainer" parent="MenuContainer/CMenu/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="CampName" type="Label" parent="Menu/MarginContainer/CampMenu"]
+[node name="CampName" type="Label" parent="MenuContainer/CMenu/MarginContainer/CampMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Menu/MarginContainer/CampMenu"]
+[node name="Control" type="Control" parent="MenuContainer/CMenu/MarginContainer/CampMenu"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RestButton" type="Button" parent="Menu/MarginContainer/CampMenu"]
+[node name="RestButton" type="Button" parent="MenuContainer/CMenu/MarginContainer/CampMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Rest"
 
-[node name="Button" type="Button" parent="Menu/MarginContainer/CampMenu"]
+[node name="Blacksmith" type="Button" parent="MenuContainer/CMenu/MarginContainer/CampMenu"]
+unique_name_in_owner = true
 layout_mode = 2
+text = "BlackSmith"
+
+[node name="LevelUp" type="Button" parent="MenuContainer/CMenu/MarginContainer/CampMenu"]
+layout_mode = 2
+disabled = true
+text = "Level Up"
+
+[node name="Button3" type="Button" parent="MenuContainer/CMenu/MarginContainer/CampMenu"]
+layout_mode = 2
+disabled = true
 text = "button"
 
-[node name="Button2" type="Button" parent="Menu/MarginContainer/CampMenu"]
-layout_mode = 2
-text = "button"
-
-[node name="Button3" type="Button" parent="Menu/MarginContainer/CampMenu"]
-layout_mode = 2
-text = "button"
-
-[node name="EffectLayer" type="ColorRect" parent="Menu"]
-material = SubResource("ShaderMaterial_ysaax")
+[node name="EffectLayer" type="ColorRect" parent="MenuContainer/CMenu"]
+material = SubResource("ShaderMaterial_2nb4v")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("4_s1lth")
 corner_radius = 0.01
 
-[connection signal="pressed" from="Menu/MarginContainer/CampMenu/RestButton" to="." method="_on_rest_button_pressed"]
+[node name="BlacksmithMenu" type="PanelContainer" parent="MenuContainer" node_paths=PackedStringArray("effect")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("2_kouvb")
+effect = NodePath("EffectLayer")
+
+[node name="PanelContainer" type="PanelContainer" parent="MenuContainer/BlacksmithMenu"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MenuContainer/BlacksmithMenu/PanelContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MenuContainer/BlacksmithMenu/PanelContainer"]
+layout_mode = 2
+text = "asd"
+
+[node name="EffectLayer" type="ColorRect" parent="MenuContainer/BlacksmithMenu"]
+material = SubResource("ShaderMaterial_lvvrb")
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("4_s1lth")
+
+[connection signal="pressed" from="MenuContainer/CMenu/MarginContainer/CampMenu/RestButton" to="." method="_on_rest_button_pressed"]
+[connection signal="pressed" from="MenuContainer/CMenu/MarginContainer/CampMenu/Blacksmith" to="." method="_on_blacksmith_pressed"]

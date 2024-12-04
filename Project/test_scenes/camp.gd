@@ -2,12 +2,17 @@ extends InteractionArea
 class_name Camp
 
 @export var camp_name: StringName
+@export var anvil: bool = false
 
 var active: bool = false
 var player: Player
 var in_camp: bool
 
 signal _interact(b: bool)
+
+
+func _ready() -> void:
+	%Anvil.visible = anvil
 
 
 func activate() -> void:

@@ -52,12 +52,23 @@ script = ExtResource("1_hw7vp")
 sprite_frames = SubResource("SpriteFrames_qq5pc")
 autoplay = "default"
 frame_progress = 0.00016022
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_c1m45")
+metadata/_edit_lock_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.5
 range_layer_min = -1
 texture = SubResource("CompressedTexture2D_xi5l2")
 texture_scale = 0.5
+metadata/_edit_lock_ = true
+
+[node name="Anvil" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(7, 0)
+texture = ExtResource("2_k0lgi")
+region_enabled = true
+region_rect = Rect2(90, 90, 10, 10)
+region_filter_clip_enabled = true

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=3 format=3 uid="uid://djlss1sn6fbkd"]
+
+[ext_resource type="Script" path="res://assets/data/model/item.gd" id="1_m3dgq"]
+[ext_resource type="Script" path="res://assets/data/model/recipe.gd" id="2_tn7pi"]
+
+[resource]
+script = ExtResource("2_tn7pi")
+required_items = Array[ExtResource("1_m3dgq")]([])
+result_item = Array[ExtResource("1_m3dgq")]([])

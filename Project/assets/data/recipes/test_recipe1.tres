@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=5 format=3 uid="uid://df7kwke3d4jpv"]
+
+[ext_resource type="Script" path="res://assets/data/model/item.gd" id="1_owok0"]
+[ext_resource type="Resource" uid="uid://dwjomx0pywg1n" path="res://assets/data/items/coin.tres" id="2_nukwg"]
+[ext_resource type="Script" path="res://assets/data/model/recipe.gd" id="2_wr5xv"]
+[ext_resource type="Resource" uid="uid://7q383kvqnpb1" path="res://assets/data/items/hammer.tres" id="3_2tl42"]
+
+[resource]
+script = ExtResource("2_wr5xv")
+required_items = Array[ExtResource("1_owok0")]([ExtResource("2_nukwg"), ExtResource("2_nukwg")])
+result_item = Array[ExtResource("1_owok0")]([ExtResource("3_2tl42")])
