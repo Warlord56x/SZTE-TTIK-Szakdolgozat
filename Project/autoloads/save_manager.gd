@@ -53,7 +53,7 @@ func save_game(_name: String = "", slot: SaveSlot = current_slot) -> void:
 ## If there are no saves in a slot (see [member SaveSlot.saves]), returns [code]false[/code],
 ## otherwise loads the first save and returns [code]true[/code]
 func load_game(slot: SaveSlot = current_slot) -> bool:
-	var key_exclude := ["filename", "parent", "checkpoint", "position"]
+	var key_exclude := ["filename", "parent", "checkpoint", "position", "inventory"]
 	var nodes = get_tree().get_nodes_in_group("Persistent")
 
 	if slot.saves.is_empty():
@@ -78,6 +78,13 @@ func load_game(slot: SaveSlot = current_slot) -> bool:
 				new_object.camp = camp
 		if "position" in node_data:
 			new_object.position = node_data["position"]
+		if "inventory" in node_data:
+			prints(new_object.inventory._items, node_data["inventory"])
+			for item in node_data["inventory"]:
+				var inv: Inventory = new_object.inventory
+				inv.add_item(item)
+			print(new_object.inventory._items)
+			
 		get_node(node_data["parent"]).add_child(new_object, true)
 		new_object.add_to_group("Persistent")
 

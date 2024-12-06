@@ -14,7 +14,7 @@
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6yxii"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ibk1e"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -28,7 +28,7 @@ shader_parameter/invert = false
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkct8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b1emp"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -127,7 +127,7 @@ layout_mode = 2
 text = "Save & Exit"
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/Main"]
-material = SubResource("ShaderMaterial_6yxii")
+material = SubResource("ShaderMaterial_ibk1e")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -189,7 +189,7 @@ focus_neighbor_top = NodePath("../VsyncCheck")
 text = "apply"
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/Settings"]
-material = SubResource("ShaderMaterial_vkct8")
+material = SubResource("ShaderMaterial_b1emp")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

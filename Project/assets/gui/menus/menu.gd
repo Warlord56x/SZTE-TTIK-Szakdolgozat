@@ -10,7 +10,7 @@ class_name Menu
 
 func _ready() -> void:
 	visibility_changed.connect(vis_changed)
-	visible = false or visible_default
+	visible = visible_default
 	if visible:
 		vis_changed()
 	scale.x = 0.001
@@ -29,6 +29,10 @@ func ready() -> void:
 func vis_changed() -> void:
 	if focus_target and visible:
 		focus_target.grab_focus()
+
+
+func _get_minimum_size() -> Vector2:
+	return Vector2.ZERO
 
 
 func switch() -> void:

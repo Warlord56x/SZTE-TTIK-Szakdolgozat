@@ -14,7 +14,11 @@ class_name ItemWheel
 			queue_sort()
 			angle = (a % 360 + 360) % 360
 
-@export var inventory: Inventory
+var inventory: Inventory:
+	set(inv):
+		inventory = inv
+		inventory.items_changed.connect(update_wheel)
+		update_wheel()
 
 var coords: Array[Vector2] = []
 var min_node: WheelItem
@@ -51,12 +55,13 @@ func _notification(what: int) -> void:
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		update_wheel()
-		inventory.items_changed.connect(update_wheel)
 
 
-func update_wheel() -> void:
+func update_wheel(_item: Item = null) -> void:
 	for slot: WheelItem in get_children():
 		slot.item = null
+	if not inventory:
+		return
 
 	for item_idx in len(inventory.get_items()):
 		var wheel_slot: WheelItem = get_child(item_idx)

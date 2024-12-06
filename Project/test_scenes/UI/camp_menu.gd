@@ -6,6 +6,8 @@ class_name CampMenu
 @onready var menu: Menu = %CMenu
 @onready var blacksmith_menu: Menu = %BlacksmithMenu
 
+var player: Player = null
+
 
 func _ready() -> void:
 	# Must wait til the nodes initialize
@@ -18,6 +20,8 @@ func _ready() -> void:
 func camp_menu_controller(b: bool, camp: Camp = null) -> void:
 	if b:
 		camp_name.text = camp.camp_name
+		player = camp.player
+		blacksmith_menu.player = player
 		blacksmith.disabled = not camp.anvil
 		menu.open()
 	else:

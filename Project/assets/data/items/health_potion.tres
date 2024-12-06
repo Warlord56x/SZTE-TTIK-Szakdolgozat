@@ -16,6 +16,6 @@ effect_time = 5.0
 effect_interval = 1.0
 name = "Health Potion"
 icon = SubResource("AtlasTexture_t8vdo")
-stack = 5
+stack = 1
 stack_size = 10
 cooldown = 5.1

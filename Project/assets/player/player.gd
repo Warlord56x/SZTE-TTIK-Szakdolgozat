@@ -18,7 +18,7 @@ enum player_res {
 	STAMINA,
 }
 
-@export var inventory: Inventory
+var inventory: Inventory = Inventory.new()
 @export var tool_tip_node: DebugInfo
 @export var debug: bool = false
 
@@ -299,6 +299,11 @@ func request_interaction_visible(b: bool) -> void:
 
 
 func save() -> Dictionary:
+	
+	var test = []
+	for item in inventory.get_items():
+		test.append(item.duplicate())
+	
 	return {
 		"filename" : get_scene_file_path(),
 		"parent": get_parent().get_path(),
@@ -306,7 +311,7 @@ func save() -> Dictionary:
 		"mana" : mana,
 		"coins" : coins,
 		"camp" : camp.camp_name if camp else &"",
-		"inventory" : inventory
+		"inventory" : test
 	}
 
 
@@ -324,10 +329,14 @@ func _ready() -> void:
 		inventory.items_changed.connect(items_changed)
 
 
-func items_changed() -> void:
-	for item in inventory.get_items():
-		if item.name.to_lower() == "coin":
-			_coins.value = item.stack
+func items_changed(item: Item) -> void:
+	if not item:
+		return
+	if item.name.to_lower() == "coin":
+		_coins.value = item.stack
+	print("\nItems changed")
+	for _item in inventory.get_items():
+		prints(_item.name, _item.stack)
 
 
 func blinker(val: float):

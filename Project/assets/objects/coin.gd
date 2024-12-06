@@ -12,5 +12,5 @@ func save() -> Dictionary:
 
 func _on_player_entered(body : Node2D) -> void:
 	if body is Player:
-		body.coins += 1
+		body.inventory.add_item(ItemLoader.COIN)
 		queue_free()

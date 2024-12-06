@@ -25,6 +25,7 @@ func _init() -> void:
 
 	pivot_offset = size / 2
 	material.set_shader_parameter("inverse_x", invert)
+	mouse_filter = MouseFilter.MOUSE_FILTER_IGNORE
 
 
 func _set_progress(f: float) -> void:

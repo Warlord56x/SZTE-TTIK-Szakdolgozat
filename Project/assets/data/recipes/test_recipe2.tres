@@ -1,9 +1,17 @@
-[gd_resource type="Resource" script_class="Recipe" load_steps=3 format=3 uid="uid://djlss1sn6fbkd"]
+[gd_resource type="Resource" script_class="Recipe" load_steps=5 format=3 uid="uid://djlss1sn6fbkd"]
 
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_edare"]
 [ext_resource type="Script" path="res://assets/data/model/item.gd" id="1_m3dgq"]
 [ext_resource type="Script" path="res://assets/data/model/recipe.gd" id="2_tn7pi"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_whhna"]
+atlas = ExtResource("1_edare")
+region = Rect2(70, 70, 10, 10)
+filter_clip = true
+
 [resource]
 script = ExtResource("2_tn7pi")
+name = "Test2"
+icon = SubResource("AtlasTexture_whhna")
 required_items = Array[ExtResource("1_m3dgq")]([])
 result_item = Array[ExtResource("1_m3dgq")]([])

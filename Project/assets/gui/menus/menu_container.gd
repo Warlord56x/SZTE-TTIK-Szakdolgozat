@@ -8,19 +8,19 @@ var previous_scales = {}
 func _ready() -> void:
 	for child: Control in get_children():
 		previous_scales[child] = child.scale
-	size_flags_changed.connect(queue_sort)
 
 
 func _process(_delta: float) -> void:
 	for child: Control in get_children():
 		var current_scale = child.scale
 		if current_scale != previous_scales[child]:
+			minimum_size_changed.emit()
 			queue_sort()
 			previous_scales[child] = current_scale
 
 
 func _get_minimum_size() -> Vector2:
-	var min_size := Vector2.ZERO
+	var min_size := (get_child(0) as Control).get_minimum_size()
 	for child: Control in get_children():
 		if child.visible:
 			min_size.x += child.get_minimum_size().x * child.scale.x

@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4tbr1nbwy7tb"]
+[gd_scene load_steps=9 format=3 uid="uid://b4tbr1nbwy7tb"]
 
 [ext_resource type="Script" path="res://test_scenes/UI/camp_menu.gd" id="1_ea34l"]
 [ext_resource type="Script" path="res://assets/gui/menus/menu_container.gd" id="2_jxgan"]
 [ext_resource type="Script" path="res://assets/gui/menus/menu.gd" id="2_kouvb"]
 [ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_g52xf"]
 [ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="4_s1lth"]
+[ext_resource type="Script" path="res://test_scenes/UI/blacksmith_menu.gd" id="6_dx3ak"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2nb4v"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ofi6o"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -16,7 +17,7 @@ shader_parameter/pixel_size = 0.01
 shader_parameter/corner_radius = 0.01
 shader_parameter/invert = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lvvrb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l2r0r"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -31,7 +32,7 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -240.0
+offset_right = -60.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -39,24 +40,21 @@ script = ExtResource("1_ea34l")
 
 [node name="MenuContainer" type="Container" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -74.0
-offset_top = -69.0
-offset_right = 74.0
-offset_bottom = 69.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_jxgan")
 
 [node name="CMenu" type="PanelContainer" parent="MenuContainer" node_paths=PackedStringArray("focus_target", "effect")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("2_kouvb")
 focus_target = NodePath("MarginContainer/CampMenu/RestButton")
@@ -82,6 +80,7 @@ mouse_filter = 2
 [node name="CampName" type="Label" parent="MenuContainer/CMenu/MarginContainer/CampMenu"]
 unique_name_in_owner = true
 layout_mode = 2
+horizontal_alignment = 1
 
 [node name="Control" type="Control" parent="MenuContainer/CMenu/MarginContainer/CampMenu"]
 custom_minimum_size = Vector2(0, 20)
@@ -109,7 +108,7 @@ disabled = true
 text = "button"
 
 [node name="EffectLayer" type="ColorRect" parent="MenuContainer/CMenu"]
-material = SubResource("ShaderMaterial_2nb4v")
+material = SubResource("ShaderMaterial_ofi6o")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -119,24 +118,81 @@ corner_radius = 0.01
 [node name="BlacksmithMenu" type="PanelContainer" parent="MenuContainer" node_paths=PackedStringArray("effect")]
 unique_name_in_owner = true
 layout_mode = 2
-script = ExtResource("2_kouvb")
+size_flags_vertical = 3
+script = ExtResource("6_dx3ak")
 effect = NodePath("EffectLayer")
 
-[node name="PanelContainer" type="PanelContainer" parent="MenuContainer/BlacksmithMenu"]
+[node name="TabContainer" type="TabContainer" parent="MenuContainer/BlacksmithMenu"]
+layout_mode = 2
+mouse_filter = 2
+current_tab = 0
+
+[node name="Craft" type="PanelContainer" parent="MenuContainer/BlacksmithMenu/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft"]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="MenuContainer/BlacksmithMenu/PanelContainer"]
+[node name="Recipes" type="VBoxContainer" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Recipes" type="Label" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer/Recipes"]
+layout_mode = 2
+text = "Recipes"
+
+[node name="RecipeList" type="ItemList" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer/Recipes"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_vertical = 3
+auto_height = true
+fixed_icon_size = Vector2i(10, 10)
+
+[node name="Ingredients" type="VBoxContainer" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="MenuContainer/BlacksmithMenu/PanelContainer"]
+[node name="Ingredients" type="Label" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer/Ingredients"]
 layout_mode = 2
-text = "asd"
+text = "Ingredients"
+
+[node name="IngredientContainer" type="ItemList" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer/Ingredients"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+auto_height = true
+fixed_icon_size = Vector2i(10, 10)
+
+[node name="Results" type="Label" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer/Ingredients"]
+layout_mode = 2
+text = "Results"
+
+[node name="ResultsContainer" type="ItemList" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer/Ingredients"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+auto_height = true
+fixed_icon_size = Vector2i(10, 10)
+
+[node name="Craft" type="Button" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer/Ingredients"]
+layout_mode = 2
+text = "Craft"
+
+[node name="Upgrade" type="PanelContainer" parent="MenuContainer/BlacksmithMenu/TabContainer"]
+visible = false
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+mouse_filter = 2
+metadata/_tab_index = 1
 
 [node name="EffectLayer" type="ColorRect" parent="MenuContainer/BlacksmithMenu"]
-material = SubResource("ShaderMaterial_lvvrb")
+material = SubResource("ShaderMaterial_l2r0r")
 layout_mode = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("4_s1lth")
 
 [connection signal="pressed" from="MenuContainer/CMenu/MarginContainer/CampMenu/RestButton" to="." method="_on_rest_button_pressed"]
 [connection signal="pressed" from="MenuContainer/CMenu/MarginContainer/CampMenu/Blacksmith" to="." method="_on_blacksmith_pressed"]
+[connection signal="pressed" from="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer/Ingredients/Craft" to="MenuContainer/BlacksmithMenu" method="_on_craft_pressed"]
