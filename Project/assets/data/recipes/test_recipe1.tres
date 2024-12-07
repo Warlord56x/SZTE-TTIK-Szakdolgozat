@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="Recipe" load_steps=7 format=3 uid="uid://df7kwke3d4jpv"]
+[gd_resource type="Resource" script_class="Recipe" load_steps=9 format=3 uid="uid://df7kwke3d4jpv"]
 
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_5pk3m"]
-[ext_resource type="Script" path="res://assets/data/model/item.gd" id="1_owok0"]
+[ext_resource type="Script" path="res://assets/data/model/ingredient.gd" id="2_axsar"]
 [ext_resource type="Resource" uid="uid://dwjomx0pywg1n" path="res://assets/data/items/coin.tres" id="2_nukwg"]
 [ext_resource type="Script" path="res://assets/data/model/recipe.gd" id="2_wr5xv"]
 [ext_resource type="Resource" uid="uid://hd2muhlnrdsc" path="res://assets/data/items/bow.tres" id="4_x6jjd"]
@@ -11,9 +11,19 @@ atlas = ExtResource("1_5pk3m")
 region = Rect2(10, 50, 10, 10)
 filter_clip = true
 
+[sub_resource type="Resource" id="Resource_xksbj"]
+script = ExtResource("2_axsar")
+item = ExtResource("2_nukwg")
+amount = 2
+
+[sub_resource type="Resource" id="Resource_viknk"]
+script = ExtResource("2_axsar")
+item = ExtResource("4_x6jjd")
+amount = 1
+
 [resource]
 script = ExtResource("2_wr5xv")
 name = "Bow"
 icon = SubResource("AtlasTexture_lq5fm")
-required_items = Array[ExtResource("1_owok0")]([ExtResource("2_nukwg"), ExtResource("2_nukwg")])
-result_item = Array[ExtResource("1_owok0")]([ExtResource("4_x6jjd")])
+required_items = Array[ExtResource("2_axsar")]([SubResource("Resource_xksbj")])
+result_item = Array[ExtResource("2_axsar")]([SubResource("Resource_viknk")])

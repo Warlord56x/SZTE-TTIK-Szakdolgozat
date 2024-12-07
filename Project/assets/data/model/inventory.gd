@@ -38,19 +38,11 @@ func remove_item(item: Item) -> void:
 	var _item = get_item(it)
 
 	if _item:
-		get_item(it).stack -= 1
+		if _item.stack_size > 0:
+			get_item(it).stack -= 1
+		else:
+			_items.remove_at(it)
 	items_changed.emit(_item)
-
-
-func move_item(pos: int, item: Item) -> void:
-	var it = find_item(item)
-	if it == -1:
-		return
-	_items.remove_at(it)
-	if pos >= _items.size():
-		_items.resize(pos + 1)
-	_items.insert(pos, item)
-	items_changed.emit(null)
 
 
 func fill_action_slots(array: Array[Item]) -> void:

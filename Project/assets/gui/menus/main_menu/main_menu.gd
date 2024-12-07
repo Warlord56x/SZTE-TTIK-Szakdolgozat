@@ -13,7 +13,8 @@ func _ready() -> void:
 
 
 func _on_continue_button_pressed() -> void:
-	NodeLoader.done.connect(load_done)
+	if not NodeLoader.done.is_connected(load_done):
+		NodeLoader.done.connect(load_done)
 	GameEnv.fade_in("Loading...")
 	GameEnv.load_icon(true)
 	await GameEnv.fade_step_in

@@ -197,7 +197,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 # Should do a parry
-	if event.is_action_pressed("test"):
+	if event.is_action_pressed("parry"):
 		if not state_machine.get_state("parry").active:
 			state_machine.travel("parry")
 

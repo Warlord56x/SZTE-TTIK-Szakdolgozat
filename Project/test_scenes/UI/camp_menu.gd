@@ -36,6 +36,7 @@ func player_rest(_player: Player = player) -> void:
 
 
 func _on_rest_button_pressed() -> void:
+	player_rest()
 	SaveManager.save_game()
 	GameEnv.respawn_enemies()
 

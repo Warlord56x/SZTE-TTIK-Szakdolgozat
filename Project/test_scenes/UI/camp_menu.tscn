@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4tbr1nbwy7tb"]
+[gd_scene load_steps=10 format=3 uid="uid://b4tbr1nbwy7tb"]
 
 [ext_resource type="Script" path="res://test_scenes/UI/camp_menu.gd" id="1_ea34l"]
 [ext_resource type="Script" path="res://assets/gui/menus/menu_container.gd" id="2_jxgan"]
@@ -16,6 +16,11 @@ shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/pixel_size = 0.01
 shader_parameter/corner_radius = 0.01
 shader_parameter/invert = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_3t5f0"]
+line_spacing = 0.0
+font_size = 6
+font_color = Color(1, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kyns2"]
 shader = ExtResource("3_g52xf")
@@ -131,18 +136,23 @@ current_tab = 0
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft"]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 
-[node name="Recipes" type="VBoxContainer" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Recipes" type="VBoxContainer" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Recipes" type="Label" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer/Recipes"]
+[node name="Recipes" type="Label" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Recipes"]
 layout_mode = 2
 text = "Recipes"
 
-[node name="RecipeList" type="ItemList" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer/Recipes"]
+[node name="RecipeList" type="ItemList" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Recipes"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -150,14 +160,15 @@ size_flags_vertical = 3
 auto_height = true
 fixed_icon_size = Vector2i(10, 10)
 
-[node name="Ingredients" type="VBoxContainer" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer"]
+[node name="Ingredients" type="VBoxContainer" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Ingredients" type="Label" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer/Ingredients"]
+[node name="Ingredients" type="Label" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
 layout_mode = 2
 text = "Ingredients"
 
-[node name="IngredientContainer" type="ItemList" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer/Ingredients"]
+[node name="IngredientContainer" type="ItemList" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -165,11 +176,11 @@ focus_mode = 0
 auto_height = true
 fixed_icon_size = Vector2i(10, 10)
 
-[node name="Results" type="Label" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer/Ingredients"]
+[node name="Results" type="Label" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
 layout_mode = 2
 text = "Results"
 
-[node name="ResultsContainer" type="ItemList" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer/Ingredients"]
+[node name="ResultsContainer" type="ItemList" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -177,9 +188,15 @@ focus_mode = 0
 auto_height = true
 fixed_icon_size = Vector2i(10, 10)
 
-[node name="Craft" type="Button" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer/Ingredients"]
+[node name="Craft" type="Button" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
 layout_mode = 2
 text = "Craft"
+
+[node name="ErrorLabel" type="Label" parent="MenuContainer/BlacksmithMenu/TabContainer/Craft/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "asd"
+label_settings = SubResource("LabelSettings_3t5f0")
 
 [node name="Upgrade" type="PanelContainer" parent="MenuContainer/BlacksmithMenu/TabContainer"]
 visible = false
@@ -197,4 +214,4 @@ script = ExtResource("4_s1lth")
 
 [connection signal="pressed" from="MenuContainer/CMenu/MarginContainer/CampMenu/RestButton" to="." method="_on_rest_button_pressed"]
 [connection signal="pressed" from="MenuContainer/CMenu/MarginContainer/CampMenu/Blacksmith" to="." method="_on_blacksmith_pressed"]
-[connection signal="pressed" from="MenuContainer/BlacksmithMenu/TabContainer/Craft/HBoxContainer/Ingredients/Craft" to="MenuContainer/BlacksmithMenu" method="_on_craft_pressed"]
+[connection signal="pressed" from="MenuContainer/BlacksmithMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients/Craft" to="MenuContainer/BlacksmithMenu" method="_on_craft_pressed"]
