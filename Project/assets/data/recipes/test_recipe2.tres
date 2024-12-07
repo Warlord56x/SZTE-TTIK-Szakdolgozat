@@ -1,17 +1,19 @@
-[gd_resource type="Resource" script_class="Recipe" load_steps=5 format=3 uid="uid://djlss1sn6fbkd"]
+[gd_resource type="Resource" script_class="Recipe" load_steps=7 format=3 uid="uid://djlss1sn6fbkd"]
 
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_edare"]
 [ext_resource type="Script" path="res://assets/data/model/item.gd" id="1_m3dgq"]
 [ext_resource type="Script" path="res://assets/data/model/recipe.gd" id="2_tn7pi"]
+[ext_resource type="Resource" uid="uid://dwjomx0pywg1n" path="res://assets/data/items/coin.tres" id="3_2nvyi"]
+[ext_resource type="Resource" uid="uid://b6iewkldjgof1" path="res://assets/data/items/sword.tres" id="4_r1xj7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_whhna"]
 atlas = ExtResource("1_edare")
-region = Rect2(70, 70, 10, 10)
+region = Rect2(140, 90, 10, 10)
 filter_clip = true
 
 [resource]
 script = ExtResource("2_tn7pi")
-name = "Test2"
+name = "Sword"
 icon = SubResource("AtlasTexture_whhna")
-required_items = Array[ExtResource("1_m3dgq")]([])
-result_item = Array[ExtResource("1_m3dgq")]([])
+required_items = Array[ExtResource("1_m3dgq")]([ExtResource("3_2nvyi"), ExtResource("3_2nvyi"), ExtResource("3_2nvyi")])
+result_item = Array[ExtResource("1_m3dgq")]([ExtResource("4_r1xj7")])

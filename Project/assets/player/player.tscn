@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://diq8ndw4ll1rm"]
+[gd_scene load_steps=108 format=3 uid="uid://diq8ndw4ll1rm"]
 
 [ext_resource type="Script" path="res://assets/player/player.gd" id="1_0p7ex"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="2_imbft"]
@@ -28,6 +28,7 @@
 [ext_resource type="Shader" path="res://assets/effects/shaders/blinker.gdshader" id="21_hreuu"]
 [ext_resource type="Texture2D" uid="uid://b4s3ar3xvuca5" path="res://assets/light_masks/2d_lights_and_shadows_neutral_point_light.webp" id="21_jh63l"]
 [ext_resource type="Script" path="res://assets/player/interactor.gd" id="23_ken48"]
+[ext_resource type="PackedScene" uid="uid://bngmpnj1xby7e" path="res://test_scenes/UI/inventory_menu.tscn" id="25_riq7e"]
 [ext_resource type="Script" path="res://helper_classes/hitbox.gd" id="26_3ibsb"]
 [ext_resource type="Script" path="res://helper_classes/hurtbox.gd" id="28_80a7v"]
 
@@ -1152,7 +1153,7 @@ metadata/_edit_lock_ = true
 
 [node name="BuffComponent" type="Node" parent="." node_paths=PackedStringArray("display_element", "apply_to")]
 script = ExtResource("3_yjybh")
-display_element = NodePath("../HUD/Control/C/BuffDisplay")
+display_element = NodePath("../HUDLayer/Control/C/BuffDisplay")
 apply_to = NodePath("..")
 
 [node name="Interactor" type="Area2D" parent="."]
@@ -1206,10 +1207,10 @@ script = ExtResource("11_6y0kl")
 [node name="Parry" type="Node" parent="StateMachine"]
 script = ExtResource("17_vc88x")
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUDLayer" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="Control" type="MarginContainer" parent="HUD"]
+[node name="Control" type="MarginContainer" parent="HUDLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1221,97 +1222,97 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="C" type="HBoxContainer" parent="HUD/Control"]
+[node name="C" type="HBoxContainer" parent="HUDLayer/Control"]
 layout_mode = 2
 
-[node name="CV" type="VBoxContainer" parent="HUD/Control/C"]
+[node name="CV" type="VBoxContainer" parent="HUDLayer/Control/C"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="HealthBar" parent="HUD/Control/C/CV" instance=ExtResource("2_n15yp")]
+[node name="HealthBar" parent="HUDLayer/Control/C/CV" instance=ExtResource("2_n15yp")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ManaBar" parent="HUD/Control/C/CV" instance=ExtResource("3_nro24")]
+[node name="ManaBar" parent="HUDLayer/Control/C/CV" instance=ExtResource("3_nro24")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
 
-[node name="StaminaBar" parent="HUD/Control/C/CV" instance=ExtResource("4_mq3j0")]
+[node name="StaminaBar" parent="HUDLayer/Control/C/CV" instance=ExtResource("4_mq3j0")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="BuffDisplay" type="HBoxContainer" parent="HUD/Control/C"]
+[node name="BuffDisplay" type="HBoxContainer" parent="HUDLayer/Control/C"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUDLayer/Control"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 2
 
-[node name="Right" type="VBoxContainer" parent="HUD/Control/HBoxContainer"]
+[node name="Right" type="VBoxContainer" parent="HUDLayer/Control/HBoxContainer"]
 layout_mode = 2
 alignment = 2
 
-[node name="ButtonHelpAdd" type="HBoxContainer" parent="HUD/Control/HBoxContainer/Right"]
+[node name="ButtonHelpAdd" type="HBoxContainer" parent="HUDLayer/Control/HBoxContainer/Right"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="InteractHelper" type="HBoxContainer" parent="HUD/Control/HBoxContainer/Right/ButtonHelpAdd"]
+[node name="InteractHelper" type="HBoxContainer" parent="HUDLayer/Control/HBoxContainer/Right/ButtonHelpAdd"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="HUD/Control/HBoxContainer/Right/ButtonHelpAdd/InteractHelper"]
+[node name="Label" type="Label" parent="HUDLayer/Control/HBoxContainer/Right/ButtonHelpAdd/InteractHelper"]
 layout_mode = 2
 text = "Interact"
 label_settings = SubResource("LabelSettings_nd3cp")
 
-[node name="ActionHelp" parent="HUD/Control/HBoxContainer/Right/ButtonHelpAdd/InteractHelper" instance=ExtResource("8_5oe6t")]
+[node name="ActionHelp" parent="HUDLayer/Control/HBoxContainer/Right/ButtonHelpAdd/InteractHelper" instance=ExtResource("8_5oe6t")]
 layout_mode = 2
 action = SubResource("InputEventAction_ycvyp")
 joypad_button = 3
 
-[node name="Label" type="Label" parent="HUD/Control/HBoxContainer/Right/ButtonHelpAdd"]
+[node name="Label" type="Label" parent="HUDLayer/Control/HBoxContainer/Right/ButtonHelpAdd"]
 layout_mode = 2
 text = "Dash"
 label_settings = SubResource("LabelSettings_nd3cp")
 
-[node name="ActionHelp" parent="HUD/Control/HBoxContainer/Right/ButtonHelpAdd" instance=ExtResource("8_5oe6t")]
+[node name="ActionHelp" parent="HUDLayer/Control/HBoxContainer/Right/ButtonHelpAdd" instance=ExtResource("8_5oe6t")]
 layout_mode = 2
 action = SubResource("InputEventAction_m7hdm")
 joypad_button = 1
 
-[node name="RightMost" type="VBoxContainer" parent="HUD/Control/HBoxContainer"]
+[node name="RightMost" type="VBoxContainer" parent="HUDLayer/Control/HBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 1
 alignment = 2
 
-[node name="Coins" type="HBoxContainer" parent="HUD/Control/HBoxContainer/RightMost"]
+[node name="Coins" type="HBoxContainer" parent="HUDLayer/Control/HBoxContainer/RightMost"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Control" type="Control" parent="HUD/Control/HBoxContainer/RightMost/Coins"]
+[node name="Control" type="Control" parent="HUDLayer/Control/HBoxContainer/RightMost/Coins"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HUD/Control/HBoxContainer/RightMost/Coins/Control"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HUDLayer/Control/HBoxContainer/RightMost/Coins/Control"]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_fby1l")
 autoplay = "default"
 offset = Vector2(4, 4)
 
-[node name="CoinLabel" type="Label" parent="HUD/Control/HBoxContainer/RightMost/Coins"]
+[node name="CoinLabel" type="Label" parent="HUDLayer/Control/HBoxContainer/RightMost/Coins"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
@@ -1319,50 +1320,56 @@ text = "0000"
 label_settings = SubResource("LabelSettings_0g1ml")
 script = ExtResource("5_pflec")
 
-[node name="ButtonHelpAdd" type="HBoxContainer" parent="HUD/Control/HBoxContainer/RightMost"]
+[node name="ButtonHelpAdd" type="HBoxContainer" parent="HUDLayer/Control/HBoxContainer/RightMost"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="ActionHelp" parent="HUD/Control/HBoxContainer/RightMost/ButtonHelpAdd" instance=ExtResource("8_5oe6t")]
+[node name="ActionHelp" parent="HUDLayer/Control/HBoxContainer/RightMost/ButtonHelpAdd" instance=ExtResource("8_5oe6t")]
 layout_mode = 2
 action = SubResource("InputEventAction_2b412")
 joypad_button = 2
 
-[node name="Wheel" parent="HUD/Control/HBoxContainer/RightMost" instance=ExtResource("11_xmcr7")]
+[node name="Wheel" parent="HUDLayer/Control/HBoxContainer/RightMost" instance=ExtResource("11_xmcr7")]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/Control"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUDLayer/Control"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control/HBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUDLayer/Control/HBoxContainer2"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="HUD/Control/HBoxContainer2/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="HUDLayer/Control/HBoxContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(80, 76)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control/HBoxContainer2/VBoxContainer/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUDLayer/Control/HBoxContainer2/VBoxContainer/CenterContainer"]
 custom_minimum_size = Vector2(40, 24)
 layout_mode = 2
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="ActionHelp" parent="HUD/Control/HBoxContainer2/VBoxContainer/CenterContainer/HBoxContainer" instance=ExtResource("8_5oe6t")]
+[node name="ActionHelp" parent="HUDLayer/Control/HBoxContainer2/VBoxContainer/CenterContainer/HBoxContainer" instance=ExtResource("8_5oe6t")]
 layout_mode = 2
 action = SubResource("InputEventAction_mptw6")
 joypad_button = 13
 
-[node name="ActionHelp2" parent="HUD/Control/HBoxContainer2/VBoxContainer/CenterContainer/HBoxContainer" instance=ExtResource("8_5oe6t")]
+[node name="ActionHelp2" parent="HUDLayer/Control/HBoxContainer2/VBoxContainer/CenterContainer/HBoxContainer" instance=ExtResource("8_5oe6t")]
 layout_mode = 2
 action = SubResource("InputEventAction_jgwt8")
 joypad_button = 14
+
+[node name="InventoryLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="InventoryMenu" parent="InventoryLayer" instance=ExtResource("25_riq7e")]
+unique_name_in_owner = true
 
 [node name="Camera" type="Camera2D" parent="."]
 ignore_rotation = false

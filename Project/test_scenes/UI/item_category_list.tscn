@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://6ukr4nj0ehof"]
+
+[ext_resource type="Script" path="res://item_category_list.gd" id="1_1mas7"]
+
+[node name="ItemCategoryList" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1mas7")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+
+[node name="ItemList" type="ItemList" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+auto_height = true
+max_columns = 5
+fixed_icon_size = Vector2i(10, 10)
+
+[connection signal="focus_exited" from="ItemList" to="." method="_on_item_list_focus_exited"]
+[connection signal="item_activated" from="ItemList" to="." method="_on_item_list_item_activated"]

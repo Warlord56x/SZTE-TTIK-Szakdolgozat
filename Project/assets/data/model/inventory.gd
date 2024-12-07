@@ -6,6 +6,10 @@ var _items: Array[Item] = []
 signal items_changed(item: Item)
 
 
+func _init() -> void:
+	_items.resize(8)
+
+
 func add_item(item: Item) -> bool:
 	var it := find_item(item)
 	var _item := get_item(it)
@@ -17,9 +21,16 @@ func add_item(item: Item) -> bool:
 			return false
 	else:
 		_item = item
-		_items.append(item)
+		if item is WeaponItem or item is ConsumableItem:
+			_items.insert(0, _item)
+		else:
+			_items.append(_item)
 	items_changed.emit(_item)
 	return true
+
+
+func set_items(array: Array[Item]) -> void:
+	_items = array
 
 
 func remove_item(item: Item) -> void:
@@ -31,15 +42,39 @@ func remove_item(item: Item) -> void:
 	items_changed.emit(_item)
 
 
+func move_item(pos: int, item: Item) -> void:
+	var it = find_item(item)
+	if it == -1:
+		return
+	_items.remove_at(it)
+	if pos >= _items.size():
+		_items.resize(pos + 1)
+	_items.insert(pos, item)
+	items_changed.emit(null)
+
+
+func fill_action_slots(array: Array[Item]) -> void:
+	for item in array:
+		_items.erase(item)
+	array.append_array(_items)
+	_items.clear()
+	_items = array
+	items_changed.emit(null)
+
+
 func find_item(item: Item) -> int:
-	for it: int in range(_items.size()):
+	if not item:
+		return -1
+	for it: int in len(_items):
+		if not _items[it]:
+			continue
 		if _items[it].name == item.name:
 			return it
 	return -1
 
 
 func get_item(index: int) -> Item:
-	if index == -1:
+	if index >= _items.size() or index < 0:
 		return null
 	return _items[index]
 

@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://bngmpnj1xby7e"]
+
+[ext_resource type="Script" path="res://assets/gui/menus/menu.gd" id="1_1ujw8"]
+[ext_resource type="Script" path="res://test_scenes/UI/inventory_menu.gd" id="1_ckcee"]
+[ext_resource type="PackedScene" uid="uid://6ukr4nj0ehof" path="res://test_scenes/UI/item_category_list.tscn" id="2_qxi1d"]
+[ext_resource type="Script" path="res://assets/data/model/melee_weapon_item.gd" id="3_yqair"]
+[ext_resource type="Script" path="res://assets/data/model/consumable_item.gd" id="4_lx2a0"]
+[ext_resource type="Script" path="res://assets/data/model/ranged_weapon_item.gd" id="5_kd7lu"]
+[ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="6_nxjw7"]
+[ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="7_40dvf"]
+[ext_resource type="Script" path="res://assets/data/model/misc_item.gd" id="7_sb7xk"]
+[ext_resource type="PackedScene" uid="uid://dq3r6eq5kcrtt" path="res://test_scenes/UI/action_mapper.tscn" id="9_uktdj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7tm0h"]
+bg_color = Color(0.211765, 0.239216, 0.290196, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5iw2m"]
+shader = ExtResource("6_nxjw7")
+shader_parameter/progress = 0.0
+shader_parameter/noise_desnity = 30.0
+shader_parameter/beam_size = 0.01
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pixel_size = 0.01
+shader_parameter/corner_radius = 0.1
+shader_parameter/invert = false
+
+[node name="InventoryMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_ckcee")
+
+[node name="Menu" type="PanelContainer" parent="." node_paths=PackedStringArray("focus_target", "effect")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 116.0
+grow_vertical = 2
+size_flags_horizontal = 0
+script = ExtResource("1_1ujw8")
+focus_target = NodePath("Categories/ItemCategoryList/ItemList")
+effect = NodePath("EffectLayer")
+
+[node name="Panel" type="Panel" parent="Menu"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7tm0h")
+
+[node name="Categories" type="VBoxContainer" parent="Menu"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ItemCategoryList" parent="Menu/Categories" instance=ExtResource("2_qxi1d")]
+layout_mode = 2
+category = ExtResource("3_yqair")
+
+[node name="ItemCategoryList2" parent="Menu/Categories" instance=ExtResource("2_qxi1d")]
+layout_mode = 2
+category = ExtResource("5_kd7lu")
+
+[node name="ItemCategoryList3" parent="Menu/Categories" instance=ExtResource("2_qxi1d")]
+layout_mode = 2
+category = ExtResource("4_lx2a0")
+
+[node name="ItemCategoryList4" parent="Menu/Categories" instance=ExtResource("2_qxi1d")]
+layout_mode = 2
+category = ExtResource("7_sb7xk")
+
+[node name="EffectLayer" type="ColorRect" parent="Menu"]
+material = SubResource("ShaderMaterial_5iw2m")
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("7_40dvf")
+
+[node name="ActionMapper" parent="." instance=ExtResource("9_uktdj")]
+visible = false
+layout_mode = 0
+
+[editable path="Menu/Categories/ItemCategoryList"]

@@ -19,3 +19,7 @@ var used: bool = false:
 
 signal _used(u: bool)
 signal stack_changed
+
+
+func _to_string() -> String:
+	return str("Item: ",name)

@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="4_s1lth"]
 [ext_resource type="Script" path="res://test_scenes/UI/blacksmith_menu.gd" id="6_dx3ak"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ofi6o"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwumc"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -17,7 +17,7 @@ shader_parameter/pixel_size = 0.01
 shader_parameter/corner_radius = 0.01
 shader_parameter/invert = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l2r0r"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kyns2"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -108,7 +108,7 @@ disabled = true
 text = "button"
 
 [node name="EffectLayer" type="ColorRect" parent="MenuContainer/CMenu"]
-material = SubResource("ShaderMaterial_ofi6o")
+material = SubResource("ShaderMaterial_bwumc")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -161,6 +161,7 @@ text = "Ingredients"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+focus_mode = 0
 auto_height = true
 fixed_icon_size = Vector2i(10, 10)
 
@@ -172,6 +173,7 @@ text = "Results"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+focus_mode = 0
 auto_height = true
 fixed_icon_size = Vector2i(10, 10)
 
@@ -187,7 +189,7 @@ mouse_filter = 2
 metadata/_tab_index = 1
 
 [node name="EffectLayer" type="ColorRect" parent="MenuContainer/BlacksmithMenu"]
-material = SubResource("ShaderMaterial_l2r0r")
+material = SubResource("ShaderMaterial_kyns2")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

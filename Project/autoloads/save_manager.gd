@@ -79,12 +79,11 @@ func load_game(slot: SaveSlot = current_slot) -> bool:
 		if "position" in node_data:
 			new_object.position = node_data["position"]
 		if "inventory" in node_data:
-			prints(new_object.inventory._items, node_data["inventory"])
-			for item in node_data["inventory"]:
-				var inv: Inventory = new_object.inventory
-				inv.add_item(item)
-			print(new_object.inventory._items)
-			
+			var items: Array[Item] = []
+			for item: Item in node_data["inventory"]:
+				items.append(item)
+			new_object.inventory.set_items(items)
+
 		get_node(node_data["parent"]).add_child(new_object, true)
 		new_object.add_to_group("Persistent")
 

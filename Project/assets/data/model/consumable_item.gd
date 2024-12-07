@@ -21,3 +21,7 @@ func consume(consumer: Node2D) -> void:
 
 	effect.apply_to = buff_component.apply_to
 	buff_component.add_child(effect)
+
+
+func _to_string() -> String:
+	return str("Consumable: ", name)

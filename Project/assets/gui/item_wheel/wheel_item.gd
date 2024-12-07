@@ -11,7 +11,7 @@ class_name WheelItem
 @onready var cooldown_mat: ShaderMaterial = $CooldownRect.material as ShaderMaterial
 
 
-@export var item : Item = null:
+@export var item: Item = null:
 	set(it):
 		if item:
 			if item.stack_changed.is_connected(refresh_label):
@@ -19,17 +19,20 @@ class_name WheelItem
 			if item._used.is_connected(_used):
 				item._used.disconnect(_used)
 		if it:
-			item = it
 			item_rect.texture = it.icon
-			item.stack_changed.connect(refresh_label)
-			item._used.connect(_used)
+			it.stack_changed.connect(refresh_label)
+			it._used.connect(_used)
 		else:
 			item_rect.texture = null
+		item = it
 		refresh_label()
 
 
-@export var focus : bool = false:
-	set(f):
+@export var focus: bool = false:
+	set = set_focus
+
+
+func set_focus(f: bool) -> void:
 		if not is_node_ready():
 			await ready
 		for_ground.visible = f
@@ -38,6 +41,8 @@ class_name WheelItem
 
 func _ready() -> void:
 	refresh_label()
+	focus_entered.connect(set_focus.bind(true))
+	focus_exited.connect(set_focus.bind(false))
 
 
 func _used(used: bool) -> void:

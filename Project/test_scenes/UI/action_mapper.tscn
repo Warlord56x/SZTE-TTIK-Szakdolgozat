@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq3r6eq5kcrtt"]
+
+[ext_resource type="Script" path="res://test_scenes/UI/action_mapper.gd" id="1_bmg5c"]
+[ext_resource type="PackedScene" uid="uid://psxpi7w48ool" path="res://assets/gui/item_wheel/wheel_item.tscn" id="1_l1li4"]
+
+[node name="ActionMapper" type="PanelContainer"]
+offset_right = 196.0
+offset_bottom = 30.0
+script = ExtResource("1_bmg5c")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="Actions" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="WheelItem" parent="Actions" instance=ExtResource("1_l1li4")]
+layout_mode = 2
+
+[node name="WheelItem2" parent="Actions" instance=ExtResource("1_l1li4")]
+layout_mode = 2
+
+[node name="WheelItem3" parent="Actions" instance=ExtResource("1_l1li4")]
+layout_mode = 2
+
+[node name="WheelItem4" parent="Actions" instance=ExtResource("1_l1li4")]
+layout_mode = 2
+
+[node name="WheelItem5" parent="Actions" instance=ExtResource("1_l1li4")]
+layout_mode = 2
+
+[node name="WheelItem6" parent="Actions" instance=ExtResource("1_l1li4")]
+layout_mode = 2
+
+[node name="WheelItem7" parent="Actions" instance=ExtResource("1_l1li4")]
+layout_mode = 2
+
+[node name="WheelItem8" parent="Actions" instance=ExtResource("1_l1li4")]
+layout_mode = 2

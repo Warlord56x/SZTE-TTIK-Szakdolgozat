@@ -23,12 +23,12 @@ func update_list(index: int) -> void:
 	results_container.clear()
 
 	for ing in recipe.required_items:
-		var idx = ingredient_container.add_item(ing.name, ing.icon)
-		ingredient_container.set_item_metadata(idx, ing)
+		ingredient_container.add_item(ing.name, ing.icon)
+		#ingredient_container.set_item_metadata(idx, ing)
 
 	for ing in recipe.result_item:
-		var idx = results_container.add_item(ing.name, ing.icon)
-		results_container.set_item_metadata(idx, ing)
+		results_container.add_item(ing.name, ing.icon)
+		#results_container.set_item_metadata(idx, ing)
 
 
 func _on_craft_pressed() -> void:

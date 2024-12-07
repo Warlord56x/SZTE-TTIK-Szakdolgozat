@@ -299,11 +299,14 @@ func request_interaction_visible(b: bool) -> void:
 
 
 func save() -> Dictionary:
-	
-	var test = []
+
+	var items_duplicate = []
 	for item in inventory.get_items():
-		test.append(item.duplicate())
-	
+		if item:
+			items_duplicate.append(item.duplicate())
+		else:
+			items_duplicate.append(null)
+
 	return {
 		"filename" : get_scene_file_path(),
 		"parent": get_parent().get_path(),
@@ -311,7 +314,7 @@ func save() -> Dictionary:
 		"mana" : mana,
 		"coins" : coins,
 		"camp" : camp.camp_name if camp else &"",
-		"inventory" : test
+		"inventory" : items_duplicate
 	}
 
 
@@ -325,6 +328,7 @@ func _ready() -> void:
 	init_regen_timer(player_res.STAMINA, stamina_regen_wait_time, stamina_regen_time)
 
 	if inventory:
+		%InventoryMenu.inventory = inventory
 		action_wheel.inventory = inventory
 		inventory.items_changed.connect(items_changed)
 
@@ -334,9 +338,6 @@ func items_changed(item: Item) -> void:
 		return
 	if item.name.to_lower() == "coin":
 		_coins.value = item.stack
-	print("\nItems changed")
-	for _item in inventory.get_items():
-		prints(_item.name, _item.stack)
 
 
 func blinker(val: float):

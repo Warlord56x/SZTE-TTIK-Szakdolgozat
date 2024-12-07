@@ -58,22 +58,16 @@ func _ready() -> void:
 
 
 func update_wheel(_item: Item = null) -> void:
-	for slot: WheelItem in get_children():
-		slot.item = null
 	if not inventory:
 		return
+	for slot: WheelItem in get_children():
+		slot.item = null
 
-	for item_idx in len(inventory.get_items()):
+	for item_idx in get_child_count():
 		var wheel_slot: WheelItem = get_child(item_idx)
-		if not wheel_slot:
-			continue
 		var item = inventory.get_item(item_idx)
 
-		var is_weapon := item is WeaponItem
-		var is_consumable := item is ConsumableItem
-
-		if (is_weapon or is_consumable):
-			wheel_slot.item = item
+		wheel_slot.item = item
 
 
 func _get_minimum_size() -> Vector2:

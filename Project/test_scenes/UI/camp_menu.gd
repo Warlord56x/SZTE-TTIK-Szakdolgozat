@@ -29,6 +29,12 @@ func camp_menu_controller(b: bool, camp: Camp = null) -> void:
 		blacksmith_menu.close()
 
 
+func player_rest(_player: Player = player) -> void:
+	_player.health = _player.max_health
+	_player.mana = _player.max_mana
+	_player.stamina = _player.max_stamina
+
+
 func _on_rest_button_pressed() -> void:
 	SaveManager.save_game()
 	GameEnv.respawn_enemies()
