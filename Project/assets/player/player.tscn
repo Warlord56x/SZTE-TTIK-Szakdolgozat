@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://diq8ndw4ll1rm"]
+[gd_scene load_steps=110 format=3 uid="uid://diq8ndw4ll1rm"]
 
 [ext_resource type="Script" path="res://assets/player/player.gd" id="1_0p7ex"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="2_imbft"]
@@ -187,6 +187,10 @@ region = Rect2(20, 0, 10, 10)
 atlas = ExtResource("3_fxfhm")
 region = Rect2(100, 10, 10, 10)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_18m3w"]
+atlas = ExtResource("3_fxfhm")
+region = Rect2(10, 20, 10, 10)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_obot2"]
 atlas = ExtResource("3_fxfhm")
 region = Rect2(20, 0, 10, 10)
@@ -360,6 +364,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"interact",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_18m3w")
+}],
+"loop": false,
+"name": &"parry",
 "speed": 5.0
 }, {
 "frames": [{
@@ -1043,6 +1055,34 @@ tracks/1/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_dkwgg"]
+resource_name = "parry"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"parry"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kkiwx"]
 _data = {
 "RESET": SubResource("Animation_bl6il"),
@@ -1060,6 +1100,7 @@ _data = {
 "idle_crouch": SubResource("Animation_8erjy"),
 "idle_look_up": SubResource("Animation_sbyn6"),
 "interact": SubResource("Animation_joddm"),
+"parry": SubResource("Animation_dkwgg"),
 "run": SubResource("Animation_vhfg4"),
 "run_crouch": SubResource("Animation_wh445"),
 "run_look_up": SubResource("Animation_kub7i"),
@@ -1069,7 +1110,7 @@ _data = {
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_mhgmp"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nbwgx"]
-graph_offset = Vector2(-343, 20)
+graph_offset = Vector2(-502, 36)
 nodes/StateMachine/node = ExtResource("7_sdq1t")
 nodes/StateMachine/position = Vector2(-220, 100)
 nodes/speed/node = SubResource("AnimationNodeTimeScale_mhgmp")

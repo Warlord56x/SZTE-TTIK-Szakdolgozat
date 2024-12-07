@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://b2qrpcmioix5b"]
+[gd_scene load_steps=10 format=3 uid="uid://b2qrpcmioix5b"]
 
-[ext_resource type="PackedScene" uid="uid://dmk3l27wkrb82" path="res://assets/gui/menus/menu_elements/volume_slider.tscn" id="1_0gqsg"]
 [ext_resource type="Theme" uid="uid://dqa12gi8o5ol4" path="res://assets/theme/default_theme.tres" id="1_xwq5v"]
 [ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_5sbp6"]
 [ext_resource type="Script" path="res://assets/gui/menus/menu_container.gd" id="3_x1cqt"]
 [ext_resource type="Script" path="res://assets/gui/menus/game_menu/main_game_menu.gd" id="4_f786d"]
-[ext_resource type="Script" path="res://assets/gui/menus/game_menu/settings_game_menu.gd" id="6_s16td"]
+[ext_resource type="PackedScene" uid="uid://c02qudtqfyl0a" path="res://test_scenes/UI/settings_menu.tscn" id="6_4evkw"]
 [ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="6_wtw0d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qr1om"]
@@ -15,20 +14,6 @@ line_spacing = 0.0
 font_size = 12
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o3r50"]
-shader = ExtResource("3_5sbp6")
-shader_parameter/progress = 0.0
-shader_parameter/noise_desnity = 30.0
-shader_parameter/beam_size = 0.01
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/pixel_size = 0.01
-shader_parameter/corner_radius = 0.01
-shader_parameter/invert = false
-
-[sub_resource type="LabelSettings" id="LabelSettings_5jag3"]
-line_spacing = 0.0
-font_size = 12
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ysd1s"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -134,73 +119,10 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("6_wtw0d")
 corner_radius = 0.01
 
-[node name="Settings" type="PanelContainer" parent="Margin/MenuContainer" node_paths=PackedStringArray("effect")]
+[node name="Settings" parent="Margin/MenuContainer" instance=ExtResource("6_4evkw")]
 layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("6_s16td")
-effect = NodePath("Effect")
-
-[node name="Panel" type="Panel" parent="Margin/MenuContainer/Settings"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Margin/MenuContainer/Settings"]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Margin/MenuContainer/Settings/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Margin/MenuContainer/Settings/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Settings"
-label_settings = SubResource("LabelSettings_5jag3")
-horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="Margin/MenuContainer/Settings/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="MasterVolumeSlider" parent="Margin/MenuContainer/Settings/MarginContainer/VBoxContainer" instance=ExtResource("1_0gqsg")]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="FullscreenCheck" type="CheckButton" parent="Margin/MenuContainer/Settings/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "FullScreen"
-
-[node name="VsyncCheck" type="CheckButton" parent="Margin/MenuContainer/Settings/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-focus_neighbor_bottom = NodePath("../Apply")
-text = "Vsync"
-
-[node name="Spacer" type="Control" parent="Margin/MenuContainer/Settings/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="Apply" type="Button" parent="Margin/MenuContainer/Settings/MarginContainer/VBoxContainer"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../VsyncCheck")
-text = "apply"
-
-[node name="Effect" type="ColorRect" parent="Margin/MenuContainer/Settings"]
-material = SubResource("ShaderMaterial_ysd1s")
-layout_mode = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-script = ExtResource("6_wtw0d")
-corner_radius = 0.01
 
 [connection signal="pressed" from="Margin/MenuContainer/Main/MarginContainer/VBoxContainer/Continue" to="Margin/MenuContainer/Main" method="_on_continue_pressed"]
 [connection signal="pressed" from="Margin/MenuContainer/Main/MarginContainer/VBoxContainer/Settings" to="Margin/MenuContainer/Main" method="_on_settings_pressed"]
 [connection signal="pressed" from="Margin/MenuContainer/Main/MarginContainer/VBoxContainer/Back" to="Margin/MenuContainer/Main" method="_on_back_pressed"]
 [connection signal="pressed" from="Margin/MenuContainer/Main/MarginContainer/VBoxContainer/Exit" to="Margin/MenuContainer/Main" method="_on_exit_pressed"]
-[connection signal="volume_changed" from="Margin/MenuContainer/Settings/MarginContainer/VBoxContainer/MasterVolumeSlider" to="Margin/MenuContainer/Settings" method="_on_master_volume_slider_volume_changed"]
-[connection signal="toggled" from="Margin/MenuContainer/Settings/MarginContainer/VBoxContainer/FullscreenCheck" to="Margin/MenuContainer/Settings" method="_on_fullscreen_check_toggled"]
-[connection signal="toggled" from="Margin/MenuContainer/Settings/MarginContainer/VBoxContainer/VsyncCheck" to="Margin/MenuContainer/Settings" method="_on_vsync_check_toggled"]
-[connection signal="pressed" from="Margin/MenuContainer/Settings/MarginContainer/VBoxContainer/Apply" to="Margin/MenuContainer/Settings" method="_on_apply_pressed"]

@@ -13,15 +13,18 @@ func _ready() -> void:
 
 func enter() -> void:
 	parry_time.start()
+	player.anim_tree["parameters/speed/scale"] = 1
+	player.anim_state_m.travel("parry")
 	await get_tree().create_timer(0.4).timeout
 	travel("Default")
 
 
-func physics_process(_delta: float) -> void:
+func physics_process(delta: float) -> void:
 	var hb = player.get_node_or_null("HurtBox")
 	if hb:
 		pass
-		
+	if not player.is_on_floor():
+		player.velocity.y += player.gravity * delta
 
 
 func leave() -> void:

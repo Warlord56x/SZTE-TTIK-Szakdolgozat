@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=3 uid="uid://c02qudtqfyl0a"]
+
+[ext_resource type="Script" path="res://assets/gui/menus/game_menu/settings_game_menu.gd" id="1_ty0iu"]
+[ext_resource type="PackedScene" uid="uid://dmk3l27wkrb82" path="res://assets/gui/menus/menu_elements/volume_slider.tscn" id="2_c3e3u"]
+[ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_wtfp7"]
+[ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="4_qiejg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5jag3"]
+line_spacing = 0.0
+font_size = 12
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ji0q7"]
+shader = ExtResource("3_wtfp7")
+shader_parameter/progress = 0.0
+shader_parameter/noise_desnity = 30.0
+shader_parameter/beam_size = 0.01
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pixel_size = 0.01
+shader_parameter/corner_radius = 0.01
+shader_parameter/invert = false
+
+[node name="Settings" type="PanelContainer" node_paths=PackedStringArray("effect")]
+size_flags_vertical = 3
+script = ExtResource("1_ty0iu")
+effect = NodePath("Effect")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_5jag3")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MasterVolumeSlider" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_c3e3u")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 3
+popup/item_0/text = "Exclusive Fullscreen"
+popup/item_0/id = 4
+popup/item_1/text = "Borderless"
+popup/item_1/id = 3
+popup/item_2/text = "Windowed"
+
+[node name="VsyncCheck" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Apply")
+text = "Vsync"
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Apply" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../VsyncCheck")
+text = "apply"
+
+[node name="Effect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ji0q7")
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("4_qiejg")
+corner_radius = 0.01
+
+[connection signal="volume_changed" from="MarginContainer/VBoxContainer/MasterVolumeSlider" to="." method="_on_master_volume_slider_volume_changed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/VsyncCheck" to="." method="_on_vsync_check_toggled"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Apply" to="." method="_on_apply_pressed"]
