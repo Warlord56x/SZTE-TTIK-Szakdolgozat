@@ -9,6 +9,10 @@ var player: Player = null
 var recipe: Recipe = null
 
 
+func tab(idx: int) -> void:
+	$TabContainer.current_tab = idx
+
+
 func _ready() -> void:
 	super._ready()
 	for _recipe: Recipe in ItemLoader.ALL_RECIPES:

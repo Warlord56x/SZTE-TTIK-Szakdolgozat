@@ -1110,7 +1110,6 @@ _data = {
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_mhgmp"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nbwgx"]
-graph_offset = Vector2(-336, 26)
 nodes/StateMachine/node = ExtResource("7_sdq1t")
 nodes/StateMachine/position = Vector2(-220, 100)
 nodes/speed/node = SubResource("AnimationNodeTimeScale_mhgmp")
@@ -1183,7 +1182,6 @@ collision_mask = 17
 safe_margin = 0.1
 script = ExtResource("1_0p7ex")
 tool_tip_node = NodePath("DebugTooltip")
-debug = true
 inv_time = 0.3
 health_regen_wait_time = 1.5
 health_regen_time = 0.5

@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://assets/data/model/misc_item.gd" id="7_sb7xk"]
 [ext_resource type="PackedScene" uid="uid://dq3r6eq5kcrtt" path="res://test_scenes/UI/action_mapper.tscn" id="9_uktdj"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rj6sk"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0yxlt"]
 shader = ExtResource("6_nxjw7")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -47,6 +47,7 @@ effect = NodePath("EffectLayer")
 layout_mode = 2
 current_tab = 0
 clip_tabs = false
+tab_focus_mode = 0
 
 [node name="Inventory" type="PanelContainer" parent="Menu/TabContainer"]
 layout_mode = 2
@@ -73,7 +74,7 @@ layout_mode = 2
 category = ExtResource("7_sb7xk")
 
 [node name="EffectLayer" type="ColorRect" parent="Menu"]
-material = SubResource("ShaderMaterial_rj6sk")
+material = SubResource("ShaderMaterial_0yxlt")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

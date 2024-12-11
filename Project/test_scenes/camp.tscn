@@ -45,7 +45,7 @@ size = Vector2(10, 10)
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xi5l2"]
 load_path = "res://.godot/imported/2d_lights_and_shadows_neutral_point_light.webp-75f08da48e77c418c0e4c68f7863b944.ctex"
 
-[node name="Camp" type="Area2D" groups=["Camp"]]
+[node name="Camp" type="Area2D" groups=["Camp", "Persistent"]]
 script = ExtResource("1_hw7vp")
 
 [node name="Anim" type="AnimatedSprite2D" parent="."]

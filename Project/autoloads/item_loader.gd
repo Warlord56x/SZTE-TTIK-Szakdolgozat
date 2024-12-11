@@ -2,9 +2,11 @@ extends Node
 
 
 #region Recipe Region
+const TEST_RECIPE = preload("res://assets/data/recipes/test_recipe.tres")
 const TEST_RECIPE_1 = preload("res://assets/data/recipes/test_recipe1.tres")
 const TEST_RECIPE_2 = preload("res://assets/data/recipes/test_recipe2.tres")
-const TEST_RECIPE = preload("res://assets/data/recipes/test_recipe.tres")
+const TEST_RECIPE_3 = preload("res://assets/data/recipes/test_recipe3.tres")
+const TEST_RECIPE_4 = preload("res://assets/data/recipes/test_recipe4.tres")
 #endregion
 
 #region Loot Region
@@ -15,4 +17,10 @@ const HEALTH_POTION := preload("res://assets/data/items/health_potion.tres")
 
 
 const BASE_LOOT_TABLE := [BOW, COIN, HEALTH_POTION]
-const ALL_RECIPES := [TEST_RECIPE, TEST_RECIPE_1, TEST_RECIPE_2]
+const ALL_RECIPES := [
+	TEST_RECIPE,
+	TEST_RECIPE_1,
+	TEST_RECIPE_2,
+	TEST_RECIPE_3,
+	TEST_RECIPE_4
+]

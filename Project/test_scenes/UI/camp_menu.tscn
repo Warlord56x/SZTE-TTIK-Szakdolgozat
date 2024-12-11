@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b4tbr1nbwy7tb"]
+[gd_scene load_steps=11 format=3 uid="uid://b4tbr1nbwy7tb"]
 
 [ext_resource type="Script" path="res://test_scenes/UI/camp_menu.gd" id="1_ea34l"]
 [ext_resource type="Script" path="res://assets/gui/menus/menu_container.gd" id="2_jxgan"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_g52xf"]
 [ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="4_s1lth"]
 [ext_resource type="Script" path="res://test_scenes/UI/blacksmith_menu.gd" id="6_dx3ak"]
+[ext_resource type="Script" path="res://test_scenes/UI/travel.gd" id="7_diu0e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5rybl"]
 shader = ExtResource("3_g52xf")
@@ -109,7 +110,6 @@ text = "Level Up"
 
 [node name="Travel" type="Button" parent="MenuContainer/CMenu/MarginContainer/CampMenu"]
 layout_mode = 2
-disabled = true
 text = "Travel"
 
 [node name="EffectLayer" type="ColorRect" parent="MenuContainer/CMenu"]
@@ -130,9 +130,11 @@ effect = NodePath("EffectLayer")
 [node name="TabContainer" type="TabContainer" parent="MenuContainer/BlacksmithMenu"]
 layout_mode = 2
 mouse_filter = 2
-current_tab = 0
+current_tab = 1
+clip_tabs = false
 
 [node name="Craft" type="PanelContainer" parent="MenuContainer/BlacksmithMenu/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -199,11 +201,19 @@ text = "asd"
 label_settings = SubResource("LabelSettings_3t5f0")
 
 [node name="Upgrade" type="PanelContainer" parent="MenuContainer/BlacksmithMenu/TabContainer"]
-visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 mouse_filter = 2
 metadata/_tab_index = 1
+
+[node name="Travel" type="PanelContainer" parent="MenuContainer/BlacksmithMenu/TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("7_diu0e")
+metadata/_tab_index = 2
+
+[node name="ItemList" type="ItemList" parent="MenuContainer/BlacksmithMenu/TabContainer/Travel"]
+layout_mode = 2
 
 [node name="EffectLayer" type="ColorRect" parent="MenuContainer/BlacksmithMenu"]
 material = SubResource("ShaderMaterial_uf2jg")
@@ -214,4 +224,7 @@ script = ExtResource("4_s1lth")
 
 [connection signal="pressed" from="MenuContainer/CMenu/MarginContainer/CampMenu/RestButton" to="." method="_on_rest_button_pressed"]
 [connection signal="pressed" from="MenuContainer/CMenu/MarginContainer/CampMenu/Blacksmith" to="." method="_on_blacksmith_pressed"]
+[connection signal="pressed" from="MenuContainer/CMenu/MarginContainer/CampMenu/Travel" to="." method="_on_travel_pressed"]
 [connection signal="pressed" from="MenuContainer/BlacksmithMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients/Craft" to="MenuContainer/BlacksmithMenu" method="_on_craft_pressed"]
+[connection signal="visibility_changed" from="MenuContainer/BlacksmithMenu/TabContainer/Travel" to="MenuContainer/BlacksmithMenu/TabContainer/Travel" method="_on_visibility_changed"]
+[connection signal="item_activated" from="MenuContainer/BlacksmithMenu/TabContainer/Travel/ItemList" to="MenuContainer/BlacksmithMenu/TabContainer/Travel" method="_on_item_list_item_activated"]

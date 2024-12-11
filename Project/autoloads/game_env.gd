@@ -11,7 +11,7 @@ const MAIN_MENU := preload("res://assets/gui/menus/main_menu/main_menu.tscn")
 
 var input_process: bool = true
 
-var nodes_to_respawn: Array[Dictionary]
+var nodes_to_respawn: Array[Dictionary] = []
 
 signal fade_step_in
 signal fade_step_wait

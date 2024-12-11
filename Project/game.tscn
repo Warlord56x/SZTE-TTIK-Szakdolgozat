@@ -277,6 +277,7 @@ tile_set = SubResource("TileSet_pc6ag")
 [node name="Camp" parent="TileMap/Camps" instance=ExtResource("10_kdo32")]
 position = Vector2(-16, -12)
 camp_name = &"Base Camp"
+anvil = true
 
 [node name="Camp2" parent="TileMap/Camps" instance=ExtResource("10_kdo32")]
 position = Vector2(416, -100)

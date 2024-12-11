@@ -377,7 +377,6 @@ func _process(_delta: float) -> void:
 			"Health: ", health, "/", max_health, "\n",
 			"State: ", state_machine.current_state.name, "\n",
 			"State: ", anim_state_m.get_current_node(), "\n",
-			"Invincible: ", collision_layer == 8, "\n",
 			"Position: ", global_position, "\n",
 			"Knock_back: ", pushback_force, "\n",
 			"Velocity: ", velocity, "\n",

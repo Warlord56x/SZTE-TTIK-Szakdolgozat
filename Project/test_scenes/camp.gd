@@ -11,6 +11,17 @@ var in_camp: bool
 signal _interact(b: bool)
 
 
+func save() -> Dictionary:
+	return {
+		"filename": get_scene_file_path(),
+		"parent": get_parent().get_path(),
+		"position": position,
+		"active": active,
+		"anvil": anvil
+	}
+
+
+
 func _ready() -> void:
 	%Anvil.visible = anvil
 

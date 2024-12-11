@@ -5,6 +5,7 @@ class_name CampMenu
 @onready var blacksmith: Button = %Blacksmith
 @onready var menu: Menu = %CMenu
 @onready var blacksmith_menu: Menu = %BlacksmithMenu
+@onready var travel: PanelContainer = $MenuContainer/BlacksmithMenu/TabContainer/Travel
 
 var player: Player = null
 
@@ -23,6 +24,7 @@ func camp_menu_controller(b: bool, camp: Camp = null) -> void:
 		player = camp.player
 		blacksmith_menu.player = player
 		blacksmith.disabled = not camp.anvil
+		travel.player = player
 		menu.open()
 	else:
 		menu.close()
@@ -44,5 +46,14 @@ func _on_rest_button_pressed() -> void:
 func _on_blacksmith_pressed() -> void:
 	if not blacksmith_menu.visible:
 		blacksmith_menu.open()
+		blacksmith_menu.tab(0)
+	else:
+		blacksmith_menu.close()
+
+
+func _on_travel_pressed() -> void:
+	if not blacksmith_menu.visible:
+		blacksmith_menu.open()
+		blacksmith_menu.tab(2)
 	else:
 		blacksmith_menu.close()
