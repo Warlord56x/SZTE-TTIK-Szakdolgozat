@@ -15,6 +15,16 @@ func _ready() -> void:
 	if visible:
 		actions.get_child(0).grab_focus()
 
+	for slot: WheelItem in actions.get_children():
+		slot.focus_exited.connect(lost_focus)
+
+
+func lost_focus() -> void:
+	await get_tree().create_timer(0.1).timeout
+	for slot: WheelItem in actions.get_children():
+		if slot.has_focus():
+			return
+	visible = false
 
 
 func _on_visibility_changed() -> void:
@@ -35,4 +45,7 @@ func input(event: InputEvent) -> void:
 		for order in actions.get_children():
 			action_order.append(order.item)
 		inventory.fill_action_slots(action_order)
+
+	if event.is_action_released("ui_accept") or event.is_action_released("click"):
+		await get_tree().create_timer(0.2).timeout
 		visible = false

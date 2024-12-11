@@ -10,7 +10,6 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func interact(_player: Player = null) -> bool:
-	interaction_done.emit()
 	if lit:
 		$Anim.play_backwards("activate")
 	else:

@@ -5,9 +5,7 @@ class_name StateClimb
 
 
 func enter() -> void:
-	#player.position.x = player.ladder_pos
 	player.velocity = Vector2.ZERO
-	player.position.x = player.ladder_pos
 
 	player.on_ladder = true
 	player.anim_state_m.travel("climb_idle")

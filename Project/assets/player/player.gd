@@ -73,7 +73,6 @@ var airborne_time: float = 0
 var input_direction: float
 
 var on_ladder: bool = false
-var ladder_pos: float = 0.0
 
 var checkpoint: Checkpoint:
 	set = set_checkpoint
@@ -85,13 +84,6 @@ var dash_max: int = 1
 var dash_count: int = 0
 
 @export var inv_time = 0.1
-
-
-#region Collectibles
-var max_coins: int = 9999
-@export_range(0, 9999, 1, "suffix:coin") var coins: int = 0:
-	set = set_coins
-#endregion
 
 #region Health Variables
 @export_category("Health")
@@ -171,12 +163,6 @@ func set_stamina(s: int) -> void:
 	else:
 		stamina_time.stop()
 		stamina_time_waiter.stop()
-
-
-func set_coins(c: int) -> void:
-	clamp(c, 0, 9999)
-	coins = c
-	#_coins.value = c
 
 
 func set_checkpoint(c: Checkpoint) -> void:
@@ -312,7 +298,6 @@ func save() -> Dictionary:
 		"parent": get_parent().get_path(),
 		"health" : health,
 		"mana" : mana,
-		"coins" : coins,
 		"camp" : camp.camp_name if camp else &"",
 		"inventory" : items_duplicate
 	}
@@ -402,6 +387,8 @@ func _process(_delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	if GameEnv.input_process:
 		input_direction = Input.get_axis("move_left", "move_right")
+	else:
+		input_direction = 0
 
 	if input_direction:
 		move_direction.x = sign(input_direction)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bngmpnj1xby7e"]
+[gd_scene load_steps=12 format=3 uid="uid://bngmpnj1xby7e"]
 
 [ext_resource type="Script" path="res://assets/gui/menus/menu.gd" id="1_1ujw8"]
 [ext_resource type="Script" path="res://test_scenes/UI/inventory_menu.gd" id="1_ckcee"]
@@ -11,14 +11,7 @@
 [ext_resource type="Script" path="res://assets/data/model/misc_item.gd" id="7_sb7xk"]
 [ext_resource type="PackedScene" uid="uid://dq3r6eq5kcrtt" path="res://test_scenes/UI/action_mapper.tscn" id="9_uktdj"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7tm0h"]
-bg_color = Color(0.211765, 0.239216, 0.290196, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5iw2m"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rj6sk"]
 shader = ExtResource("6_nxjw7")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -43,39 +36,44 @@ unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_right = 116.0
+offset_right = 200.0
 grow_vertical = 2
 size_flags_horizontal = 0
 script = ExtResource("1_1ujw8")
-focus_target = NodePath("Categories/ItemCategoryList/ItemList")
+focus_target = NodePath("TabContainer/Inventory/Categories/ItemCategoryList/ItemList")
 effect = NodePath("EffectLayer")
 
-[node name="Panel" type="Panel" parent="Menu"]
+[node name="TabContainer" type="TabContainer" parent="Menu"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_7tm0h")
+current_tab = 0
+clip_tabs = false
 
-[node name="Categories" type="VBoxContainer" parent="Menu"]
+[node name="Inventory" type="PanelContainer" parent="Menu/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Categories" type="VBoxContainer" parent="Menu/TabContainer/Inventory"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ItemCategoryList" parent="Menu/Categories" instance=ExtResource("2_qxi1d")]
+[node name="ItemCategoryList" parent="Menu/TabContainer/Inventory/Categories" instance=ExtResource("2_qxi1d")]
 layout_mode = 2
 category = ExtResource("3_yqair")
 
-[node name="ItemCategoryList2" parent="Menu/Categories" instance=ExtResource("2_qxi1d")]
+[node name="ItemCategoryList2" parent="Menu/TabContainer/Inventory/Categories" instance=ExtResource("2_qxi1d")]
 layout_mode = 2
 category = ExtResource("5_kd7lu")
 
-[node name="ItemCategoryList3" parent="Menu/Categories" instance=ExtResource("2_qxi1d")]
+[node name="ItemCategoryList3" parent="Menu/TabContainer/Inventory/Categories" instance=ExtResource("2_qxi1d")]
 layout_mode = 2
 category = ExtResource("4_lx2a0")
 
-[node name="ItemCategoryList4" parent="Menu/Categories" instance=ExtResource("2_qxi1d")]
+[node name="ItemCategoryList4" parent="Menu/TabContainer/Inventory/Categories" instance=ExtResource("2_qxi1d")]
 layout_mode = 2
 category = ExtResource("7_sb7xk")
 
 [node name="EffectLayer" type="ColorRect" parent="Menu"]
-material = SubResource("ShaderMaterial_5iw2m")
+material = SubResource("ShaderMaterial_rj6sk")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -83,6 +81,6 @@ script = ExtResource("7_40dvf")
 
 [node name="ActionMapper" parent="." instance=ExtResource("9_uktdj")]
 visible = false
-layout_mode = 0
+layout_mode = 2
 
-[editable path="Menu/Categories/ItemCategoryList"]
+[editable path="Menu/TabContainer/Inventory/Categories/ItemCategoryList"]

@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="4_s1lth"]
 [ext_resource type="Script" path="res://test_scenes/UI/blacksmith_menu.gd" id="6_dx3ak"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwumc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5rybl"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -22,7 +22,7 @@ line_spacing = 0.0
 font_size = 6
 font_color = Color(1, 0, 0, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kyns2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uf2jg"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -107,13 +107,13 @@ layout_mode = 2
 disabled = true
 text = "Level Up"
 
-[node name="Button3" type="Button" parent="MenuContainer/CMenu/MarginContainer/CampMenu"]
+[node name="Travel" type="Button" parent="MenuContainer/CMenu/MarginContainer/CampMenu"]
 layout_mode = 2
 disabled = true
-text = "button"
+text = "Travel"
 
 [node name="EffectLayer" type="ColorRect" parent="MenuContainer/CMenu"]
-material = SubResource("ShaderMaterial_bwumc")
+material = SubResource("ShaderMaterial_5rybl")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -206,7 +206,7 @@ mouse_filter = 2
 metadata/_tab_index = 1
 
 [node name="EffectLayer" type="ColorRect" parent="MenuContainer/BlacksmithMenu"]
-material = SubResource("ShaderMaterial_kyns2")
+material = SubResource("ShaderMaterial_uf2jg")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

@@ -5,7 +5,7 @@ extends Control
 @onready var menu: Menu = %Menu
 @onready var action_mapper: ActionMapper = $ActionMapper
 
-var last_focus: Control
+var last_focus: Control = null
 
 
 var inventory: Inventory:
@@ -36,21 +36,33 @@ func display_mapper(item: Item, pos: Vector2) -> void:
 	action_mapper.visible = true
 
 
+func flip() -> void:
+	if not menu.visible:
+		if not GameEnv.input_process:
+			return
+		menu.open()
+		update_categories()
+		GameEnv.input_process = false
+	else:
+		close()
+
+
+func update_categories() -> void:
+	for category: ItemCategoryList in categories.get_children():
+		category.update_items()
+
+
+func close() -> void:
+	if menu.visible:
+		menu.close()
+		action_mapper.visible = false
+		GameEnv.input_process = true
+		accept_event()
+
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("inventory"):
-		if not menu.visible:
-			if not GameEnv.input_process:
-				return
-			menu.open()
-			for category: ItemCategoryList in categories.get_children():
-				category.update_items()
-			GameEnv.input_process = false
-		else:
-			menu.close()
-			GameEnv.input_process = true
-			
+		flip()
+
 	if event.is_action_pressed("menu"):
-		if menu.visible:
-			menu.close()
-			GameEnv.input_process = true
-			accept_event()
+		close()

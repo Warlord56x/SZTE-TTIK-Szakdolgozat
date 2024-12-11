@@ -42,7 +42,7 @@ func _ready() -> void:
 
 func interact(player: Player = null) -> bool:
 	if not player.on_ladder:
-		player.ladder_pos = global_position.x
+		player.global_position.x = global_position.x
 		player.on_ladder = true
 	else:
 		player.on_ladder = false

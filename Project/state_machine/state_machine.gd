@@ -83,7 +83,7 @@ func on_state_changed(from: State, to: String) -> void:
 		
 		#Ignore the warning because the 'leave()' method can be async
 		@warning_ignore("redundant_await")
-		await current_state.leave()
+		current_state.leave()
 		if debug and owner and from:
 			prints(owner.name,"left state:", from.name.to_lower())
 

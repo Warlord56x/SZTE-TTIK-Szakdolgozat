@@ -10,11 +10,11 @@ func enter() -> void:
 	player.anim_state_m.travel("interact")
 	await player.anim_tree.animation_finished
 	player.anim_state_m.travel("idle")
-	#travel("default")
+	travel("default")
 
 
-func physics_process(_delta: float) -> void:
-	player.move_and_slide()
+#func physics_process(_delta: float) -> void:
+	#player.move_and_slide()
 
 
 func leave() -> void:

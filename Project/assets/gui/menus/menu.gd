@@ -7,6 +7,8 @@ class_name Menu
 @export var visible_default: bool = false
 @export var invert: bool = false
 
+var tween: Tween
+
 
 func _ready() -> void:
 	visibility_changed.connect(vis_changed)
@@ -43,8 +45,10 @@ func switch() -> void:
 
 
 func open() -> void:
+	if tween and tween.is_running():
+		await tween.finished
 
-	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_parallel()
+	tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_parallel()
 	tween.tween_method(_scaler, 0.001, 1.0, 0.5).set_trans(Tween.TRANS_EXPO)
 	tween.tween_method(_progress, 1.0, 0.0, 0.5).set_trans(Tween.TRANS_LINEAR)
 	visible = true
@@ -52,8 +56,10 @@ func open() -> void:
 
 
 func close() -> void:
+	if tween and tween.is_running():
+		await tween.finished
 
-	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_parallel()
+	tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_parallel()
 	tween.tween_method(_progress, 0.0, 1.0, 0.5).set_trans(Tween.TRANS_LINEAR)
 	tween.tween_method(_scaler, 1.0, 0.001, 0.7).set_trans(Tween.TRANS_EXPO)
 	await tween.finished
