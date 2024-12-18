@@ -17,7 +17,7 @@
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4w1gj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ym7ke"]
 shader = ExtResource("5_slrmh")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -37,7 +37,7 @@ line_spacing = 0.0
 font_size = 10
 font_color = Color(1, 0, 0, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_73gf2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8h63t"]
 shader = ExtResource("5_slrmh")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -178,7 +178,7 @@ layout_mode = 2
 text = "Load"
 
 [node name="Effect" type="ColorRect" parent="MarginContainer/MenuContainer/LoadGameMenu"]
-material = SubResource("ShaderMaterial_4w1gj")
+material = SubResource("ShaderMaterial_ym7ke")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -249,7 +249,7 @@ focus_neighbor_top = NodePath("../LineEdit")
 text = "Create & Play"
 
 [node name="Effect" type="ColorRect" parent="MarginContainer/MenuContainer/NewGameMenu"]
-material = SubResource("ShaderMaterial_73gf2")
+material = SubResource("ShaderMaterial_8h63t")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

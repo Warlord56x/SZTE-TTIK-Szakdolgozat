@@ -7,6 +7,8 @@ class_name ActionMapper
 var item: Item = null
 var inventory: Inventory = null
 
+var input_counter := 0
+
 
 func _ready() -> void:
 	visibility_changed.connect(_on_visibility_changed)
@@ -45,7 +47,10 @@ func input(event: InputEvent) -> void:
 		for order in actions.get_children():
 			action_order.append(order.item)
 		inventory.fill_action_slots(action_order)
+		input_counter = 1
 
 	if event.is_action_released("ui_accept") or event.is_action_released("click"):
-		await get_tree().create_timer(0.2).timeout
-		visible = false
+		input_counter -= 1
+		if input_counter == 0:
+			await get_tree().create_timer(0.2).timeout
+			visible = false

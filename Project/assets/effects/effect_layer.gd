@@ -28,6 +28,13 @@ func _init() -> void:
 	mouse_filter = MouseFilter.MOUSE_FILTER_IGNORE
 
 
+func fade(for_: float = 0.0, fading_time: float = 0.3) -> void:
+	var tween := create_tween()
+	tween.tween_method(_set_progress, 0.0, 1.0, fading_time)
+	tween.tween_method(_set_progress, 1.0, 1.0, for_)
+	tween.tween_method(_set_progress, 1.0, 0.0, fading_time)
+
+
 func _set_progress(f: float) -> void:
 	progress = f
 	material.set_shader_parameter("progress", f)

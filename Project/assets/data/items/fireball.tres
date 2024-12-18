@@ -13,6 +13,7 @@ script = ExtResource("1_1ffww")
 damage = 1
 name = "Fireball"
 icon = SubResource("AtlasTexture_w0gc8")
+description = "A fireball spell, to hurl balls of fire at your enemies."
 stack = 0
 stack_size = 0
 cooldown = 0.5

@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://test_scenes/UI/blacksmith_menu.gd" id="6_dx3ak"]
 [ext_resource type="Script" path="res://test_scenes/UI/travel.gd" id="7_diu0e"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5rybl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7k48c"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -23,7 +23,7 @@ line_spacing = 0.0
 font_size = 6
 font_color = Color(1, 0, 0, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uf2jg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gjwv5"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -113,7 +113,7 @@ layout_mode = 2
 text = "Travel"
 
 [node name="EffectLayer" type="ColorRect" parent="MenuContainer/CMenu"]
-material = SubResource("ShaderMaterial_5rybl")
+material = SubResource("ShaderMaterial_7k48c")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -130,11 +130,11 @@ effect = NodePath("EffectLayer")
 [node name="TabContainer" type="TabContainer" parent="MenuContainer/BlacksmithMenu"]
 layout_mode = 2
 mouse_filter = 2
-current_tab = 1
+current_tab = 0
 clip_tabs = false
+use_hidden_tabs_for_min_size = true
 
 [node name="Craft" type="PanelContainer" parent="MenuContainer/BlacksmithMenu/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -201,6 +201,7 @@ text = "asd"
 label_settings = SubResource("LabelSettings_3t5f0")
 
 [node name="Upgrade" type="PanelContainer" parent="MenuContainer/BlacksmithMenu/TabContainer"]
+visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 mouse_filter = 2
@@ -216,7 +217,7 @@ metadata/_tab_index = 2
 layout_mode = 2
 
 [node name="EffectLayer" type="ColorRect" parent="MenuContainer/BlacksmithMenu"]
-material = SubResource("ShaderMaterial_uf2jg")
+material = SubResource("ShaderMaterial_gjwv5")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -225,6 +226,9 @@ script = ExtResource("4_s1lth")
 [connection signal="pressed" from="MenuContainer/CMenu/MarginContainer/CampMenu/RestButton" to="." method="_on_rest_button_pressed"]
 [connection signal="pressed" from="MenuContainer/CMenu/MarginContainer/CampMenu/Blacksmith" to="." method="_on_blacksmith_pressed"]
 [connection signal="pressed" from="MenuContainer/CMenu/MarginContainer/CampMenu/Travel" to="." method="_on_travel_pressed"]
+[connection signal="visibility_changed" from="MenuContainer/BlacksmithMenu" to="MenuContainer/BlacksmithMenu" method="_on_visibility_changed"]
+[connection signal="tab_changed" from="MenuContainer/BlacksmithMenu/TabContainer" to="MenuContainer/BlacksmithMenu" method="_on_tab_container_tab_changed"]
 [connection signal="pressed" from="MenuContainer/BlacksmithMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients/Craft" to="MenuContainer/BlacksmithMenu" method="_on_craft_pressed"]
+[connection signal="travel" from="MenuContainer/BlacksmithMenu/TabContainer/Travel" to="." method="_on_travel_travel"]
 [connection signal="visibility_changed" from="MenuContainer/BlacksmithMenu/TabContainer/Travel" to="MenuContainer/BlacksmithMenu/TabContainer/Travel" method="_on_visibility_changed"]
 [connection signal="item_activated" from="MenuContainer/BlacksmithMenu/TabContainer/Travel/ItemList" to="MenuContainer/BlacksmithMenu/TabContainer/Travel" method="_on_item_list_item_activated"]

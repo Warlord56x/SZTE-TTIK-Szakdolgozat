@@ -41,6 +41,7 @@ animations = [{
 script = ExtResource("1_3itp5")
 name = "Coin"
 icon = SubResource("AtlasTexture_rbtdf")
+description = "A coin."
 stack = 1
 stack_size = 9999
 cooldown = 0.0

@@ -42,6 +42,7 @@ script = ExtResource("1_b384f")
 damage = 1
 name = "Bow"
 icon = SubResource("AtlasTexture_ul4yj")
+description = "It's a plain and simple bow."
 stack = 1
 stack_size = 20
 cooldown = 0.2

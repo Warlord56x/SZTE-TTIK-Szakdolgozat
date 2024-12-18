@@ -32,8 +32,9 @@ func leave() -> void:
 	player.velocity = Vector2.ZERO
 	player.pushback_force = Vector2.ZERO
 
-	if player.camp:
-		player.global_position = player.camp.global_position
+	var camps = get_tree().get_nodes_in_group("Camp").filter(func(c: Camp): return c.camp_name == player.camp)
+	if not camps.is_empty() and camps[0]:
+		player.global_position = camps[0].global_position
 	elif player.checkpoint:
 		player.global_position = player.checkpoint.global_position
 	else:

@@ -77,7 +77,7 @@ var on_ladder: bool = false
 var checkpoint: Checkpoint:
 	set = set_checkpoint
 
-var camp: Camp = null:
+var camp: String = &"":
 	set = set_camp
 
 var dash_max: int = 1
@@ -172,9 +172,8 @@ func set_checkpoint(c: Checkpoint) -> void:
 	c.activate()
 
 
-func set_camp(c: Camp) -> void:
+func set_camp(c: String) -> void:
 	camp = c
-	c.activate()
 #endregion
 
 
@@ -298,7 +297,7 @@ func save() -> Dictionary:
 		"parent": get_parent().get_path(),
 		"health" : health,
 		"mana" : mana,
-		"camp" : camp.camp_name if camp else &"",
+		"camp" : camp,
 		"inventory" : items_duplicate
 	}
 

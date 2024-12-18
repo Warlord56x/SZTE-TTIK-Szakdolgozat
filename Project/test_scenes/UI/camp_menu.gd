@@ -19,11 +19,11 @@ func _ready() -> void:
 
 
 func camp_menu_controller(b: bool, camp: Camp = null) -> void:
-	if b:
+	if b and camp:
 		camp_name.text = camp.camp_name
 		player = camp.player
 		blacksmith_menu.player = player
-		blacksmith.disabled = not camp.anvil
+		reset_menu_state(camp)
 		travel.player = player
 		menu.open()
 	else:
@@ -31,10 +31,23 @@ func camp_menu_controller(b: bool, camp: Camp = null) -> void:
 		blacksmith_menu.close()
 
 
-func player_rest(_player: Player = player) -> void:
-	_player.health = _player.max_health
-	_player.mana = _player.max_mana
-	_player.stamina = _player.max_stamina
+func reset_menu_state(camp: Camp) -> void:
+	camp_name.text = camp.camp_name
+	blacksmith.disabled = not camp.anvil
+	blacksmith_menu.disable_tab(0, not camp.anvil)
+
+
+func player_rest(player_: Player = player) -> void:
+	GameEnv.fade_in_out(0.5, "Resting...")
+	GameEnv.load_icon(true)
+	await GameEnv.fade_step_in
+
+	player_.health = player_.max_health
+	player_.mana = player_.max_mana
+	player_.stamina = player_.max_stamina
+
+	await GameEnv.fade_step_wait
+	GameEnv.load_icon(false)
 
 
 func _on_rest_button_pressed() -> void:
@@ -48,7 +61,10 @@ func _on_blacksmith_pressed() -> void:
 		blacksmith_menu.open()
 		blacksmith_menu.tab(0)
 	else:
-		blacksmith_menu.close()
+		if blacksmith_menu.current_tab == 0:
+			blacksmith_menu.close()
+		else:
+			blacksmith_menu.current_tab = 0
 
 
 func _on_travel_pressed() -> void:
@@ -56,4 +72,11 @@ func _on_travel_pressed() -> void:
 		blacksmith_menu.open()
 		blacksmith_menu.tab(2)
 	else:
-		blacksmith_menu.close()
+		if blacksmith_menu.current_tab == 2:
+			blacksmith_menu.close()
+		else:
+			blacksmith_menu.current_tab = 2
+
+
+func _on_travel_travel(camp: Camp) -> void:
+	reset_menu_state(camp)

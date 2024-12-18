@@ -25,7 +25,10 @@ func attack() -> void:
 
 func enter() -> void:
 	target = enemy.target
-	attack_timer.start()
+	if attack_timer.is_stopped():
+		attack_timer.start()
+	if attack_timer.paused:
+		attack_timer.paused = false
 
 
 func physics_process(_delta: float) -> void:
@@ -47,12 +50,13 @@ func physics_process(_delta: float) -> void:
 		if not attacking:
 			enemy.sprite.play("default")
 		if  attack_timer.time_left == 0:
+			attack_timer.wait_time = randf_range(1.0, 1.6)
 			attack()
 			attack_timer.start()
 
 
 func leave() -> void:
-	attack_timer.stop()
+	attack_timer.paused = true
 	if enemy.sprite.animation == "cast" and enemy.sprite.is_playing():
 		await enemy.sprite.animation_finished
 

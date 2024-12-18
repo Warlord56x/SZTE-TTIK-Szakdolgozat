@@ -37,9 +37,12 @@ func update_items() -> void:
 			if item.stack_size > 0:
 				display_name += str(" x",item.stack)
 			var idx = item_list.add_item(display_name, item.icon)
+			item_list.set_item_tooltip(idx, item.description)
+			item_list.set_item_tooltip_enabled(idx, true)
 			item_list.set_item_metadata(idx, item)
 	if item_list.item_count == 0:
-		item_list.add_item("No items", null, false)
+		var idx = item_list.add_item("No items", null, false)
+		item_list.set_item_tooltip_enabled(idx, false)
 
 
 func _on_item_list_focus_exited() -> void:

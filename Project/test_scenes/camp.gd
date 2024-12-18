@@ -2,7 +2,10 @@ extends InteractionArea
 class_name Camp
 
 @export var camp_name: StringName
-@export var anvil: bool = false
+@export var anvil: bool = false:
+	set(an):
+		%Anvil.visible = an
+		anvil = an
 
 var active: bool = false
 var player: Player
@@ -17,13 +20,9 @@ func save() -> Dictionary:
 		"parent": get_parent().get_path(),
 		"position": position,
 		"active": active,
-		"anvil": anvil
+		"anvil": anvil,
+		"camp_name": camp_name,
 	}
-
-
-
-func _ready() -> void:
-	%Anvil.visible = anvil
 
 
 func activate() -> void:
@@ -44,8 +43,9 @@ func zoom(in_out: bool, camera: Camera2D) -> void:
 
 func interact(_player: Player = null) -> bool:
 	player = _player
+	activate()
 
-	player.camp = self
+	player.camp = camp_name
 	in_camp = true
 	zoom(true, player.camera)
 	_interact.emit(true, self)

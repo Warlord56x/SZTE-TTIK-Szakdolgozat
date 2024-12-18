@@ -64,4 +64,5 @@ func leave() -> void:
 
 
 func _on_p_timer_timeout() -> void:
+	projectile_timer.wait_time = randf_range(1.0, 1.6)
 	attack()

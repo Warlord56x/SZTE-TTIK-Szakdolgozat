@@ -13,6 +13,7 @@ script = ExtResource("2_8ulrl")
 damage = 1
 name = "Sword"
 icon = SubResource("AtlasTexture_bd75o")
+description = "It's a sword, and you can slash your enemies with it."
 stack = 0
 stack_size = 0
 cooldown = 0.5
