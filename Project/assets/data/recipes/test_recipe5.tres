@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=9 format=3 uid="uid://ev8lg7ga10id"]
+
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_r5v46"]
+[ext_resource type="Script" path="res://assets/data/model/ingredient.gd" id="2_yrxjm"]
+[ext_resource type="Resource" uid="uid://dwjomx0pywg1n" path="res://assets/data/items/coin.tres" id="3_25bgh"]
+[ext_resource type="Resource" uid="uid://blbhq7hm0wb8q" path="res://assets/data/items/health_potion.tres" id="4_sbwr8"]
+[ext_resource type="Script" path="res://assets/data/model/recipe.gd" id="5_gnyuh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mut8b"]
+atlas = ExtResource("1_r5v46")
+region = Rect2(40, 80, 10, 10)
+filter_clip = true
+
+[sub_resource type="Resource" id="Resource_lylhc"]
+script = ExtResource("2_yrxjm")
+item = ExtResource("3_25bgh")
+amount = 5
+
+[sub_resource type="Resource" id="Resource_1xfhl"]
+script = ExtResource("2_yrxjm")
+item = ExtResource("4_sbwr8")
+amount = 1
+
+[resource]
+script = ExtResource("5_gnyuh")
+name = "Health Potion"
+icon = SubResource("AtlasTexture_mut8b")
+required_items = Array[ExtResource("2_yrxjm")]([SubResource("Resource_lylhc")])
+result_item = Array[ExtResource("2_yrxjm")]([SubResource("Resource_1xfhl")])

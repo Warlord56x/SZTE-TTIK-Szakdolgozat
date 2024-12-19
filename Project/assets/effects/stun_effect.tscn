@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://doam6xduhln3t"]
+
+[ext_resource type="Texture2D" uid="uid://cc4crdg7bbj3d" path="res://assets/effects/img/symbol_02.png" id="1_o5dwj"]
+
+[sub_resource type="Curve" id="Curve_qmacr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.501818, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qa8fo"]
+curve = SubResource("Curve_qmacr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i4odc"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0.78, 0.24)
+emission_ring_height = 0.0
+emission_ring_radius = 5.0
+emission_ring_inner_radius = 4.0
+orbit_velocity_min = -0.0999999
+orbit_velocity_max = 0.1
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.1
+alpha_curve = SubResource("CurveTexture_qa8fo")
+
+[sub_resource type="Curve" id="Curve_vhitk"]
+_data = [Vector2(0, 0), 0.0, 4.01786, 0, 0, Vector2(0.490909, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.11412, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_x6rgq"]
+curve = SubResource("Curve_vhitk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k7fji"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0.78, 0.24)
+emission_ring_height = 0.0
+emission_ring_radius = 5.0
+emission_ring_inner_radius = 4.0
+orbit_velocity_min = 0.17
+orbit_velocity_max = 0.37
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.01
+color = Color(1, 1, 0, 1)
+alpha_curve = SubResource("CurveTexture_x6rgq")
+
+[node name="StunEffect" type="Node2D"]
+
+[node name="Line" type="GPUParticles2D" parent="."]
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_i4odc")
+local_coords = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_k7fji")
+texture = ExtResource("1_o5dwj")
+lifetime = 4.0
+local_coords = true

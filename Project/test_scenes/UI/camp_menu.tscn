@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://test_scenes/UI/blacksmith_menu.gd" id="6_dx3ak"]
 [ext_resource type="Script" path="res://test_scenes/UI/travel.gd" id="7_diu0e"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7k48c"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fplvw"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -23,7 +23,7 @@ line_spacing = 0.0
 font_size = 6
 font_color = Color(1, 0, 0, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gjwv5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4dh5a"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -113,7 +113,7 @@ layout_mode = 2
 text = "Travel"
 
 [node name="EffectLayer" type="ColorRect" parent="MenuContainer/CMenu"]
-material = SubResource("ShaderMaterial_7k48c")
+material = SubResource("ShaderMaterial_fplvw")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -217,7 +217,7 @@ metadata/_tab_index = 2
 layout_mode = 2
 
 [node name="EffectLayer" type="ColorRect" parent="MenuContainer/BlacksmithMenu"]
-material = SubResource("ShaderMaterial_gjwv5")
+material = SubResource("ShaderMaterial_4dh5a")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

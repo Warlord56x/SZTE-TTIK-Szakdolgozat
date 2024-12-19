@@ -6,10 +6,12 @@ class_name StateEnemySwmanStun
 
 
 func enter() -> void:
+	$"../../StunEffect".visible = true
 	enemy.sprite.play("default")
 	enemy.velocity = Vector2.ZERO
 	await get_tree().create_timer(duration).timeout
 	back()
+	$"../../StunEffect".visible = false
 
 
 func physics_process(_delta: float) -> void:

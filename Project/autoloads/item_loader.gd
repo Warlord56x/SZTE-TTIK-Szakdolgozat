@@ -7,6 +7,7 @@ const TEST_RECIPE_1 = preload("res://assets/data/recipes/test_recipe1.tres")
 const TEST_RECIPE_2 = preload("res://assets/data/recipes/test_recipe2.tres")
 const TEST_RECIPE_3 = preload("res://assets/data/recipes/test_recipe3.tres")
 const TEST_RECIPE_4 = preload("res://assets/data/recipes/test_recipe4.tres")
+const TEST_RECIPE_5 = preload("res://assets/data/recipes/test_recipe5.tres")
 #endregion
 
 #region Loot Region
@@ -22,5 +23,6 @@ const ALL_RECIPES := [
 	TEST_RECIPE_1,
 	TEST_RECIPE_2,
 	TEST_RECIPE_3,
-	TEST_RECIPE_4
+	TEST_RECIPE_4,
+	TEST_RECIPE_5,
 ]

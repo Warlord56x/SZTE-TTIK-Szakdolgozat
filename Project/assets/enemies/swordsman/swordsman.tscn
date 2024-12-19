@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b25vye5etxi5"]
+[gd_scene load_steps=33 format=3 uid="uid://b25vye5etxi5"]
 
 [ext_resource type="Script" path="res://assets/enemies/swordsman/swordsman.gd" id="1_6tos1"]
 [ext_resource type="Script" path="res://test_scenes/buff_component.gd" id="2_0phdp"]
@@ -10,6 +10,7 @@
 [ext_resource type="Shader" path="res://assets/effects/shaders/blinker.gdshader" id="7_e3isw"]
 [ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_stun.gd" id="7_nmiy0"]
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="7_si21x"]
+[ext_resource type="PackedScene" uid="uid://doam6xduhln3t" path="res://assets/effects/stun_effect.tscn" id="9_ccyrh"]
 [ext_resource type="Script" path="res://helper_classes/hitbox.gd" id="9_q8lhd"]
 [ext_resource type="AudioStream" uid="uid://82jihjn8dema" path="res://assets/sounds/568169__merrick079__sword-sound-2.wav" id="9_vs37d"]
 [ext_resource type="Script" path="res://helper_classes/hurtbox.gd" id="10_xrarh"]
@@ -227,6 +228,10 @@ state_machine = NodePath("StateMachine")
 navigation_agent = NodePath("NavigationAgent2D")
 sprite = NodePath("AnimatedSprite2D")
 limit_nav_axis = Vector2i(1, 0)
+
+[node name="StunEffect" parent="." instance=ExtResource("9_ccyrh")]
+visible = false
+position = Vector2(0, -6)
 
 [node name="BuffComponent" type="Node" parent="." node_paths=PackedStringArray("apply_to")]
 script = ExtResource("2_0phdp")
