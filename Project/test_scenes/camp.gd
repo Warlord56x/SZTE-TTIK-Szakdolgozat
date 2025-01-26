@@ -42,6 +42,8 @@ func zoom(in_out: bool, camera: Camera2D) -> void:
 
 
 func interact(_player: Player = null) -> bool:
+	if not GameEnv.input_process:
+		return interactable
 	player = _player
 	activate()
 

@@ -50,11 +50,12 @@ alpha_curve = SubResource("CurveTexture_x6rgq")
 [node name="Line" type="GPUParticles2D" parent="."]
 amount = 200
 process_material = SubResource("ParticleProcessMaterial_i4odc")
+preprocess = 200.0
 local_coords = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 5
 process_material = SubResource("ParticleProcessMaterial_k7fji")
 texture = ExtResource("1_o5dwj")
 lifetime = 4.0
+preprocess = 4.0
 local_coords = true

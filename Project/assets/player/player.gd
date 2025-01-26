@@ -191,7 +191,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			state_machine.travel("cast")
 
 	if event.is_action_pressed("dash"):
-		if dash_count == dash_max or stamina == 0 or state_machine.get_state("dash").active:
+		if dash_count == dash_max or stamina == 0 or state_machine.is_active("Dash"):
 			return
 		state_machine.travel("dash")
 
