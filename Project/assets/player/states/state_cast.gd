@@ -22,7 +22,7 @@ func enter() -> void:
 	item.used = true
 
 	if item is WeaponItem:
-		player.weapon_hitbox.damage = item.damage
+		player.weapon_hitbox.damage = item.damage * player.stats.strength
 
 	if item.name.to_lower() == "fireball":
 		if player.mana == 0:
@@ -52,6 +52,10 @@ func enter() -> void:
 		projectile_instance.position = player.position
 		projectile_instance.parent_ref = player
 		projectile_instance.damage = item.damage
+		if bool(item.name.to_lower() == "fireball"):
+			projectile_instance.damage *= player.stats.intelligence
+		else:
+			projectile_instance.damage *= player.stats.dexterity
 		player.add_child(projectile_instance)
 
 	if item.name.to_lower() == "hammer":

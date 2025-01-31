@@ -20,6 +20,10 @@ func update_camps_list() -> void:
 		if camp.active:
 			var idx = item_list.add_item(camp.camp_name)
 			item_list.set_item_metadata(idx, camp)
+			if not player:
+				return
+			if player.camp == camp.camp_name:
+				item_list.set_item_disabled(idx, true)
 
 
 func _on_item_list_item_activated(index: int) -> void:

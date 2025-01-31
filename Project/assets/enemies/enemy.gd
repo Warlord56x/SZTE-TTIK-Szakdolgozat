@@ -156,8 +156,6 @@ func hurt(e_damage: int, dealer: Node2D = null) -> bool:
 	if has_node("HurtBox"):
 		$HurtBox.set_deferred("monitoring", false)
 
-	health -= e_damage
-
 	var inv_tween = create_tween().set_loops(3)
 	var inv_timer = get_tree().create_timer(inv_time)
 	inv_tween.finished.connect(blinker_timeout)
@@ -166,14 +164,17 @@ func hurt(e_damage: int, dealer: Node2D = null) -> bool:
 	inv_tween.tween_method(blinker, 0.0, 1.0, 0.15)
 	inv_tween.tween_method(blinker, 1.0, 0.0, 0.15)
 
-	var splatter = SPLATTER.instantiate()
-	splatter.global_position = global_position
-	get_tree().root.add_child(splatter)
+	for intensity in damage:
+		var splatter = SPLATTER.instantiate()
+		splatter.global_position = global_position
+		get_tree().root.add_child.call_deferred(splatter)
 
 	var damage_number = DAMAGE_NUMBER.instantiate()
 	damage_number.damage_number = e_damage
 	damage_number.global_position = global_position
-	add_child.call_deferred(damage_number)
+	get_tree().root.add_child.call_deferred(damage_number)
+
+	health -= e_damage
 
 	if dealer and dealer is Player:
 		target = dealer

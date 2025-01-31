@@ -52,7 +52,7 @@ A játék mentését először egy egyszerű rendszerrel oldottam meg amelyre va
 
 A betöltést ebben az esetben úgy kell implementálni hogy le kérjük ebben az esetben is a "persistent" csoportban levő node -okat, betöljük a mentet Json fájlunkat, és ezután kitöröljük az összes node -ot a "persistent" csoportban utánna a fájl visszakonvertáljuk egy "dictionary" -re az adatok alapján betöljük a node -okat és be inicializáljuk őket a mentett adatokkal. Azért fontos hogy kitöröljük a régi node -okat, egyrészt hogy ne keljen a mentés és a csoportban lévő node -ok sorrendjével bajlódni, másrészt meg így biztos hogy helyesen lesznek a node -ok paraméterei hiszen lehet hogy betöltéskor már nem alapállapotban van a node.
 
-Később ezt a rendszert úgy módosítottam, hogy nem Json formátumban vannak mentve az adatok hanem egy "custom resource" objektumban ami így lehetőve tette hogy egyszerűen mentsem a karakter "INVENTORY"(szép magyar szó ez) tartalmát, tehát mostmár egy .tres fájl formátumban van ami egy text formátum, de ezt bármikor meg lehet változtatni binaris (.res) formátumra. Megjegyezném hogy egyébként sok játék van ami nem figyel a mentés fájlok védelmére, vagyis könnyű a mentés fájl módosításával előnyökhöz jutni.
+Később ezt a rendszert úgy módosítottam, hogy nem Json formátumban vannak mentve az adatok hanem egy "custom resource" objektumban ami így lehetőve tette hogy egyszerűen mentsem a karakter leltár tartalmát, tehát mostmár egy .tres fájl formátumban van ami egy text formátum, de ezt bármikor meg lehet változtatni binaris (.res) formátumra. Megjegyezném hogy egyébként sok játék van ami nem figyel a mentés fájlok védelmére, vagyis könnyű a mentés fájl módosításával előnyökhöz jutni.
 
 ## Tábor rendszer
 

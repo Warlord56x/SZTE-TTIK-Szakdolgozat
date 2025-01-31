@@ -3,16 +3,22 @@ class_name CampMenu
 
 @onready var camp_name: Label = %CampName
 @onready var blacksmith: Button = %Blacksmith
-@onready var menu: Menu = %CMenu
-@onready var blacksmith_menu: Menu = %BlacksmithMenu
-@onready var travel: PanelContainer = $MenuContainer/BlacksmithMenu/TabContainer/Travel
-
+@onready var menu: Menu = %MainCampMenu
+@onready var blacksmith_menu: Menu = %CampChildMenu
+@onready var travel: PanelContainer = %Travel
 var player: Player = null
 
 
 func _ready() -> void:
+	# Avoid blocking ready from occuring.
+	_init_camps.call_deferred()
+
+
+func _init_camps() -> void:
 	# Must wait til the nodes initialize
-	await get_tree().create_timer(0.1).timeout
+	# The first physics frame should be perfect for this
+	await get_tree().physics_frame
+	
 	var camps := get_tree().get_nodes_in_group("Camp")
 	for camp: Camp in camps:
 		camp._interact.connect(camp_menu_controller)
@@ -42,7 +48,7 @@ func player_rest(player_: Player = player) -> void:
 	GameEnv.load_icon(true)
 	await GameEnv.fade_step_in
 
-	player_.health = player_.max_health
+	player_.health = player_.stats.max_health
 	player_.mana = player_.max_mana
 	player_.stamina = player_.max_stamina
 
@@ -59,7 +65,7 @@ func _on_rest_button_pressed() -> void:
 func _on_blacksmith_pressed() -> void:
 	if not blacksmith_menu.visible:
 		blacksmith_menu.open()
-		blacksmith_menu.tab(0)
+		blacksmith_menu.current_tab = 0
 	else:
 		if blacksmith_menu.current_tab == 0:
 			blacksmith_menu.close()
@@ -70,7 +76,7 @@ func _on_blacksmith_pressed() -> void:
 func _on_travel_pressed() -> void:
 	if not blacksmith_menu.visible:
 		blacksmith_menu.open()
-		blacksmith_menu.tab(2)
+		blacksmith_menu.current_tab = 2
 	else:
 		if blacksmith_menu.current_tab == 2:
 			blacksmith_menu.close()
@@ -80,3 +86,14 @@ func _on_travel_pressed() -> void:
 
 func _on_travel_travel(camp: Camp) -> void:
 	reset_menu_state(camp)
+
+
+func _on_level_up_pressed() -> void:
+	if not blacksmith_menu.visible:
+		blacksmith_menu.open()
+		blacksmith_menu.current_tab = 3
+	else:
+		if blacksmith_menu.current_tab == 3:
+			blacksmith_menu.close()
+		else:
+			blacksmith_menu.current_tab = 3

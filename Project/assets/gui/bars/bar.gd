@@ -4,14 +4,17 @@ class_name Bar
 
 @export var heart: PackedScene = null
 
-@export var max_resource: int = 20
+@export var max_resource: int = 20:
+	set = set_max_resource
 @export_range(0, 20, 1,"suffix:resource") var resource: int = 20:
 	set = set_resource
 
 
 func _init() -> void:
-	await ready
+	init_hearts.call_deferred()
 
+
+func init_hearts() -> void:
 	for child in get_children():
 		child.queue_free()
 	for i in range(0, max_resource, 4):
@@ -21,6 +24,11 @@ func _init() -> void:
 			add_child.call_deferred(heart_instance)
 		else:
 			add_child(heart_instance)
+
+
+func set_max_resource(res: int) -> void:
+	max_resource = res
+	init_hearts()
 
 
 func set_resource(res: int) -> void:

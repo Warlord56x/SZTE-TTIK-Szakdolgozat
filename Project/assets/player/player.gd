@@ -85,9 +85,10 @@ var dash_count: int = 0
 
 @export var inv_time = 0.1
 
+var stats: EntityStats = EntityStats.new()
+
 #region Health Variables
 @export_category("Health")
-var max_health: int = 20
 @export_range(0.1, 2.0, 0.1, "suffix:s") var health_regen_wait_time: float = 1.0
 @export_range(0.1, 2.0, 0.1, "suffix:s") var health_regen_time: float = 0.2
 @export_range(0, 20, 1, "suffix:Health") var max_health_regen: int = 12
@@ -140,7 +141,7 @@ func set_mana(m: int) -> void:
 
 
 func set_health(h: int) -> void:
-	h = clamp(h, 0, max_health)
+	h = clamp(h, 0, stats.max_health)
 	if health > h:
 		health_time.stop()
 	health = h
@@ -307,6 +308,17 @@ func _ready() -> void:
 		global_position = DEFAULT_SPAWN_POINT
 	tool_tip_node.visible = debug
 
+	health_bar.max_resource = stats.max_health
+	# TODO: max_resource from stats
+	mana_bar.max_resource = max_mana
+	stamina_bar.max_resource = max_stamina
+
+	print(stats)
+	print(health_bar.max_resource,
+	mana_bar.max_resource,
+	stamina_bar.max_resource
+	)
+
 	init_regen_timer(player_res.HEALTH, health_regen_wait_time, health_regen_time)
 	init_regen_timer(player_res.MANA, mana_regen_wait_time, mana_regen_time)
 	init_regen_timer(player_res.STAMINA, stamina_regen_wait_time, stamina_regen_time)
@@ -332,12 +344,6 @@ func hurt(damage: int, _dealer: Node2D = null) -> bool:
 	if has_node("HurtBox"):
 		$HurtBox.set_deferred("monitoring", false)
 
-	health -= damage
-
-	if health <= 0:
-		if state_machine.current_state.name.to_lower() != "death":
-			state_machine.travel("Death")
-
 	camera.add_trauma(0.2, 0.85)
 
 	var inv_tween = create_tween().set_loops(3)
@@ -351,12 +357,19 @@ func hurt(damage: int, _dealer: Node2D = null) -> bool:
 	for intensity in damage:
 		var splatter = SPLATTER.instantiate()
 		splatter.global_position = global_position
-		get_tree().root.add_child(splatter)
+		get_tree().root.add_child.call_deferred(splatter)
 
 	var damage_number = DAMAGE_NUMBER.instantiate()
 	damage_number.damage_number = damage
 	damage_number.global_position = global_position
-	add_child.call_deferred(damage_number)
+	get_tree().root.add_child.call_deferred(damage_number)
+
+	health -= damage
+
+	if health <= 0:
+		if state_machine.current_state.name.to_lower() != "death":
+			state_machine.travel("Death")
+
 	return true
 
 
@@ -373,7 +386,7 @@ func _process(_delta: float) -> void:
 			"Name: ", name, "\n",
 			"Node: ", self, "\n",
 			"\n",
-			"Health: ", health, "/", max_health, "\n",
+			"Health: ", health, "/", stats.max_health, "\n",
 			"State: ", state_machine.current_state.name, "\n",
 			"State: ", anim_state_m.get_current_node(), "\n",
 			"Position: ", global_position, "\n",

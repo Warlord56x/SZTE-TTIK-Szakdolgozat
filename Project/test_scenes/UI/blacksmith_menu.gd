@@ -11,10 +11,10 @@ var player: Player = null
 var recipe: Recipe = null
 
 var current_tab := 0:
-	set = tab
+	set = set_tab
 
 
-func tab(idx: int) -> void:
+func set_tab(idx: int) -> void:
 	tab_container.current_tab = idx
 	current_tab = idx
 
@@ -25,11 +25,17 @@ func disable_tab(idx: int, disable: bool) -> void:
 
 func _ready() -> void:
 	super._ready()
-	tab_container.set_tab_disabled(1, true)
+
+	for tab in tab_container.get_child_count():
+		var title := tab_container.get_tab_title(tab)
+		title = title.to_snake_case().replace("_", " ").capitalize()
+		tab_container.set_tab_title(tab, title)
+
 	for _recipe: Recipe in ItemLoader.ALL_RECIPES:
 		var idx = recipe_list.add_item(_recipe.name, _recipe.icon)
 		recipe_list.set_item_metadata(idx, _recipe)
 	recipe_list.item_selected.connect(update_list)
+
 	update_list(0)
 
 

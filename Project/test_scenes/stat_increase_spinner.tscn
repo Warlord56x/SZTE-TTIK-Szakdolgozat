@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1fy87vwy6oos"]
+
+[ext_resource type="Script" path="res://test_scenes/stat_increase_spinner.gd" id="1_ib184"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ec7q8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qgxtu"]
+
+[node name="StatIncreaseSpinner" type="HBoxContainer"]
+offset_right = 164.0
+offset_bottom = 26.0
+size_flags_vertical = 0
+script = ExtResource("1_ib184")
+
+[node name="StatLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Stat:"
+
+[node name="CurrentStatLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1"
+
+[node name="Arrow" type="Label" parent="."]
+layout_mode = 2
+text = "->"
+
+[node name="LeftArrow" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ec7q8")
+disabled = true
+text = "<"
+flat = true
+
+[node name="NextStatEditor" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+text = "1"
+flat = true
+
+[node name="RightArrow" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qgxtu")
+text = ">"
+flat = true
+
+[connection signal="pressed" from="LeftArrow" to="." method="_on_left_arrow_pressed"]
+[connection signal="gui_input" from="NextStatEditor" to="." method="_on_next_stat_editor_gui_input"]
+[connection signal="pressed" from="RightArrow" to="." method="_on_right_arrow_pressed"]
