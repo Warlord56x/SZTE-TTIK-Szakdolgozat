@@ -1278,12 +1278,10 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
-columns = 5
 
 [node name="StaminaBar" parent="HUDLayer/Control/C/CV" instance=ExtResource("4_mq3j0")]
 unique_name_in_owner = true
 layout_mode = 2
-columns = 5
 
 [node name="BuffDisplay" type="HBoxContainer" parent="HUDLayer/Control/C"]
 unique_name_in_owner = true
@@ -1409,6 +1407,7 @@ joypad_button = 14
 
 [node name="InventoryLayer" type="CanvasLayer" parent="."]
 layer = 3
+visible = false
 
 [node name="InventoryMenu" parent="InventoryLayer" instance=ExtResource("25_riq7e")]
 unique_name_in_owner = true

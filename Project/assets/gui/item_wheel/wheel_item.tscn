@@ -40,13 +40,12 @@ offset_right = 20.0
 offset_bottom = 20.0
 
 [node name="Label" type="Label" parent="."]
-visible = false
 layout_mode = 0
-offset_right = 20.0
-offset_bottom = 26.0
+offset_left = -1.0
+offset_right = 24.0
+offset_bottom = 28.0
 text = "999"
 label_settings = SubResource("LabelSettings_0o5if")
-horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="Panel" type="Panel" parent="Label"]
@@ -57,7 +56,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -8.0
+offset_top = -10.0
 grow_horizontal = 2
 grow_vertical = 0
 

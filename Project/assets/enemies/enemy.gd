@@ -164,7 +164,7 @@ func hurt(e_damage: int, dealer: Node2D = null) -> bool:
 	inv_tween.tween_method(blinker, 0.0, 1.0, 0.15)
 	inv_tween.tween_method(blinker, 1.0, 0.0, 0.15)
 
-	for intensity in damage:
+	for intensity in e_damage:
 		var splatter = SPLATTER.instantiate()
 		splatter.global_position = global_position
 		get_tree().root.add_child.call_deferred(splatter)

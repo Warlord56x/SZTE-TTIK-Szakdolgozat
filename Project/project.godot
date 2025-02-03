@@ -23,6 +23,7 @@ Settings="*res://autoloads/settings.gd"
 GameEnv="*res://autoloads/game_env.tscn"
 NodeLoader="*res://autoloads/node_loader.gd"
 ItemLoader="*res://autoloads/item_loader.gd"
+Colors="*res://colors/colors.gd"
 
 [display]
 
@@ -40,7 +41,7 @@ Camp=""
 
 [gui]
 
-theme/custom="res://assets/theme/default_theme.tres"
+theme/custom="res://assets/theme/test_theme.tres"
 theme/default_font_multichannel_signed_distance_field=true
 theme/default_font_generate_mipmaps=true
 

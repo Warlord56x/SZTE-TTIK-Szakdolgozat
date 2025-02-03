@@ -85,7 +85,8 @@ var dash_count: int = 0
 
 @export var inv_time = 0.1
 
-var stats: EntityStats = EntityStats.new()
+var stats: EntityStats = EntityStats.new():
+	set = set_stats
 
 #region Health Variables
 @export_category("Health")
@@ -93,29 +94,27 @@ var stats: EntityStats = EntityStats.new()
 @export_range(0.1, 2.0, 0.1, "suffix:s") var health_regen_time: float = 0.2
 @export_range(0, 20, 1, "suffix:Health") var max_health_regen: int = 12
 @export_range(0, 20, 1, "suffix:/interval") var health_regen: int = 1
-@export_range(0, 20, 1, "suffix:Health") var health: int = 20:
+@export_range(0, 20, 1, "suffix:Health") var health: int = stats.max_health:
 	set = set_health
 #endregion
 
 #region Mana Variables
 @export_category("Mana")
-var max_mana: int = 20
 @export_range(0.1, 2.0, 0.1, "suffix:s") var mana_regen_wait_time: float = 1.0
 @export_range(0.1, 2.0, 0.1, "suffix:s") var mana_regen_time: float = 0.2
 @export_range(0, 20, 1, "suffix:Mana") var max_mana_regen: int = 4
 @export_range(0, 20, 1, "suffix:/interval") var mana_regen: int = 1
-@export_range(0, 20, 1, "suffix:Mana") var mana: int = 20:
+@export_range(0, 20, 1, "suffix:Mana") var mana: int = stats.max_mana:
 	set = set_mana
 #endregion
 
 #region Stamina Variables
 @export_category("Stamina")
-var max_stamina : int = 20
 @export_range(0.1, 2.0, 0.1, "suffix:s") var stamina_regen_wait_time: float = 0.5
 @export_range(0.1, 2.0, 0.1, "suffix:s") var stamina_regen_time: float = 0.1
-@export_range(0, 20, 1, "suffix:Stamina") var max_stamina_regen: int = 20
+@export_range(0, 20, 1, "suffix:Stamina") var max_stamina_regen: int = stats.max_stamina
 @export_range(0, 20, 1, "suffix:/interval") var stamina_regen: int = 1
-@export_range(0, 20, 1, "suffix:Stamina") var stamina: int = 20:
+@export_range(0, 20, 1, "suffix:Stamina") var stamina: int = stats.max_stamina:
 	set = set_stamina
 @export_range(0.1, 2.0, 0.1, "suffix:s") var wall_drain_time: float = 0.1:
 	set(t):
@@ -127,8 +126,15 @@ var max_stamina : int = 20
 
 
 #region Setters
+func set_stats(new_stats: EntityStats) -> void:
+	stats = new_stats
+	if not is_node_ready():
+		await ready
+	update_max_resources()
+
+
 func set_mana(m: int) -> void:
-	m = clamp(m, 0, max_mana)
+	m = clamp(m, 0, stats.max_mana)
 	if mana > m:
 		mana_time.stop()
 	mana = m
@@ -154,7 +160,7 @@ func set_health(h: int) -> void:
 
 
 func set_stamina(s: int) -> void:
-	s = clamp(s, 0, max_stamina)
+	s = clamp(s, 0, stats.max_stamina)
 	if stamina > s:
 		stamina_time.stop()
 	stamina = s
@@ -299,6 +305,7 @@ func save() -> Dictionary:
 		"health" : health,
 		"mana" : mana,
 		"camp" : camp,
+		#"stats": stats,
 		"inventory" : items_duplicate
 	}
 
@@ -308,16 +315,7 @@ func _ready() -> void:
 		global_position = DEFAULT_SPAWN_POINT
 	tool_tip_node.visible = debug
 
-	health_bar.max_resource = stats.max_health
-	# TODO: max_resource from stats
-	mana_bar.max_resource = max_mana
-	stamina_bar.max_resource = max_stamina
-
-	print(stats)
-	print(health_bar.max_resource,
-	mana_bar.max_resource,
-	stamina_bar.max_resource
-	)
+	update_max_resources()
 
 	init_regen_timer(player_res.HEALTH, health_regen_wait_time, health_regen_time)
 	init_regen_timer(player_res.MANA, mana_regen_wait_time, mana_regen_time)
@@ -329,6 +327,12 @@ func _ready() -> void:
 		inventory.items_changed.connect(items_changed)
 
 
+func update_max_resources() -> void:
+	health_bar.max_resource = stats.max_health
+	mana_bar.max_resource = stats.max_mana
+	stamina_bar.max_resource = stats.max_stamina
+
+
 func items_changed(item: Item) -> void:
 	if not item:
 		return
@@ -336,8 +340,14 @@ func items_changed(item: Item) -> void:
 		_coins.value = item.stack
 
 
-func blinker(val: float):
+func blinker(val: float) -> void:
 	($AnimatedSprite2D.material as ShaderMaterial).set_shader_parameter("blend", val)
+
+
+func recover() -> void:
+	health = stats.max_health
+	mana = stats.max_mana
+	stamina = stats.max_stamina
 
 
 func hurt(damage: int, _dealer: Node2D = null) -> bool:
@@ -389,6 +399,7 @@ func _process(_delta: float) -> void:
 			"Health: ", health, "/", stats.max_health, "\n",
 			"State: ", state_machine.current_state.name, "\n",
 			"State: ", anim_state_m.get_current_node(), "\n",
+			"Sats: ", stats, "\n",
 			"Position: ", global_position, "\n",
 			"Knock_back: ", pushback_force, "\n",
 			"Velocity: ", velocity, "\n",

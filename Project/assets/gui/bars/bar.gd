@@ -29,6 +29,7 @@ func init_hearts() -> void:
 func set_max_resource(res: int) -> void:
 	max_resource = res
 	init_hearts()
+	resource = res
 
 
 func set_resource(res: int) -> void:

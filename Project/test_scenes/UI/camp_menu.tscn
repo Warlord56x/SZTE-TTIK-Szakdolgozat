@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b4tbr1nbwy7tb"]
+[gd_scene load_steps=15 format=3 uid="uid://b4tbr1nbwy7tb"]
 
 [ext_resource type="Script" path="res://test_scenes/UI/camp_menu.gd" id="1_ea34l"]
 [ext_resource type="Script" path="res://assets/gui/menus/menu_container.gd" id="2_jxgan"]
@@ -7,9 +7,10 @@
 [ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="4_s1lth"]
 [ext_resource type="Script" path="res://test_scenes/UI/blacksmith_menu.gd" id="6_dx3ak"]
 [ext_resource type="Script" path="res://test_scenes/UI/travel.gd" id="7_diu0e"]
+[ext_resource type="Script" path="res://test_scenes/UI/level_up.gd" id="7_evkrb"]
 [ext_resource type="PackedScene" uid="uid://c1fy87vwy6oos" path="res://test_scenes/stat_increase_spinner.tscn" id="7_n88r1"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ihmp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nx40c"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -24,11 +25,15 @@ line_spacing = 0.0
 font_size = 6
 font_color = Color(1, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_an3pi"]
+[sub_resource type="LabelSettings" id="LabelSettings_g5n70"]
 font_size = 6
 font_color = Color(0.803922, 0.811765, 0.823529, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xx5x3"]
+[sub_resource type="LabelSettings" id="LabelSettings_vpnxx"]
+font_size = 6
+font_color = Color(0.803922, 0.811765, 0.823529, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vmvf"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -43,123 +48,128 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -60.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_ea34l")
+metadata/_edit_vertical_guides_ = [415.0, 372.0]
 
-[node name="MenuContainer" type="Container" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 20
+
+[node name="MenuContainer" type="Container" parent="MarginContainer"]
+layout_mode = 2
 mouse_filter = 2
 script = ExtResource("2_jxgan")
 
-[node name="MainCampMenu" type="PanelContainer" parent="MenuContainer" node_paths=PackedStringArray("focus_target", "effect")]
+[node name="MainCampMenu" type="PanelContainer" parent="MarginContainer/MenuContainer" node_paths=PackedStringArray("focus_target", "effect")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 8
 size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("2_kouvb")
 focus_target = NodePath("MarginContainer/CampMenu/RestButton")
 effect = NodePath("EffectLayer")
 
-[node name="Panel" type="Panel" parent="MenuContainer/MainCampMenu"]
+[node name="Panel" type="Panel" parent="MarginContainer/MenuContainer/MainCampMenu"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MenuContainer/MainCampMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MenuContainer/MainCampMenu"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="CampMenu" type="VBoxContainer" parent="MenuContainer/MainCampMenu/MarginContainer"]
+[node name="CampMenu" type="VBoxContainer" parent="MarginContainer/MenuContainer/MainCampMenu/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="CampName" type="Label" parent="MenuContainer/MainCampMenu/MarginContainer/CampMenu"]
+[node name="CampName" type="Label" parent="MarginContainer/MenuContainer/MainCampMenu/MarginContainer/CampMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="Control" type="Control" parent="MenuContainer/MainCampMenu/MarginContainer/CampMenu"]
+[node name="Control" type="Control" parent="MarginContainer/MenuContainer/MainCampMenu/MarginContainer/CampMenu"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RestButton" type="Button" parent="MenuContainer/MainCampMenu/MarginContainer/CampMenu"]
+[node name="RestButton" type="Button" parent="MarginContainer/MenuContainer/MainCampMenu/MarginContainer/CampMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Rest"
 
-[node name="Blacksmith" type="Button" parent="MenuContainer/MainCampMenu/MarginContainer/CampMenu"]
+[node name="Blacksmith" type="Button" parent="MarginContainer/MenuContainer/MainCampMenu/MarginContainer/CampMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "BlackSmith"
 
-[node name="LevelUp" type="Button" parent="MenuContainer/MainCampMenu/MarginContainer/CampMenu"]
+[node name="LevelUp" type="Button" parent="MarginContainer/MenuContainer/MainCampMenu/MarginContainer/CampMenu"]
 layout_mode = 2
 text = "Level Up"
 
-[node name="Travel" type="Button" parent="MenuContainer/MainCampMenu/MarginContainer/CampMenu"]
+[node name="Travel" type="Button" parent="MarginContainer/MenuContainer/MainCampMenu/MarginContainer/CampMenu"]
 layout_mode = 2
 text = "Travel"
 
-[node name="EffectLayer" type="ColorRect" parent="MenuContainer/MainCampMenu"]
-material = SubResource("ShaderMaterial_8ihmp")
+[node name="EffectLayer" type="ColorRect" parent="MarginContainer/MenuContainer/MainCampMenu"]
+material = SubResource("ShaderMaterial_nx40c")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("4_s1lth")
 corner_radius = 0.01
 
-[node name="CampChildMenu" type="PanelContainer" parent="MenuContainer" node_paths=PackedStringArray("effect")]
+[node name="CampChildMenu" type="PanelContainer" parent="MarginContainer/MenuContainer" node_paths=PackedStringArray("effect")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("6_dx3ak")
 effect = NodePath("EffectLayer")
 
-[node name="TabContainer" type="TabContainer" parent="MenuContainer/CampChildMenu"]
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/MenuContainer/CampChildMenu"]
 layout_mode = 2
 mouse_filter = 2
 current_tab = 1
 clip_tabs = false
 use_hidden_tabs_for_min_size = true
 
-[node name="Craft" type="PanelContainer" parent="MenuContainer/CampChildMenu/TabContainer"]
+[node name="Craft" type="PanelContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/CampChildMenu/TabContainer/Craft"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Recipes" type="VBoxContainer" parent="MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer"]
+[node name="Recipes" type="VBoxContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Recipes" type="Label" parent="MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Recipes"]
+[node name="Recipes" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Recipes"]
 layout_mode = 2
 text = "Recipes"
 
-[node name="RecipeList" type="ItemList" parent="MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Recipes"]
+[node name="RecipeList" type="ItemList" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Recipes"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -167,15 +177,15 @@ size_flags_vertical = 3
 auto_height = true
 fixed_icon_size = Vector2i(10, 10)
 
-[node name="Ingredients" type="VBoxContainer" parent="MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer"]
+[node name="Ingredients" type="VBoxContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Ingredients" type="Label" parent="MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
+[node name="Ingredients" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
 layout_mode = 2
 text = "Ingredients"
 
-[node name="IngredientContainer" type="ItemList" parent="MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
+[node name="IngredientContainer" type="ItemList" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -183,11 +193,11 @@ focus_mode = 0
 auto_height = true
 fixed_icon_size = Vector2i(10, 10)
 
-[node name="Results" type="Label" parent="MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
+[node name="Results" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
 layout_mode = 2
 text = "Results"
 
-[node name="ResultsContainer" type="ItemList" parent="MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
+[node name="ResultsContainer" type="ItemList" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -195,94 +205,184 @@ focus_mode = 0
 auto_height = true
 fixed_icon_size = Vector2i(10, 10)
 
-[node name="Craft" type="Button" parent="MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
+[node name="Craft" type="Button" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
 layout_mode = 2
 text = "Craft"
 
-[node name="ErrorLabel" type="Label" parent="MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer"]
+[node name="ErrorLabel" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "asd"
 label_settings = SubResource("LabelSettings_3t5f0")
 
-[node name="LevelUp" type="PanelContainer" parent="MenuContainer/CampChildMenu/TabContainer"]
+[node name="LevelUp" type="PanelContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 mouse_filter = 2
+script = ExtResource("7_evkrb")
 metadata/_tab_index = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/CampChildMenu/TabContainer/LevelUp"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="LevelInfo" type="Label" parent="MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer"]
+[node name="LevelInfo" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer" instance=ExtResource("7_n88r1")]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Current Level: 1
-Soul cost: 100
-souls owned: 100
-"
-label_settings = SubResource("LabelSettings_an3pi")
+stat_name = "level"
+disabled = true
 
-[node name="Panel" type="Panel" parent="MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="StatIncrease" type="Panel" parent="MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer"]
+[node name="Control" type="Control" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/StatIncrease"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="CoinInfo" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer" instance=ExtResource("7_n88r1")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "coins held"
+disabled = true
 
-[node name="StatVitality" parent="MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/StatIncrease/VBoxContainer" instance=ExtResource("7_n88r1")]
+[node name="CoinCostInfo" type="HBoxContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/CoinCostInfo"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Coins Needed:"
+
+[node name="CostInfo" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/CoinCostInfo"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "1"
+label_settings = SubResource("LabelSettings_g5n70")
+horizontal_alignment = 1
+
+[node name="CoreStatPanel" type="PanelContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatIncrease" type="Panel" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/CoreStatPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/CoreStatPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/CoreStatPanel/VBoxContainer"]
+layout_mode = 2
+text = "Core Stats:"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/CoreStatPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatVitality" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/CoreStatPanel/VBoxContainer" instance=ExtResource("7_n88r1")]
+unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Vitality"
 
-[node name="StatStrength" parent="MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/StatIncrease/VBoxContainer" instance=ExtResource("7_n88r1")]
+[node name="StatStrength" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/CoreStatPanel/VBoxContainer" instance=ExtResource("7_n88r1")]
+unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Strength"
 
-[node name="StatDexterity" parent="MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/StatIncrease/VBoxContainer" instance=ExtResource("7_n88r1")]
+[node name="StatDexterity" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/CoreStatPanel/VBoxContainer" instance=ExtResource("7_n88r1")]
+unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Dexterity"
 
-[node name="StatIntelligence" parent="MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/StatIncrease/VBoxContainer" instance=ExtResource("7_n88r1")]
+[node name="StatIntelligence" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/CoreStatPanel/VBoxContainer" instance=ExtResource("7_n88r1")]
+unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Intelligence"
 
-[node name="Button" type="Button" parent="MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer"]
+[node name="BasicStatPanel" type="PanelContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/BasicStatPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NewStatsDisplay" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/BasicStatPanel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 1
+text = "Basic Stats:
+
+Health 26 -> 32
+Stamina 20 -> 32
+"
+label_settings = SubResource("LabelSettings_vpnxx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/BasicStatPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/BasicStatPanel/VBoxContainer"]
+layout_mode = 2
+text = "Basic Stats:"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/BasicStatPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatHealth" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/BasicStatPanel/VBoxContainer" instance=ExtResource("7_n88r1")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Health"
+disabled = true
+
+[node name="StatMana" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/BasicStatPanel/VBoxContainer" instance=ExtResource("7_n88r1")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Mana"
+disabled = true
+
+[node name="StatStamina" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/BasicStatPanel/VBoxContainer" instance=ExtResource("7_n88r1")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Stamina"
+disabled = true
+
+[node name="LevelUpButton" type="Button" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Level Up"
 
-[node name="Travel" type="PanelContainer" parent="MenuContainer/CampChildMenu/TabContainer"]
+[node name="Travel" type="PanelContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 script = ExtResource("7_diu0e")
 metadata/_tab_index = 2
 
-[node name="ItemList" type="ItemList" parent="MenuContainer/CampChildMenu/TabContainer/Travel"]
+[node name="ItemList" type="ItemList" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Travel"]
 layout_mode = 2
 
-[node name="EffectLayer" type="ColorRect" parent="MenuContainer/CampChildMenu"]
-material = SubResource("ShaderMaterial_xx5x3")
+[node name="EffectLayer" type="ColorRect" parent="MarginContainer/MenuContainer/CampChildMenu"]
+material = SubResource("ShaderMaterial_1vmvf")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("4_s1lth")
 
-[connection signal="pressed" from="MenuContainer/MainCampMenu/MarginContainer/CampMenu/RestButton" to="." method="_on_rest_button_pressed"]
-[connection signal="pressed" from="MenuContainer/MainCampMenu/MarginContainer/CampMenu/Blacksmith" to="." method="_on_blacksmith_pressed"]
-[connection signal="pressed" from="MenuContainer/MainCampMenu/MarginContainer/CampMenu/LevelUp" to="." method="_on_level_up_pressed"]
-[connection signal="pressed" from="MenuContainer/MainCampMenu/MarginContainer/CampMenu/Travel" to="." method="_on_travel_pressed"]
-[connection signal="visibility_changed" from="MenuContainer/CampChildMenu" to="MenuContainer/CampChildMenu" method="_on_visibility_changed"]
-[connection signal="tab_changed" from="MenuContainer/CampChildMenu/TabContainer" to="MenuContainer/CampChildMenu" method="_on_tab_container_tab_changed"]
-[connection signal="pressed" from="MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients/Craft" to="MenuContainer/CampChildMenu" method="_on_craft_pressed"]
-[connection signal="travel" from="MenuContainer/CampChildMenu/TabContainer/Travel" to="." method="_on_travel_travel"]
-[connection signal="visibility_changed" from="MenuContainer/CampChildMenu/TabContainer/Travel" to="MenuContainer/CampChildMenu/TabContainer/Travel" method="_on_visibility_changed"]
-[connection signal="item_activated" from="MenuContainer/CampChildMenu/TabContainer/Travel/ItemList" to="MenuContainer/CampChildMenu/TabContainer/Travel" method="_on_item_list_item_activated"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/MainCampMenu/MarginContainer/CampMenu/RestButton" to="." method="_on_rest_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/MainCampMenu/MarginContainer/CampMenu/Blacksmith" to="." method="_on_blacksmith_pressed"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/MainCampMenu/MarginContainer/CampMenu/LevelUp" to="." method="_on_level_up_pressed"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/MainCampMenu/MarginContainer/CampMenu/Travel" to="." method="_on_travel_pressed"]
+[connection signal="visibility_changed" from="MarginContainer/MenuContainer/CampChildMenu" to="MarginContainer/MenuContainer/CampChildMenu" method="_on_visibility_changed"]
+[connection signal="tab_changed" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer" to="MarginContainer/MenuContainer/CampChildMenu" method="_on_tab_container_tab_changed"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients/Craft" to="MarginContainer/MenuContainer/CampChildMenu" method="_on_craft_pressed"]
+[connection signal="visibility_changed" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp" to="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp" method="_on_visibility_changed"]
+[connection signal="next_stat_changed" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/CoreStatPanel/VBoxContainer/StatVitality" to="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp" method="_on_stat_vitality_next_stat_changed"]
+[connection signal="next_stat_changed" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/CoreStatPanel/VBoxContainer/StatStrength" to="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp" method="_on_stat_strength_next_stat_changed"]
+[connection signal="next_stat_changed" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/CoreStatPanel/VBoxContainer/StatDexterity" to="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp" method="_on_stat_dexterity_next_stat_changed"]
+[connection signal="next_stat_changed" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/CoreStatPanel/VBoxContainer/StatIntelligence" to="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp" method="_on_stat_intelligence_next_stat_changed"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/LevelUpButton" to="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp" method="_on_level_up_button_pressed"]
+[connection signal="travel" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Travel" to="." method="_on_travel_travel"]
+[connection signal="visibility_changed" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Travel" to="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Travel" method="_on_visibility_changed"]
+[connection signal="item_activated" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Travel/ItemList" to="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Travel" method="_on_item_list_item_activated"]

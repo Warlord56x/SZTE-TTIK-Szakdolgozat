@@ -1,7 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://dax01kvdrllj1"]
+[gd_scene load_steps=17 format=3 uid="uid://dax01kvdrllj1"]
 
-[ext_resource type="Theme" uid="uid://dwervey06e5is" path="res://assets/theme/menu_theme.tres" id="1_33roa"]
-[ext_resource type="Theme" uid="uid://dqa12gi8o5ol4" path="res://assets/theme/default_theme.tres" id="1_aqgs1"]
+[ext_resource type="Theme" uid="uid://cn3dpyixby5g5" path="res://assets/theme/test_theme.tres" id="1_m3r6s"]
 [ext_resource type="Script" path="res://assets/gui/menus/main_menu/main_menu.gd" id="2_0mh3k"]
 [ext_resource type="Texture2D" uid="uid://d4cojs7o3f304" path="res://assets/backgrounds/level1.png" id="2_jaj5p"]
 [ext_resource type="Script" path="res://assets/gui/menus/menu_container.gd" id="4_3e0ys"]
@@ -17,7 +16,7 @@
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ym7ke"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_foopm"]
 shader = ExtResource("5_slrmh")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -37,7 +36,7 @@ line_spacing = 0.0
 font_size = 10
 font_color = Color(1, 0, 0, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8h63t"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i4sw0"]
 shader = ExtResource("5_slrmh")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -54,7 +53,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_aqgs1")
+theme = ExtResource("1_m3r6s")
 script = ExtResource("2_0mh3k")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -74,7 +73,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_33roa")
 
 [node name="MenuContainer" type="Container" parent="MarginContainer"]
 layout_mode = 2
@@ -178,7 +176,7 @@ layout_mode = 2
 text = "Load"
 
 [node name="Effect" type="ColorRect" parent="MarginContainer/MenuContainer/LoadGameMenu"]
-material = SubResource("ShaderMaterial_ym7ke")
+material = SubResource("ShaderMaterial_foopm")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -249,7 +247,7 @@ focus_neighbor_top = NodePath("../LineEdit")
 text = "Create & Play"
 
 [node name="Effect" type="ColorRect" parent="MarginContainer/MenuContainer/NewGameMenu"]
-material = SubResource("ShaderMaterial_8h63t")
+material = SubResource("ShaderMaterial_i4sw0")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://beullbbmtqwww"]
+[gd_scene load_steps=14 format=3 uid="uid://beullbbmtqwww"]
 
 [ext_resource type="Script" path="res://autoloads/game_env.gd" id="1_emsl1"]
 [ext_resource type="AudioStream" uid="uid://cfa0cw21p6d04" path="res://assets/music/650558__stephiequeen__the-song-in-the-trees-song-loop.ogg" id="2_lxf3p"]
 [ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_7erxc"]
-[ext_resource type="Theme" uid="uid://dqa12gi8o5ol4" path="res://assets/theme/default_theme.tres" id="3_pm0tk"]
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="5_3icuv"]
 
 [sub_resource type="Environment" id="Environment_1o8hs"]
@@ -97,7 +96,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme = ExtResource("3_pm0tk")
 
 [node name="Effect" type="ColorRect" parent="ScreenEffectLayer/Control"]
 material = SubResource("ShaderMaterial_s6npm")

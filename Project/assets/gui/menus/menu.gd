@@ -45,6 +45,8 @@ func switch() -> void:
 
 
 func open() -> void:
+	if visible:
+		return
 	if tween and tween.is_running():
 		await tween.finished
 
@@ -56,6 +58,8 @@ func open() -> void:
 
 
 func close() -> void:
+	if not visible:
+		return
 	if tween and tween.is_running():
 		await tween.finished
 

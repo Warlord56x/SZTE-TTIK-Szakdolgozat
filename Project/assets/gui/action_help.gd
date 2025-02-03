@@ -48,6 +48,9 @@ func refresh_label() -> void:
 
 
 func _unhandled_input(event : InputEvent) -> void:
+	if not GameEnv.input_process:
+		return
+
 	if event is InputEventKey or event is InputEventMouseButton:
 		button.visible = false
 		key.visible = not special

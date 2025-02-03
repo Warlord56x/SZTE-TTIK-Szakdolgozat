@@ -7,6 +7,20 @@ const GAME_SCENE := "res://game.tscn"
 @onready var new_game_menu: Menu = %NewGameMenu
 @onready var load_game_menu: Menu = %LoadGameMenu
 
+@onready var menu_groups := {
+	"settings": [settings_menu],
+	"management": [new_game_menu, load_game_menu]
+}
+
+var history: Array[Menu] = []
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		var last_open: Menu = history.pop_back()
+		if last_open:
+			last_open.close()
+
 
 func _ready() -> void:
 	continue_button.disabled = SaveManager.save_slots.is_empty()
@@ -31,16 +45,37 @@ func load_done(scene: PackedScene, status: ResourceLoader.ThreadLoadStatus) -> v
 	GameEnv.load_icon(false)
 
 
+func open_menu(menu: Menu) -> void:
+	var open_group: String
+	for group in menu_groups:
+		if menu in menu_groups[group]:
+			open_group = group
+			break
+	
+	for group in menu_groups:
+		if group != open_group:
+			for m: Menu in menu_groups[group]:
+				if m == menu_groups[group][-1]:
+					await m.close()
+				else:
+					m.close()
+	menu.switch()
+	if menu.visible:
+		history.append(menu)
+	else:
+		history.erase(menu)
+
+
 func _on_new_game_pressed() -> void:
-	new_game_menu.switch()
+	open_menu(new_game_menu)
 
 
 func _on_settings_button_pressed() -> void:
-	settings_menu.switch()
+	open_menu(settings_menu)
 
 
 func _on_load_game_pressed() -> void:
-	load_game_menu.switch()
+	open_menu(load_game_menu)
 
 
 func _on_exit_pressed() -> void:

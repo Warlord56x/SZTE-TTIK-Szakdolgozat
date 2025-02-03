@@ -97,6 +97,7 @@ func _progress(f: float) -> void:
 func start_bg_music() -> void:
 	await get_tree().create_timer(0.2).timeout
 	background_music.play()
+	#pass
 
 
 func set_blur(on: bool, time: float = 0.1) -> void:

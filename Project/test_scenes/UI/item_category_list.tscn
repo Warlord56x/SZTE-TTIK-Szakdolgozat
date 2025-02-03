@@ -17,8 +17,11 @@ layout_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 5
 auto_height = true
+item_count = 2
 max_columns = 5
 fixed_icon_size = Vector2i(10, 10)
+item_0/text = "test"
+item_1/text = "test2"
 
 [connection signal="focus_exited" from="ItemList" to="." method="_on_item_list_focus_exited"]
 [connection signal="item_activated" from="ItemList" to="." method="_on_item_list_item_activated"]

@@ -16,7 +16,7 @@ signal pressed(s: SaveSlot)
 func _ready() -> void:
 	time_label.text = time
 	%Button.button_group = button_group
-	$GridContainer/Label.text = test
+	%NameLabel.text = test
 	if slot:
 		pass
 

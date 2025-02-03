@@ -6,6 +6,8 @@ class_name CampMenu
 @onready var menu: Menu = %MainCampMenu
 @onready var blacksmith_menu: Menu = %CampChildMenu
 @onready var travel: PanelContainer = %Travel
+@onready var level_up: PanelContainer = %LevelUp
+
 var player: Player = null
 
 
@@ -31,6 +33,7 @@ func camp_menu_controller(b: bool, camp: Camp = null) -> void:
 		blacksmith_menu.player = player
 		reset_menu_state(camp)
 		travel.player = player
+		level_up.player = player
 		menu.open()
 	else:
 		menu.close()
@@ -48,9 +51,7 @@ func player_rest(player_: Player = player) -> void:
 	GameEnv.load_icon(true)
 	await GameEnv.fade_step_in
 
-	player_.health = player_.stats.max_health
-	player_.mana = player_.max_mana
-	player_.stamina = player_.max_stamina
+	player_.recover()
 
 	await GameEnv.fade_step_wait
 	GameEnv.load_icon(false)
@@ -91,9 +92,9 @@ func _on_travel_travel(camp: Camp) -> void:
 func _on_level_up_pressed() -> void:
 	if not blacksmith_menu.visible:
 		blacksmith_menu.open()
-		blacksmith_menu.current_tab = 3
+		blacksmith_menu.current_tab = 1
 	else:
-		if blacksmith_menu.current_tab == 3:
+		if blacksmith_menu.current_tab == 1:
 			blacksmith_menu.close()
 		else:
-			blacksmith_menu.current_tab = 3
+			blacksmith_menu.current_tab = 1

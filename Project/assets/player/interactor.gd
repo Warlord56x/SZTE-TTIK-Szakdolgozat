@@ -6,8 +6,8 @@ class_name Interactor
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	#if not GameEnv.input_process:
-		#return
+	if not GameEnv.input_process:
+		return
 
 	if event.is_action_pressed("interact") and (
 		interaction_target and

@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=3 uid="uid://b2qrpcmioix5b"]
+[gd_scene load_steps=9 format=3 uid="uid://b2qrpcmioix5b"]
 
-[ext_resource type="Theme" uid="uid://dqa12gi8o5ol4" path="res://assets/theme/default_theme.tres" id="1_xwq5v"]
 [ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_5sbp6"]
 [ext_resource type="Script" path="res://assets/gui/menus/menu_container.gd" id="3_x1cqt"]
 [ext_resource type="Script" path="res://assets/gui/menus/game_menu/main_game_menu.gd" id="4_f786d"]
@@ -13,7 +12,7 @@
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hiyis"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ikm8q"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -33,7 +32,6 @@ grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 2
 mouse_filter = 2
-theme = ExtResource("1_xwq5v")
 
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -66,10 +64,6 @@ mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Margin/MenuContainer/Main"]
 layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Margin/MenuContainer/Main/MarginContainer"]
 layout_mode = 2
@@ -112,7 +106,7 @@ layout_mode = 2
 text = "Save & Exit"
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/Main"]
-material = SubResource("ShaderMaterial_hiyis")
+material = SubResource("ShaderMaterial_ikm8q")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
