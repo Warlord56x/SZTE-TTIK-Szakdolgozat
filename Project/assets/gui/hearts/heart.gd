@@ -8,15 +8,40 @@ class_name Heart
 	set = set_current
 
 
-func _init() -> void:
+func _ready() -> void:
 	if not heart:
 		var children = get_children()
 		if not children.is_empty():
 			heart = children[0]
+		else:
+			printerr("This node can't work without an AnimatedSprite2D child.")
+		return
 
-
-func _ready() -> void:
+	if custom_minimum_size == Vector2.ZERO:
+		var first_frame = heart.sprite_frames.get_frame_texture("default", 0)
+		var first_frame_size = first_frame.get_size() * 2
+		custom_minimum_size = first_frame_size
 	set_current(4)
+	appear_effect()
+
+
+func appear_effect() -> void:
+	var tween := create_tween()
+	heart.modulate.a = 0
+	tween.tween_property(heart, "modulate:a", 1, 0.3)
+	await tween.finished
+
+
+func disappear_effect() -> void:
+	var tween := create_tween()
+	heart.modulate.a = 1
+	tween.tween_property(heart, "modulate:a", 0, 0.3)
+	await tween.finished
+
+
+func kill_heart() -> void:
+	await disappear_effect()
+	queue_free()
 
 
 func set_current(h : int) -> void:

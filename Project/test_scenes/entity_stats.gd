@@ -58,7 +58,8 @@ func diminishing_return(base: int, stat: int) -> int:
 	var max_value = 60
 	var scaling_factor = 20.0
 	var raw_max = base + (max_value - base) * (stat / (stat + scaling_factor))
-	return int(round(raw_max / 4.0)) * 4
+	return raw_max
+	#return int(round(raw_max / 4.0)) * 4
 
 
 func calc_next_lvl_up_coin_cost(new_level: int, next: int = 1) -> int:
