@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://hbpp6xu33ckp"]
-
-[ext_resource type="Script" path="res://test_scenes/buffs/buff_health_regen.gd" id="1_8foav"]
-
-[node name="BuffHealthRegen" type="Node"]
-script = ExtResource("1_8foav")

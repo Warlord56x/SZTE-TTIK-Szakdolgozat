@@ -8,7 +8,6 @@ class_name Buff
 
 
 func _ready() -> void:
-	ready()
 	buff_timer.wait_time = buff_time
 	buff_timer.one_shot = true
 	add_child(buff_timer)
@@ -18,10 +17,6 @@ func _ready() -> void:
 
 
 func effect() -> void:
-	pass
-
-
-func ready() -> void:
 	pass
 
 

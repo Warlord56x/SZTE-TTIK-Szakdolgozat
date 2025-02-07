@@ -1,5 +1,5 @@
 extends Menu
-class_name SettingsGameMenu
+class_name SettingsMenu
 
 @onready var master_volume_slider: VolumeSlider = %MasterVolumeSlider
 @onready var vsync_check: CheckButton = %VsyncCheck

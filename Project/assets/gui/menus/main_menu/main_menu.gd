@@ -3,7 +3,7 @@ extends Control
 const GAME_SCENE := "res://game.tscn"
 
 @onready var continue_button: Button = %ContinueButton
-@onready var settings_menu: SettingsGameMenu = %Settings
+@onready var settings_menu: SettingsMenu = %Settings
 @onready var new_game_menu: Menu = %NewGameMenu
 @onready var load_game_menu: Menu = %LoadGameMenu
 

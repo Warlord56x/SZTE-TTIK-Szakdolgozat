@@ -36,6 +36,8 @@ var tool_tip_node: DebugInfo = DEBUG_TIP.instantiate()
 var floating_hp_bar: FloatingHpBar = FLOATING_HP_BAR.instantiate()
 var invincible: bool = false
 var navmap_ready: bool = false
+@export var stats: EntityStats:
+	set = set_stats
 
 @onready var initial_pos: Vector2
 
@@ -60,7 +62,6 @@ func _ready() -> void:
 	actor_setup.call_deferred()
 	tool_tip_node.visible = debug
 	initial_pos = global_position
-	ready()
 
 	floating_hp_bar.position = Vector2(0, -10)
 	add_child(floating_hp_bar)
@@ -69,11 +70,15 @@ func _ready() -> void:
 	floating_hp_bar.effect = true
 
 
-func ready() -> void:
-	pass
+func set_stats(sts: EntityStats) -> void:
+	stats = sts
+	if not is_node_ready():
+		await ready
+	floating_hp_bar.max_value = stats.max_health
+	floating_hp_bar.value = stats.max_health
 
 
-func actor_setup():
+func actor_setup() -> void:
 	# Wait for the NavigationServer to sync.
 	if NavigationServer2D.get_maps().is_empty():
 		await NavigationServer2D.map_changed
@@ -148,7 +153,7 @@ func physics_process(_delta: float) -> void:
 	pass
 
 
-func blinker(val: float):
+func blinker(val: float) -> void:
 	(sprite.material as ShaderMaterial).set_shader_parameter("blend", val)
 
 

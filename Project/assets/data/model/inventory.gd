@@ -11,6 +11,7 @@ func _init() -> void:
 
 
 func add_item(item: Item) -> bool:
+	item = item.duplicate()
 	var it := find_item(item)
 	var _item := get_item(it)
 

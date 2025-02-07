@@ -85,7 +85,7 @@ var dash_count: int = 0
 
 @export var inv_time = 0.1
 
-var stats: EntityStats = EntityStats.new():
+@export var stats: EntityStats = null:
 	set = set_stats
 
 #region Health Variables
@@ -94,7 +94,7 @@ var stats: EntityStats = EntityStats.new():
 @export_range(0.1, 2.0, 0.1, "suffix:s") var health_regen_time: float = 0.2
 @export_range(0, 20, 1, "suffix:Health") var max_health_regen: int = 12
 @export_range(0, 20, 1, "suffix:/interval") var health_regen: int = 1
-@export_range(0, 20, 1, "suffix:Health") var health: int = stats.max_health:
+@export_range(0, 20, 1, "suffix:Health") var health: int:
 	set = set_health
 #endregion
 
@@ -104,7 +104,7 @@ var stats: EntityStats = EntityStats.new():
 @export_range(0.1, 2.0, 0.1, "suffix:s") var mana_regen_time: float = 0.2
 @export_range(0, 20, 1, "suffix:Mana") var max_mana_regen: int = 4
 @export_range(0, 20, 1, "suffix:/interval") var mana_regen: int = 1
-@export_range(0, 20, 1, "suffix:Mana") var mana: int = stats.max_mana:
+@export_range(0, 20, 1, "suffix:Mana") var mana: int:
 	set = set_mana
 #endregion
 
@@ -112,9 +112,9 @@ var stats: EntityStats = EntityStats.new():
 @export_category("Stamina")
 @export_range(0.1, 2.0, 0.1, "suffix:s") var stamina_regen_wait_time: float = 0.5
 @export_range(0.1, 2.0, 0.1, "suffix:s") var stamina_regen_time: float = 0.1
-@export_range(0, 20, 1, "suffix:Stamina") var max_stamina_regen: int = stats.max_stamina
+@export_range(0, 20, 1, "suffix:Stamina") var max_stamina_regen: int
 @export_range(0, 20, 1, "suffix:/interval") var stamina_regen: int = 1
-@export_range(0, 20, 1, "suffix:Stamina") var stamina: int = stats.max_stamina:
+@export_range(0, 20, 1, "suffix:Stamina") var stamina: int:
 	set = set_stamina
 @export_range(0.1, 2.0, 0.1, "suffix:s") var wall_drain_time: float = 0.1:
 	set(t):
@@ -291,22 +291,14 @@ func request_interaction_visible(b: bool) -> void:
 
 
 func save() -> Dictionary:
-
-	var items_duplicate = []
-	for item in inventory.get_items():
-		if item:
-			items_duplicate.append(item.duplicate())
-		else:
-			items_duplicate.append(null)
-
 	return {
 		"filename" : get_scene_file_path(),
 		"parent": get_parent().get_path(),
 		"health" : health,
 		"mana" : mana,
 		"camp" : camp,
-		#"stats": stats,
-		"inventory" : items_duplicate
+		"stats": stats,
+		"inventory" : inventory.get_items()
 	}
 
 
@@ -331,6 +323,8 @@ func update_max_resources() -> void:
 	health_bar.max_resource = stats.max_health
 	mana_bar.max_resource = stats.max_mana
 	stamina_bar.max_resource = stats.max_stamina
+
+	max_stamina_regen = stats.max_stamina
 
 
 func items_changed(item: Item) -> void:

@@ -1,6 +1,7 @@
-[gd_scene load_steps=110 format=3 uid="uid://diq8ndw4ll1rm"]
+[gd_scene load_steps=112 format=3 uid="uid://diq8ndw4ll1rm"]
 
 [ext_resource type="Script" path="res://assets/player/player.gd" id="1_0p7ex"]
+[ext_resource type="Script" path="res://test_scenes/entity_stats.gd" id="2_fr6p7"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="2_imbft"]
 [ext_resource type="PackedScene" uid="uid://dm4lu0fwgsv75" path="res://assets/gui/bars/bar_health.tscn" id="2_n15yp"]
 [ext_resource type="PackedScene" uid="uid://b488vmoc2emb0" path="res://debug/debug_info.tscn" id="2_p0eb3"]
@@ -31,6 +32,17 @@
 [ext_resource type="PackedScene" uid="uid://bngmpnj1xby7e" path="res://test_scenes/UI/inventory_menu.tscn" id="25_riq7e"]
 [ext_resource type="Script" path="res://helper_classes/hitbox.gd" id="26_3ibsb"]
 [ext_resource type="Script" path="res://helper_classes/hurtbox.gd" id="28_80a7v"]
+
+[sub_resource type="Resource" id="Resource_lkap7"]
+script = ExtResource("2_fr6p7")
+level = 1
+base_max_health = 12
+base_max_mana = 12
+base_max_stamina = 12
+vitality = 10
+strength = 10
+dexterity = 10
+intelligence = 10
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2gbc"]
 size = Vector2(6, 6)
@@ -1177,12 +1189,13 @@ size = Vector2(8, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mirti"]
 size = Vector2(6, 6)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("tool_tip_node") groups=["Persistent"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("tool_tip_node") groups=["Persistent", "Player"]]
 collision_mask = 17
 safe_margin = 0.1
 script = ExtResource("1_0p7ex")
 tool_tip_node = NodePath("DebugTooltip")
 inv_time = 0.3
+stats = SubResource("Resource_lkap7")
 health_regen_wait_time = 1.5
 health_regen_time = 0.5
 max_health_regen = 0
@@ -1407,7 +1420,6 @@ joypad_button = 14
 
 [node name="InventoryLayer" type="CanvasLayer" parent="."]
 layer = 3
-visible = false
 
 [node name="InventoryMenu" parent="InventoryLayer" instance=ExtResource("25_riq7e")]
 unique_name_in_owner = true

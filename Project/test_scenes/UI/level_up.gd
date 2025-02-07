@@ -21,6 +21,9 @@ var player: Player = null
 
 var new_stats: EntityStats = null
 
+var player_coins: Item
+var coin_cost: int = 0
+
 
 func reset_level_window() -> void:
 	if not player:
@@ -32,7 +35,7 @@ func reset_level_window() -> void:
 	stat_dexterity.current_stat = player.stats.dexterity
 	stat_intelligence.current_stat = player.stats.intelligence
 
-	new_stats = player.stats.copy()
+	new_stats = player.stats.duplicate()
 
 
 func update_level_window() -> void:
@@ -43,12 +46,12 @@ func update_level_window() -> void:
 	var coin_amount := 0
 	var coin_index := player.inventory.find_item(COIN)
 	if coin_index != -1:
-		var coin := player.inventory.get_item(coin_index)
-		coin_amount = coin.stack
-	var actual_cost := player.stats.calc_multi_lvl_up_coin_cost(new_stats.level)
+		player_coins = player.inventory.get_item(coin_index)
+		coin_amount = player_coins.stack
+	coin_cost = player.stats.calc_multi_lvl_up_coin_cost(new_stats.level)
 	var cost := player.stats.calc_next_lvl_up_coin_cost(new_stats.level)
 	coin_info.current_stat = coin_amount
-	coin_info.next_stat = coin_amount - actual_cost
+	coin_info.next_stat = coin_amount - coin_cost
 	cost_info.text = str(cost)
 
 	var lock = coin_info.next_stat - player.stats.calc_next_lvl_up_coin_cost(new_stats.level, 2)
@@ -77,21 +80,25 @@ func update_basic_stats() -> void:
 
 
 func _on_stat_vitality_next_stat_changed(stat: int) -> void:
+	new_stats.level += stat - new_stats.vitality
 	new_stats.vitality = stat
 	update_level_window()
 
 
 func _on_stat_strength_next_stat_changed(stat: int) -> void:
+	new_stats.level += stat - new_stats.strength
 	new_stats.strength = stat
 	update_level_window()
 
 
 func _on_stat_dexterity_next_stat_changed(stat: int) -> void:
+	new_stats.level += stat - new_stats.dexterity
 	new_stats.dexterity = stat
 	update_level_window()
 
 
 func _on_stat_intelligence_next_stat_changed(stat: int) -> void:
+	new_stats.level += stat - new_stats.intelligence
 	new_stats.intelligence = stat
 	update_level_window()
 
@@ -103,5 +110,7 @@ func _on_visibility_changed() -> void:
 
 func _on_level_up_button_pressed() -> void:
 	player.stats = new_stats
+	if player_coins.stack - coin_cost >= 0:
+		player_coins.stack -= coin_cost
 	reset_level_window()
 	update_level_window()

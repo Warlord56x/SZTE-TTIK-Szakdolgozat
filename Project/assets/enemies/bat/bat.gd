@@ -5,7 +5,8 @@ class_name Bat
 @onready var hitbox: Hitbox = $Hitbox
 
 
-func ready() -> void:
+func _ready() -> void:
+	super._ready()
 	hitbox.hit_callback = knock_back.bind(global_position, 1.0)
 
 

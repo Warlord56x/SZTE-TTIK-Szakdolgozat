@@ -38,6 +38,7 @@ Persistent="Saveable nodes"
 Checkpoint="Essentially a \"bonfire\" from ds"
 Respawnable="Enemies that will respawn on rest"
 Camp=""
+Player="This is the player"
 
 [gui]
 

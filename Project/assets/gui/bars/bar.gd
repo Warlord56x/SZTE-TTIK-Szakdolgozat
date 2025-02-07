@@ -16,7 +16,7 @@ func _init() -> void:
 
 func init_hearts() -> void:
 	for child: Heart in get_children():
-		# Same as queue_free() but with animation
+		# Same as queue_free() but with animation (custom method)
 		child.kill_heart()
 	for i in range(0, max_resource, 4):
 		var heart_instance := heart.instantiate() as Heart
@@ -43,7 +43,6 @@ func fix_hearts() -> void:
 func set_max_resource(res: int) -> void:
 	max_resource = res
 	fix_hearts()
-	resource = res
 	set_resource(res)
 
 
@@ -57,10 +56,10 @@ func set_resource(res: int) -> void:
 		for child: Heart in children:
 			child.set_null()
 		return
-	if res == max_resource:
-		for child: Heart in children:
-			child.set_full()
-		return
+	#if res == max_resource:
+		#for child: Heart in children:
+			#child.set_full()
+		#return
 
 	for child: Heart in children:
 		child.current = 0

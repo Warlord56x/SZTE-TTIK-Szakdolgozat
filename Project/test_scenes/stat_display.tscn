@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1ymk23npn35b"]
+
+[ext_resource type="Script" path="res://test_scenes/stat_display.gd" id="1_asab5"]
+
+[node name="StatDisplay" type="HBoxContainer"]
+script = ExtResource("1_asab5")
+
+[node name="StatLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Level:"
+
+[node name="StatDisplay" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "1"

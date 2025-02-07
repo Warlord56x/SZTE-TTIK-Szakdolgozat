@@ -25,9 +25,7 @@ func physics_process(delta: float) -> void:
 func leave() -> void:
 	if player.has_node("Hurtbox"):
 		player.get_node("Hurtbox").set_deferred("monitoring", true)
-	player.health = player.max_health
-	player.stamina = player.max_stamina
-	player.mana = player.max_mana
+	player.recover()
 
 	player.velocity = Vector2.ZERO
 	player.pushback_force = Vector2.ZERO

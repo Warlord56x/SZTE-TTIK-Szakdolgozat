@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2qrpcmioix5b"]
+[gd_scene load_steps=12 format=3 uid="uid://b2qrpcmioix5b"]
 
 [ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_5sbp6"]
 [ext_resource type="Script" path="res://assets/gui/menus/menu_container.gd" id="3_x1cqt"]
 [ext_resource type="Script" path="res://assets/gui/menus/game_menu/main_game_menu.gd" id="4_f786d"]
+[ext_resource type="Script" path="res://assets/gui/menus/game_menu/status_menu.gd" id="5_d28p0"]
 [ext_resource type="PackedScene" uid="uid://c02qudtqfyl0a" path="res://test_scenes/UI/settings_menu.tscn" id="6_4evkw"]
+[ext_resource type="PackedScene" uid="uid://b1ymk23npn35b" path="res://test_scenes/stat_display.tscn" id="6_ugvnl"]
 [ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="6_wtw0d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qr1om"]
@@ -12,7 +14,7 @@
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i3086"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qui52"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -21,6 +23,8 @@ shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/pixel_size = 0.01
 shader_parameter/corner_radius = 0.01
 shader_parameter/invert = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_p44gk"]
 
 [node name="GameMenu" type="Control"]
 material = SubResource("ShaderMaterial_qr1om")
@@ -88,6 +92,10 @@ mouse_filter = 2
 layout_mode = 2
 text = "Continue"
 
+[node name="Status" type="Button" parent="Margin/MenuContainer/Main/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Status"
+
 [node name="Settings" type="Button" parent="Margin/MenuContainer/Main/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
@@ -106,7 +114,7 @@ layout_mode = 2
 text = "Save & Exit"
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/Main"]
-material = SubResource("ShaderMaterial_i3086")
+material = SubResource("ShaderMaterial_qui52")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -116,7 +124,105 @@ corner_radius = 0.01
 [node name="Settings" parent="Margin/MenuContainer" instance=ExtResource("6_4evkw")]
 layout_mode = 2
 
+[node name="StatusMenu" type="PanelContainer" parent="Margin/MenuContainer" node_paths=PackedStringArray("effect")]
+layout_mode = 2
+script = ExtResource("5_d28p0")
+effect = NodePath("Effect")
+
+[node name="Panel" type="Panel" parent="Margin/MenuContainer/StatusMenu"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Margin/MenuContainer/StatusMenu"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/MenuContainer/StatusMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Status"
+label_settings = SubResource("LabelSettings_p44gk")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CoreStatsLabel" type="Label" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Core stats:"
+
+[node name="StatLevel" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_ugvnl")]
+layout_mode = 2
+stat_name = "Level"
+stat = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StatVitality" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_ugvnl")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Vitality"
+stat = 10
+
+[node name="StatStrength" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_ugvnl")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Mana"
+stat = 10
+
+[node name="StatDexterity" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_ugvnl")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Dexterity"
+stat = 10
+
+[node name="StatIntelligence" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_ugvnl")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Intelligence"
+stat = 10
+
+[node name="BasicStatsLabel" type="Label" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Basic stats:"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StatHealth" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("6_ugvnl")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Health"
+stat = 20
+
+[node name="StatMana" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("6_ugvnl")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Mana"
+stat = 20
+
+[node name="StatStamina" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("6_ugvnl")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Stamina"
+stat = 20
+
+[node name="Effect" type="ColorRect" parent="Margin/MenuContainer/StatusMenu"]
+material = SubResource("ShaderMaterial_qui52")
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("6_wtw0d")
+corner_radius = 0.01
+
 [connection signal="pressed" from="Margin/MenuContainer/Main/MarginContainer/VBoxContainer/Continue" to="Margin/MenuContainer/Main" method="_on_continue_pressed"]
+[connection signal="pressed" from="Margin/MenuContainer/Main/MarginContainer/VBoxContainer/Status" to="Margin/MenuContainer/Main" method="_on_status_pressed"]
 [connection signal="pressed" from="Margin/MenuContainer/Main/MarginContainer/VBoxContainer/Settings" to="Margin/MenuContainer/Main" method="_on_settings_pressed"]
 [connection signal="pressed" from="Margin/MenuContainer/Main/MarginContainer/VBoxContainer/Back" to="Margin/MenuContainer/Main" method="_on_back_pressed"]
 [connection signal="pressed" from="Margin/MenuContainer/Main/MarginContainer/VBoxContainer/Exit" to="Margin/MenuContainer/Main" method="_on_exit_pressed"]

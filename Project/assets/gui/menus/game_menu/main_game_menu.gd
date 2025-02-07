@@ -1,7 +1,8 @@
 extends Menu
 class_name MainGameMenu
 
-@onready var settings: Menu = $"../Settings"
+@onready var settings: SettingsMenu = $"../Settings"
+@onready var status_menu: StatusMenu = $"../StatusMenu"
 
 @onready var menus: Array[Menu] = [self, settings]
 @onready var menus_reversed: Array[Menu] = [settings, self]
@@ -49,4 +50,8 @@ func _on_back_pressed() -> void:
 func _on_exit_pressed() -> void:
 	SaveManager.save_game()
 	get_tree().quit()
+
+
+func _on_status_pressed() -> void:
+	status_menu.switch()
 #endregion

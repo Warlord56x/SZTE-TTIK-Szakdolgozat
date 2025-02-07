@@ -1,26 +1,28 @@
+extends Resource
 class_name EntityStats
 
 
-var level: int = 1:
+@export var level: int = 1:
 	set = set_level
 
+@export_group("Basic stats")
 var max_health: int
-var base_max_health: int
+@export var base_max_health: int = 12
 
 var max_mana: int
-var base_max_mana: int
+@export var base_max_mana: int = 12
 
 var max_stamina: int
-var base_max_stamina: int
+@export var base_max_stamina: int = 12
 
-
-var vitality: int:
+@export_group("Core Stats")
+@export var vitality: int = 10:
 	set = set_vitalaity
-var strength: int:
+@export var strength: int = 10:
 	set = set_strength
-var dexterity: int:
+@export var dexterity: int = 10:
 	set = set_dexterity
-var intelligence: int:
+@export var intelligence: int = 10:
 	set = set_intelligence
 
 signal level_changed(new_level: int)
@@ -28,6 +30,7 @@ signal stat_changed(stat: String, new_value: int)
 
 
 func _init(
+		lvl: int = 1,
 		health: int = 12,
 		mana: int = 12,
 		stamina: int = 12,
@@ -35,7 +38,6 @@ func _init(
 		s: int = 10,
 		d: int = 10,
 		i: int = 10,
-		lvl: int = 1,
 	) -> void:
 
 	base_max_health = health
@@ -82,49 +84,36 @@ func set_level(lvl: int) -> void:
 
 
 func set_vitalaity(v: int) -> void:
-	level += v - vitality
+	#level += v - vitality
 	vitality = v
 	max_health = diminishing_return(base_max_health, vitality)
 	stat_changed.emit("vit", vitality)
 
 
 func set_strength(s: int) -> void:
-	level += s - strength
+	#level += s - strength
 	strength = s
 	stat_changed.emit("str", strength)
 
 
 func set_dexterity(d: int) -> void:
-	level += d - dexterity
+	#level += d - dexterity
 	dexterity = d
 	max_stamina = diminishing_return(base_max_stamina, dexterity)
 	stat_changed.emit("dex", dexterity)
 
 
 func set_intelligence(i: int) -> void:
-	level += i - intelligence
+	#level += i - intelligence
 	intelligence = i
 	max_mana = diminishing_return(base_max_mana, intelligence)
 	stat_changed.emit("int", intelligence)
 
 
-func copy() -> EntityStats:
-	var _copy := EntityStats.new(
-		base_max_health,
-		base_max_mana,
-		base_max_stamina,
-		vitality,
-		strength,
-		dexterity,
-		intelligence,
-		level,
-	)
-	return _copy
-
-
 func _to_string() -> String:
 	var result = "Stats:\n"
 	result += "-----------------\n"
+	result += "Level: " + str(level)+ "\n"
 	result += "Health: " + str(max_health)+ "\n"
 	result += "Mana: " + str(max_mana) + "\n"
 	result += "Stamina: " + str(max_stamina) + "\n\n"

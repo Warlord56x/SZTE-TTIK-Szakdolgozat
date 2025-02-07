@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c02qudtqfyl0a"]
 
-[ext_resource type="Script" path="res://assets/gui/menus/game_menu/settings_game_menu.gd" id="1_ty0iu"]
+[ext_resource type="Script" path="res://assets/gui/menus/game_menu/settings_menu.gd" id="1_ty0iu"]
 [ext_resource type="PackedScene" uid="uid://dmk3l27wkrb82" path="res://assets/gui/menus/menu_elements/volume_slider.tscn" id="2_c3e3u"]
 [ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_wtfp7"]
 [ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="4_qiejg"]
@@ -9,7 +9,7 @@
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dlu7y"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kcali"]
 shader = ExtResource("3_wtfp7")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -88,7 +88,7 @@ focus_neighbor_top = NodePath("../VsyncCheck")
 text = "apply"
 
 [node name="Effect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_dlu7y")
+material = SubResource("ShaderMaterial_kcali")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

@@ -4,8 +4,9 @@ class_name BuffStun
 @export var duration: float = 1.0
 
 
-func ready() -> void:
+func _ready() -> void:
 	buff_time = duration
+	super._ready()
 
 
 func effect() -> void:
