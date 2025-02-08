@@ -14,9 +14,8 @@ const FLOATING_HP_BAR := preload("res://assets/gui/floating_bar/floating_hp_bar.
 @export var movement_speed: float = 70
 @export var limit_nav_axis: Vector2i = Vector2i.ONE
 @export var min_jump_velocity: float = -100
-@export var max_health: int = 10
 @export var inv_time: float = 0.3
-@export var health: int = 10:
+var health: int:
 	set = set_health
 
 @export var ai: bool = true
@@ -24,7 +23,8 @@ const FLOATING_HP_BAR := preload("res://assets/gui/floating_bar/floating_hp_bar.
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var damage: int = 1
+@export var damage: int = 1:
+	get = get_damage
 var pushback_force: Vector2:
 	set(value):
 		value -= Vector2.ONE
@@ -44,6 +44,12 @@ var navmap_ready: bool = false
 var move_direction: float
 
 
+func _init() -> void:
+	tool_tip_node.anchor_point = Vector2(0, -5)
+	tool_tip_node.anchor_preset = Control.PRESET_CENTER_BOTTOM
+	add_child(tool_tip_node)
+
+
 func set_health(h: int) -> void:
 	health = h
 	floating_hp_bar.value = h
@@ -51,11 +57,17 @@ func set_health(h: int) -> void:
 		death()
 
 
-func _init() -> void:
-	tool_tip_node.anchor_point = Vector2(0, -5)
-	tool_tip_node.anchor_preset = Control.PRESET_CENTER_BOTTOM
-	add_child(tool_tip_node)
+func set_stats(sts: EntityStats) -> void:
+	stats = sts
+	if not is_node_ready():
+		await ready
+	health = stats.max_health
+	floating_hp_bar.max_value = stats.max_health
+	floating_hp_bar.value = stats.max_health
 
+
+func get_damage() -> int:
+	return damage
 
 
 func _ready() -> void:
@@ -65,17 +77,9 @@ func _ready() -> void:
 
 	floating_hp_bar.position = Vector2(0, -10)
 	add_child(floating_hp_bar)
-	floating_hp_bar.max_value = max_health
+	floating_hp_bar.max_value = stats.max_health
 	floating_hp_bar.value = health
 	floating_hp_bar.effect = true
-
-
-func set_stats(sts: EntityStats) -> void:
-	stats = sts
-	if not is_node_ready():
-		await ready
-	floating_hp_bar.max_value = stats.max_health
-	floating_hp_bar.value = stats.max_health
 
 
 func actor_setup() -> void:
@@ -123,9 +127,9 @@ func _process(_delta : float) -> void:
 	if debug:
 		tool_tip_node.tool_tip = str(
 			"Name: ", name, "\n",
-			"Node: ", self, "\n",
 			"\n",
-			"Health: ", health, "/", max_health, "\n",
+			"Health: ", health, "/", stats.max_health, "\n",
+			"Damage: ", damage, "\n",
 			"AI: ", ai,"\n",
 			"Target: ", target, "\n",
 			"Invincible: ", invincible, "\n",
@@ -222,3 +226,18 @@ func death() -> void:
 	var data := {"position": initial_pos, "filename": scene_file_path, "parent": get_parent().get_path()}
 	GameEnv.nodes_to_respawn.append(data)
 	queue_free()
+
+
+func _to_string() -> String:
+	return str(
+				"Name: ", name, "\n",
+				"\n",
+				"Health: ", health, "/", stats.max_health, "\n",
+				"Damage: ", damage, "\n",
+				"AI: ", ai,"\n",
+				"Target: ", target, "\n",
+				"State: ", state_machine.current_state.name, "\n",
+				"Position: ", global_position, "\n",
+				"Knock_back: ", pushback_force, "\n",
+				"Velocity: ", velocity, "\n",
+				)

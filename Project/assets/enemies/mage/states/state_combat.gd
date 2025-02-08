@@ -9,8 +9,6 @@ const PROJECTILE := preload("res://assets/player/projectile.tscn")
 var target: Player = null
 var attack_flag: bool = false
 
-#TODO: Check why the attack triggers multiple times
-
 
 func _ready() -> void:
 	projectile_timer.connect("timeout", _on_p_timer_timeout)
@@ -31,6 +29,7 @@ func attack() -> void:
 	projectile.p_rotation = enemy.global_position.angle_to_point(target.global_position)
 	projectile.global_position = enemy.global_position
 	projectile.type = 1
+	projectile.damage = enemy.damage
 	projectile.parent_ref = enemy
 	enemy.add_child(projectile)
 	enemy.sprite.play("default")
@@ -64,5 +63,5 @@ func leave() -> void:
 
 
 func _on_p_timer_timeout() -> void:
-	projectile_timer.wait_time = randf_range(1.0, 1.6)
+	projectile_timer.wait_time = randf_range(1.2, 1.8)
 	attack()

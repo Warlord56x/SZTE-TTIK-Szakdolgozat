@@ -9,6 +9,7 @@ class_name StatusMenu
 @onready var stat_health: StatDisplay = %StatHealth
 @onready var stat_mana: StatDisplay = %StatMana
 @onready var stat_stamina: StatDisplay = %StatStamina
+@onready var stat_level: StatDisplay = %StatLevel
 
 @onready var player: Player
 var stats: EntityStats
@@ -22,6 +23,8 @@ func vis_changed() -> void:
 func update_menu() -> void:
 	player = get_tree().get_first_node_in_group("Player")
 	stats = player.stats
+
+	stat_level.stat = stats.level
 
 	stat_vitality.stat = stats.vitality
 	stat_strength.stat = stats.strength

@@ -4,8 +4,8 @@ class_name MainGameMenu
 @onready var settings: SettingsMenu = $"../Settings"
 @onready var status_menu: StatusMenu = $"../StatusMenu"
 
-@onready var menus: Array[Menu] = [self, settings]
-@onready var menus_reversed: Array[Menu] = [settings, self]
+@onready var menus: Array[Menu] = [self, settings, status_menu]
+@onready var menus_reversed: Array[Menu] = [status_menu, settings, self]
 
 
 var main_open: bool = false:

@@ -22,6 +22,9 @@ func chase_finished() -> void:
 
 
 func physics_process(_delta: float) -> void:
+	if not enemy.target:
+		chase_timer.stop()
+		return
 	enemy.set_movement_target(enemy.target.global_position)
 	enemy.move()
 	if not enemy.is_on_floor():

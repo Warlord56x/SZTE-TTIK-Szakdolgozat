@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2qrpcmioix5b"]
+[gd_scene load_steps=13 format=3 uid="uid://b2qrpcmioix5b"]
 
 [ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_5sbp6"]
 [ext_resource type="Script" path="res://assets/gui/menus/menu_container.gd" id="3_x1cqt"]
@@ -14,7 +14,7 @@
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qui52"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_demqf"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -25,6 +25,16 @@ shader_parameter/corner_radius = 0.01
 shader_parameter/invert = false
 
 [sub_resource type="LabelSettings" id="LabelSettings_p44gk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_58ftj"]
+shader = ExtResource("3_5sbp6")
+shader_parameter/progress = 0.0
+shader_parameter/noise_desnity = 30.0
+shader_parameter/beam_size = 0.01
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pixel_size = 0.01
+shader_parameter/corner_radius = 0.01
+shader_parameter/invert = false
 
 [node name="GameMenu" type="Control"]
 material = SubResource("ShaderMaterial_qr1om")
@@ -114,7 +124,7 @@ layout_mode = 2
 text = "Save & Exit"
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/Main"]
-material = SubResource("ShaderMaterial_qui52")
+material = SubResource("ShaderMaterial_demqf")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -155,6 +165,7 @@ layout_mode = 2
 text = "Core stats:"
 
 [node name="StatLevel" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_ugvnl")]
+unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Level"
 stat = 1
@@ -214,7 +225,7 @@ stat_name = "Stamina"
 stat = 20
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/StatusMenu"]
-material = SubResource("ShaderMaterial_qui52")
+material = SubResource("ShaderMaterial_58ftj")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

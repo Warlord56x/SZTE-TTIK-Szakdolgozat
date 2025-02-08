@@ -2,8 +2,6 @@ extends State
 class_name StateEnemySwmanCombat
 
 
-const PROJECTILE := preload("res://assets/player/projectile.tscn")
-
 @onready var enemy: Swordsman = owner as Swordsman
 @onready var attack_timer: Timer = $"../../AttackTimer"
 
@@ -14,11 +12,13 @@ var attacking: bool = false
 func attack() -> void:
 	attacking = true
 
+	enemy.weapon_hitbox.monitorable = true
 	$"../../SwordSwing".play()
 	enemy.sprite.play("hit")
 	enemy.animation_player.play("hit")
 
 	await enemy.animation_player.animation_finished
+	enemy.weapon_hitbox.monitorable = false
 
 	attacking = false
 

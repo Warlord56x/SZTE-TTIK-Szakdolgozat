@@ -1,8 +1,9 @@
-[gd_scene load_steps=33 format=3 uid="uid://b25vye5etxi5"]
+[gd_scene load_steps=35 format=3 uid="uid://b25vye5etxi5"]
 
 [ext_resource type="Script" path="res://assets/enemies/swordsman/swordsman.gd" id="1_6tos1"]
 [ext_resource type="Script" path="res://test_scenes/buff_component.gd" id="2_0phdp"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="2_8i2l2"]
+[ext_resource type="Script" path="res://test_scenes/entity_stats.gd" id="2_jvihu"]
 [ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_idle.gd" id="3_c8dnd"]
 [ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_chase.gd" id="4_75o1n"]
 [ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_fall.gd" id="5_fqqg6"]
@@ -15,6 +16,17 @@
 [ext_resource type="AudioStream" uid="uid://82jihjn8dema" path="res://assets/sounds/568169__merrick079__sword-sound-2.wav" id="9_vs37d"]
 [ext_resource type="Script" path="res://helper_classes/hurtbox.gd" id="10_xrarh"]
 [ext_resource type="AudioStream" uid="uid://dm1uu5hsqy01n" path="res://assets/sounds/362349__beerbelly38__knife-slash-2.wav" id="10_xtmbh"]
+
+[sub_resource type="Resource" id="Resource_k6ulr"]
+script = ExtResource("2_jvihu")
+level = 2
+base_max_health = 15
+base_max_mana = 12
+base_max_stamina = 12
+vitality = 16
+strength = 16
+dexterity = 13
+intelligence = 10
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2wfxl"]
 size = Vector2(5, 8)
@@ -228,6 +240,8 @@ state_machine = NodePath("StateMachine")
 navigation_agent = NodePath("NavigationAgent2D")
 sprite = NodePath("AnimatedSprite2D")
 limit_nav_axis = Vector2i(1, 0)
+damage = 8
+stats = SubResource("Resource_k6ulr")
 
 [node name="StunEffect" parent="." instance=ExtResource("9_ccyrh")]
 visible = false
@@ -293,6 +307,7 @@ visible = false
 sprite_frames = SubResource("SpriteFrames_b2g1y")
 
 [node name="Hitbox" type="Area2D" parent="WeaponPivot/Weapon" node_paths=PackedStringArray("parent_ref", "sound_on_hit")]
+unique_name_in_owner = true
 collision_layer = 64
 collision_mask = 0
 monitoring = false

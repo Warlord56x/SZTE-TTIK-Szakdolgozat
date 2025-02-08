@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://test_scenes/UI/level_up.gd" id="7_evkrb"]
 [ext_resource type="PackedScene" uid="uid://c1fy87vwy6oos" path="res://test_scenes/stat_increase_spinner.tscn" id="7_n88r1"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ktemo"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s8wnh"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -33,7 +33,7 @@ font_color = Color(0.803922, 0.811765, 0.823529, 1)
 font_size = 6
 font_color = Color(0.803922, 0.811765, 0.823529, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yrrhn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kila1"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -127,7 +127,7 @@ layout_mode = 2
 text = "Travel"
 
 [node name="EffectLayer" type="ColorRect" parent="MarginContainer/MenuContainer/MainCampMenu"]
-material = SubResource("ShaderMaterial_ktemo")
+material = SubResource("ShaderMaterial_s8wnh")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -144,12 +144,11 @@ effect = NodePath("EffectLayer")
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/MenuContainer/CampChildMenu"]
 layout_mode = 2
 mouse_filter = 2
-current_tab = 1
+current_tab = 0
 clip_tabs = false
 use_hidden_tabs_for_min_size = true
 
 [node name="Craft" type="PanelContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -217,6 +216,7 @@ label_settings = SubResource("LabelSettings_3t5f0")
 
 [node name="LevelUp" type="PanelContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 mouse_filter = 2
@@ -364,7 +364,7 @@ metadata/_tab_index = 2
 layout_mode = 2
 
 [node name="EffectLayer" type="ColorRect" parent="MarginContainer/MenuContainer/CampChildMenu"]
-material = SubResource("ShaderMaterial_yrrhn")
+material = SubResource("ShaderMaterial_kila1")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

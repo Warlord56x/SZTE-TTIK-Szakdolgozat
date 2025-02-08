@@ -23,14 +23,13 @@ func _ready() -> void:
 
 
 func respawn_enemies() -> void:
-	for enemy in get_tree().get_nodes_in_group("Respawnable"):
+	for enemy: Enemy in get_tree().get_nodes_in_group("Respawnable"):
 		enemy.death()
 	for enemy in nodes_to_respawn:
 		var e = load(enemy.filename).instantiate()
 		e.global_position = enemy.position
 		get_node(enemy.parent).add_child(e)
 		e.add_to_group("Respawnable")
-		print("respawned 1 enemy")
 	nodes_to_respawn.clear()
 
 

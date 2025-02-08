@@ -1,13 +1,25 @@
-[gd_scene load_steps=16 format=3 uid="uid://cufofyqncxk0k"]
+[gd_scene load_steps=18 format=3 uid="uid://cufofyqncxk0k"]
 
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_0dun2"]
 [ext_resource type="Script" path="res://assets/enemies/bat/bat.gd" id="1_t6ry7"]
+[ext_resource type="Script" path="res://test_scenes/entity_stats.gd" id="2_md84r"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_hmb65"]
 [ext_resource type="Script" path="res://assets/enemies/bat/states/state_idle.gd" id="3_xpn50"]
 [ext_resource type="Script" path="res://assets/enemies/bat/states/state_chase.gd" id="4_ipeic"]
 [ext_resource type="Shader" path="res://assets/effects/shaders/blinker.gdshader" id="5_4wd8i"]
 [ext_resource type="Script" path="res://helper_classes/hurtbox.gd" id="7_6s6v0"]
 [ext_resource type="Script" path="res://helper_classes/hitbox.gd" id="8_sdxv4"]
+
+[sub_resource type="Resource" id="Resource_syucu"]
+script = ExtResource("2_md84r")
+level = 1
+base_max_health = 12
+base_max_mana = 12
+base_max_stamina = 12
+vitality = 10
+strength = 10
+dexterity = 10
+intelligence = 10
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2xn2"]
 size = Vector2(2, 2)
@@ -52,6 +64,7 @@ script = ExtResource("1_t6ry7")
 state_machine = NodePath("StateMachine")
 navigation_agent = NodePath("NavigationAgent2D")
 sprite = NodePath("AnimatedSprite2D")
+stats = SubResource("Resource_syucu")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_hmb65")
