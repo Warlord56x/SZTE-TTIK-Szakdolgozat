@@ -21,11 +21,6 @@ func _ready() -> void:
 		effect.invert = invert
 	if invert:
 		pivot_offset.x = size.x
-	ready()
-
-
-func ready() -> void:
-	pass
 
 
 func vis_changed() -> void:

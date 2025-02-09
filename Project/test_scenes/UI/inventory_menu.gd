@@ -3,7 +3,8 @@ extends Control
 
 @onready var categories: VBoxContainer = %Categories
 @onready var menu: Menu = %Menu
-@onready var action_mapper: ActionMapper = $ActionMapper
+@onready var item_status: ItemStatus = %ItemStatus
+@onready var action_mapper: ActionMapper = %ActionMapper
 
 var last_focus: Control = null
 
@@ -15,6 +16,8 @@ var inventory: Inventory:
 			category.inventory = inventory
 			if not category.item_activated.is_connected(display_mapper):
 				category.item_activated.connect(display_mapper)
+			if not category.item_selected.is_connected(update_item_display):
+				category.item_selected.connect(update_item_display)
 		action_mapper.inventory = inventory
 		if not action_mapper.visibility_changed.is_connected(reset_focus):
 			action_mapper.visibility_changed.connect(reset_focus)
@@ -36,7 +39,15 @@ func display_mapper(item: Item, pos: Vector2) -> void:
 	action_mapper.visible = true
 
 
-func flip() -> void:
+func update_item_display(item: Item) -> void:
+	item_status.item = item
+	if item:
+		item_status.open()
+	else:
+		item_status.close()
+
+
+func switch() -> void:
 	if not menu.visible:
 		if not GameEnv.input_process:
 			return
@@ -55,6 +66,7 @@ func update_categories() -> void:
 func close() -> void:
 	if menu.visible:
 		menu.close()
+		item_status.close()
 		action_mapper.visible = false
 		GameEnv.input_process = true
 		accept_event()
@@ -62,7 +74,7 @@ func close() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("inventory"):
-		flip()
+		switch()
 
 	if event.is_action_pressed("menu"):
 		close()

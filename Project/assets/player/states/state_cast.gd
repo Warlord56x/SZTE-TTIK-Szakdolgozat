@@ -22,6 +22,7 @@ func enter() -> void:
 	item.used = true
 
 	if item is WeaponItem:
+		print(item.calc_damage(player.stats))
 		player.weapon_hitbox.damage = item.damage * player.stats.strength
 
 	if item.name.to_lower() == "fireball":

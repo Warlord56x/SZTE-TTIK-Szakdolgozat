@@ -3,25 +3,33 @@
 [ext_resource type="Script" path="res://item_category_list.gd" id="1_1mas7"]
 
 [node name="ItemCategoryList" type="VBoxContainer"]
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 106.0
 grow_horizontal = 2
-grow_vertical = 2
+size_flags_horizontal = 3
 script = ExtResource("1_1mas7")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "Category"
 
 [node name="ItemList" type="ItemList" parent="."]
 layout_mode = 2
 theme_override_font_sizes/font_size = 5
 auto_height = true
-item_count = 2
-max_columns = 5
+item_count = 4
+max_columns = 20
+same_column_width = true
 fixed_icon_size = Vector2i(10, 10)
 item_0/text = "test"
 item_1/text = "test2"
+item_2/text = "test3"
+item_3/text = "asd"
 
+[connection signal="empty_clicked" from="ItemList" to="." method="_on_item_list_empty_clicked"]
 [connection signal="focus_exited" from="ItemList" to="." method="_on_item_list_focus_exited"]
 [connection signal="item_activated" from="ItemList" to="." method="_on_item_list_item_activated"]
+[connection signal="item_selected" from="ItemList" to="." method="_on_item_list_item_selected"]

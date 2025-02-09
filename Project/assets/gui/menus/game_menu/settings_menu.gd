@@ -6,7 +6,8 @@ class_name SettingsMenu
 @onready var option_button: OptionButton = %OptionButton
 
 
-func ready() -> void:
+func _ready() -> void:
+	super._ready()
 	master_volume_slider.value = Settings.settings.master_volume * 100
 	vsync_check.button_pressed = Settings.settings.vsync
 	option_button.selected = Settings.settings.fullscreen

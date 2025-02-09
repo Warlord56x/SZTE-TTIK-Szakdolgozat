@@ -4,7 +4,8 @@ class_name CampMenu
 @onready var camp_name: Label = %CampName
 @onready var blacksmith: Button = %Blacksmith
 @onready var menu: Menu = %MainCampMenu
-@onready var blacksmith_menu: Menu = %CampChildMenu
+@onready var blacksmith_menu: BlacksmithMenu = %CampChildMenu
+@onready var item_status: ItemStatus = %ItemStatus
 @onready var travel: PanelContainer = %Travel
 @onready var level_up: PanelContainer = %LevelUp
 
@@ -38,12 +39,14 @@ func camp_menu_controller(b: bool, camp: Camp = null) -> void:
 	else:
 		menu.close()
 		blacksmith_menu.close()
+		item_status.close()
 
 
 func reset_menu_state(camp: Camp) -> void:
 	camp_name.text = camp.camp_name
 	blacksmith.disabled = not camp.anvil
 	blacksmith_menu.disable_tab(0, not camp.anvil)
+	item_status.close()
 
 
 func player_rest(player_: Player = player) -> void:

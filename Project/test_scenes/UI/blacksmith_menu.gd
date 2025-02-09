@@ -6,6 +6,7 @@ class_name BlacksmithMenu
 @onready var recipe_list: ItemList = %RecipeList
 @onready var error_label: Label = %ErrorLabel
 @onready var tab_container: TabContainer = $TabContainer
+@onready var item_status: ItemStatus = %ItemStatus
 
 var player: Player = null
 var recipe: Recipe = null
@@ -46,13 +47,18 @@ func update_list(index: int) -> void:
 
 	error_label.text = ""
 
-	for ing in recipe.required_items:
+	for ing: Ingredient in recipe.required_items:
 		ingredient_container.add_item(str(ing.item.name, " x", ing.amount), ing.item.icon, false)
 		#ingredient_container.set_item_metadata(idx, ing)
 
-	for ing in recipe.result_item:
+	for ing: Ingredient  in recipe.result_item:
 		results_container.add_item(str(ing.item.name, " x", ing.amount), ing.item.icon, false)
 		#results_container.set_item_metadata(idx, ing)
+	
+	var first_result: Ingredient  = recipe.result_item.front()
+	if first_result:
+		item_status.item = first_result.item
+		item_status.open()
 
 
 func _on_craft_pressed() -> void:
@@ -73,3 +79,4 @@ func _on_visibility_changed() -> void:
 
 func _on_tab_container_tab_changed(_tab: int) -> void:
 	effect.fade(0.1)
+	item_status.close()

@@ -1,0 +1,159 @@
+[gd_scene load_steps=7 format=3 uid="uid://du16tb8p7npf3"]
+
+[ext_resource type="Script" path="res://test_scenes/item_status.gd" id="1_8e4cp"]
+[ext_resource type="PackedScene" uid="uid://b1ymk23npn35b" path="res://test_scenes/stat_display.tscn" id="1_chuu4"]
+[ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="4_6ltm4"]
+[ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="5_yqwdk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xyl6e"]
+line_spacing = 0.0
+font_size = 12
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ghhy6"]
+shader = ExtResource("4_6ltm4")
+shader_parameter/progress = 0.0
+shader_parameter/noise_desnity = 30.0
+shader_parameter/beam_size = 0.01
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pixel_size = 0.01
+shader_parameter/corner_radius = 0.1
+shader_parameter/invert = false
+
+[node name="ItemStatus" type="PanelContainer" node_paths=PackedStringArray("effect")]
+offset_right = 266.0
+offset_bottom = 224.0
+script = ExtResource("1_8e4cp")
+effect = NodePath("EffectLayer")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ItemName" type="Label" parent="MarginContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "No item"
+label_settings = SubResource("LabelSettings_xyl6e")
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="StatLevel" parent="MarginContainer/VBoxContainer2" instance=ExtResource("1_chuu4")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Item level"
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Damage:"
+
+[node name="DamageLabel" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Base: 5 Actual:(15)"
+
+[node name="WeaponStats" type="VBoxContainer" parent="MarginContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/WeaponStats"]
+layout_mode = 2
+
+[node name="Core" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Core"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "Item Requirements:"
+autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Core"]
+layout_mode = 2
+
+[node name="StatReq" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Core"]
+layout_mode = 2
+
+[node name="StatVit" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Core/StatReq" instance=ExtResource("1_chuu4")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Vitality"
+
+[node name="StatStr" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Core/StatReq" instance=ExtResource("1_chuu4")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Strength"
+
+[node name="StatDex" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Core/StatReq" instance=ExtResource("1_chuu4")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Dexterity"
+
+[node name="StatInt" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Core/StatReq" instance=ExtResource("1_chuu4")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Intelligence"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer"]
+layout_mode = 2
+
+[node name="Scales" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Scales"]
+layout_mode = 2
+text = "Item
+Scales"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Scales"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Scales"]
+layout_mode = 2
+
+[node name="StatVitScale" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Scales/VBoxContainer" instance=ExtResource("1_chuu4")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Vitality"
+
+[node name="StatStrScale" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Scales/VBoxContainer" instance=ExtResource("1_chuu4")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Strength"
+
+[node name="StatDexScale" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Scales/VBoxContainer" instance=ExtResource("1_chuu4")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Dexterity"
+
+[node name="StatIntScale" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Scales/VBoxContainer" instance=ExtResource("1_chuu4")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Intelligence"
+stat = 140
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer2/WeaponStats"]
+layout_mode = 2
+
+[node name="Description" type="Label" parent="MarginContainer/VBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+text = "No description"
+autowrap_mode = 3
+
+[node name="EffectLayer" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ghhy6")
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("5_yqwdk")

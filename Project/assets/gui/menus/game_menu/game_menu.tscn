@@ -14,7 +14,7 @@
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_demqf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vlcfw"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -25,8 +25,10 @@ shader_parameter/corner_radius = 0.01
 shader_parameter/invert = false
 
 [sub_resource type="LabelSettings" id="LabelSettings_p44gk"]
+line_spacing = 0.0
+font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_58ftj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ro11n"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -124,7 +126,7 @@ layout_mode = 2
 text = "Save & Exit"
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/Main"]
-material = SubResource("ShaderMaterial_demqf")
+material = SubResource("ShaderMaterial_vlcfw")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -183,7 +185,7 @@ stat = 10
 [node name="StatStrength" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_ugvnl")]
 unique_name_in_owner = true
 layout_mode = 2
-stat_name = "Mana"
+stat_name = "Strength"
 stat = 10
 
 [node name="StatDexterity" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_ugvnl")]
@@ -225,7 +227,7 @@ stat_name = "Stamina"
 stat = 20
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/StatusMenu"]
-material = SubResource("ShaderMaterial_58ftj")
+material = SubResource("ShaderMaterial_ro11n")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

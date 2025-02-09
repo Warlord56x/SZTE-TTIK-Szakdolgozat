@@ -16,6 +16,7 @@ var inventory: Inventory:
 		update_items()
 
 signal item_activated(item: Item, pos: Vector2)
+signal item_selected(item: Item)
 
 
 func _ready() -> void:
@@ -51,3 +52,11 @@ func _on_item_list_focus_exited() -> void:
 
 func _on_item_list_item_activated(index: int) -> void:
 	item_activated.emit(item_list.get_item_metadata(index), position)
+
+
+func _on_item_list_item_selected(index: int) -> void:
+	item_selected.emit(item_list.get_item_metadata(index))
+
+
+func _on_item_list_empty_clicked(_at_position: Vector2, _mouse_button_index: int) -> void:
+	item_selected.emit(null)

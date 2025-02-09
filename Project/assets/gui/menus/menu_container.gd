@@ -2,70 +2,105 @@
 extends Container
 class_name MenuContainer
 
-var previous_scales = {}
+@export var separation: int = 0:  # Gap between child controls
+	set = set_separation
+
+var previous_scales := {}
+
+
+# Cache each child's scale for change detection
+func _cache_child_scales() -> void:
+	for child in get_children():
+		if child is Control:
+			previous_scales[child] = child.scale
+
+
+func set_separation(s: int) -> void:
+	separation = s
+	minimum_size_changed.emit()
+	queue_sort()
 
 
 func _ready() -> void:
-	for child: Control in get_children():
-		previous_scales[child] = child.scale
+	_cache_child_scales()
 
 
 func _process(_delta: float) -> void:
-	for child: Control in get_children():
-		var current_scale = child.scale
-		if current_scale != previous_scales[child]:
-			minimum_size_changed.emit()
-			queue_sort()
-			previous_scales[child] = current_scale
+	# Check if any child has a changed scale, then trigger a sort
+	for child in get_children():
+		if child is Control:
+			var current_scale = child.scale
+			if current_scale != previous_scales.get(child, current_scale):
+				minimum_size_changed.emit()
+				queue_sort()
+				previous_scales[child] = current_scale
 
 
 func _get_minimum_size() -> Vector2:
-	var min_size := (get_child(0) as Control).get_minimum_size()
-	for child: Control in get_children():
-		if child.visible:
-			min_size.x += child.get_minimum_size().x * child.scale.x
-			if child.get_minimum_size().y > min_size.y:
-				min_size.y = child.get_minimum_size().y * child.scale.y
-	return min_size
+	var children = get_children()
+	if children.is_empty():
+		return Vector2.ZERO
+
+	var total_width: float = 0
+	var max_height: float = 0
+	var visible_count: int = 0
+	
+	# Calculate total fixed width and maximum height
+	for child in children:
+		if child is Control and child.visible:
+			var child_min = child.get_minimum_size() * child.scale
+			total_width += child_min.x
+			max_height = max(max_height, child_min.y)
+			visible_count += 1
+	
+	# Account for separation gaps between visible children
+	if visible_count > 1:
+		total_width += separation * (visible_count - 1)
+		
+	return Vector2(total_width, max_height)
 
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_CHILD_ORDER_CHANGED:
-		for child: Control in get_children():
-			previous_scales[child] = child.scale
+		_cache_child_scales()
 
 	if what == NOTIFICATION_SORT_CHILDREN:
-		var total_fixed_width = 0
-		var expanding_children = []
-		var offset_x = 0
+		# Cache visible children for layout calculations.
+		var children := []
+		for c in get_children():
+			if c is Control and c.visible:
+				children.append(c)
 
-		for c: Control in get_children():
-			if not c.visible:
-				continue
-
-			var flags_h := c.size_flags_horizontal
-
-			if flags_h != SIZE_EXPAND and flags_h != SIZE_EXPAND_FILL:
-				var min_size_x = c.get_minimum_size().x * c.scale.x
-				total_fixed_width += min_size_x
-			else:
+		# First pass: compute the total fixed width and gather expanding children.
+		var total_fixed_width: float = 0
+		var expanding_children := []
+		for c in children:
+			# Use bitwise flag check to see if the control should expand horizontally.
+			if c.size_flags_horizontal & Control.SIZE_EXPAND:
 				expanding_children.append(c)
+			else:
+				total_fixed_width += c.get_minimum_size().x * c.scale.x
 
-		for c: Control in get_children():
-			if not c.visible:
-				continue
+		# Include separation gaps between children.
+		var separation_total = separation * max(0, children.size() - 1)
+		var available_width = max(0, size.x - total_fixed_width - separation_total)
+		
+		var expand_width = 0
+		if (expanding_children.size() > 0):
+			expand_width = available_width / expanding_children.size()
 
-			var child_size := c.get_minimum_size()
-			var flags_v := c.size_flags_vertical
-
+		# Second pass: position and size each child.
+		var offset_x: float = 0
+		for c: Control in children:
+			var child_min = c.get_minimum_size() * c.scale
+			var new_size = child_min
+			# For expanding controls, assign the computed width.
 			if c in expanding_children:
-				child_size.x = (size.x - total_fixed_width) / expanding_children.size()
-			child_size.x *= c.scale.x
+				new_size.x = expand_width
+			# For vertical expansion, stretch to the container's height.
+			if c.size_flags_vertical & Control.SIZE_EXPAND:
+				new_size.y = size.y
 
-			if flags_v == SIZE_EXPAND or flags_v == SIZE_EXPAND_FILL:
-				child_size.y = size.y
-
-			c.position.x = offset_x
-			c.size = child_size
-
-			offset_x += child_size.x
+			c.position = Vector2(offset_x, 0)
+			c.size = new_size
+			offset_x += new_size.x + separation

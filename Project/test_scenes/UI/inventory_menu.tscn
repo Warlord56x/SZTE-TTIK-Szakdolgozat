@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bngmpnj1xby7e"]
+[gd_scene load_steps=15 format=3 uid="uid://bngmpnj1xby7e"]
 
 [ext_resource type="Script" path="res://assets/gui/menus/menu.gd" id="1_1ujw8"]
 [ext_resource type="Script" path="res://test_scenes/UI/inventory_menu.gd" id="1_ckcee"]
 [ext_resource type="Theme" uid="uid://cn3dpyixby5g5" path="res://assets/theme/test_theme.tres" id="1_jvhci"]
 [ext_resource type="PackedScene" uid="uid://6ukr4nj0ehof" path="res://test_scenes/UI/item_category_list.tscn" id="2_qxi1d"]
+[ext_resource type="Script" path="res://assets/gui/menus/menu_container.gd" id="3_174fu"]
 [ext_resource type="Script" path="res://assets/data/model/melee_weapon_item.gd" id="3_yqair"]
 [ext_resource type="Script" path="res://assets/data/model/consumable_item.gd" id="4_lx2a0"]
 [ext_resource type="Script" path="res://assets/data/model/ranged_weapon_item.gd" id="5_kd7lu"]
@@ -11,8 +12,9 @@
 [ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="7_40dvf"]
 [ext_resource type="Script" path="res://assets/data/model/misc_item.gd" id="7_sb7xk"]
 [ext_resource type="PackedScene" uid="uid://dq3r6eq5kcrtt" path="res://test_scenes/UI/action_mapper.tscn" id="9_uktdj"]
+[ext_resource type="PackedScene" uid="uid://du16tb8p7npf3" path="res://test_scenes/item_status.tscn" id="12_c4nxq"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vh1wn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_48sat"]
 shader = ExtResource("6_nxjw7")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -46,51 +48,65 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 20
 
-[node name="Menu" type="PanelContainer" parent="MarginContainer" node_paths=PackedStringArray("focus_target", "effect")]
+[node name="HBoxContainer" type="Container" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("3_174fu")
+
+[node name="Menu" type="PanelContainer" parent="MarginContainer/HBoxContainer" node_paths=PackedStringArray("focus_target", "effect")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_vertical = 6
 script = ExtResource("1_1ujw8")
 focus_target = NodePath("TabContainer/Inventory/Categories/ItemCategoryList/ItemList")
 effect = NodePath("EffectLayer")
 
-[node name="TabContainer" type="TabContainer" parent="MarginContainer/Menu"]
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/HBoxContainer/Menu"]
 layout_mode = 2
 current_tab = 0
 clip_tabs = false
 tab_focus_mode = 0
 
-[node name="Inventory" type="PanelContainer" parent="MarginContainer/Menu/TabContainer"]
+[node name="Inventory" type="PanelContainer" parent="MarginContainer/HBoxContainer/Menu/TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Categories" type="VBoxContainer" parent="MarginContainer/Menu/TabContainer/Inventory"]
+[node name="Categories" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Menu/TabContainer/Inventory"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="ItemCategoryList" parent="MarginContainer/Menu/TabContainer/Inventory/Categories" instance=ExtResource("2_qxi1d")]
+[node name="ItemCategoryList" parent="MarginContainer/HBoxContainer/Menu/TabContainer/Inventory/Categories" instance=ExtResource("2_qxi1d")]
 layout_mode = 2
 category = ExtResource("3_yqair")
 
-[node name="ItemCategoryList2" parent="MarginContainer/Menu/TabContainer/Inventory/Categories" instance=ExtResource("2_qxi1d")]
+[node name="ItemCategoryList2" parent="MarginContainer/HBoxContainer/Menu/TabContainer/Inventory/Categories" instance=ExtResource("2_qxi1d")]
 layout_mode = 2
 category = ExtResource("5_kd7lu")
 
-[node name="ItemCategoryList3" parent="MarginContainer/Menu/TabContainer/Inventory/Categories" instance=ExtResource("2_qxi1d")]
+[node name="ItemCategoryList3" parent="MarginContainer/HBoxContainer/Menu/TabContainer/Inventory/Categories" instance=ExtResource("2_qxi1d")]
 layout_mode = 2
 category = ExtResource("4_lx2a0")
 
-[node name="ItemCategoryList4" parent="MarginContainer/Menu/TabContainer/Inventory/Categories" instance=ExtResource("2_qxi1d")]
+[node name="ItemCategoryList4" parent="MarginContainer/HBoxContainer/Menu/TabContainer/Inventory/Categories" instance=ExtResource("2_qxi1d")]
 layout_mode = 2
 category = ExtResource("7_sb7xk")
 
-[node name="EffectLayer" type="ColorRect" parent="MarginContainer/Menu"]
-material = SubResource("ShaderMaterial_vh1wn")
+[node name="EffectLayer" type="ColorRect" parent="MarginContainer/HBoxContainer/Menu"]
+material = SubResource("ShaderMaterial_48sat")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("7_40dvf")
 
-[node name="ActionMapper" parent="." instance=ExtResource("9_uktdj")]
-visible = false
+[node name="ItemStatus" parent="MarginContainer/HBoxContainer" instance=ExtResource("12_c4nxq")]
+unique_name_in_owner = true
 layout_mode = 2
+
+[node name="ActionMapper" parent="." instance=ExtResource("9_uktdj")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+size_flags_horizontal = 0
+size_flags_vertical = 0

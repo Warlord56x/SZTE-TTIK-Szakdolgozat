@@ -1,16 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1ymk23npn35b"]
+[gd_scene load_steps=4 format=3 uid="uid://b1ymk23npn35b"]
 
 [ext_resource type="Script" path="res://test_scenes/stat_display.gd" id="1_asab5"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_m7otv"]
+font_size = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_lpem6"]
+line_spacing = 0.0
+font_size = 5
+
 [node name="StatDisplay" type="HBoxContainer"]
+offset_right = 70.0
+offset_bottom = 16.0
 script = ExtResource("1_asab5")
 
 [node name="StatLabel" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Level:"
+label_settings = SubResource("LabelSettings_m7otv")
 
 [node name="StatDisplay" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "1"
+label_settings = SubResource("LabelSettings_lpem6")

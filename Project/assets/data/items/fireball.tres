@@ -1,16 +1,35 @@
-[gd_resource type="Resource" script_class="RangedWeaponItem" load_steps=4 format=3 uid="uid://2nlg1ktbcmbt"]
+[gd_resource type="Resource" script_class="RangedWeaponItem" load_steps=8 format=3 uid="uid://2nlg1ktbcmbt"]
 
 [ext_resource type="Script" path="res://assets/data/model/ranged_weapon_item.gd" id="1_1ffww"]
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_bu0uw"]
+[ext_resource type="Script" path="res://assets/data/model/scale.gd" id="2_5tdef"]
+[ext_resource type="Script" path="res://assets/data/model/item_stats.gd" id="2_nm43l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w0gc8"]
 atlas = ExtResource("1_bu0uw")
 region = Rect2(0, 50, 10, 10)
 filter_clip = true
 
+[sub_resource type="Resource" id="Resource_thsns"]
+script = ExtResource("2_5tdef")
+vitality_scale = 0
+strength_scale = 0
+dexterity_scale = 0
+intelligence_scale = 140
+
+[sub_resource type="Resource" id="Resource_e7vn0"]
+script = ExtResource("2_nm43l")
+item_scale = SubResource("Resource_thsns")
+level = 1
+vitality = 0
+strength = 0
+dexterity = 0
+intelligence = 15
+
 [resource]
 script = ExtResource("1_1ffww")
-damage = 1
+damage = 5
+item_stats = SubResource("Resource_e7vn0")
 name = "Fireball"
 icon = SubResource("AtlasTexture_w0gc8")
 description = "A fireball spell, to hurl balls of fire at your enemies."
