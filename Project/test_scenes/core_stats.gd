@@ -15,6 +15,18 @@ class_name CoreStats
 	set = set_intelligence
 
 
+func diminishing_return(base: int, stat: int) -> int:
+	var max_value = 60
+	var scaling_factor = 20.0
+	var raw_max = base + (max_value - base) * (stat / (stat + scaling_factor))
+	return raw_max
+	# TODO do something for the hearts to
+	# be visible when stat is not a multiple of 4
+	# DO NOT force the multiple of 4,
+	# makes diminishing feel too small or too much
+	#return int(round(raw_max / 4.0)) * 4
+
+
 func set_level(lvl: int) -> void:
 	level = lvl
 

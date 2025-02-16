@@ -10,9 +10,11 @@ class_name StatDisplay
 @export var stat_scale: Scale.Scales:
 	set = set_stat_scale
 
+@export var stat_font_color: Color:
+	set = set_stat_font_color
+
 @onready var stat_label: Label = $StatLabel
 @onready var stat_display: Label = $StatDisplay
-
 
 
 func set_stat_name(sn: String) -> void:
@@ -40,3 +42,13 @@ func set_stat_scale(sc: Scale.Scales) -> void:
 	if stat_scale == Scale.Scales.NONE:
 		d = "-"
 	stat_display.text = d
+
+
+func set_stat_font_color(c: Color) -> void:
+	stat_font_color = c
+	if not is_node_ready():
+		await ready
+	stat_display.remove_theme_color_override("font_color")
+	if not c:
+		return
+	stat_display.add_theme_color_override("font_color", c)

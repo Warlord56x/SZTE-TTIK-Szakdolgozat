@@ -58,7 +58,6 @@ animations = [{
 [resource]
 script = ExtResource("1_b384f")
 damage = 5
-scale = SubResource("Resource_in6qh")
 item_stats = SubResource("Resource_nhwru")
 name = "Bow"
 icon = SubResource("AtlasTexture_ul4yj")

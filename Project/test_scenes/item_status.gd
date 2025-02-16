@@ -11,6 +11,7 @@ class_name ItemStatus
 @onready var stat_str_scale: StatDisplay = %StatStrScale
 @onready var stat_dex_scale: StatDisplay = %StatDexScale
 @onready var stat_int_scale: StatDisplay = %StatIntScale
+@onready var warning: Label = %Warning
 
 @onready var item_name: Label = %ItemName
 @onready var description: Label = %Description
@@ -20,6 +21,10 @@ class_name ItemStatus
 
 @export var item: Item:
 	set = set_item
+
+
+func get_player() -> Player:
+	return get_tree().get_first_node_in_group("Player")
 
 
 func set_item(it: Item) -> void:
@@ -34,13 +39,17 @@ func set_item(it: Item) -> void:
 	if item is not WeaponItem:
 		stat_level.visible = false
 		weapon_stats.visible = false
+		warning.visible = false
+		%Damages.visible = false
 		return
 	stat_level.visible = true
 	weapon_stats.visible = true
 	updata_values()
+	update_display()
 
 
 func updata_values() -> void:
+	warning.visible = false
 	var weapon := item as WeaponItem
 	stat_level.stat = item.item_stats.level
 
@@ -53,6 +62,32 @@ func updata_values() -> void:
 	stat_str_scale.stat_scale = weapon.item_stats.item_scale.strength_scale
 	stat_dex_scale.stat_scale = weapon.item_stats.item_scale.dexterity_scale
 	stat_int_scale.stat_scale = weapon.item_stats.item_scale.intelligence_scale
+
+
+	if not get_player():
+		return
+	var calc_damage := weapon.calc_damage(get_player().stats)
+	%DamageLabel.text = "%d" % weapon.damage
+	%ActualDamageLabel.text = "(%d)" % calc_damage
+	warning.visible = not weapon.item_stats.met(get_player().stats)
+	warning.text = "Item stat requirements are not met!\nThe item can't be used effectively. (No scaling applied, -40% from damage)"
+
+
+
+func update_display() -> void:
+	var player := get_player()
+	if not get_player():
+		return
+	var player_stats := player.stats
+
+	var helper := func (n: StatDisplay, c: int):
+		n.stat_font_color = Colors.ERROR_COLOR if n.stat > c else Color.WHITE
+
+	helper.call(stat_vit, player_stats.vitality)
+	helper.call(stat_str, player_stats.strength)
+	helper.call(stat_dex, player_stats.dexterity)
+	helper.call(stat_int, player_stats.intelligence)
+
 
 
 func reset_values() -> void:

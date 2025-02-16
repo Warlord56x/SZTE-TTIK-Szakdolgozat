@@ -9,7 +9,7 @@
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bio5y"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_diggd"]
 shader = ExtResource("3_wtfp7")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -88,7 +88,7 @@ focus_neighbor_top = NodePath("../VsyncCheck")
 text = "apply"
 
 [node name="Effect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_bio5y")
+material = SubResource("ShaderMaterial_diggd")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

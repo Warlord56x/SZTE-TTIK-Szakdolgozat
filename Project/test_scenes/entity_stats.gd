@@ -1,9 +1,6 @@
 extends CoreStats
 class_name EntityStats
 
-#
-#@export var level: int = 1:
-	#set = set_level
 
 @export_group("Basic stats")
 var max_health: int
@@ -14,28 +11,6 @@ var max_mana: int
 
 var max_stamina: int
 @export var base_max_stamina: int = 12
-
-#@export_group("Core Stats")
-#@export var vitality: int = 10:
-	#set = set_vitalaity
-#@export var strength: int = 10:
-	#set = set_strength
-#@export var dexterity: int = 10:
-	#set = set_dexterity
-#@export var intelligence: int = 10:
-	#set = set_intelligence
-
-
-func diminishing_return(base: int, stat: int) -> int:
-	var max_value = 60
-	var scaling_factor = 20.0
-	var raw_max = base + (max_value - base) * (stat / (stat + scaling_factor))
-	return raw_max
-	# TODO do something for the hearts to
-	# be visible when stat is not a multiple of 4
-	# DO NOT force the multiple of 4,
-	# makes diminishing feel too small or too much
-	#return int(round(raw_max / 4.0)) * 4
 
 
 func calc_next_lvl_up_coin_cost(new_level: int, next: int = 1) -> int:
