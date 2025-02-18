@@ -28,6 +28,7 @@ intelligence = 0
 
 [resource]
 script = ExtResource("2_8ulrl")
+knock_back = 0.3
 damage = 5
 item_stats = SubResource("Resource_024r6")
 name = "Sword"

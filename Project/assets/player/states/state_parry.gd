@@ -20,6 +20,7 @@ func enter() -> void:
 
 
 func physics_process(delta: float) -> void:
+	# TODO: ? what is this?
 	var hb = player.get_node_or_null("HurtBox")
 	if hb:
 		pass
@@ -34,6 +35,6 @@ func leave() -> void:
 func _on_hurt_box_hurt() -> void:
 	if active and parry_time.time_left > 0:
 		print("parry")
-		
+
 	parry_time.stop()
 	parry_time.start()

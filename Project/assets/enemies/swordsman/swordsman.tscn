@@ -1,8 +1,9 @@
-[gd_scene load_steps=35 format=3 uid="uid://b25vye5etxi5"]
+[gd_scene load_steps=37 format=3 uid="uid://b25vye5etxi5"]
 
 [ext_resource type="Script" path="res://assets/enemies/swordsman/swordsman.gd" id="1_6tos1"]
 [ext_resource type="Script" path="res://test_scenes/buff_component.gd" id="2_0phdp"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="2_8i2l2"]
+[ext_resource type="Resource" uid="uid://b6iewkldjgof1" path="res://assets/data/items/sword.tres" id="2_am0tw"]
 [ext_resource type="Script" path="res://test_scenes/entity_stats.gd" id="2_jvihu"]
 [ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_idle.gd" id="3_c8dnd"]
 [ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_chase.gd" id="4_75o1n"]
@@ -16,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://82jihjn8dema" path="res://assets/sounds/568169__merrick079__sword-sound-2.wav" id="9_vs37d"]
 [ext_resource type="Script" path="res://helper_classes/hurtbox.gd" id="10_xrarh"]
 [ext_resource type="AudioStream" uid="uid://dm1uu5hsqy01n" path="res://assets/sounds/362349__beerbelly38__knife-slash-2.wav" id="10_xtmbh"]
+[ext_resource type="Script" path="res://assets/enemies/shared_states/state_eknock_back.gd" id="12_lr4et"]
 
 [sub_resource type="Resource" id="Resource_k6ulr"]
 script = ExtResource("2_jvihu")
@@ -173,6 +175,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedSprite2D:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hit"]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AnimatedSprite2D:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_w4vrw"]
 resource_name = "hit"
@@ -208,7 +234,7 @@ tracks/2/path = NodePath("WeaponPivot/Weapon/Hitbox:monitorable")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.5),
+"times": PackedFloat32Array(0, 0.2, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -225,6 +251,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0, -8), Vector2(8, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedSprite2D:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hit"]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AnimatedSprite2D:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rstr4"]
 _data = {
@@ -236,6 +286,7 @@ _data = {
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_6tos1")
+weapon_item = ExtResource("2_am0tw")
 state_machine = NodePath("StateMachine")
 navigation_agent = NodePath("NavigationAgent2D")
 sprite = NodePath("AnimatedSprite2D")
@@ -273,6 +324,9 @@ script = ExtResource("6_njad8")
 
 [node name="Stun" type="Node" parent="StateMachine"]
 script = ExtResource("7_nmiy0")
+
+[node name="Knockback" type="Node" parent="StateMachine"]
+script = ExtResource("12_lr4et")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_iorbs")

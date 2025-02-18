@@ -8,6 +8,7 @@ const DAMAGE_NUMBER := preload("res://assets/effects/damage_number.tscn")
 const DEATH_SCENE_TEST := preload("res://assets/effects/death_effect.tscn")
 const FLOATING_HP_BAR := preload("res://assets/gui/floating_bar/floating_hp_bar.tscn")
 
+@export var weapon_item: WeaponItem
 @export var state_machine: StateMachine
 @export var navigation_agent: NavigationAgent2D
 @export var sprite: Node2D
@@ -67,7 +68,10 @@ func set_stats(sts: EntityStats) -> void:
 
 
 func get_damage() -> int:
-	return damage
+	if weapon_item:
+		return weapon_item.calc_damage(stats)
+	else:
+		return damage
 
 
 func _ready() -> void:
@@ -199,7 +203,8 @@ func knock_back(source_position: Vector2, intensity: float = 1.0) -> bool:
 	pushback_force = -global_position.direction_to(source_position) * intensity
 	pushback_force.y = min_jump_velocity * intensity
 	pushback_force.x *= movement_speed
-	pushback_force *= Vector2(limit_nav_axis)
+	#pushback_force *= Vector2(limit_nav_axis)
+	state_machine.travel("Knockback")
 	return true
 
 

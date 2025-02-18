@@ -190,15 +190,15 @@ func _unhandled_input(event: InputEvent) -> void:
 
 # Should do a parry
 	if event.is_action_pressed("parry"):
-		if not state_machine.get_state("parry").active:
+		if not state_machine.is_active("parry"):
 			state_machine.travel("parry")
 
 	if event.is_action_pressed("cast_spell"):
-		if not state_machine.get_state("cast").active:
+		if not state_machine.is_active("cast"):
 			state_machine.travel("cast")
 
 	if event.is_action_pressed("dash"):
-		if dash_count == dash_max or stamina == 0 or state_machine.is_active("Dash"):
+		if dash_count == dash_max or stamina == 0 or state_machine.is_active("dash"):
 			return
 		state_machine.travel("dash")
 
@@ -326,6 +326,10 @@ func update_max_resources() -> void:
 
 	max_stamina_regen = stats.max_stamina
 
+	health = stats.max_health
+	mana = stats.max_mana
+	stamina = stats.max_stamina
+
 
 func items_changed(item: Item) -> void:
 	if not item:
@@ -371,7 +375,7 @@ func hurt(damage: int, _dealer: Node2D = null) -> bool:
 	health -= damage
 
 	if health <= 0:
-		if state_machine.current_state.name.to_lower() != "death":
+		if not state_machine.is_active("death"):
 			state_machine.travel("Death")
 
 	return true
@@ -381,6 +385,8 @@ func knock_back(source_position: Vector2, intensity: float = 1.0) -> bool:
 	pushback_force = -global_position.direction_to(source_position) * intensity
 	pushback_force.y = MIN_JUMP_VELOCITY * intensity
 	pushback_force.x *= SPEED
+	if not state_machine.is_active("death"):
+		state_machine.travel("Knockback")
 	return true
 
 
@@ -390,10 +396,10 @@ func _process(_delta: float) -> void:
 			"Name: ", name, "\n",
 			"Node: ", self, "\n",
 			"\n",
+			#"Sats: ", stats, "\n",
 			"Health: ", health, "/", stats.max_health, "\n",
 			"State: ", state_machine.current_state.name, "\n",
 			"State: ", anim_state_m.get_current_node(), "\n",
-			"Sats: ", stats, "\n",
 			"Position: ", global_position, "\n",
 			"Knock_back: ", pushback_force, "\n",
 			"Velocity: ", velocity, "\n",
@@ -409,13 +415,7 @@ func _physics_process(_delta: float) -> void:
 	if input_direction:
 		move_direction.x = sign(input_direction)
 
-	if pushback_force.length() > 0.01:
-		input_direction = 0.0
-
-	velocity += pushback_force
-
 	anim_sprite.flip_h = move_direction.x < 0
-	pushback_force = pushback_force.lerp(Vector2.ZERO, 0.5)
 
 
 func _on_wall_stamina_drain_timeout() -> void:

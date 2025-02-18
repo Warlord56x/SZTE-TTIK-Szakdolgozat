@@ -8,10 +8,6 @@ class_name Swordsman
 @onready var weapon_hitbox: Hitbox = %Hitbox
 
 
-func get_damage() -> int:
-	return round((damage + (stats.dexterity / 2.0 + stats.strength * 0.9)) / 3.0)
-
-
 func _ready() -> void:
 	super._ready()
 	weapon_hitbox.damage = damage

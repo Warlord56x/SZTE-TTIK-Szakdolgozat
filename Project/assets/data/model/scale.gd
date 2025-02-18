@@ -21,8 +21,7 @@ func calc_scale(num: float, scale: Scales, stat: int) -> float:
 	if scale == Scales.NONE:
 		return num
 	var s = scale / 100.0
-	prints("rounding:",num * (1 + stat/100.0 * s), "scale-stat:",s, stat, "calc scale:", (1 + stat/100.0 * s))
-	return num * (1 + stat/100.0 * s)
+	return num * (1 + stat / 100.0 * s)
 
 
 func calc_all_scales(num: int, stats: Array[int]) -> int:

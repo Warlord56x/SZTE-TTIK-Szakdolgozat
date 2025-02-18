@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=3 uid="uid://diq8ndw4ll1rm"]
+[gd_scene load_steps=113 format=3 uid="uid://diq8ndw4ll1rm"]
 
 [ext_resource type="Script" path="res://assets/player/player.gd" id="1_0p7ex"]
 [ext_resource type="Script" path="res://test_scenes/entity_stats.gd" id="2_fr6p7"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bpg8ab2biymnb" path="res://assets/gui/action_help.tscn" id="8_5oe6t"]
 [ext_resource type="Script" path="res://assets/player/states/state_death.gd" id="8_8nrgl"]
 [ext_resource type="Script" path="res://assets/player/states/state_cast.gd" id="9_sy26o"]
+[ext_resource type="Script" path="res://assets/player/states/state_knockback.gd" id="10_pnwwh"]
 [ext_resource type="Script" path="res://assets/player/states/state_climb.gd" id="10_xs81r"]
 [ext_resource type="Script" path="res://assets/player/states/state_interact.gd" id="11_6y0kl"]
 [ext_resource type="AudioStream" uid="uid://82jihjn8dema" path="res://assets/sounds/568169__merrick079__sword-sound-2.wav" id="11_psku0"]
@@ -818,7 +819,7 @@ tracks/4/path = NodePath("WeaponPivot/Weapon/Hitbox:monitorable")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.3),
+"times": PackedFloat32Array(0, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -1122,6 +1123,7 @@ _data = {
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_mhgmp"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nbwgx"]
+graph_offset = Vector2(-403, 35)
 nodes/StateMachine/node = ExtResource("7_sdq1t")
 nodes/StateMachine/position = Vector2(-220, 100)
 nodes/speed/node = SubResource("AnimationNodeTimeScale_mhgmp")
@@ -1164,7 +1166,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hdyhm")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -1178,7 +1180,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n0uj4")
 }],
-"loop": true,
+"loop": false,
 "name": &"sword",
 "speed": 5.0
 }]
@@ -1235,6 +1237,9 @@ initial_state = NodePath("Default")
 
 [node name="Default" type="Node" parent="StateMachine"]
 script = ExtResource("3_sadaf")
+
+[node name="Knockback" type="Node" parent="StateMachine"]
+script = ExtResource("10_pnwwh")
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("4_oyygq")
@@ -1471,7 +1476,6 @@ unique_name_in_owner = true
 visible = false
 position = Vector2(8, -1)
 sprite_frames = SubResource("SpriteFrames_ckq3n")
-animation = &"sword"
 
 [node name="Hitbox" type="Area2D" parent="WeaponPivot/Weapon" node_paths=PackedStringArray("parent_ref", "sound_on_hit")]
 visible = false

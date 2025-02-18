@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://d34pc2g4hgfyl"]
+[gd_scene load_steps=24 format=3 uid="uid://d34pc2g4hgfyl"]
 
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_ipxbu"]
 [ext_resource type="Script" path="res://assets/enemies/mage/mage.gd" id="1_w332w"]
+[ext_resource type="Resource" uid="uid://2nlg1ktbcmbt" path="res://assets/data/items/fireball.tres" id="2_3au8k"]
 [ext_resource type="Script" path="res://test_scenes/entity_stats.gd" id="2_68jwt"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_2w5tj"]
 [ext_resource type="Script" path="res://assets/enemies/mage/states/state_idle.gd" id="3_d63xr"]
@@ -10,13 +11,14 @@
 [ext_resource type="Script" path="res://assets/enemies/mage/states/state_chase.gd" id="6_y5woy"]
 [ext_resource type="Shader" path="res://assets/effects/shaders/blinker.gdshader" id="7_2a0m2"]
 [ext_resource type="Script" path="res://helper_classes/hurtbox.gd" id="9_uf5br"]
+[ext_resource type="Script" path="res://assets/enemies/shared_states/state_eknock_back.gd" id="9_yccb5"]
 
 [sub_resource type="Resource" id="Resource_1rc8i"]
 script = ExtResource("2_68jwt")
 base_max_health = 10
 base_max_mana = 12
 base_max_stamina = 12
-level = 2
+level = 1
 vitality = 12
 strength = 10
 dexterity = 10
@@ -95,6 +97,7 @@ size = Vector2(10, 10)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_w332w")
+weapon_item = ExtResource("2_3au8k")
 state_machine = NodePath("StateMachine")
 navigation_agent = NodePath("NavigationAgent2D")
 sprite = NodePath("Sprite")
@@ -116,6 +119,9 @@ script = ExtResource("6_y5woy")
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("6_plq2j")
+
+[node name="Knockback" type="Node" parent="StateMachine"]
+script = ExtResource("9_yccb5")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 

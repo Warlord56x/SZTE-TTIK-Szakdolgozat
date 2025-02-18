@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c1fy87vwy6oos" path="res://test_scenes/stat_increase_spinner.tscn" id="7_n88r1"]
 [ext_resource type="PackedScene" uid="uid://du16tb8p7npf3" path="res://test_scenes/item_status.tscn" id="10_qg2rr"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8av53"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0f2lf"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -34,7 +34,7 @@ font_color = Color(0.803922, 0.811765, 0.823529, 1)
 font_size = 6
 font_color = Color(0.803922, 0.811765, 0.823529, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rpyib"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u62mg"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -128,7 +128,7 @@ layout_mode = 2
 text = "Travel"
 
 [node name="EffectLayer" type="ColorRect" parent="MarginContainer/MenuContainer/MainCampMenu"]
-material = SubResource("ShaderMaterial_8av53")
+material = SubResource("ShaderMaterial_0f2lf")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -365,7 +365,7 @@ metadata/_tab_index = 2
 layout_mode = 2
 
 [node name="EffectLayer" type="ColorRect" parent="MarginContainer/MenuContainer/CampChildMenu"]
-material = SubResource("ShaderMaterial_rpyib")
+material = SubResource("ShaderMaterial_u62mg")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

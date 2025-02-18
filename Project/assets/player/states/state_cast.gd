@@ -14,6 +14,8 @@ func enter() -> void:
 	var anim_tree = player.anim_tree
 	var anim_state_m = player.anim_state_m
 
+	var damage: int = 0
+
 	player.anim_tree["parameters/speed/scale"] = 1
 
 	if not item or (item and item.used):
@@ -22,8 +24,8 @@ func enter() -> void:
 	item.used = true
 
 	if item is WeaponItem:
-		print(item.calc_damage(player.stats))
-		player.weapon_hitbox.damage = item.damage * player.stats.strength
+		damage = item.calc_damage(player.stats)
+		player.weapon_hitbox.damage = damage
 
 	if item.name.to_lower() == "fireball":
 		if player.mana == 0:
@@ -52,12 +54,11 @@ func enter() -> void:
 		projectile_instance.p_rotation = player.global_position.angle_to_point(target)
 		projectile_instance.position = player.position
 		projectile_instance.parent_ref = player
-		projectile_instance.damage = item.damage
-		if bool(item.name.to_lower() == "fireball"):
-			projectile_instance.damage *= player.stats.intelligence
-		else:
-			projectile_instance.damage *= player.stats.dexterity
+		projectile_instance.damage = damage
 		player.add_child(projectile_instance)
+
+	if item is MeleeWeaponItem:
+		player.weapon_hitbox.knock_back_strength = item.knock_back
 
 	if item.name.to_lower() == "hammer":
 		if player.stamina == 0:

@@ -28,6 +28,7 @@ intelligence = 0
 
 [resource]
 script = ExtResource("2_h1mls")
+knock_back = 0.4
 damage = 7
 item_stats = SubResource("Resource_svsp1")
 name = "Hammer"
