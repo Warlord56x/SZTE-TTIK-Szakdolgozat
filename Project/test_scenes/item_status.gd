@@ -31,6 +31,7 @@ func set_item(it: Item) -> void:
 	item = it
 	if not item:
 		return
+	effect.fade(0.1)
 	if not is_node_ready():
 		await ready
 	reset_values()

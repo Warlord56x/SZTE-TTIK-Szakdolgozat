@@ -14,7 +14,7 @@
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kh0rq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ejmm7"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -28,7 +28,7 @@ shader_parameter/invert = false
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8efyq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xwae3"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -126,7 +126,7 @@ layout_mode = 2
 text = "Save & Exit"
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/Main"]
-material = SubResource("ShaderMaterial_kh0rq")
+material = SubResource("ShaderMaterial_ejmm7")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -171,7 +171,6 @@ unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Level"
 stat = 1
-stat_font_color = null
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -182,28 +181,24 @@ unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Vitality"
 stat = 10
-stat_font_color = null
 
 [node name="StatStrength" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_ugvnl")]
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Strength"
 stat = 10
-stat_font_color = null
 
 [node name="StatDexterity" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_ugvnl")]
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Dexterity"
 stat = 10
-stat_font_color = null
 
 [node name="StatIntelligence" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_ugvnl")]
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Intelligence"
 stat = 10
-stat_font_color = null
 
 [node name="BasicStatsLabel" type="Label" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -218,24 +213,21 @@ unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Health"
 stat = 20
-stat_font_color = null
 
 [node name="StatMana" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("6_ugvnl")]
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Mana"
 stat = 20
-stat_font_color = null
 
 [node name="StatStamina" parent="Margin/MenuContainer/StatusMenu/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("6_ugvnl")]
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Stamina"
 stat = 20
-stat_font_color = null
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/StatusMenu"]
-material = SubResource("ShaderMaterial_8efyq")
+material = SubResource("ShaderMaterial_xwae3")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

@@ -43,27 +43,22 @@ func fix_hearts() -> void:
 func set_max_resource(res: int) -> void:
 	max_resource = res
 	fix_hearts()
-	set_resource(res)
 
 
 func set_resource(res: int) -> void:
 	resource = clamp(res, 0, max_resource)
-	if res > max_resource:
-		return
+	#if res > max_resource:
+		#return
 	var children: Array[Node] = get_children()
 
 	if res == 0:
 		for child: Heart in children:
 			child.set_null()
 		return
-	#if res == max_resource:
-		#for child: Heart in children:
-			#child.set_full()
-		#return
 
 	for child: Heart in children:
 		child.current = 0
 
 	if children.is_empty(): return
-	for r in res:
+	for r: int in res:
 		children[int(r / 4.0)].current += 1

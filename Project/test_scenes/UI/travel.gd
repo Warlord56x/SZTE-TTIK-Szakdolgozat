@@ -33,9 +33,9 @@ func _on_item_list_item_activated(index: int) -> void:
 	GameEnv.fade_in_out(0.5, "Travelling...")
 	GameEnv.load_icon(true)
 	await GameEnv.fade_step_in
-	update_camps_list()
 	player.global_position = camp.global_position
 	player.camp = camp.camp_name
+	update_camps_list()
 	await GameEnv.fade_step_wait
 	GameEnv.load_icon(false)
 	travel.emit(camp)

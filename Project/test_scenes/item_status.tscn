@@ -9,7 +9,7 @@
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sfh31"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gkom5"]
 shader = ExtResource("4_6ltm4")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -47,7 +47,6 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Item level"
-stat_font_color = Color(0, 0, 0, 1)
 
 [node name="Damages" type="HBoxContainer" parent="MarginContainer/VBoxContainer2"]
 unique_name_in_owner = true
@@ -94,25 +93,21 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Vitality"
-stat_font_color = Color(0, 0, 0, 1)
 
 [node name="StatStr" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Core/StatReq" instance=ExtResource("1_chuu4")]
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Strength"
-stat_font_color = Color(0, 0, 0, 1)
 
 [node name="StatDex" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Core/StatReq" instance=ExtResource("1_chuu4")]
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Dexterity"
-stat_font_color = Color(0, 0, 0, 1)
 
 [node name="StatInt" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Core/StatReq" instance=ExtResource("1_chuu4")]
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Intelligence"
-stat_font_color = Color(0, 0, 0, 1)
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer"]
 layout_mode = 2
@@ -135,26 +130,22 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Vitality"
-stat_font_color = Color(0, 0, 0, 1)
 
 [node name="StatStrScale" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Scales/VBoxContainer" instance=ExtResource("1_chuu4")]
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Strength"
-stat_font_color = Color(0, 0, 0, 1)
 
 [node name="StatDexScale" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Scales/VBoxContainer" instance=ExtResource("1_chuu4")]
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Dexterity"
-stat_font_color = Color(0, 0, 0, 1)
 
 [node name="StatIntScale" parent="MarginContainer/VBoxContainer2/WeaponStats/HBoxContainer/Scales/VBoxContainer" instance=ExtResource("1_chuu4")]
 unique_name_in_owner = true
 layout_mode = 2
 stat_name = "Intelligence"
 stat = 140
-stat_font_color = Color(0, 0, 0, 1)
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer2/WeaponStats"]
 layout_mode = 2
@@ -176,7 +167,7 @@ text = "Warning"
 autowrap_mode = 3
 
 [node name="EffectLayer" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_sfh31")
+material = SubResource("ShaderMaterial_gkom5")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

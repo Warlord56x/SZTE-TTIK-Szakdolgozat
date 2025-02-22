@@ -77,7 +77,7 @@ var on_ladder: bool = false
 var checkpoint: Checkpoint:
 	set = set_checkpoint
 
-var camp: String = &"":
+var camp: StringName = &"":
 	set = set_camp
 
 var dash_max: int = 1
@@ -130,7 +130,7 @@ func set_stats(new_stats: EntityStats) -> void:
 	stats = new_stats
 	if not is_node_ready():
 		await ready
-	update_max_resources()
+	update_max_resources.call_deferred()
 
 
 func set_mana(m: int) -> void:
@@ -260,12 +260,12 @@ func default_animations(dir: float) -> void:
 
 func regener(res: player_res) -> void:
 	var res_string: String = player_res.keys()[res].to_lower()
-	set(res_string, get(res_string) + get(res_string+"_regen"))
+	set(res_string, get(res_string) + get(res_string + "_regen"))
 
 
 func regener_waiter(res: player_res) -> void:
 	var res_string: String = player_res.keys()[res].to_lower()
-	var timer: Timer = get(res_string+"_time")
+	var timer: Timer = get(res_string + "_time")
 	timer.start()
 
 
@@ -307,7 +307,7 @@ func _ready() -> void:
 		global_position = DEFAULT_SPAWN_POINT
 	tool_tip_node.visible = debug
 
-	update_max_resources()
+	update_max_resources.call_deferred()
 
 	init_regen_timer(player_res.HEALTH, health_regen_wait_time, health_regen_time)
 	init_regen_timer(player_res.MANA, mana_regen_wait_time, mana_regen_time)
@@ -320,6 +320,8 @@ func _ready() -> void:
 
 
 func update_max_resources() -> void:
+	# This function should be called deferred, to let the nodes catch up
+	# Deferred functions are called in the idle frames and always last
 	health_bar.max_resource = stats.max_health
 	mana_bar.max_resource = stats.max_mana
 	stamina_bar.max_resource = stats.max_stamina
