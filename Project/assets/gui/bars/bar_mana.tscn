@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://uvwfpidv7ujl"]
 
-[ext_resource type="Script" path="res://assets/gui/bars/bar.gd" id="1_f24i2"]
+[ext_resource type="Script" uid="uid://dq3hpje0wbkai" path="res://assets/gui/bars/bar.gd" id="1_f24i2"]
 [ext_resource type="PackedScene" uid="uid://bjfjodjrs05d1" path="res://assets/gui/hearts/heart_mana.tscn" id="2_io8ca"]
 
 [node name="BarMana" type="GridContainer"]

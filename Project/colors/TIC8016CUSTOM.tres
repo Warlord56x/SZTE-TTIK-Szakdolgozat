@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Palette" load_steps=19 format=3 uid="uid://hinqp36j7eas"]
 
-[ext_resource type="Script" path="res://colors/palette_color.gd" id="1"]
-[ext_resource type="Script" path="res://colors/palette.gd" id="2"]
+[ext_resource type="Script" uid="uid://baxgify7a6spc" path="res://colors/palette_color.gd" id="1"]
+[ext_resource type="Script" uid="uid://dsavb6l76kq7t" path="res://colors/palette.gd" id="2"]
 
 [sub_resource type="Resource" id="1"]
 script = ExtResource("1")

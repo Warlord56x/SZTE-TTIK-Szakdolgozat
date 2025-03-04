@@ -80,7 +80,7 @@ var checkpoint: Checkpoint:
 var camp: StringName = &"":
 	set = set_camp
 
-var dash_max: int = 1
+@export var dash_max: int = 1
 var dash_count: int = 0
 
 @export var inv_time = 0.1

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bayt3w65gl00f"]
 
-[ext_resource type="Script" path="res://assets/effects/damage_number.gd" id="1_txepc"]
+[ext_resource type="Script" uid="uid://bjvsm55kpa177" path="res://assets/effects/damage_number.gd" id="1_txepc"]
 [ext_resource type="FontFile" uid="uid://xqmbpl7848ab" path="res://fonts/puux.ttf" id="2_icoyt"]
 [ext_resource type="Texture2D" uid="uid://b4s3ar3xvuca5" path="res://assets/light_masks/2d_lights_and_shadows_neutral_point_light.webp" id="3_6b160"]
 

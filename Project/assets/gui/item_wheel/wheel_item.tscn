@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://psxpi7w48ool"]
 
-[ext_resource type="Script" path="res://assets/gui/item_wheel/wheel_item.gd" id="1_mqtpe"]
+[ext_resource type="Script" uid="uid://cvvya1c20vmw1" path="res://assets/gui/item_wheel/wheel_item.gd" id="1_mqtpe"]
 [ext_resource type="Texture2D" uid="uid://dufbdy81bhfap" path="res://nin_tiles.png" id="2_6pglt"]
 [ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://fonts/nin_font.png" id="3_ij7qm"]
-[ext_resource type="Shader" path="res://assets/effects/shaders/cooldown.gdshader" id="3_yrv5i"]
+[ext_resource type="Shader" uid="uid://d1q3i22vuhp8l" path="res://assets/effects/shaders/cooldown.gdshader" id="3_yrv5i"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0o5if"]
 line_spacing = 0.0

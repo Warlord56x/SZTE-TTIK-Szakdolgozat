@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bpg8ab2biymnb"]
 
-[ext_resource type="Script" path="res://assets/gui/action_help.gd" id="1_i3ubn"]
+[ext_resource type="Script" uid="uid://bcpgtycx0s4ca" path="res://assets/gui/action_help.gd" id="1_i3ubn"]
 [ext_resource type="SpriteFrames" uid="uid://dk6vbx22r2f4q" path="res://assets/gui/resources/action_help.tres" id="2_0b3wp"]
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="3_f8724"]
 

@@ -5,7 +5,7 @@ class_name Item
 @export var icon: Texture2D
 @export_multiline var description: String = ""
 
-@export var stack: int:
+@export_storage var stack: int:
 	set(s):
 		stack = s
 		stack_changed.emit()

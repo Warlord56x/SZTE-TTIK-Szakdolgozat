@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b488vmoc2emb0"]
 
-[ext_resource type="Script" path="res://debug/debug_info.gd" id="1_jygyo"]
+[ext_resource type="Script" uid="uid://dynkt21kflmtj" path="res://debug/debug_info.gd" id="1_jygyo"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ca5d2"]
 light_mode = 1

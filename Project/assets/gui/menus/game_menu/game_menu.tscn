@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=3 uid="uid://b2qrpcmioix5b"]
 
-[ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_5sbp6"]
-[ext_resource type="Script" path="res://assets/gui/menus/menu_container.gd" id="3_x1cqt"]
-[ext_resource type="Script" path="res://assets/gui/menus/game_menu/main_game_menu.gd" id="4_f786d"]
-[ext_resource type="Script" path="res://assets/gui/menus/game_menu/status_menu.gd" id="5_d28p0"]
+[ext_resource type="Shader" uid="uid://c72gwv2qqo3o8" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_5sbp6"]
+[ext_resource type="Script" uid="uid://c3hpthf37lpnu" path="res://assets/gui/menus/menu_container.gd" id="3_x1cqt"]
+[ext_resource type="Script" uid="uid://bt0h7lsw3h5cy" path="res://assets/gui/menus/game_menu/main_game_menu.gd" id="4_f786d"]
+[ext_resource type="Script" uid="uid://xntaxdepy2hm" path="res://assets/gui/menus/game_menu/status_menu.gd" id="5_d28p0"]
 [ext_resource type="PackedScene" uid="uid://c02qudtqfyl0a" path="res://test_scenes/UI/settings_menu.tscn" id="6_4evkw"]
 [ext_resource type="PackedScene" uid="uid://b1ymk23npn35b" path="res://test_scenes/stat_display.tscn" id="6_ugvnl"]
-[ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="6_wtw0d"]
+[ext_resource type="Script" uid="uid://c7a5noibqs2p7" path="res://assets/effects/effect_layer.gd" id="6_wtw0d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qr1om"]
 

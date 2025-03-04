@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d4m7xeugvefch"]
 
-[ext_resource type="Script" path="res://assets/effects/death_effect.gd" id="1_v0tlu"]
+[ext_resource type="Script" uid="uid://pi8gy0u55uru" path="res://assets/effects/death_effect.gd" id="1_v0tlu"]
 [ext_resource type="Texture2D" uid="uid://br6pbn55fcmhh" path="res://assets/effects/img/fire_ball_only.png" id="4_w4h1t"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_88gwy"]

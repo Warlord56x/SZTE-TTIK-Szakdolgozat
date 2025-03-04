@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dxhjvt705i3g8"]
 
-[ext_resource type="Script" path="res://assets/objects/ladder.gd" id="1_uqkod"]
+[ext_resource type="Script" uid="uid://cnuq13yvw8mge" path="res://assets/objects/ladder.gd" id="1_uqkod"]
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="2_com3p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r1va5"]

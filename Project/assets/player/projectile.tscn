@@ -1,13 +1,13 @@
 [gd_scene load_steps=24 format=3 uid="uid://bhxmqg2i48ced"]
 
-[ext_resource type="Script" path="res://assets/player/projectile.gd" id="1_jl8yt"]
+[ext_resource type="Script" uid="uid://b6wooxf6ls8x8" path="res://assets/player/projectile.gd" id="1_jl8yt"]
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="2_7nube"]
 [ext_resource type="Texture2D" uid="uid://b4s3ar3xvuca5" path="res://assets/light_masks/2d_lights_and_shadows_neutral_point_light.webp" id="3_pja8y"]
 [ext_resource type="AudioStream" uid="uid://dum1chmge16o" path="res://assets/sounds/701804__perduuus__fireball.wav" id="4_fhkfq"]
 [ext_resource type="AudioStream" uid="uid://dcjv6ghjq606o" path="res://assets/sounds/431174__highpixel__fireball-explosion.wav" id="5_5aybg"]
 [ext_resource type="AudioStream" uid="uid://dp2tki63awsmg" path="res://assets/sounds/209399__sgossner__bow-release.mp3" id="6_fhpl1"]
 [ext_resource type="AudioStream" uid="uid://gthgyswsyk5p" path="res://assets/sounds/536066__eminyildirim__bow-impact.wav" id="7_q3x0f"]
-[ext_resource type="Script" path="res://helper_classes/hitbox.gd" id="8_dbsx6"]
+[ext_resource type="Script" uid="uid://cjfcf2q3lekt4" path="res://helper_classes/hitbox.gd" id="8_dbsx6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l0nfp"]
 size = Vector2(7, 4)

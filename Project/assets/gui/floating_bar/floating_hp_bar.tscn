@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://0iac6qukikeg"]
 
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_2ij80"]
-[ext_resource type="Script" path="res://assets/gui/floating_bar/floating_hp_bar.gd" id="1_hftse"]
+[ext_resource type="Script" uid="uid://bvy1ul8ky1q4f" path="res://assets/gui/floating_bar/floating_hp_bar.gd" id="1_hftse"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bjdt1"]
 

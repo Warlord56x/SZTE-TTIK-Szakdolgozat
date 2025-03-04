@@ -39,12 +39,12 @@ func new_game(slot_name: String) -> bool:
 ## Makes a new save in [param slot] and appends it to the front of the it's [member SaveSlot.saves_array]
 func save_game(_name: String = "", slot: SaveSlot = current_slot) -> void:
 	var save_file: SaveFile = SaveFile.new()
-	var save_data: Array = save_file.data
 	var nodes = get_tree().get_nodes_in_group("Persistent")
+	save_file.modified_at = int(Time.get_unix_time_from_system())
 
 	for node in nodes:
 		if node.has_method("save"):
-			save_data.append(node.call("save"))
+			save_file.data.append(node.call("save"))
 		else:
 			print("Persistent node '%s' does not have a save() function" % node.name)
 	slot.new_save(_name, save_file)

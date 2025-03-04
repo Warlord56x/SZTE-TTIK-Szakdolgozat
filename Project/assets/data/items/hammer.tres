@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="MeleeWeaponItem" load_steps=8 format=3 uid="uid://7q383kvqnpb1"]
 
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_a245v"]
-[ext_resource type="Script" path="res://assets/data/model/scale.gd" id="2_a5gfl"]
-[ext_resource type="Script" path="res://assets/data/model/melee_weapon_item.gd" id="2_h1mls"]
-[ext_resource type="Script" path="res://assets/data/model/item_stats.gd" id="3_x0lpk"]
+[ext_resource type="Script" uid="uid://dq13monkhe8vq" path="res://assets/data/model/scale.gd" id="2_a5gfl"]
+[ext_resource type="Script" uid="uid://lesuen4mjep5" path="res://assets/data/model/melee_weapon_item.gd" id="2_h1mls"]
+[ext_resource type="Script" uid="uid://xv62oylkr6sf" path="res://assets/data/model/item_stats.gd" id="3_x0lpk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o76ja"]
 atlas = ExtResource("1_a245v")

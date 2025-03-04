@@ -1,23 +1,23 @@
 [gd_scene load_steps=37 format=3 uid="uid://b25vye5etxi5"]
 
-[ext_resource type="Script" path="res://assets/enemies/swordsman/swordsman.gd" id="1_6tos1"]
-[ext_resource type="Script" path="res://test_scenes/buff_component.gd" id="2_0phdp"]
-[ext_resource type="Script" path="res://state_machine/state_machine.gd" id="2_8i2l2"]
+[ext_resource type="Script" uid="uid://tuxfh0xm2rj1" path="res://assets/enemies/swordsman/swordsman.gd" id="1_6tos1"]
+[ext_resource type="Script" uid="uid://dkt60c0jdnveu" path="res://test_scenes/buff_component.gd" id="2_0phdp"]
+[ext_resource type="Script" uid="uid://qvs8u77e2ysl" path="res://state_machine/state_machine.gd" id="2_8i2l2"]
 [ext_resource type="Resource" uid="uid://b6iewkldjgof1" path="res://assets/data/items/sword.tres" id="2_am0tw"]
-[ext_resource type="Script" path="res://test_scenes/entity_stats.gd" id="2_jvihu"]
-[ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_idle.gd" id="3_c8dnd"]
-[ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_chase.gd" id="4_75o1n"]
-[ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_fall.gd" id="5_fqqg6"]
-[ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_combat.gd" id="6_njad8"]
-[ext_resource type="Shader" path="res://assets/effects/shaders/blinker.gdshader" id="7_e3isw"]
-[ext_resource type="Script" path="res://assets/enemies/swordsman/states/state_stun.gd" id="7_nmiy0"]
+[ext_resource type="Script" uid="uid://b3le6uphdtjhr" path="res://test_scenes/entity_stats.gd" id="2_jvihu"]
+[ext_resource type="Script" uid="uid://ws546cxx435n" path="res://assets/enemies/swordsman/states/state_idle.gd" id="3_c8dnd"]
+[ext_resource type="Script" uid="uid://dvlc4j7hq2auh" path="res://assets/enemies/swordsman/states/state_chase.gd" id="4_75o1n"]
+[ext_resource type="Script" uid="uid://be125kb0p1to1" path="res://assets/enemies/swordsman/states/state_fall.gd" id="5_fqqg6"]
+[ext_resource type="Script" uid="uid://cahfodi2k16oe" path="res://assets/enemies/swordsman/states/state_combat.gd" id="6_njad8"]
+[ext_resource type="Shader" uid="uid://rasm7isai8jl" path="res://assets/effects/shaders/blinker.gdshader" id="7_e3isw"]
+[ext_resource type="Script" uid="uid://bvtht80s4wnqe" path="res://assets/enemies/swordsman/states/state_stun.gd" id="7_nmiy0"]
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="7_si21x"]
 [ext_resource type="PackedScene" uid="uid://doam6xduhln3t" path="res://assets/effects/stun_effect.tscn" id="9_ccyrh"]
-[ext_resource type="Script" path="res://helper_classes/hitbox.gd" id="9_q8lhd"]
+[ext_resource type="Script" uid="uid://cjfcf2q3lekt4" path="res://helper_classes/hitbox.gd" id="9_q8lhd"]
 [ext_resource type="AudioStream" uid="uid://82jihjn8dema" path="res://assets/sounds/568169__merrick079__sword-sound-2.wav" id="9_vs37d"]
-[ext_resource type="Script" path="res://helper_classes/hurtbox.gd" id="10_xrarh"]
+[ext_resource type="Script" uid="uid://cmo2sh3hbcvve" path="res://helper_classes/hurtbox.gd" id="10_xrarh"]
 [ext_resource type="AudioStream" uid="uid://dm1uu5hsqy01n" path="res://assets/sounds/362349__beerbelly38__knife-slash-2.wav" id="10_xtmbh"]
-[ext_resource type="Script" path="res://assets/enemies/shared_states/state_eknock_back.gd" id="12_lr4et"]
+[ext_resource type="Script" uid="uid://cqs55okyqlc6y" path="res://assets/enemies/shared_states/state_eknock_back.gd" id="12_lr4et"]
 
 [sub_resource type="Resource" id="Resource_k6ulr"]
 script = ExtResource("2_jvihu")
@@ -278,8 +278,8 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rstr4"]
 _data = {
-"RESET": SubResource("Animation_82swx"),
-"hit": SubResource("Animation_w4vrw")
+&"RESET": SubResource("Animation_82swx"),
+&"hit": SubResource("Animation_w4vrw")
 }
 
 [node name="Swordsman" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite") groups=["Respawnable"]]
@@ -385,7 +385,7 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_rstr4")
+&"": SubResource("AnimationLibrary_rstr4")
 }
 
 [node name="SwordHit" type="AudioStreamPlayer2D" parent="."]

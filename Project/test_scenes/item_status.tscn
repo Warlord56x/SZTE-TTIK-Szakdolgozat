@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://du16tb8p7npf3"]
 
-[ext_resource type="Script" path="res://test_scenes/item_status.gd" id="1_8e4cp"]
+[ext_resource type="Script" uid="uid://uto71o8pu8yn" path="res://test_scenes/item_status.gd" id="1_8e4cp"]
 [ext_resource type="PackedScene" uid="uid://b1ymk23npn35b" path="res://test_scenes/stat_display.tscn" id="1_chuu4"]
-[ext_resource type="Shader" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="4_6ltm4"]
-[ext_resource type="Script" path="res://assets/effects/effect_layer.gd" id="5_yqwdk"]
+[ext_resource type="Shader" uid="uid://c72gwv2qqo3o8" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="4_6ltm4"]
+[ext_resource type="Script" uid="uid://c7a5noibqs2p7" path="res://assets/effects/effect_layer.gd" id="5_yqwdk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xyl6e"]
 line_spacing = 0.0

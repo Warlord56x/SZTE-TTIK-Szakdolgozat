@@ -23,11 +23,11 @@ func _init(_name: String, _slot: SaveSlot, _data: SaveFile = null) -> void:
 
 
 func save_data(_data: SaveFile = data) -> void:
-	var saved = ResourceSaver.save(data, _path)
+	var saved = ResourceSaver.save(_data, _path)
+	at = _data.modified_at
 	if saved != OK:
 		printerr("Saving data has failed with error code: ", saved)
 		return
-	at = FileAccess.get_modified_time(_path)
 
 
 func load_data() -> void:

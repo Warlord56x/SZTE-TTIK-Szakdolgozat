@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://6ukr4nj0ehof"]
 
-[ext_resource type="Script" path="res://item_category_list.gd" id="1_1mas7"]
+[ext_resource type="Script" uid="uid://gdu4xqw25sag" path="res://item_category_list.gd" id="1_1mas7"]
 
 [node name="ItemCategoryList" type="VBoxContainer"]
 anchors_preset = 10

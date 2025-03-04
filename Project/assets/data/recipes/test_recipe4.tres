@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="Recipe" load_steps=9 format=3 uid="uid://5365sweowd4u"]
 
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_12qcx"]
-[ext_resource type="Script" path="res://assets/data/model/ingredient.gd" id="2_hgswp"]
+[ext_resource type="Script" uid="uid://dcmo4di2vbwm3" path="res://assets/data/model/ingredient.gd" id="2_hgswp"]
 [ext_resource type="Resource" uid="uid://dwjomx0pywg1n" path="res://assets/data/items/coin.tres" id="3_vmi2k"]
 [ext_resource type="Resource" uid="uid://7q383kvqnpb1" path="res://assets/data/items/hammer.tres" id="4_dhujw"]
-[ext_resource type="Script" path="res://assets/data/model/recipe.gd" id="5_2vhku"]
+[ext_resource type="Script" uid="uid://cj86xckuywyyt" path="res://assets/data/model/recipe.gd" id="5_2vhku"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x5sv8"]
 atlas = ExtResource("1_12qcx")

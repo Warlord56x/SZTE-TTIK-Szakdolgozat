@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dfwa6vext6tuf"]
 
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_2vegq"]
-[ext_resource type="Script" path="res://assets/objects/heart.gd" id="1_cr6ka"]
+[ext_resource type="Script" uid="uid://ds1ka5xn3nu1c" path="res://assets/objects/heart.gd" id="1_cr6ka"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2sxc"]
 size = Vector2(8, 8)

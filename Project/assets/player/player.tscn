@@ -1,38 +1,38 @@
 [gd_scene load_steps=113 format=3 uid="uid://diq8ndw4ll1rm"]
 
-[ext_resource type="Script" path="res://assets/player/player.gd" id="1_0p7ex"]
-[ext_resource type="Script" path="res://test_scenes/entity_stats.gd" id="2_fr6p7"]
-[ext_resource type="Script" path="res://state_machine/state_machine.gd" id="2_imbft"]
+[ext_resource type="Script" uid="uid://c0yjwtim3y5rd" path="res://assets/player/player.gd" id="1_0p7ex"]
+[ext_resource type="Script" uid="uid://b3le6uphdtjhr" path="res://test_scenes/entity_stats.gd" id="2_fr6p7"]
+[ext_resource type="Script" uid="uid://qvs8u77e2ysl" path="res://state_machine/state_machine.gd" id="2_imbft"]
 [ext_resource type="PackedScene" uid="uid://dm4lu0fwgsv75" path="res://assets/gui/bars/bar_health.tscn" id="2_n15yp"]
 [ext_resource type="PackedScene" uid="uid://b488vmoc2emb0" path="res://debug/debug_info.tscn" id="2_p0eb3"]
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="3_fxfhm"]
 [ext_resource type="PackedScene" uid="uid://uvwfpidv7ujl" path="res://assets/gui/bars/bar_mana.tscn" id="3_nro24"]
-[ext_resource type="Script" path="res://assets/player/states/state_default.gd" id="3_sadaf"]
-[ext_resource type="Script" path="res://test_scenes/buff_component.gd" id="3_yjybh"]
+[ext_resource type="Script" uid="uid://cm05eur8vkoe" path="res://assets/player/states/state_default.gd" id="3_sadaf"]
+[ext_resource type="Script" uid="uid://dkt60c0jdnveu" path="res://test_scenes/buff_component.gd" id="3_yjybh"]
 [ext_resource type="PackedScene" uid="uid://bakgosfbeq37h" path="res://assets/gui/bars/bar_stamina.tscn" id="4_mq3j0"]
-[ext_resource type="Script" path="res://assets/player/states/state_fall.gd" id="4_oyygq"]
+[ext_resource type="Script" uid="uid://ylh2jpxjhkn4" path="res://assets/player/states/state_fall.gd" id="4_oyygq"]
 [ext_resource type="AudioStream" uid="uid://dm1uu5hsqy01n" path="res://assets/sounds/362349__beerbelly38__knife-slash-2.wav" id="4_v8ma5"]
-[ext_resource type="Script" path="res://assets/player/states/state_wall.gd" id="5_mhtgr"]
-[ext_resource type="Script" path="res://assets/gui/label.gd" id="5_pflec"]
-[ext_resource type="Script" path="res://assets/player/states/state_dash.gd" id="6_0fo1b"]
+[ext_resource type="Script" uid="uid://cxrnhqse00xdf" path="res://assets/player/states/state_wall.gd" id="5_mhtgr"]
+[ext_resource type="Script" uid="uid://cviky8xqy5l7o" path="res://assets/gui/label.gd" id="5_pflec"]
+[ext_resource type="Script" uid="uid://bwurcuwavt031" path="res://assets/player/states/state_dash.gd" id="6_0fo1b"]
 [ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://fonts/nin_font.png" id="6_2mfpg"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://dqj1t6rwkk2af" path="res://assets/player/player_anim_state_m.tres" id="7_sdq1t"]
 [ext_resource type="PackedScene" uid="uid://bpg8ab2biymnb" path="res://assets/gui/action_help.tscn" id="8_5oe6t"]
-[ext_resource type="Script" path="res://assets/player/states/state_death.gd" id="8_8nrgl"]
-[ext_resource type="Script" path="res://assets/player/states/state_cast.gd" id="9_sy26o"]
-[ext_resource type="Script" path="res://assets/player/states/state_knockback.gd" id="10_pnwwh"]
-[ext_resource type="Script" path="res://assets/player/states/state_climb.gd" id="10_xs81r"]
-[ext_resource type="Script" path="res://assets/player/states/state_interact.gd" id="11_6y0kl"]
+[ext_resource type="Script" uid="uid://brark5tk3sb2p" path="res://assets/player/states/state_death.gd" id="8_8nrgl"]
+[ext_resource type="Script" uid="uid://chl44r3jn5lr1" path="res://assets/player/states/state_cast.gd" id="9_sy26o"]
+[ext_resource type="Script" uid="uid://w3vwesq1lpcd" path="res://assets/player/states/state_knockback.gd" id="10_pnwwh"]
+[ext_resource type="Script" uid="uid://c5uhe1dxjhqt5" path="res://assets/player/states/state_climb.gd" id="10_xs81r"]
+[ext_resource type="Script" uid="uid://bgj0477qsfwv4" path="res://assets/player/states/state_interact.gd" id="11_6y0kl"]
 [ext_resource type="AudioStream" uid="uid://82jihjn8dema" path="res://assets/sounds/568169__merrick079__sword-sound-2.wav" id="11_psku0"]
 [ext_resource type="PackedScene" uid="uid://dr8mvhnt8sq40" path="res://assets/gui/item_wheel/wheel.tscn" id="11_xmcr7"]
-[ext_resource type="Script" path="res://assets/player/states/state_parry.gd" id="17_vc88x"]
-[ext_resource type="Script" path="res://assets/player/camera.gd" id="20_w6pmk"]
-[ext_resource type="Shader" path="res://assets/effects/shaders/blinker.gdshader" id="21_hreuu"]
+[ext_resource type="Script" uid="uid://co15fr81p45hb" path="res://assets/player/states/state_parry.gd" id="17_vc88x"]
+[ext_resource type="Script" uid="uid://6xa6ruicudev" path="res://assets/player/camera.gd" id="20_w6pmk"]
+[ext_resource type="Shader" uid="uid://rasm7isai8jl" path="res://assets/effects/shaders/blinker.gdshader" id="21_hreuu"]
 [ext_resource type="Texture2D" uid="uid://b4s3ar3xvuca5" path="res://assets/light_masks/2d_lights_and_shadows_neutral_point_light.webp" id="21_jh63l"]
-[ext_resource type="Script" path="res://assets/player/interactor.gd" id="23_ken48"]
+[ext_resource type="Script" uid="uid://bcxfp4ofnox3f" path="res://assets/player/interactor.gd" id="23_ken48"]
 [ext_resource type="PackedScene" uid="uid://bngmpnj1xby7e" path="res://test_scenes/UI/inventory_menu.tscn" id="25_riq7e"]
-[ext_resource type="Script" path="res://helper_classes/hitbox.gd" id="26_3ibsb"]
-[ext_resource type="Script" path="res://helper_classes/hurtbox.gd" id="28_80a7v"]
+[ext_resource type="Script" uid="uid://cjfcf2q3lekt4" path="res://helper_classes/hitbox.gd" id="26_3ibsb"]
+[ext_resource type="Script" uid="uid://cmo2sh3hbcvve" path="res://helper_classes/hurtbox.gd" id="28_80a7v"]
 
 [sub_resource type="Resource" id="Resource_lkap7"]
 script = ExtResource("2_fr6p7")
@@ -1098,26 +1098,26 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kkiwx"]
 _data = {
-"RESET": SubResource("Animation_bl6il"),
-"cast_spell": SubResource("Animation_8st5l"),
-"climb": SubResource("Animation_7h4r7"),
-"climb_idle": SubResource("Animation_bbjac"),
-"climb_idle_crouch": SubResource("Animation_kc78b"),
-"climb_idle_look_up": SubResource("Animation_8woal"),
-"dash": SubResource("Animation_85k48"),
-"death": SubResource("Animation_e10im"),
-"fall": SubResource("Animation_h104u"),
-"fire_bow": SubResource("Animation_2w3iw"),
-"hit": SubResource("Animation_8j145"),
-"idle": SubResource("Animation_0iskf"),
-"idle_crouch": SubResource("Animation_8erjy"),
-"idle_look_up": SubResource("Animation_sbyn6"),
-"interact": SubResource("Animation_joddm"),
-"parry": SubResource("Animation_dkwgg"),
-"run": SubResource("Animation_vhfg4"),
-"run_crouch": SubResource("Animation_wh445"),
-"run_look_up": SubResource("Animation_kub7i"),
-"wall_slide": SubResource("Animation_m1ml7")
+&"RESET": SubResource("Animation_bl6il"),
+&"cast_spell": SubResource("Animation_8st5l"),
+&"climb": SubResource("Animation_7h4r7"),
+&"climb_idle": SubResource("Animation_bbjac"),
+&"climb_idle_crouch": SubResource("Animation_kc78b"),
+&"climb_idle_look_up": SubResource("Animation_8woal"),
+&"dash": SubResource("Animation_85k48"),
+&"death": SubResource("Animation_e10im"),
+&"fall": SubResource("Animation_h104u"),
+&"fire_bow": SubResource("Animation_2w3iw"),
+&"hit": SubResource("Animation_8j145"),
+&"idle": SubResource("Animation_0iskf"),
+&"idle_crouch": SubResource("Animation_8erjy"),
+&"idle_look_up": SubResource("Animation_sbyn6"),
+&"interact": SubResource("Animation_joddm"),
+&"parry": SubResource("Animation_dkwgg"),
+&"run": SubResource("Animation_vhfg4"),
+&"run_crouch": SubResource("Animation_wh445"),
+&"run_look_up": SubResource("Animation_kub7i"),
+&"wall_slide": SubResource("Animation_m1ml7")
 }
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_mhgmp"]
@@ -1450,7 +1450,7 @@ animation = &"run"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_kkiwx")
+&"": SubResource("AnimationLibrary_kkiwx")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cd1nb61y8aiy"]
 
-[ext_resource type="Script" path="res://assets/objects/cherry.gd" id="1_d7bkl"]
+[ext_resource type="Script" uid="uid://henwfl7dalsu" path="res://assets/objects/cherry.gd" id="1_d7bkl"]
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_mfk5f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gamdx"]

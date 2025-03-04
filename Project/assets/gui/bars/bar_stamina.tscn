@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bakgosfbeq37h"]
 
-[ext_resource type="Script" path="res://assets/gui/bars/bar.gd" id="1_minie"]
+[ext_resource type="Script" uid="uid://dq3hpje0wbkai" path="res://assets/gui/bars/bar.gd" id="1_minie"]
 [ext_resource type="PackedScene" uid="uid://dhihbcv2grl0l" path="res://assets/gui/hearts/heart_stamina.tscn" id="2_scd6c"]
 
 [node name="BarStamina" type="GridContainer"]

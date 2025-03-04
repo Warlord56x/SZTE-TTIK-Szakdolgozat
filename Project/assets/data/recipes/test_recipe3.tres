@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Recipe" load_steps=9 format=3 uid="uid://cf1lqboh1xibm"]
 
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_hbtdg"]
-[ext_resource type="Script" path="res://assets/data/model/ingredient.gd" id="1_hifbc"]
-[ext_resource type="Script" path="res://assets/data/model/recipe.gd" id="2_auf0b"]
+[ext_resource type="Script" uid="uid://dcmo4di2vbwm3" path="res://assets/data/model/ingredient.gd" id="1_hifbc"]
+[ext_resource type="Script" uid="uid://cj86xckuywyyt" path="res://assets/data/model/recipe.gd" id="2_auf0b"]
 [ext_resource type="Resource" uid="uid://dwjomx0pywg1n" path="res://assets/data/items/coin.tres" id="3_um0or"]
 [ext_resource type="Resource" uid="uid://2nlg1ktbcmbt" path="res://assets/data/items/fireball.tres" id="4_1rk22"]
 

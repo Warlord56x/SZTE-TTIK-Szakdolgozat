@@ -10,9 +10,15 @@ var at: int
 func _init(_name: String) -> void:
 	if not DirAccess.dir_exists_absolute(SaveManager.default_path + _name):
 		DirAccess.make_dir_recursive_absolute(SaveManager.default_path + _name)
-	at = FileAccess.get_modified_time(SaveManager.default_path + _name)
 	name = _name
 	saves = _get_saves()
+
+	# Avoid relaying on the OS for modified time
+	if saves.size() > 0:
+		at = saves[0].at
+	for save: Save in saves:
+		if save.at > at:
+			at = save.at
 
 
 ## Gets the first [Save] in the [param saves] array.
@@ -42,7 +48,9 @@ func new_save(_name: String, _data: SaveFile) -> void:
 	if not any.is_empty():
 		(any.front() as Save).save_data()
 		return
-	saves.push_front(Save.new(_name, self, _data))
+	var save = Save.new(_name, self, _data)
+	saves.push_front(save)
+	at = save.at
 
 
 ## Saves list for this slot, in last edited order

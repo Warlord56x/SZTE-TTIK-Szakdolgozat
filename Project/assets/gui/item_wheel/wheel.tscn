@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dr8mvhnt8sq40"]
 
-[ext_resource type="Script" path="res://assets/gui/item_wheel/wheel.gd" id="1_h501d"]
+[ext_resource type="Script" uid="uid://bhv1vujtjdk32" path="res://assets/gui/item_wheel/wheel.gd" id="1_h501d"]
 [ext_resource type="PackedScene" uid="uid://psxpi7w48ool" path="res://assets/gui/item_wheel/wheel_item.tscn" id="2_hlwiv"]
 
 [node name="Wheel" type="Container"]

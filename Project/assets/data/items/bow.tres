@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="RangedWeaponItem" load_steps=12 format=3 uid="uid://hd2muhlnrdsc"]
 
-[ext_resource type="Script" path="res://assets/data/model/ranged_weapon_item.gd" id="1_b384f"]
+[ext_resource type="Script" uid="uid://j4itge3rmsos" path="res://assets/data/model/ranged_weapon_item.gd" id="1_b384f"]
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://nin_sprites.png" id="1_owxrb"]
-[ext_resource type="Script" path="res://assets/data/model/item_stats.gd" id="2_6xn1k"]
-[ext_resource type="Script" path="res://assets/data/model/scale.gd" id="2_nqua5"]
+[ext_resource type="Script" uid="uid://xv62oylkr6sf" path="res://assets/data/model/item_stats.gd" id="2_6xn1k"]
+[ext_resource type="Script" uid="uid://dq13monkhe8vq" path="res://assets/data/model/scale.gd" id="2_nqua5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ul4yj"]
 atlas = ExtResource("1_owxrb")
