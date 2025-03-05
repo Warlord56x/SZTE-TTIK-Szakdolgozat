@@ -1,5 +1,5 @@
 extends ScrollContainer
-class_name SaveSlotlist
+class_name SaveSlotList
 
 const ELEMENT := preload("res://assets/gui/menus/menu_elements/save_element.tscn")
 

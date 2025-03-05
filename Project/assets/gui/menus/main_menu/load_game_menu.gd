@@ -1,7 +1,7 @@
 extends Menu
 
 
-@onready var save_list: SaveSlotlist = $MarginContainer/VBoxContainer/SaveList
+@onready var save_list: SaveSlotList = $MarginContainer/VBoxContainer/SaveList
 
 
 func _on_load_button_pressed() -> void:
