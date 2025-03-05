@@ -77,8 +77,9 @@ var on_ladder: bool = false
 var checkpoint: Checkpoint:
 	set = set_checkpoint
 
-var camp: StringName = &"":
-	set = set_camp
+var camp: StringName = &""
+
+var active_camps: Array[StringName] = []
 
 @export var dash_max: int = 1
 var dash_count: int = 0
@@ -177,10 +178,6 @@ func set_checkpoint(c: Checkpoint) -> void:
 		checkpoint.deactivate()
 	checkpoint = c
 	c.activate()
-
-
-func set_camp(c: String) -> void:
-	camp = c
 #endregion
 
 
@@ -297,6 +294,7 @@ func save() -> Dictionary:
 		"health" : health,
 		"mana" : mana,
 		"camp" : camp,
+		"active_camps" : active_camps,
 		"stats": stats,
 		"inventory" : inventory.get_items()
 	}
@@ -308,6 +306,7 @@ func _ready() -> void:
 	tool_tip_node.visible = debug
 
 	update_max_resources.call_deferred()
+	after_load.call_deferred()
 
 	init_regen_timer(player_res.HEALTH, health_regen_wait_time, health_regen_time)
 	init_regen_timer(player_res.MANA, mana_regen_wait_time, mana_regen_time)
@@ -317,6 +316,14 @@ func _ready() -> void:
 		%InventoryMenu.inventory = inventory
 		action_wheel.inventory = inventory
 		inventory.items_changed.connect(items_changed)
+	print(active_camps)
+
+
+func after_load() -> void:
+	# This function is to do things after the node is loaded
+	for c: Camp in get_tree().get_nodes_in_group("Camp"):
+		if c.camp_name in active_camps:
+			c.activate()
 
 
 func update_max_resources() -> void:

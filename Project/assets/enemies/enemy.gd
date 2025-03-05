@@ -90,8 +90,7 @@ func actor_setup() -> void:
 	# Wait for the NavigationServer to sync.
 	if NavigationServer2D.get_maps().is_empty():
 		await NavigationServer2D.map_changed
-	await get_tree().physics_frame
-	await get_tree().physics_frame
+	await get_tree().process_frame
 	navmap_ready = true
 
 	# Now that the navigation map is no longer empty, set the movement target.

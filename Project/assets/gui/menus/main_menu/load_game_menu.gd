@@ -14,7 +14,6 @@ func _on_load_button_pressed() -> void:
 	NodeLoader.load_scene("res://game.tscn")
 
 
-
 func load_done(scene: PackedScene, status: ResourceLoader.ThreadLoadStatus) -> void:
 	if scene == null and status == ResourceLoader.THREAD_LOAD_FAILED:
 		printerr("Scene loading has been failed")

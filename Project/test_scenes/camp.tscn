@@ -45,13 +45,12 @@ size = Vector2(10, 10)
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xi5l2"]
 load_path = "res://.godot/imported/2d_lights_and_shadows_neutral_point_light.webp-75f08da48e77c418c0e4c68f7863b944.ctex"
 
-[node name="Camp" type="Area2D" groups=["Camp", "Persistent"]]
+[node name="Camp" type="Area2D" groups=["Camp"]]
 script = ExtResource("1_hw7vp")
 
 [node name="Anim" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qq5pc")
 autoplay = "default"
-frame_progress = 0.00016022
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

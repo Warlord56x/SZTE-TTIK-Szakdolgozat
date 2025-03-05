@@ -14,17 +14,6 @@ var in_camp: bool
 signal _interact(b: bool)
 
 
-func save() -> Dictionary:
-	return {
-		"filename": get_scene_file_path(),
-		"parent": get_parent().get_path(),
-		"position": position,
-		"active": active,
-		"anvil": anvil,
-		"camp_name": camp_name,
-	}
-
-
 func activate() -> void:
 	active = true
 
@@ -45,13 +34,17 @@ func interact(_player: Player = null) -> bool:
 	if not GameEnv.input_process:
 		return interactable
 	player = _player
+	player.camp = camp_name
+
+	if not active:
+		player.active_camps.append(camp_name)
 	activate()
 
-	player.camp = camp_name
 	in_camp = true
 	zoom(true, player.camera)
 	_interact.emit(true, self)
 	GameEnv.input_process = false
+
 	return interactable
 
 
