@@ -1,5 +1,5 @@
 extends Menu
-class_name BlacksmithMenu
+class_name CampMenus
 
 @onready var ingredient_container: ItemList = %IngredientContainer
 @onready var results_container: ItemList = %ResultsContainer
@@ -13,6 +13,11 @@ var recipe: Recipe = null
 
 var current_tab := 0:
 	set = set_tab
+
+
+func close() -> void:
+	super.close()
+	item_status.close()
 
 
 func set_tab(idx: int) -> void:
@@ -57,8 +62,8 @@ func update_list(index: int) -> void:
 	
 	var first_result: Ingredient  = recipe.result_item.front()
 	if first_result:
-		item_status.item = first_result.item
 		item_status.open()
+		item_status.item = first_result.item
 
 
 func _on_craft_pressed() -> void:

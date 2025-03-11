@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bko38t0dow60s" path="res://assets/gui/menus/menu.gd" id="2_kouvb"]
 [ext_resource type="Shader" uid="uid://c72gwv2qqo3o8" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_g52xf"]
 [ext_resource type="Script" uid="uid://c7a5noibqs2p7" path="res://assets/effects/effect_layer.gd" id="4_s1lth"]
-[ext_resource type="Script" uid="uid://c5n0gpae6oypk" path="res://test_scenes/UI/blacksmith_menu.gd" id="6_dx3ak"]
+[ext_resource type="Script" uid="uid://c5n0gpae6oypk" path="res://test_scenes/UI/camp_menus.gd" id="6_dx3ak"]
 [ext_resource type="Script" uid="uid://dcibavxbu8gw7" path="res://test_scenes/UI/travel.gd" id="7_diu0e"]
 [ext_resource type="Script" uid="uid://bhm5j8l7ojiao" path="res://test_scenes/UI/level_up.gd" id="7_evkrb"]
 [ext_resource type="PackedScene" uid="uid://c1fy87vwy6oos" path="res://test_scenes/stat_increase_spinner.tscn" id="7_n88r1"]
@@ -149,27 +149,27 @@ current_tab = 0
 clip_tabs = false
 use_hidden_tabs_for_min_size = true
 
-[node name="Craft" type="PanelContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer"]
+[node name="Blacksmith" type="PanelContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Blacksmith"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Blacksmith/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Recipes" type="VBoxContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer"]
+[node name="Recipes" type="VBoxContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Blacksmith/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Recipes" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Recipes"]
+[node name="Recipes" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Blacksmith/VBoxContainer/HBoxContainer/Recipes"]
 layout_mode = 2
 text = "Recipes"
 
-[node name="RecipeList" type="ItemList" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Recipes"]
+[node name="RecipeList" type="ItemList" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Blacksmith/VBoxContainer/HBoxContainer/Recipes"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -177,15 +177,15 @@ size_flags_vertical = 3
 auto_height = true
 fixed_icon_size = Vector2i(10, 10)
 
-[node name="Ingredients" type="VBoxContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer"]
+[node name="Ingredients" type="VBoxContainer" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Blacksmith/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Ingredients" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
+[node name="Ingredients" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Blacksmith/VBoxContainer/HBoxContainer/Ingredients"]
 layout_mode = 2
 text = "Ingredients"
 
-[node name="IngredientContainer" type="ItemList" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
+[node name="IngredientContainer" type="ItemList" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Blacksmith/VBoxContainer/HBoxContainer/Ingredients"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -193,11 +193,11 @@ focus_mode = 0
 auto_height = true
 fixed_icon_size = Vector2i(10, 10)
 
-[node name="Results" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
+[node name="Results" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Blacksmith/VBoxContainer/HBoxContainer/Ingredients"]
 layout_mode = 2
 text = "Results"
 
-[node name="ResultsContainer" type="ItemList" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
+[node name="ResultsContainer" type="ItemList" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Blacksmith/VBoxContainer/HBoxContainer/Ingredients"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -205,11 +205,11 @@ focus_mode = 0
 auto_height = true
 fixed_icon_size = Vector2i(10, 10)
 
-[node name="Craft" type="Button" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients"]
+[node name="Craft" type="Button" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Blacksmith/VBoxContainer/HBoxContainer/Ingredients"]
 layout_mode = 2
 text = "Craft"
 
-[node name="ErrorLabel" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer"]
+[node name="ErrorLabel" type="Label" parent="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Blacksmith/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "asd"
@@ -381,7 +381,7 @@ layout_mode = 2
 [connection signal="pressed" from="MarginContainer/MenuContainer/MainCampMenu/MarginContainer/CampMenu/Travel" to="." method="_on_travel_pressed"]
 [connection signal="visibility_changed" from="MarginContainer/MenuContainer/CampChildMenu" to="MarginContainer/MenuContainer/CampChildMenu" method="_on_visibility_changed"]
 [connection signal="tab_changed" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer" to="MarginContainer/MenuContainer/CampChildMenu" method="_on_tab_container_tab_changed"]
-[connection signal="pressed" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Craft/VBoxContainer/HBoxContainer/Ingredients/Craft" to="MarginContainer/MenuContainer/CampChildMenu" method="_on_craft_pressed"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer/Blacksmith/VBoxContainer/HBoxContainer/Ingredients/Craft" to="MarginContainer/MenuContainer/CampChildMenu" method="_on_craft_pressed"]
 [connection signal="visibility_changed" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp" to="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp" method="_on_visibility_changed"]
 [connection signal="next_stat_changed" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/CoreStatPanel/VBoxContainer/StatVitality" to="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp" method="_on_stat_vitality_next_stat_changed"]
 [connection signal="next_stat_changed" from="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp/VBoxContainer/CoreStatPanel/VBoxContainer/StatStrength" to="MarginContainer/MenuContainer/CampChildMenu/TabContainer/LevelUp" method="_on_stat_strength_next_stat_changed"]
