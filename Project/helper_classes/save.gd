@@ -32,7 +32,7 @@ func save_data(_data: SaveFile = data) -> void:
 
 func load_data() -> void:
 	data = ResourceLoader.load(_path)
-	at = FileAccess.get_modified_time(_path)
+	at = data.modified_at
 
 
 func get_saved_at() -> String:
