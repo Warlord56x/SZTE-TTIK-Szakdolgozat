@@ -80,9 +80,7 @@ func on_state_changed(from: State, to: String) -> void:
 		# Dispose of last state if exists
 		previous_state = current_state
 		current_state.active = false
-		
-		#Ignore the warning because the 'leave()' method can be async
-		@warning_ignore("redundant_await")
+
 		current_state.leave()
 		if debug and owner and from:
 			prints(owner.name,"left state:", from.name.to_lower())

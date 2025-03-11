@@ -1123,7 +1123,7 @@ _data = {
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_mhgmp"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nbwgx"]
-graph_offset = Vector2(-403, 35)
+graph_offset = Vector2(-569.064, 0)
 nodes/StateMachine/node = ExtResource("7_sdq1t")
 nodes/StateMachine/position = Vector2(-220, 100)
 nodes/speed/node = SubResource("AnimationNodeTimeScale_mhgmp")
