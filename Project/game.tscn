@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://uf631v4f4rfx"]
+[gd_scene load_steps=16 format=3 uid="uid://uf631v4f4rfx"]
 
 [ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://fonts/nin_font.png" id="2_qcju4"]
 [ext_resource type="PackedScene" uid="uid://b2qrpcmioix5b" path="res://assets/gui/menus/game_menu/game_menu.tscn" id="3_fxh5a"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://b25vye5etxi5" path="res://assets/enemies/swordsman/swordsman.tscn" id="9_80lmc"]
 [ext_resource type="PackedScene" uid="uid://cufofyqncxk0k" path="res://assets/enemies/bat/bat.tscn" id="9_e55gt"]
 [ext_resource type="PackedScene" uid="uid://diq8ndw4ll1rm" path="res://assets/player/player.tscn" id="9_rfqiq"]
-[ext_resource type="Material" uid="uid://b4q147v40j1vp" path="res://assets/effects/snow.tres" id="10_ole2b"]
 [ext_resource type="Script" uid="uid://brdrap8slu1m0" path="res://assets/gui/debug.gd" id="11_fah24"]
 [ext_resource type="Script" uid="uid://lgbvt2l0rb2w" path="res://world_bound.gd" id="13_ynwvk"]
 [ext_resource type="Script" uid="uid://vq0he5lv7pnh" path="res://debug/debug_inputs.gd" id="19_5t51q"]
@@ -109,14 +108,6 @@ position = Vector2(57, -79)
 
 [node name="Player" parent="." instance=ExtResource("9_rfqiq")]
 position = Vector2(25, -20)
-
-[node name="Snowfall" type="GPUParticles2D" parent="."]
-position = Vector2(997, -986)
-amount = 12000
-lifetime = 100.0
-preprocess = 80.0
-visibility_rect = Rect2(-429.035, -10.9836, 869.543, 667.246)
-process_material = ExtResource("10_ole2b")
 
 [node name="WorldBound" type="Area2D" parent="."]
 position = Vector2(0, 300)

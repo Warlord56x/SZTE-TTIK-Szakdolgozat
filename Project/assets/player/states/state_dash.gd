@@ -7,8 +7,10 @@ class_name StateDash
 
 
 func enter() -> void:
-	player.collision_mask = 8
-	player.collision_layer = 8
+	if player.has_node("HurtBox"):
+		player.get_node("HurtBox").set_deferred("monitoring", false)
+	#player.collision_mask = 8
+	#player.collision_layer = 8
 	player.anim_state_m.travel("dash")
 	player.anim_tree["parameters/speed/scale"] = 1
 	await get_tree().create_timer(0.2).timeout
@@ -22,7 +24,9 @@ func physics_process(_delta: float) -> void:
 
 
 func leave() -> void:
-	player.collision_mask = col_mask
-	player.collision_layer = col_layer
+	if player.has_node("HurtBox"):
+		player.get_node("HurtBox").set_deferred("monitoring", true)
+	#player.collision_mask = col_mask
+	#player.collision_layer = col_layer
 	player.dash_count += 1
 	player.stamina -= 2

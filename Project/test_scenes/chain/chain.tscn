@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://btay4il8iq3aa"]
+
+[ext_resource type="Script" uid="uid://bnclakkuudqiu" path="res://test_scenes/chain/chain.gd" id="1_dc3xv"]
+[ext_resource type="Texture2D" uid="uid://dufbdy81bhfap" path="res://nin_tiles.png" id="1_oxm72"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wwwdh"]
+radius = 4.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oxm72"]
+atlas = ExtResource("1_oxm72")
+region = Rect2(104, 40, 8, 8)
+filter_clip = true
+
+[node name="Chain" type="Node2D"]
+script = ExtResource("1_dc3xv")
+
+[node name="Base" type="StaticBody2D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Base"]
+shape = SubResource("CircleShape2D_wwwdh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Base"]
+texture = SubResource("AtlasTexture_oxm72")
+
+[node name="Segments" type="Node2D" parent="."]
+position = Vector2(0, 8)
