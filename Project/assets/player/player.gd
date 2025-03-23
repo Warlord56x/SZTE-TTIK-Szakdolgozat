@@ -316,7 +316,6 @@ func _ready() -> void:
 		%InventoryMenu.inventory = inventory
 		action_wheel.inventory = inventory
 		inventory.items_changed.connect(items_changed)
-	print(active_camps)
 
 
 func after_load() -> void:

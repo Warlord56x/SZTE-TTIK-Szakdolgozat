@@ -1,5 +1,5 @@
 extends State
-class_name StateEnemyKnockBack
+class_name StateEnemyKnockback
 
 @onready var enemy: Enemy = owner as Enemy
 

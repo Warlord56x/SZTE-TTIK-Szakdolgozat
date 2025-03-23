@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://uf631v4f4rfx"]
+[gd_scene load_steps=17 format=3 uid="uid://uf631v4f4rfx"]
 
 [ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://fonts/nin_font.png" id="2_qcju4"]
 [ext_resource type="PackedScene" uid="uid://b2qrpcmioix5b" path="res://assets/gui/menus/game_menu/game_menu.tscn" id="3_fxh5a"]
 [ext_resource type="PackedScene" uid="uid://b4tbr1nbwy7tb" path="res://test_scenes/UI/camp_menu.tscn" id="3_vtc0b"]
 [ext_resource type="Script" uid="uid://fb75h858o17" path="res://test_scenes/labeldebug.gd" id="4_d83g2"]
 [ext_resource type="PackedScene" uid="uid://n7valmjwtbx1" path="res://tile_map.tscn" id="7_lc2xo"]
+[ext_resource type="PackedScene" uid="uid://ccnvol1i0rgkn" path="res://assets/enemies/boss/boss.tscn" id="8_lc2xo"]
 [ext_resource type="PackedScene" uid="uid://b25vye5etxi5" path="res://assets/enemies/swordsman/swordsman.tscn" id="9_80lmc"]
 [ext_resource type="PackedScene" uid="uid://cufofyqncxk0k" path="res://assets/enemies/bat/bat.tscn" id="9_e55gt"]
 [ext_resource type="PackedScene" uid="uid://diq8ndw4ll1rm" path="res://assets/player/player.tscn" id="9_rfqiq"]
@@ -96,6 +97,9 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
 [node name="Enemies" type="Node" parent="."]
+
+[node name="Boss" parent="Enemies" instance=ExtResource("8_lc2xo")]
+position = Vector2(-313, 77)
 
 [node name="Swordsman" parent="Enemies" instance=ExtResource("9_80lmc")]
 position = Vector2(361, -7)
