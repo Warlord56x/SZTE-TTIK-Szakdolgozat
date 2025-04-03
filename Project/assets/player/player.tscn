@@ -1481,6 +1481,7 @@ sprite_frames = SubResource("SpriteFrames_ckq3n")
 visible = false
 collision_layer = 64
 collision_mask = 0
+input_pickable = false
 monitoring = false
 monitorable = false
 script = ExtResource("26_3ibsb")
@@ -1495,6 +1496,7 @@ shape = SubResource("RectangleShape2D_1us6n")
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("parent_ref")]
 collision_layer = 0
 collision_mask = 64
+input_pickable = false
 monitorable = false
 script = ExtResource("28_80a7v")
 parent_ref = NodePath("..")

@@ -17,7 +17,7 @@ func set_length(l: int) -> void:
 
 
 func update_chain() -> void:
-	if segments == null:
+	if segments == null or not segments.is_node_ready():
 		await ready
 	var children := segments.get_children()
 

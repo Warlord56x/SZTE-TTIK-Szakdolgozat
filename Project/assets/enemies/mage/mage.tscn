@@ -150,6 +150,8 @@ one_shot = true
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("parent_ref")]
 collision_layer = 0
 collision_mask = 64
+input_pickable = false
+monitorable = false
 script = ExtResource("9_uf5br")
 parent_ref = NodePath("..")
 ignore_enemy = true

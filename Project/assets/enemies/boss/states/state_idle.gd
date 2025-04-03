@@ -7,3 +7,8 @@ class_name StateBossIdle
 
 func enter() -> void:
 	(boss.sprite as AnimatedSprite2D).play("default")
+	boss.target = null
+
+
+func physics_process(_delta: float) -> void:
+	boss.move()

@@ -5,7 +5,7 @@ class_name Boss
 @onready var chase_timer := $ChaseTimer
 
 
-func physics_process(delta: float) -> void:
+func physics_process(_delta: float) -> void:
 	if velocity:
 		if target:
 			move_direction = sign(target.global_position.x - global_position.x)

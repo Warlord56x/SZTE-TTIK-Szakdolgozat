@@ -32,7 +32,7 @@ func hurtbox_entered(hitbox: Node2D) -> void:
 		hitbox.hit_callback.call()
 
 	if parent_ref.has_method("hurt"):
-		if parent_ref.state_machine:
+		if parent_ref.has_node("StateMachine"):
 			if parent_ref.state_machine.is_active("parry"):
 				hitbox.parent_ref.stun()
 				return
@@ -40,4 +40,6 @@ func hurtbox_entered(hitbox: Node2D) -> void:
 			if hitbox.sound_on_hit:
 				hitbox.sound_on_hit.play()
 			hurt.emit()
+		if not parent_ref.has_method("knock_back"):
+			return
 		parent_ref.knock_back(hitbox.parent_ref.global_position, hitbox.knock_back_strength)
