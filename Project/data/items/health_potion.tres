@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ConsumableItem" load_steps=5 format=3 uid="uid://blbhq7hm0wb8q"]
+
+[ext_resource type="Script" uid="uid://bq8p0g004fgy8" path="res://data/model/buffs/buff_health_regen.gd" id="1_fiukx"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://assets/nin_sprites.png" id="1_mlky0"]
+[ext_resource type="Script" uid="uid://ba3ix8ok433pf" path="res://data/model/item/consumable_item.gd" id="2_swgpg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8vdo"]
+atlas = ExtResource("1_mlky0")
+region = Rect2(40, 80, 10, 10)
+filter_clip = true
+
+[resource]
+script = ExtResource("2_swgpg")
+_effect = ExtResource("1_fiukx")
+effect_time = 5.0
+effect_interval = 1.0
+name = "Health Potion"
+icon = SubResource("AtlasTexture_t8vdo")
+description = "A potion that restores your health"
+stack = 1
+stack_size = 10
+cooldown = 5.1

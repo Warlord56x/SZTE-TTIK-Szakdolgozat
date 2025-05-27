@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://uvwfpidv7ujl"]
+
+[ext_resource type="Script" uid="uid://dq3hpje0wbkai" path="res://gui/bars/bar.gd" id="1_f24i2"]
+[ext_resource type="PackedScene" uid="uid://bjfjodjrs05d1" path="res://gui/hearts/heart_mana.tscn" id="2_io8ca"]
+
+[node name="BarMana" type="GridContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 10
+script = ExtResource("1_f24i2")
+heart = ExtResource("2_io8ca")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c02qudtqfyl0a"]
 
-[ext_resource type="Script" uid="uid://c683coswm0pys" path="res://assets/gui/menus/game_menu/settings_menu.gd" id="1_ty0iu"]
-[ext_resource type="PackedScene" uid="uid://dmk3l27wkrb82" path="res://assets/gui/menus/menu_elements/volume_slider.tscn" id="2_c3e3u"]
+[ext_resource type="Script" uid="uid://c683coswm0pys" path="res://gui/menus/game_menu/settings_menu.gd" id="1_ty0iu"]
+[ext_resource type="PackedScene" uid="uid://dmk3l27wkrb82" path="res://gui/menus/menu_elements/volume_slider.tscn" id="2_c3e3u"]
 [ext_resource type="Shader" uid="uid://c72gwv2qqo3o8" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_wtfp7"]
 [ext_resource type="Script" uid="uid://c7a5noibqs2p7" path="res://assets/effects/effect_layer.gd" id="4_qiejg"]
 

@@ -1,18 +1,18 @@
 [gd_scene load_steps=17 format=3 uid="uid://uf631v4f4rfx"]
 
-[ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://fonts/nin_font.png" id="2_qcju4"]
-[ext_resource type="PackedScene" uid="uid://b2qrpcmioix5b" path="res://assets/gui/menus/game_menu/game_menu.tscn" id="3_fxh5a"]
+[ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://assets/fonts/nin_font.png" id="2_qcju4"]
+[ext_resource type="PackedScene" uid="uid://b2qrpcmioix5b" path="res://gui/menus/game_menu/game_menu.tscn" id="3_fxh5a"]
 [ext_resource type="PackedScene" uid="uid://b4tbr1nbwy7tb" path="res://test_scenes/UI/camp_menu.tscn" id="3_vtc0b"]
 [ext_resource type="Script" uid="uid://fb75h858o17" path="res://test_scenes/labeldebug.gd" id="4_d83g2"]
-[ext_resource type="PackedScene" uid="uid://n7valmjwtbx1" path="res://tile_map.tscn" id="7_lc2xo"]
-[ext_resource type="PackedScene" uid="uid://ccnvol1i0rgkn" path="res://assets/enemies/boss/boss.tscn" id="8_lc2xo"]
-[ext_resource type="PackedScene" uid="uid://b25vye5etxi5" path="res://assets/enemies/swordsman/swordsman.tscn" id="9_80lmc"]
-[ext_resource type="PackedScene" uid="uid://cufofyqncxk0k" path="res://assets/enemies/bat/bat.tscn" id="9_e55gt"]
-[ext_resource type="PackedScene" uid="uid://diq8ndw4ll1rm" path="res://assets/player/player.tscn" id="9_rfqiq"]
-[ext_resource type="Script" uid="uid://brdrap8slu1m0" path="res://assets/gui/debug.gd" id="11_fah24"]
-[ext_resource type="Script" uid="uid://lgbvt2l0rb2w" path="res://world_bound.gd" id="13_ynwvk"]
+[ext_resource type="PackedScene" uid="uid://n7valmjwtbx1" path="res://map/tile_map.tscn" id="7_lc2xo"]
+[ext_resource type="PackedScene" uid="uid://ccnvol1i0rgkn" path="res://entities/enemies/boss/boss.tscn" id="8_lc2xo"]
+[ext_resource type="PackedScene" uid="uid://b25vye5etxi5" path="res://entities/enemies/swordsman/swordsman.tscn" id="9_80lmc"]
+[ext_resource type="PackedScene" uid="uid://cufofyqncxk0k" path="res://entities/enemies/bat/bat.tscn" id="9_e55gt"]
+[ext_resource type="PackedScene" uid="uid://diq8ndw4ll1rm" path="res://entities/player/player.tscn" id="9_rfqiq"]
+[ext_resource type="Script" uid="uid://brdrap8slu1m0" path="res://gui/debug.gd" id="11_fah24"]
+[ext_resource type="Script" uid="uid://lgbvt2l0rb2w" path="res://map/world_bound.gd" id="13_ynwvk"]
 [ext_resource type="Script" uid="uid://vq0he5lv7pnh" path="res://debug/debug_inputs.gd" id="19_5t51q"]
-[ext_resource type="PackedScene" uid="uid://d34pc2g4hgfyl" path="res://assets/enemies/mage/mage.tscn" id="23_kobi1"]
+[ext_resource type="PackedScene" uid="uid://d34pc2g4hgfyl" path="res://entities/enemies/mage/mage.tscn" id="23_kobi1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ed6on"]
 line_spacing = 0.0
@@ -93,7 +93,6 @@ color = Color(0, 0, 0, 1)
 [node name="TileMap" parent="." instance=ExtResource("7_lc2xo")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 

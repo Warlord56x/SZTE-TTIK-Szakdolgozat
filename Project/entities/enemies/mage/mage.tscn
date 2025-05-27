@@ -1,0 +1,163 @@
+[gd_scene load_steps=24 format=3 uid="uid://d34pc2g4hgfyl"]
+
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://assets/nin_sprites.png" id="1_ipxbu"]
+[ext_resource type="Script" uid="uid://bcsefrm2jyug0" path="res://entities/enemies/mage/mage.gd" id="1_w332w"]
+[ext_resource type="Resource" uid="uid://2nlg1ktbcmbt" path="res://data/items/fireball.tres" id="2_3au8k"]
+[ext_resource type="Script" uid="uid://b3le6uphdtjhr" path="res://data/model/stats/entity_stats.gd" id="2_68jwt"]
+[ext_resource type="Script" uid="uid://qvs8u77e2ysl" path="res://data/model/state_machine/state_machine.gd" id="3_2w5tj"]
+[ext_resource type="Script" uid="uid://dyishs5ffr1on" path="res://entities/enemies/mage/states/state_idle.gd" id="3_d63xr"]
+[ext_resource type="Script" uid="uid://23snaebldc06" path="res://entities/enemies/mage/states/state_combat.gd" id="5_3men6"]
+[ext_resource type="Script" uid="uid://dg3jcel0xoglx" path="res://entities/enemies/mage/states/state_fall.gd" id="6_plq2j"]
+[ext_resource type="Script" uid="uid://c7qkxr7lccwmy" path="res://entities/enemies/mage/states/state_chase.gd" id="6_y5woy"]
+[ext_resource type="Shader" uid="uid://rasm7isai8jl" path="res://assets/effects/shaders/blinker.gdshader" id="7_2a0m2"]
+[ext_resource type="Script" uid="uid://cmo2sh3hbcvve" path="res://data/model/helpers/hurtbox.gd" id="9_uf5br"]
+[ext_resource type="Script" uid="uid://cqs55okyqlc6y" path="res://entities/enemies/shared_states/state_eknock_back.gd" id="9_yccb5"]
+
+[sub_resource type="Resource" id="Resource_1rc8i"]
+script = ExtResource("2_68jwt")
+base_max_health = 10
+base_max_mana = 12
+base_max_stamina = 12
+level = 1
+vitality = 12
+strength = 10
+dexterity = 10
+intelligence = 14
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lruuv"]
+size = Vector2(8, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2tidv"]
+shader = ExtResource("7_2a0m2")
+shader_parameter/blend = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j10rx"]
+atlas = ExtResource("1_ipxbu")
+region = Rect2(90, 60, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjiig"]
+atlas = ExtResource("1_ipxbu")
+region = Rect2(110, 60, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1q0qm"]
+atlas = ExtResource("1_ipxbu")
+region = Rect2(90, 60, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nafqg"]
+atlas = ExtResource("1_ipxbu")
+region = Rect2(90, 60, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1nb3"]
+atlas = ExtResource("1_ipxbu")
+region = Rect2(100, 60, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gby2t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j10rx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjiig")
+}],
+"loop": false,
+"name": &"cast",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1q0qm")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nafqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1nb3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nafqg")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o8ani"]
+size = Vector2(100, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c5ksi"]
+size = Vector2(10, 10)
+
+[node name="Mage" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite") groups=["Respawnable"]]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_w332w")
+weapon_item = ExtResource("2_3au8k")
+state_machine = NodePath("StateMachine")
+navigation_agent = NodePath("NavigationAgent2D")
+sprite = NodePath("Sprite")
+limit_nav_axis = Vector2i(1, 0)
+stats = SubResource("Resource_1rc8i")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_2w5tj")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_d63xr")
+
+[node name="Combat" type="Node" parent="StateMachine"]
+script = ExtResource("5_3men6")
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("6_y5woy")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("6_plq2j")
+
+[node name="Knockback" type="Node" parent="StateMachine"]
+script = ExtResource("9_yccb5")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lruuv")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_2tidv")
+sprite_frames = SubResource("SpriteFrames_gby2t")
+autoplay = "default"
+
+[node name="DetectRange" type="Area2D" parent="."]
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
+shape = SubResource("RectangleShape2D_o8ani")
+
+[node name="AttackTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 1.8
+
+[node name="ChaseTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("parent_ref")]
+collision_layer = 0
+collision_mask = 64
+input_pickable = false
+monitorable = false
+script = ExtResource("9_uf5br")
+parent_ref = NodePath("..")
+ignore_enemy = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_c5ksi")
+
+[connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]
+[connection signal="body_exited" from="DetectRange" to="." method="_on_detect_range_body_exited"]

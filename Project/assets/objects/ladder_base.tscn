@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmmxtunn5b8xf"]
-
-[ext_resource type="PackedScene" uid="uid://dxhjvt705i3g8" path="res://assets/objects/_ladder.tscn" id="1_yujf4"]
-
-[node name="LadderBase" type="Node2D"]
-
-[node name="Ladder" parent="." instance=ExtResource("1_yujf4")]
-ladder_state = 2

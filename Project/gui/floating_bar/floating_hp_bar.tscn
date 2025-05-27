@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://0iac6qukikeg"]
+
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://assets/nin_sprites.png" id="1_2ij80"]
+[ext_resource type="Script" uid="uid://bvy1ul8ky1q4f" path="res://gui/floating_bar/floating_hp_bar.gd" id="1_hftse"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bjdt1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lw4cn"]
+atlas = ExtResource("1_2ij80")
+region = Rect2(21, 101, 8, 8)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xkd5"]
+atlas = ExtResource("1_2ij80")
+region = Rect2(11, 101, 8, 8)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_py4ih"]
+atlas = ExtResource("1_2ij80")
+region = Rect2(10, 110, 10, 10)
+filter_clip = true
+
+[node name="FloatingHpBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hftse")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+material = SubResource("ShaderMaterial_bjdt1")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.5
+offset_top = -4.0
+offset_right = 12.5
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 98.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+texture_under = SubResource("AtlasTexture_lw4cn")
+texture_progress = SubResource("AtlasTexture_5xkd5")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="TextureProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_py4ih")
+draw_center = false
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+axis_stretch_horizontal = 1
+
+[connection signal="value_changed" from="TextureProgressBar" to="." method="_on_texture_progress_bar_value_changed"]

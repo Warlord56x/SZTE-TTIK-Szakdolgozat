@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=44 format=3 uid="uid://cn3dpyixby5g5"]
 
-[ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://fonts/nin_font.png" id="1_3v1wf"]
+[ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://assets/fonts/nin_font.png" id="1_3v1wf"]
 [ext_resource type="Texture2D" uid="uid://uabqigxethmr" path="res://assets/theme/nin_ui.png" id="1_xb1kq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_diq83"]

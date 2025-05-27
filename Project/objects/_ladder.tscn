@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://dxhjvt705i3g8"]
+
+[ext_resource type="Script" uid="uid://cnuq13yvw8mge" path="res://objects/ladder.gd" id="1_uqkod"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://assets/nin_sprites.png" id="2_com3p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1va5"]
+atlas = ExtResource("2_com3p")
+region = Rect2(40, 50, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrbtu"]
+atlas = ExtResource("2_com3p")
+region = Rect2(40, 60, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68yrf"]
+atlas = ExtResource("2_com3p")
+region = Rect2(40, 70, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o1ho4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1va5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yrbtu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68yrf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fgu17"]
+size = Vector2(12, 10)
+
+[node name="Ladder" type="Area2D"]
+script = ExtResource("1_uqkod")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o1ho4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fgu17")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

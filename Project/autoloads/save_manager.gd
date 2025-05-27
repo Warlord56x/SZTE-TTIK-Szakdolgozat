@@ -1,6 +1,6 @@
 extends Node
 ## The Saves manager is a global singleton that helps manage saving and loading data.
-## Also it helps with changing to scenes and then loading/saving data.
+## It also helps with changing to scenes and then loading/saving data on them.
 
 const default_path := "user://saves/"
 
@@ -62,6 +62,7 @@ func load_game(slot: SaveSlot = current_slot) -> bool:
 	if slot != current_slot:
 		current_slot = slot
 
+	slot.saves[0].load_data()
 	var data = slot.saves[0].data.data
 	for node in nodes:
 		node.queue_free()

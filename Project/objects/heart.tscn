@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://dfwa6vext6tuf"]
+
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://assets/nin_sprites.png" id="1_2vegq"]
+[ext_resource type="Script" uid="uid://ds1ka5xn3nu1c" path="res://objects/heart.gd" id="1_cr6ka"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n2sxc"]
+size = Vector2(8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tmo2"]
+atlas = ExtResource("1_2vegq")
+region = Rect2(90, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcomb"]
+atlas = ExtResource("1_2vegq")
+region = Rect2(100, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23f63"]
+atlas = ExtResource("1_2vegq")
+region = Rect2(110, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kduf8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8tmo2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcomb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23f63")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="Heart" type="Area2D"]
+collision_layer = 0
+collision_mask = 9
+script = ExtResource("1_cr6ka")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_n2sxc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kduf8")
+autoplay = "default"
+frame_progress = 0.669108
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

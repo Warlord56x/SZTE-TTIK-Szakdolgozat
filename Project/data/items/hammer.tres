@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="MeleeWeaponItem" load_steps=8 format=3 uid="uid://7q383kvqnpb1"]
+
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://assets/nin_sprites.png" id="1_a245v"]
+[ext_resource type="Script" uid="uid://dq13monkhe8vq" path="res://data/model/scale.gd" id="2_a5gfl"]
+[ext_resource type="Script" uid="uid://lesuen4mjep5" path="res://data/model/item/melee_weapon_item.gd" id="2_h1mls"]
+[ext_resource type="Script" uid="uid://xv62oylkr6sf" path="res://data/model/item/item_stats.gd" id="3_x0lpk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o76ja"]
+atlas = ExtResource("1_a245v")
+region = Rect2(0, 10, 10, 10)
+filter_clip = true
+
+[sub_resource type="Resource" id="Resource_nvnxn"]
+script = ExtResource("2_a5gfl")
+vitality_scale = 40
+strength_scale = 140
+dexterity_scale = 25
+intelligence_scale = 0
+
+[sub_resource type="Resource" id="Resource_svsp1"]
+script = ExtResource("3_x0lpk")
+item_scale = SubResource("Resource_nvnxn")
+level = 1
+vitality = 10
+strength = 16
+dexterity = 11
+intelligence = 0
+
+[resource]
+script = ExtResource("2_h1mls")
+knock_back = 0.4
+damage = 7
+item_stats = SubResource("Resource_svsp1")
+name = "Hammer"
+icon = SubResource("AtlasTexture_o76ja")
+description = "A hammer. It's hammer time!"
+stack = 0
+stack_size = 0
+cooldown = 0.5

@@ -1,6 +1,6 @@
 extends PanelContainer
 
-const COIN := preload("res://assets/data/items/coin.tres")
+const COIN := preload("res://data/items/coin.tres")
 
 @onready var stat_vitality: StatIncreaseSpinner = %StatVitality
 @onready var stat_strength: StatIncreaseSpinner = %StatStrength

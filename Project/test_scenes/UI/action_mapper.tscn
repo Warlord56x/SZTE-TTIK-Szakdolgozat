@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dq3r6eq5kcrtt"]
 
 [ext_resource type="Script" uid="uid://u82sqpwghaib" path="res://test_scenes/UI/action_mapper.gd" id="1_bmg5c"]
-[ext_resource type="PackedScene" uid="uid://psxpi7w48ool" path="res://assets/gui/item_wheel/wheel_item.tscn" id="1_l1li4"]
+[ext_resource type="PackedScene" uid="uid://psxpi7w48ool" path="res://gui/item_wheel/wheel_item.tscn" id="1_l1li4"]
 
 [node name="ActionMapper" type="PanelContainer"]
 offset_right = 200.0

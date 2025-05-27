@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bakgosfbeq37h"]
+
+[ext_resource type="Script" uid="uid://dq3hpje0wbkai" path="res://gui/bars/bar.gd" id="1_minie"]
+[ext_resource type="PackedScene" uid="uid://dhihbcv2grl0l" path="res://gui/hearts/heart_stamina.tscn" id="2_scd6c"]
+
+[node name="BarStamina" type="GridContainer"]
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 10
+script = ExtResource("1_minie")
+heart = ExtResource("2_scd6c")

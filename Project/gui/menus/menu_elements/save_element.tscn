@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3x4vqllq1yty"]
+
+[ext_resource type="Script" uid="uid://bxqcrk3otq5xo" path="res://gui/menus/menu_elements/save_element.gd" id="1_pct7a"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c5nnq"]
+size = Vector2(32, 32)
+
+[sub_resource type="LabelSettings" id="LabelSettings_m8nks"]
+line_spacing = 0.0
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_0a6em"]
+line_spacing = 0.0
+font_size = 8
+
+[node name="SaveElement" type="PanelContainer"]
+offset_right = 92.0
+offset_bottom = 66.0
+script = ExtResource("1_pct7a")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ScreenShot" type="TextureRect" parent="MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("PlaceholderTexture2D_c5nnq")
+stretch_mode = 2
+
+[node name="TimeLabel" type="Label" parent="MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "2024.12.31"
+label_settings = SubResource("LabelSettings_m8nks")
+horizontal_alignment = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = SubResource("LabelSettings_0a6em")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

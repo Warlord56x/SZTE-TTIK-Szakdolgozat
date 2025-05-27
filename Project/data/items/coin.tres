@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="MiscItem" load_steps=8 format=3 uid="uid://dwjomx0pywg1n"]
+
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://assets/nin_sprites.png" id="1_1rbfy"]
+[ext_resource type="Script" uid="uid://bcp8g816d3dym" path="res://data/model/item/misc_item.gd" id="1_3itp5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbtdf"]
+atlas = ExtResource("1_1rbfy")
+region = Rect2(60, 0, 10, 10)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ra5ud"]
+atlas = ExtResource("1_1rbfy")
+region = Rect2(60, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqduu"]
+atlas = ExtResource("1_1rbfy")
+region = Rect2(70, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_22d1i"]
+atlas = ExtResource("1_1rbfy")
+region = Rect2(80, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s64gc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ra5ud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqduu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_22d1i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_3itp5")
+name = "Coin"
+icon = SubResource("AtlasTexture_rbtdf")
+description = "A coin."
+stack = 1
+stack_size = 9999
+cooldown = 0.0
+pickup_animation = SubResource("SpriteFrames_s64gc")

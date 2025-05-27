@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=9 format=3 uid="uid://cf1lqboh1xibm"]
+
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://assets/nin_sprites.png" id="1_hbtdg"]
+[ext_resource type="Script" uid="uid://dcmo4di2vbwm3" path="res://data/model/crafting/ingredient.gd" id="1_hifbc"]
+[ext_resource type="Script" uid="uid://cj86xckuywyyt" path="res://data/model/crafting/recipe.gd" id="2_auf0b"]
+[ext_resource type="Resource" uid="uid://dwjomx0pywg1n" path="res://data/items/coin.tres" id="3_um0or"]
+[ext_resource type="Resource" uid="uid://2nlg1ktbcmbt" path="res://data/items/fireball.tres" id="4_1rk22"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2rvq"]
+atlas = ExtResource("1_hbtdg")
+region = Rect2(0, 50, 10, 10)
+filter_clip = true
+
+[sub_resource type="Resource" id="Resource_ojhip"]
+script = ExtResource("1_hifbc")
+item = ExtResource("3_um0or")
+amount = 5
+
+[sub_resource type="Resource" id="Resource_65lcb"]
+script = ExtResource("1_hifbc")
+item = ExtResource("4_1rk22")
+amount = 1
+
+[resource]
+script = ExtResource("2_auf0b")
+name = "Fireball"
+icon = SubResource("AtlasTexture_w2rvq")
+required_items = Array[ExtResource("1_hifbc")]([SubResource("Resource_ojhip")])
+result_item = Array[ExtResource("1_hifbc")]([SubResource("Resource_65lcb")])

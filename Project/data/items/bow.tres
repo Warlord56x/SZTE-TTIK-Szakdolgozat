@@ -1,0 +1,68 @@
+[gd_resource type="Resource" script_class="RangedWeaponItem" load_steps=12 format=3 uid="uid://hd2muhlnrdsc"]
+
+[ext_resource type="Script" uid="uid://j4itge3rmsos" path="res://data/model/item/ranged_weapon_item.gd" id="1_b384f"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://assets/nin_sprites.png" id="1_owxrb"]
+[ext_resource type="Script" uid="uid://xv62oylkr6sf" path="res://data/model/item/item_stats.gd" id="2_6xn1k"]
+[ext_resource type="Script" uid="uid://dq13monkhe8vq" path="res://data/model/scale.gd" id="2_nqua5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ul4yj"]
+atlas = ExtResource("1_owxrb")
+region = Rect2(10, 50, 10, 10)
+filter_clip = true
+
+[sub_resource type="Resource" id="Resource_in6qh"]
+script = ExtResource("2_nqua5")
+vitality_scale = 0
+strength_scale = 40
+dexterity_scale = 90
+intelligence_scale = 0
+
+[sub_resource type="Resource" id="Resource_nhwru"]
+script = ExtResource("2_6xn1k")
+item_scale = SubResource("Resource_in6qh")
+level = 1
+vitality = 0
+strength = 11
+dexterity = 15
+intelligence = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kg7uv"]
+atlas = ExtResource("1_owxrb")
+region = Rect2(60, 60, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dq4oa"]
+atlas = ExtResource("1_owxrb")
+region = Rect2(70, 60, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0w1u"]
+atlas = ExtResource("1_owxrb")
+region = Rect2(80, 60, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jxb45"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kg7uv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dq4oa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0w1u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_b384f")
+damage = 5
+item_stats = SubResource("Resource_nhwru")
+name = "Bow"
+icon = SubResource("AtlasTexture_ul4yj")
+description = "It's a plain and simple bow."
+stack = 1
+stack_size = 20
+cooldown = 0.2
+pickup_animation = SubResource("SpriteFrames_jxb45")

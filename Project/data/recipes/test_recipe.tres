@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=8 format=3 uid="uid://dt7crhvm1gahw"]
+
+[ext_resource type="Script" uid="uid://cj86xckuywyyt" path="res://data/model/crafting/recipe.gd" id="1_1gd8f"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://assets/nin_sprites.png" id="1_g4abd"]
+[ext_resource type="Script" uid="uid://dcmo4di2vbwm3" path="res://data/model/crafting/ingredient.gd" id="2_444f5"]
+[ext_resource type="Resource" uid="uid://dwjomx0pywg1n" path="res://data/items/coin.tres" id="3_ofalp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6iaep"]
+atlas = ExtResource("1_g4abd")
+region = Rect2(40, 90, 10, 10)
+filter_clip = true
+
+[sub_resource type="Resource" id="Resource_lgsot"]
+script = ExtResource("2_444f5")
+item = ExtResource("3_ofalp")
+amount = 1
+
+[sub_resource type="Resource" id="Resource_jyv4p"]
+script = ExtResource("2_444f5")
+item = ExtResource("3_ofalp")
+amount = 20
+
+[resource]
+script = ExtResource("1_1gd8f")
+name = "Double"
+icon = SubResource("AtlasTexture_6iaep")
+required_items = Array[ExtResource("2_444f5")]([SubResource("Resource_lgsot")])
+result_item = Array[ExtResource("2_444f5")]([SubResource("Resource_jyv4p")])

@@ -1,0 +1,179 @@
+[gd_scene load_steps=25 format=3 uid="uid://ccnvol1i0rgkn"]
+
+[ext_resource type="Script" uid="uid://c3jw3vhj8b8fq" path="res://entities/enemies/boss/boss.gd" id="1_g5xe5"]
+[ext_resource type="Texture2D" uid="uid://c2agx2i7n80im" path="res://assets/nin_boss.png" id="1_r4bb6"]
+[ext_resource type="Script" uid="uid://b3le6uphdtjhr" path="res://data/model/stats/entity_stats.gd" id="2_3wpr4"]
+[ext_resource type="Resource" uid="uid://b6iewkldjgof1" path="res://data/items/sword.tres" id="2_rpn4w"]
+[ext_resource type="Script" uid="uid://qvs8u77e2ysl" path="res://data/model/state_machine/state_machine.gd" id="3_1cn55"]
+[ext_resource type="Shader" uid="uid://rasm7isai8jl" path="res://assets/effects/shaders/blinker.gdshader" id="4_ri647"]
+[ext_resource type="Script" uid="uid://bqmverdksbmyy" path="res://entities/enemies/boss/states/state_idle.gd" id="6_j5ri0"]
+[ext_resource type="Script" uid="uid://cqs55okyqlc6y" path="res://entities/enemies/shared_states/state_eknock_back.gd" id="6_uuojr"]
+[ext_resource type="Script" uid="uid://ca58epif0uhpi" path="res://entities/enemies/boss/states/state_chase.gd" id="8_8jyj3"]
+[ext_resource type="Script" uid="uid://cjfcf2q3lekt4" path="res://data/model/helpers/hitbox.gd" id="9_5ew54"]
+[ext_resource type="Script" uid="uid://cmo2sh3hbcvve" path="res://data/model/helpers/hurtbox.gd" id="10_ri647"]
+
+[sub_resource type="Resource" id="Resource_rpn4w"]
+script = ExtResource("2_3wpr4")
+base_max_health = 20
+base_max_mana = 12
+base_max_stamina = 12
+level = 30
+vitality = 30
+strength = 30
+dexterity = 30
+intelligence = 30
+metadata/_custom_type_script = "uid://b3le6uphdtjhr"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8csyq"]
+shader = ExtResource("4_ri647")
+shader_parameter/blend = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5xe5"]
+atlas = ExtResource("1_r4bb6")
+region = Rect2(0, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1cn55"]
+atlas = ExtResource("1_r4bb6")
+region = Rect2(24, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wpr4"]
+atlas = ExtResource("1_r4bb6")
+region = Rect2(48, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpn4w"]
+atlas = ExtResource("1_r4bb6")
+region = Rect2(72, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uuojr"]
+atlas = ExtResource("1_r4bb6")
+region = Rect2(0, 32, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5ri0"]
+atlas = ExtResource("1_r4bb6")
+region = Rect2(24, 32, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jyj3"]
+atlas = ExtResource("1_r4bb6")
+region = Rect2(48, 32, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6f25"]
+atlas = ExtResource("1_r4bb6")
+region = Rect2(72, 32, 24, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ew54"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5xe5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1cn55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wpr4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpn4w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uuojr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5ri0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jyj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6f25")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8csyq"]
+height = 35.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8jyj3"]
+radius = 32.0
+
+[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite")]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_g5xe5")
+weapon_item = ExtResource("2_rpn4w")
+state_machine = NodePath("StateMachine")
+navigation_agent = NodePath("NavAgent")
+sprite = NodePath("AnimatedSprite2D")
+movement_speed = 30.0
+stats = SubResource("Resource_rpn4w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_8csyq")
+sprite_frames = SubResource("SpriteFrames_5ew54")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_8csyq")
+
+[node name="NavAgent" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_1cn55")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://qvs8u77e2ysl"
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("6_j5ri0")
+metadata/_custom_type_script = "uid://bu4uuimjwcbhr"
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("8_8jyj3")
+metadata/_custom_type_script = "uid://bu4uuimjwcbhr"
+
+[node name="Knockback" type="Node" parent="StateMachine"]
+script = ExtResource("6_uuojr")
+metadata/_custom_type_script = "uid://cqs55okyqlc6y"
+
+[node name="DetectRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
+shape = SubResource("CircleShape2D_8jyj3")
+
+[node name="ChaseTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("parent_ref")]
+collision_layer = 64
+collision_mask = 0
+input_pickable = false
+monitoring = false
+script = ExtResource("9_5ew54")
+parent_ref = NodePath("..")
+metadata/_custom_type_script = "uid://cjfcf2q3lekt4"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_8csyq")
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("parent_ref")]
+collision_layer = 0
+collision_mask = 64
+input_pickable = false
+monitorable = false
+script = ExtResource("10_ri647")
+parent_ref = NodePath("..")
+ignore_enemy = true
+metadata/_custom_type_script = "uid://cmo2sh3hbcvve"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CapsuleShape2D_8csyq")
+
+[connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]
