@@ -8,5 +8,14 @@ class_name ChainJoint
 @export var end: bool = false:
 	set(e):
 		end = e
-		end_node.visible = e
-		default.visible = !e
+		vis(e)
+
+
+func vis(v: bool) -> void:
+	if not default or not end_node:
+		return
+	if !default.is_node_ready() or !end_node.is_node_ready():
+		await end_node.ready
+		await default.ready
+	end_node.visible = v
+	default.visible = !v

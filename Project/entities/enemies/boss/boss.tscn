@@ -103,7 +103,7 @@ height = 35.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_8jyj3"]
 radius = 32.0
 
-[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite")]
+[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite", "hurtbox", "hitbox")]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_g5xe5")
@@ -113,6 +113,8 @@ navigation_agent = NodePath("NavAgent")
 sprite = NodePath("AnimatedSprite2D")
 movement_speed = 30.0
 stats = SubResource("Resource_rpn4w")
+hurtbox = NodePath("HurtBox")
+hitbox = NodePath("Hitbox")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_8csyq")

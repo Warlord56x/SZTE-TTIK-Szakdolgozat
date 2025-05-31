@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://bya7v0widd40m"]
 
 [ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://assets/nin_sprites.png" id="1_hc7k2"]
-[ext_resource type="Script" uid="uid://dcn5kju2rc5wr" path="res://objects/chest.gd" id="1_wvjik"]
+[ext_resource type="Script" uid="uid://dcn5kju2rc5wr" path="res://objects/interactive/chest.gd" id="1_wvjik"]
 [ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://assets/fonts/nin_font.png" id="3_fuvln"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgeat"]

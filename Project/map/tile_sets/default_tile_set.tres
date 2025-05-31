@@ -1,8 +1,8 @@
 [gd_resource type="TileSet" load_steps=29 format=3 uid="uid://3qx3dvf66s68"]
 
 [ext_resource type="Texture2D" uid="uid://dufbdy81bhfap" path="res://assets/nin_tiles.png" id="1_0tyon"]
-[ext_resource type="PackedScene" uid="uid://bbyw8sy2nr4wl" path="res://objects/braizier.tscn" id="2_r8b3c"]
-[ext_resource type="PackedScene" uid="uid://bya7v0widd40m" path="res://objects/chest.tscn" id="3_qrhnp"]
+[ext_resource type="PackedScene" uid="uid://bbyw8sy2nr4wl" path="res://objects/interactive/braizier.tscn" id="2_r8b3c"]
+[ext_resource type="PackedScene" uid="uid://bya7v0widd40m" path="res://objects/interactive/chest.tscn" id="3_qrhnp"]
 [ext_resource type="PackedScene" uid="uid://ds24204v1omvp" path="res://objects/trap.tscn" id="4_k5j0x"]
 [ext_resource type="PackedScene" uid="uid://dfwa6vext6tuf" path="res://objects/heart.tscn" id="5_1huxs"]
 [ext_resource type="PackedScene" uid="uid://cd1nb61y8aiy" path="res://objects/cherry.tscn" id="6_ec2me"]
@@ -10,9 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://cix80xwd8d26l" path="res://objects/flag.tscn" id="8_rrmsb"]
 [ext_resource type="PackedScene" uid="uid://bxrjnblnsb0de" path="res://objects/create.tscn" id="9_1aowp"]
 [ext_resource type="PackedScene" uid="uid://h47sebfygmui" path="res://objects/barrel.tscn" id="10_a6tww"]
-[ext_resource type="PackedScene" uid="uid://dld435xtba8em" path="res://objects/ladder.tscn" id="11_3y36k"]
-[ext_resource type="PackedScene" uid="uid://nm700l5u165" path="res://objects/ladder_top.tscn" id="12_v8wui"]
-[ext_resource type="PackedScene" uid="uid://cmmxtunn5b8xf" path="res://objects/ladder_base.tscn" id="13_kdyv8"]
+[ext_resource type="PackedScene" uid="uid://dld435xtba8em" path="res://objects/ladder/ladder.tscn" id="11_3y36k"]
+[ext_resource type="PackedScene" uid="uid://nm700l5u165" path="res://objects/ladder/ladder_top.tscn" id="12_v8wui"]
+[ext_resource type="PackedScene" uid="uid://cmmxtunn5b8xf" path="res://objects/ladder/ladder_base.tscn" id="13_kdyv8"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_53ddb"]
 polygon = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)

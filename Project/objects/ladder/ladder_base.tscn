@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cmmxtunn5b8xf"]
 
-[ext_resource type="PackedScene" uid="uid://dxhjvt705i3g8" path="res://objects/_ladder.tscn" id="1_yujf4"]
+[ext_resource type="PackedScene" uid="uid://dxhjvt705i3g8" path="res://objects/ladder/_ladder.tscn" id="1_yujf4"]
 
 [node name="LadderBase" type="Node2D"]
 

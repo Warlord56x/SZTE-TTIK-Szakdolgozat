@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://nm700l5u165"]
 
-[ext_resource type="PackedScene" uid="uid://dxhjvt705i3g8" path="res://objects/_ladder.tscn" id="1_4ol02"]
+[ext_resource type="PackedScene" uid="uid://dxhjvt705i3g8" path="res://objects/ladder/_ladder.tscn" id="1_4ol02"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3egd8"]
 size = Vector2(10, 1)
