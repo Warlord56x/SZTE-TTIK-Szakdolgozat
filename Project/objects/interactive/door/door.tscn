@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq7msy2140ix4"]
+
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://assets/nin_sprites.png" id="1_exvej"]
+[ext_resource type="Script" uid="uid://o00ofr86s0ld" path="res://objects/interactive/door/door.gd" id="1_wl6p7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ulb8m"]
+size = Vector2(8, 16)
+
+[node name="Door" type="Node2D"]
+script = ExtResource("1_wl6p7")
+metadata/_edit_group_ = true
+
+[node name="DoorBody" type="AnimatableBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="DoorBody"]
+position = Vector2(0, 4.76837e-07)
+scale = Vector2(1, 1.8)
+texture = ExtResource("1_exvej")
+region_enabled = true
+region_rect = Rect2(50, 60, 10, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorBody"]
+shape = SubResource("RectangleShape2D_ulb8m")

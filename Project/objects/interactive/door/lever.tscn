@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://crmgulodo3wko"]
+
+[ext_resource type="Script" uid="uid://wavyyi8gfqiy" path="res://objects/interactive/interaction_area.gd" id="2_unin4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p3bwk"]
+size = Vector2(8, 8)
+
+[node name="Lever" type="Node2D"]
+
+[node name="InteractionArea" type="Area2D" parent="."]
+script = ExtResource("2_unin4")
+metadata/_custom_type_script = "uid://wavyyi8gfqiy"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("RectangleShape2D_p3bwk")
