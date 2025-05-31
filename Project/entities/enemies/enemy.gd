@@ -89,9 +89,9 @@ func _ready() -> void:
 	floating_hp_bar.effect = true
 
 	for ch in get_children():
-		if ch is Hitbox:
+		if ch is Hitbox and not hitbox:
 			hitbox = ch
-		if ch is Hurtbox:
+		if ch is Hurtbox and not hurtbox:
 			hurtbox = ch
 	if not hurtbox:
 		print("%s should have a hurtbox (currently: %)" % [name, hurtbox])

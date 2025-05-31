@@ -32,6 +32,8 @@ func add_item(item: Item) -> bool:
 
 func set_items(array: Array[Item]) -> void:
 	_items = array
+	for it: Item in array:
+		items_changed.emit(it)
 
 
 func remove_item(item: Item) -> void:
