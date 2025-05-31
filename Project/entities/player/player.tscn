@@ -1467,6 +1467,7 @@ wait_time = 0.1
 energy = 0.5
 range_layer_min = -1
 texture = ExtResource("21_jh63l")
+texture_scale = 0.7
 
 [node name="WeaponPivot" type="Node2D" parent="."]
 unique_name_in_owner = true

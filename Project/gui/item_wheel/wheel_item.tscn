@@ -46,6 +46,7 @@ offset_right = 24.0
 offset_bottom = 28.0
 text = "999"
 label_settings = SubResource("LabelSettings_0o5if")
+horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="Panel" type="Panel" parent="Label"]
