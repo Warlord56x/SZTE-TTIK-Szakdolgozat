@@ -15,15 +15,17 @@ class_name Door
 @export var opening_count: int = 1
 var current_opening: int = 0
 
-var is_open: bool = false
+## Is the door open, should not be modified externally
+var _is_open: bool = false
+
 
 ## Handles opening the door.
 func open() -> void:
-	if is_open:
+	if _is_open:
 		return
 	current_opening += 1
 	if current_opening >= opening_count:
-		is_open = true
+		_is_open = true
 		create_tween().tween_property(
 			door_body,
 			"global_position:y",
@@ -31,11 +33,12 @@ func open() -> void:
 			open_time
 			)
 
+
 ## Handles closing the door.
 func close() -> void:
-	if not is_open:
+	if not _is_open:
 		return
-	is_open = false
+	_is_open = false
 	create_tween().tween_property(
 		door_body,
 		"global_position:y",
@@ -43,9 +46,10 @@ func close() -> void:
 		open_time
 		)
 
+
 ## Handles the door in a flip-flop manner.
 func switch() -> void:
-	if is_open:
+	if _is_open:
 		close()
 	else:
 		open()

@@ -1,15 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://crmgulodo3wko"]
+[gd_scene load_steps=4 format=3 uid="uid://crmgulodo3wko"]
 
-[ext_resource type="Script" uid="uid://wavyyi8gfqiy" path="res://objects/interactive/interaction_area.gd" id="2_unin4"]
+[ext_resource type="Script" uid="uid://15j1tfvyr8yp" path="res://objects/interactive/door/lever.gd" id="1_jdsho"]
+[ext_resource type="Texture2D" uid="uid://bt44fw0pdh16x" path="res://assets/nin_sprites.png" id="2_e00su"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p3bwk"]
 size = Vector2(8, 8)
 
-[node name="Lever" type="Node2D"]
-
-[node name="InteractionArea" type="Area2D" parent="."]
-script = ExtResource("2_unin4")
+[node name="Lever" type="Area2D"]
+script = ExtResource("1_jdsho")
 metadata/_custom_type_script = "uid://wavyyi8gfqiy"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_p3bwk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_e00su")
+region_enabled = true
+region_rect = Rect2(50, 50, 10, 10)
