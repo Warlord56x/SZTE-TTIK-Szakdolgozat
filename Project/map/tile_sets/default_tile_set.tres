@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=29 format=3 uid="uid://3qx3dvf66s68"]
+[gd_resource type="TileSet" load_steps=30 format=3 uid="uid://3qx3dvf66s68"]
 
 [ext_resource type="Texture2D" uid="uid://dufbdy81bhfap" path="res://assets/nin_tiles.png" id="1_0tyon"]
 [ext_resource type="PackedScene" uid="uid://bbyw8sy2nr4wl" path="res://objects/interactive/braizier.tscn" id="2_r8b3c"]
@@ -13,6 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://dld435xtba8em" path="res://objects/ladder/ladder.tscn" id="11_3y36k"]
 [ext_resource type="PackedScene" uid="uid://nm700l5u165" path="res://objects/ladder/ladder_top.tscn" id="12_v8wui"]
 [ext_resource type="PackedScene" uid="uid://cmmxtunn5b8xf" path="res://objects/ladder/ladder_base.tscn" id="13_kdyv8"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_hybx3"]
+vertices = PackedVector2Array(4, 4, -4, 4, -4, -4, 4, -4)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)])
+agent_radius = 0.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_53ddb"]
 polygon = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
@@ -54,6 +60,7 @@ polygon = PackedVector2Array(-4, -4, 4, -4, 4, -2, -4, -2)
 texture = ExtResource("1_0tyon")
 texture_region_size = Vector2i(8, 8)
 0:0/0 = 0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_hybx3")
 1:0/0 = 0
 1:0/0/terrain_set = 0
 1:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_7d3wc")
