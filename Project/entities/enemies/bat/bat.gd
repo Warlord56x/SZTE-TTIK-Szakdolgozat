@@ -18,6 +18,5 @@ func _on_detect_range_body_entered(body : Node2D) -> void:
 
 func _on_detect_range_body_exited(body: Node2D) -> void:
 	if body is Player and ai:
-		target = null
-		print(chase_timer, chase_timer.time_left)
-		chase_timer.start()
+		if chase_timer.is_inside_tree():
+			chase_timer.start()

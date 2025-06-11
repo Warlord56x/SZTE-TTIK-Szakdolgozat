@@ -22,8 +22,9 @@ strength = 10
 dexterity = 10
 intelligence = 10
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k2xn2"]
-size = Vector2(2, 2)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_frm5i"]
+radius = 3.0
+height = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_frm5i"]
 radius = 74.0
@@ -57,7 +58,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtclc"]
 size = Vector2(8, 7)
 
-[node name="Bat" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite") groups=["Respawnable"]]
+[node name="Bat" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite", "hurtbox", "hitbox") groups=["Respawnable"]]
 collision_layer = 4
 collision_mask = 2
 motion_mode = 1
@@ -66,9 +67,10 @@ state_machine = NodePath("StateMachine")
 navigation_agent = NodePath("NavigationAgent2D")
 sprite = NodePath("AnimatedSprite2D")
 movement_speed = 60.0
-debug = true
 damage = 3
 stats = SubResource("Resource_syucu")
+hurtbox = NodePath("HurtBox")
+hitbox = NodePath("Hitbox")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_hmb65")
@@ -88,9 +90,10 @@ gravity = false
 path_desired_distance = 10.0
 target_desired_distance = 5.0
 path_postprocessing = 1
+debug_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_k2xn2")
+shape = SubResource("CapsuleShape2D_frm5i")
 
 [node name="DetectRange" type="Area2D" parent="."]
 
