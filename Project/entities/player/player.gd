@@ -300,10 +300,6 @@ func save() -> Dictionary:
 	}
 
 
-func init() -> void:
-	inventory.items_changed.connect(items_changed)
-
-
 func _ready() -> void:
 	if global_position == Vector2.ZERO:
 		global_position = DEFAULT_SPAWN_POINT
@@ -316,6 +312,7 @@ func _ready() -> void:
 	init_regen_timer(player_res.MANA, mana_regen_wait_time, mana_regen_time)
 	init_regen_timer(player_res.STAMINA, stamina_regen_wait_time, stamina_regen_time)
 
+	inventory.items_changed.connect(items_changed)
 	%InventoryMenu.inventory = inventory
 	action_wheel.inventory = inventory
 
@@ -351,7 +348,6 @@ func update_max_resources() -> void:
 func items_changed(item: Item) -> void:
 	if not item:
 		return
-	print(item)
 	if item.name.to_lower() == "coin":
 		_coins.value = item.stack
 

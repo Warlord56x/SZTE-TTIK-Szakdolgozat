@@ -2,6 +2,7 @@ extends State
 class_name StateEnemyKnockback
 
 @onready var enemy: Enemy = owner as Enemy
+@export var gravity: bool = true
 
 var pushback_force: Vector2
 
@@ -16,11 +17,13 @@ func enter() -> void:
 
 func physics_process(delta: float) -> void:
 	enemy.velocity += pushback_force
-	enemy.velocity.y += enemy.gravity * delta
+	if gravity:
+		enemy.velocity.y += enemy.gravity * delta
+	else:
+		enemy.velocity.y = move_toward(enemy.velocity.y, 0, 10)
 	enemy.velocity.x = move_toward(enemy.velocity.x, 0, 10)
-
 	enemy.move_and_slide()
 
 
 func leave() -> void:
-	pass
+	print("left the knockback")

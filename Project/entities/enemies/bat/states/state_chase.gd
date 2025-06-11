@@ -11,8 +11,7 @@ func _ready() -> void:
 
 
 func enter() -> void:
-	if chase_timer.is_inside_tree():
-		chase_timer.start()
+	pass
 
 
 func chase_finished() -> void:

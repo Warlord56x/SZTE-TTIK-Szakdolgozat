@@ -90,8 +90,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v36c8"]
-size = Vector2(100, 100)
+[sub_resource type="CircleShape2D" id="CircleShape2D_cc66o"]
+radius = 74.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_17m7r"]
 size = Vector2(10, 12)
@@ -341,7 +341,7 @@ animation = &"hit"
 collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
-shape = SubResource("RectangleShape2D_v36c8")
+shape = SubResource("CircleShape2D_cc66o")
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("parent_ref")]
 collision_layer = 0

@@ -101,7 +101,7 @@ animations = [{
 height = 35.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8jyj3"]
-radius = 32.0
+radius = 74.0
 
 [node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite", "hurtbox", "hitbox")]
 collision_layer = 4

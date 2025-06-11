@@ -66,8 +66,7 @@ func on_back(from: State) -> void:
 
 func on_state_changed(from: State, to: String) -> void:
 	if from != current_state:
-		printerr(from.name," ", current_state.name)
-		printerr("The state is not active! can't travel")
+		printerr("The state: '{0}' is not active! can't travel to '{1}'".format([from.name, current_state.name]))
 		return
 
 	var to_state: State = get_state(to.to_lower())

@@ -93,6 +93,7 @@ color = Color(0, 0, 0, 1)
 [node name="TileMap" parent="." instance=ExtResource("7_lc2xo")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
@@ -123,5 +124,3 @@ script = ExtResource("13_ynwvk")
 shape = SubResource("WorldBoundaryShape2D_is7xv")
 
 [connection signal="body_entered" from="WorldBound" to="WorldBound" method="_on_body_entered"]
-
-[editable path="TileMap"]
