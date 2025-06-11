@@ -214,9 +214,9 @@ func knock_back(source_position: Vector2, intensity: float = 1.0) -> bool:
 	pushback_force.y = min_jump_velocity * intensity
 	pushback_force.x *= movement_speed
 	#pushback_force *= Vector2(limit_nav_axis)
-	if state_machine.current_state == state_machine.get_state("Knockback"):
+	if state_machine.current_state == state_machine.get_state("knockback"):
 		return true
-	state_machine.travel("Knockback")
+	state_machine.travel("knockback")
 	return true
 
 

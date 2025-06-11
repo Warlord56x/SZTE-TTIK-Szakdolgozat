@@ -65,6 +65,7 @@ script = ExtResource("1_t6ry7")
 state_machine = NodePath("StateMachine")
 navigation_agent = NodePath("NavigationAgent2D")
 sprite = NodePath("AnimatedSprite2D")
+movement_speed = 60.0
 debug = true
 damage = 3
 stats = SubResource("Resource_syucu")

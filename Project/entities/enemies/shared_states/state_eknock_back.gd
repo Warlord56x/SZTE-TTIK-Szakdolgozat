@@ -26,4 +26,4 @@ func physics_process(delta: float) -> void:
 
 
 func leave() -> void:
-	print("left the knockback")
+	pass

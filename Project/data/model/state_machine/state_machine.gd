@@ -30,6 +30,8 @@ func travel(state: String) -> void:
 
 
 func back() -> void:
+	if current_state == previous_state:
+		current_state.travel(initial_state.name)
 	current_state.travel(previous_state.name)
 
 
@@ -61,6 +63,9 @@ func is_active(state: String) -> bool:
 
 
 func on_back(from: State) -> void:
+	if from == previous_state:
+		print("works, but not what I need")
+		from.travel(initial_state.name)
 	on_state_changed(from, previous_state.name)
 
 
