@@ -78,7 +78,7 @@ func get_damage() -> int:
 
 
 func _ready() -> void:
-	actor_setup.call_deferred()
+	agent_setup.call_deferred()
 	tool_tip_node.visible = debug
 	initial_pos = global_position
 
@@ -97,7 +97,7 @@ func _ready() -> void:
 		print("%s should have a hurtbox (currently: %)" % [name, hurtbox])
 
 
-func actor_setup() -> void:
+func agent_setup() -> void:
 	# Wait for the NavigationServer to sync.
 	if NavigationServer2D.get_maps().is_empty():
 		await NavigationServer2D.map_changed
