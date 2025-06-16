@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=43 format=3 uid="uid://cn3dpyixby5g5"]
+[gd_resource type="Theme" load_steps=44 format=3 uid="uid://cn3dpyixby5g5"]
 
 [ext_resource type="Texture2D" uid="uid://uabqigxethmr" path="res://assets/theme/nin_ui.png" id="1_xb1kq"]
+[ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://assets/fonts/nin_font.png" id="2_nf1nj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_diq83"]
 content_margin_left = 6.0
@@ -343,6 +344,7 @@ corner_radius_bottom_left = 3
 anti_aliasing = false
 
 [resource]
+default_font = ExtResource("2_nf1nj")
 default_font_size = 6
 Button/styles/disabled = SubResource("StyleBoxFlat_diq83")
 Button/styles/focus = SubResource("StyleBoxFlat_2cq75")
