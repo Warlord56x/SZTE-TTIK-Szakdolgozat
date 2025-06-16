@@ -6,6 +6,11 @@ var name: String = ""
 var saves: Array[Save] = []
 var at: int
 
+var corruption: float = 0
+
+var has_corrupt: bool = false
+var all_corrupt: bool = false
+
 
 func _init(_name: String) -> void:
 	if not DirAccess.dir_exists_absolute(SaveManager.default_path + _name):
@@ -19,6 +24,18 @@ func _init(_name: String) -> void:
 	for save: Save in saves:
 		if save.at > at:
 			at = save.at
+
+
+## Delete all the [Save]s in the [param saves] array and the folder.
+## Removes itself from the [SaveManager]
+func delete() -> void:
+	for save: Save in saves:
+		save.delete()
+	DirAccess.remove_absolute(SaveManager.default_path + name)
+	if self == SaveManager.current_slot:
+		SaveManager.current_slot = null
+	if self in SaveManager.save_slots:
+		SaveManager.save_slots.erase(self)
 
 
 ## Gets the first [Save] in the [param saves] array.
@@ -65,14 +82,36 @@ func _get_saves() -> Array[Save]:
 
 	if dir:
 		for file_name: String in dir.get_files():
-			if ".tres" in file_name and "NINSAVE" in file_name:
+			var naming := ".tres" in file_name and "NINSAVE" in file_name
+			var default_name := file_name == "default_new_game.tres"
+			if naming or default_name:
 				var _save := Save.new(file_name, self)
+				if _save.is_corrupt:
+					has_corrupt = true
 				_saves.append(_save)
+		if has_corrupt:
+			var _corruption := 0.0
+			for save: Save in _saves:
+				if save.is_corrupt:
+					_corruption += 1.0
+			all_corrupt = _corruption == len(_saves)
+			corruption = _corruption / len(_saves) * 100.0
 	else:
 		print("An error occurred when trying to access the path.")
 
 	_saves.sort_custom(time_sort)
 	return _saves
+
+
+func _to_string() -> String:
+	var st := ""
+	st += "Class: " + get_class() + "\n" 
+	st += "Slot name: " + name + "\n"
+	st += "Saves count: " + str(len(saves)) + "\n"
+	st += "Has corrupt: " + str(has_corrupt) + "\n"
+	st += "Corruption (%): " + str(corruption) + "%\n"
+	st += "Saved at: " + get_saved_at() + "\n"
+	return st
 
 
 ## Sort saves based on save date

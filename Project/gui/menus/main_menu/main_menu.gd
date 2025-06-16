@@ -1,4 +1,5 @@
 extends Control
+class_name MainMenu
 
 const GAME_SCENE := "res://game.tscn"
 
@@ -24,6 +25,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _ready() -> void:
 	continue_button.disabled = SaveManager.save_slots.is_empty()
+	if SaveManager.current_slot:
+		continue_button.disabled = SaveManager.current_slot.saves.is_empty()
+		continue_button.disabled = SaveManager.current_slot.all_corrupt
 
 
 func _on_continue_button_pressed() -> void:

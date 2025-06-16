@@ -54,10 +54,12 @@ func _on_create_play_pressed() -> void:
 	NodeLoader.load_scene(GAME_SCENE)
 
 
-func load_done(scene: PackedScene, status: ResourceLoader.ThreadLoadStatus) -> void:
+func load_done(scene_str: String, status: ResourceLoader.ThreadLoadStatus) -> void:
+	var scene = ResourceLoader.load_threaded_get(scene_str)
 	if scene == null and status == ResourceLoader.THREAD_LOAD_FAILED:
 		printerr("Scene loading has failed")
 		return
+	
 	if scene.resource_path == GAME_SCENE:
 		SaveManager.change_to_new_game(scene, new_slot_name)
 	GameEnv.fade_out("Loading...")

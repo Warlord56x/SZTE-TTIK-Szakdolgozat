@@ -5,6 +5,7 @@ var data: SaveFile = null
 var at: int = 0
 var screen_shot: Texture2D = null
 var name: String = ""
+var is_corrupt: bool = false
 
 var _path: String = ""
 
@@ -16,8 +17,17 @@ func _init(_name: String, _slot: SaveSlot, _data: SaveFile = null) -> void:
 	slot = _slot
 	data = _data
 	_path = SaveManager.default_path + "{0}/{1}".format([slot.name, name])
-	if FileAccess.file_exists(_path):
+
+	var file_exists := FileAccess.file_exists(_path)
+	var res_exists := ResourceLoader.exists(_path)
+
+	if file_exists and res_exists:
+		for dependency in ResourceLoader.get_dependencies(_path):
+			if not ResourceLoader.exists(dependency.get_slice("::", 2)):
+				is_corrupt = true
 		load_data()
+	elif file_exists:
+		is_corrupt = true
 	else:
 		save_data()
 
@@ -31,6 +41,8 @@ func save_data(_data: SaveFile = data) -> void:
 
 
 func load_data() -> void:
+	if is_corrupt:
+		return
 	data = ResourceLoader.load(_path)
 	at = data.modified_at
 
