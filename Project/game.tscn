@@ -109,10 +109,10 @@ position = Vector2(361, -7)
 position = Vector2(98, -5)
 
 [node name="Bat" parent="Enemies" instance=ExtResource("9_e55gt")]
-position = Vector2(57, -79)
+position = Vector2(92, -96)
 
 [node name="Player" parent="." instance=ExtResource("9_rfqiq")]
-position = Vector2(25, -20)
+position = Vector2(13, -21)
 
 [node name="WorldBound" type="Area2D" parent="."]
 position = Vector2(0, 300)

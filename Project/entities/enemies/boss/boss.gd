@@ -2,7 +2,6 @@ extends Enemy
 class_name Boss
 
 @onready var boss: Boss = owner as Boss
-@onready var chase_timer := $ChaseTimer
 @onready var boss_zone: BossZone = $BossZone
 @onready var nav_agent: NavigationAgent2D = $NavAgent
 @onready var boss_weapon: BossWeaponScene = $BossWeapon
@@ -11,18 +10,32 @@ class_name Boss
 func _ready() -> void:
 	super._ready()
 	boss_zone.global_position = global_position
+	boss_zone.set_up_zone(0, health)
+	random_zone_position()
+
+
+func set_health(hp: int) -> void:
+	super.set_health(hp)
+	boss_zone.update_hp_progress(hp)
+
+
+func random_point_in_circle(center: Vector2, radius: float) -> Vector2:
+	var theta = randf_range(0.0, TAU)
+	var r = radius * sqrt(randf())
+	var x = center.x + r * cos(theta)
+	var y = center.y + r * sin(theta)
+	return Vector2(x, y)
 
 
 func random_zone_position() -> Vector2:
 	randomize()
 
-	var rand_x := randf_range(-100, 99)
-	var rand_y := randf_range(-100, 99)
-	var rand_vec := Vector2(rand_x, rand_y)
+	var max_distance_x := boss_zone.get_rect().size.x / 2
+	var max_distance_y := boss_zone.get_rect().size.y / 2
 
-	if not boss_zone.get_rect().has_point(rand_vec):
-		printerr("Point is not inside the zone!")
-	return rand_vec
+	var radius: float = max(max_distance_x, max_distance_y)
+
+	return boss_zone.global_position + random_point_in_circle(Vector2(0,0), radius)
 
 
 func physics_process(_delta: float) -> void:
@@ -35,13 +48,10 @@ func physics_process(_delta: float) -> void:
 	sprite.flip_h = move_direction < 0
 
 
-func _on_detect_range_body_entered(body : Node2D) -> void:
-	if body is Player and ai:
-		target = body
-		state_machine.travel("Combat")
+func detection_exited(body) -> void:
+	if body == possible_target:
+		possible_target = null
 
-
-func _on_detect_range_body_exited(body: Node2D) -> void:
 	if body is Player and ai:
-		target = null
+		possible_target = null
 		state_machine.travel("Idle")

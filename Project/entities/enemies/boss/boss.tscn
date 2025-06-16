@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ccnvol1i0rgkn"]
+[gd_scene load_steps=37 format=3 uid="uid://ccnvol1i0rgkn"]
 
 [ext_resource type="Script" uid="uid://c3jw3vhj8b8fq" path="res://entities/enemies/boss/boss.gd" id="1_g5xe5"]
 [ext_resource type="Texture2D" uid="uid://c2agx2i7n80im" path="res://assets/nin_boss.png" id="1_r4bb6"]
@@ -9,7 +9,6 @@
 [ext_resource type="Shader" uid="uid://rasm7isai8jl" path="res://assets/effects/shaders/blinker.gdshader" id="4_ri647"]
 [ext_resource type="Script" uid="uid://bqmverdksbmyy" path="res://entities/enemies/boss/states/state_idle.gd" id="6_j5ri0"]
 [ext_resource type="Script" uid="uid://cqs55okyqlc6y" path="res://entities/enemies/shared_states/state_eknock_back.gd" id="6_uuojr"]
-[ext_resource type="Script" uid="uid://ca58epif0uhpi" path="res://entities/enemies/boss/states/state_chase.gd" id="8_8jyj3"]
 [ext_resource type="Script" uid="uid://dlcw0jewtqktm" path="res://entities/enemies/boss/states/state_combat.gd" id="8_qvujr"]
 [ext_resource type="Script" uid="uid://cjfcf2q3lekt4" path="res://data/model/helpers/hitbox.gd" id="9_5ew54"]
 [ext_resource type="Script" uid="uid://cmo2sh3hbcvve" path="res://data/model/helpers/hurtbox.gd" id="10_ri647"]
@@ -30,6 +29,38 @@ metadata/_custom_type_script = "uid://b3le6uphdtjhr"
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8csyq"]
 shader = ExtResource("4_ri647")
 shader_parameter/blend = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvujr"]
+atlas = ExtResource("1_r4bb6")
+region = Rect2(0, 64, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptatw"]
+atlas = ExtResource("1_r4bb6")
+region = Rect2(24, 64, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmhca"]
+atlas = ExtResource("1_r4bb6")
+region = Rect2(48, 64, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obb5p"]
+atlas = ExtResource("1_r4bb6")
+region = Rect2(72, 64, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_woyg1"]
+atlas = ExtResource("1_r4bb6")
+region = Rect2(0, 96, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgpxg"]
+atlas = ExtResource("1_r4bb6")
+region = Rect2(24, 96, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncffa"]
+atlas = ExtResource("1_r4bb6")
+region = Rect2(48, 96, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvmq7"]
+atlas = ExtResource("1_r4bb6")
+region = Rect2(72, 96, 24, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g5xe5"]
 atlas = ExtResource("1_r4bb6")
@@ -65,6 +96,40 @@ region = Rect2(72, 32, 24, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5ew54"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvujr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptatw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmhca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obb5p")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_woyg1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgpxg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncffa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvmq7")
+}],
+"loop": true,
+"name": &"attack_move",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g5xe5")
@@ -121,16 +186,17 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite", "hurtbox", "hitbox")]
+[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "detect_range", "travel_on_detect", "sprite", "hurtbox", "hitbox")]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_g5xe5")
 weapon_item = ExtResource("2_rpn4w")
 state_machine = NodePath("StateMachine")
 navigation_agent = NodePath("NavAgent")
+detect_range = NodePath("BossZone")
+travel_on_detect = NodePath("StateMachine/Combat")
 sprite = NodePath("AnimatedSprite2D")
 movement_speed = 30.0
-debug = true
 stats = SubResource("Resource_rpn4w")
 hurtbox = NodePath("HurtBox")
 hitbox = NodePath("BossWeapon/WeaponAnimations/Hitbox")
@@ -162,10 +228,6 @@ metadata/_custom_type_script = "uid://bu4uuimjwcbhr"
 script = ExtResource("8_qvujr")
 metadata/_custom_type_script = "uid://bu4uuimjwcbhr"
 
-[node name="Chase" type="Node" parent="StateMachine"]
-script = ExtResource("8_8jyj3")
-metadata/_custom_type_script = "uid://bu4uuimjwcbhr"
-
 [node name="Knockback" type="Node" parent="StateMachine"]
 script = ExtResource("6_uuojr")
 metadata/_custom_type_script = "uid://cqs55okyqlc6y"
@@ -174,10 +236,6 @@ metadata/_custom_type_script = "uid://cqs55okyqlc6y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
 shape = SubResource("CircleShape2D_8jyj3")
-
-[node name="ChaseTimer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("parent_ref")]
 collision_layer = 0
@@ -210,6 +268,3 @@ metadata/_custom_type_script = "uid://cjfcf2q3lekt4"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="BossWeapon/WeaponAnimations/Hitbox"]
 shape = SubResource("CapsuleShape2D_8csyq")
-
-[connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]
-[connection signal="body_exited" from="DetectRange" to="." method="_on_detect_range_body_exited"]

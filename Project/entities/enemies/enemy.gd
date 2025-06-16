@@ -11,6 +11,9 @@ const FLOATING_HP_BAR := preload("res://gui/floating_bar/floating_hp_bar.tscn")
 @export var weapon_item: WeaponItem
 @export var state_machine: StateMachine
 @export var navigation_agent: NavigationAgent2D
+@export var detect_range: Area2D
+@export var travel_on_detect: State
+@export var chase_timer: Timer
 @export var sprite: Node2D
 @export var movement_speed: float = 70
 @export var limit_nav_axis: Vector2i = Vector2i.ONE
@@ -32,9 +35,11 @@ var pushback_force: Vector2:
 		value += Vector2.ONE
 		pushback_force = value
 
+var possible_target: Player
 var target: Player
 var tool_tip_node: DebugInfo = DEBUG_TIP.instantiate()
 var floating_hp_bar: FloatingHpBar = FLOATING_HP_BAR.instantiate()
+var raycast: RayCast2D = RayCast2D.new()
 var invincible: bool = false
 var navmap_ready: bool = false
 @export var stats: EntityStats:
@@ -61,6 +66,8 @@ func set_health(h: int) -> void:
 		death()
 
 
+## Sets the stat object on the enemy.
+## Updates [FloatingHpBar].
 func set_stats(sts: EntityStats) -> void:
 	stats = sts
 	if not is_node_ready():
@@ -70,6 +77,7 @@ func set_stats(sts: EntityStats) -> void:
 	floating_hp_bar.value = stats.max_health
 
 
+## returns the weapons damage, or the default enemy damage if a weapon is not provided
 func get_damage() -> int:
 	if weapon_item:
 		return weapon_item.calc_damage(stats)
@@ -96,7 +104,14 @@ func _ready() -> void:
 	if not hurtbox:
 		print("%s should have a hurtbox (currently: %)" % [name, hurtbox])
 
+	add_child(raycast)
+	if detect_range:
+		detect_range.body_entered.connect(detection_entered)
+		detect_range.body_exited.connect(detection_exited)
 
+
+## Called defered to avoid bottlenecking the main thread.
+## Ensures that the [NavigationAgent2D] is ready to be used
 func agent_setup() -> void:
 	# Wait for the NavigationServer to sync.
 	if NavigationServer2D.get_maps().is_empty():
@@ -109,6 +124,7 @@ func agent_setup() -> void:
 	set_movement_target(initial_pos)
 
 
+## Moves the enemy to the last known movement target.
 func move() -> void:
 	if not navmap_ready:
 		return
@@ -133,6 +149,7 @@ func move() -> void:
 			velocity.y = move_toward(velocity.y, 0, movement_speed)
 
 
+## Sets the [NavigationAgent2D]s target position to [param movement_target]
 func set_movement_target(movement_target: Vector2):
 	navigation_agent.target_position = movement_target
 
@@ -155,9 +172,18 @@ func _process(_delta : float) -> void:
 			)
 
 
+## Default physics operations
 func _physics_process(delta: float) -> void:
 	if velocity:
 		move_direction = sign(velocity.x)
+
+	if possible_target:
+		raycast.target_position = to_local(possible_target.global_position)
+		raycast.force_raycast_update()
+		if raycast.get_collider() == possible_target:
+			target = possible_target
+			if state_machine.current_state != travel_on_detect:
+				state_machine.travel(travel_on_detect.name)
 
 	physics_process(delta)
 	velocity += pushback_force
@@ -166,15 +192,39 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-# This function should be overloaded instead of the regular one
+## This function should be overloaded instead of the regular one
 func physics_process(_delta: float) -> void:
 	pass
 
 
+## Active when the enemy is getting attacked
+## Will make the enemy flash in white
 func blinker(val: float) -> void:
 	(sprite.material as ShaderMaterial).set_shader_parameter("blend", val)
 
 
+## The default behavior for when the player enters the detection area.
+func detection_entered(body) -> void:
+	if state_machine.has_state("stun") and state_machine.is_active("stun"):
+		return
+
+	if body is Player and ai:
+		possible_target = body
+
+
+## The default behavior for when the player leaves the detection area.
+## (Usually stars the chase timer).
+func detection_exited(body) -> void:
+	if state_machine.has_state("stun") and state_machine.is_active("stun"):
+		return
+	if body == possible_target:
+		possible_target = null
+	if body is Player and ai:
+		state_machine.travel("Chase")
+
+
+## Function that is called when the enemy is hurt.
+## (When it's [Hurtbox] detects that a [Hitbox] is contacted)
 func hurt(e_damage: int, dealer: Node2D = null) -> bool:
 	if hurtbox:
 		hurtbox.set_deferred("monitoring", false)
@@ -208,6 +258,8 @@ func hurt(e_damage: int, dealer: Node2D = null) -> bool:
 	return true
 
 
+## [param source_position] is from where the target is getting knocked back.
+## [param intensity] is the amount of knockback.
 func knock_back(source_position: Vector2, intensity: float = 1.0) -> bool:
 
 	pushback_force = -global_position.direction_to(source_position) * intensity
@@ -220,6 +272,7 @@ func knock_back(source_position: Vector2, intensity: float = 1.0) -> bool:
 	return true
 
 
+## if a [BuffComponent] is present adds a new stun debuff to stop the enemy.
 func stun() -> void:
 	var buff_component = get_node_or_null("BuffComponent")
 	if buff_component:
@@ -228,14 +281,17 @@ func stun() -> void:
 		buff_component.add_child(stun_buff)
 
 
+## Restores the blinker to stop flashing
 func blinker_timeout() -> void:
 	blinker(0.0)
 
 
+## Sets the hurtbox back to it's default state usually after an attack
 func invincibility_timeout() -> void:
 	hurtbox.set_deferred("monitoring", true)
 
 
+## Frees the object, adds animations and registers the object for respawn
 func death() -> void:
 	var _death = DEATH_SCENE_TEST.instantiate()
 	_death.global_position = global_position

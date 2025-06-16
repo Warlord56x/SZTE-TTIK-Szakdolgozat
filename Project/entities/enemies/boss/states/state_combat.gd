@@ -2,6 +2,7 @@ extends State
 class_name StateBossCombat
 
 @onready var boss: Boss = owner as Boss
+@onready var boss_animation = boss.sprite as AnimatedSprite2D
 @onready var bossWeapon := boss.boss_weapon
 @onready var move_timer := Timer.new()
 
@@ -14,6 +15,17 @@ func _ready() -> void:
 
 func enter() -> void:
 	move_timer.start()
+	boss_animation.play("attack")
+
+
+func physics_process(_delta: float) -> void:
+	if abs(boss.velocity.length()) > 0.001 and not boss.is_on_floor():
+		if (boss.sprite as AnimatedSprite2D).animation != "attack_move":
+			boss_animation.play("attack_move")
+	else:
+		if (boss.sprite as AnimatedSprite2D).animation != "attack":
+			boss_animation.play("attack")
+	boss.move()
 
 
 func random_move() -> void:

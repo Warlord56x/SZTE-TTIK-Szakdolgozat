@@ -93,16 +93,20 @@ radius = 74.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c5ksi"]
 size = Vector2(10, 10)
 
-[node name="Mage" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite") groups=["Respawnable"]]
+[node name="Mage" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "detect_range", "travel_on_detect", "chase_timer", "sprite", "hurtbox") groups=["Respawnable"]]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_w332w")
 weapon_item = ExtResource("2_3au8k")
 state_machine = NodePath("StateMachine")
 navigation_agent = NodePath("NavigationAgent2D")
+detect_range = NodePath("DetectRange")
+travel_on_detect = NodePath("StateMachine/Combat")
+chase_timer = NodePath("ChaseTimer")
 sprite = NodePath("Sprite")
 limit_nav_axis = Vector2i(1, 0)
 stats = SubResource("Resource_1rc8i")
+hurtbox = NodePath("HurtBox")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_2w5tj")
@@ -158,6 +162,3 @@ ignore_enemy = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_c5ksi")
-
-[connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]
-[connection signal="body_exited" from="DetectRange" to="." method="_on_detect_range_body_exited"]

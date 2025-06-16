@@ -31,6 +31,7 @@ offset_left = -69.0
 offset_right = 69.0
 offset_bottom = 6.0
 grow_horizontal = 2
+show_percentage = false
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

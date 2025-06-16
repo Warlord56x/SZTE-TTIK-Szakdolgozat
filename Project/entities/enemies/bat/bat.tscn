@@ -58,15 +58,19 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtclc"]
 size = Vector2(8, 7)
 
-[node name="Bat" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "sprite", "hurtbox", "hitbox") groups=["Respawnable"]]
+[node name="Bat" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "navigation_agent", "detect_range", "travel_on_detect", "chase_timer", "sprite", "hurtbox", "hitbox") groups=["Respawnable"]]
 collision_layer = 4
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_t6ry7")
 state_machine = NodePath("StateMachine")
 navigation_agent = NodePath("NavigationAgent2D")
+detect_range = NodePath("DetectRange")
+travel_on_detect = NodePath("StateMachine/Chase")
+chase_timer = NodePath("ChaseTimer")
 sprite = NodePath("AnimatedSprite2D")
 movement_speed = 60.0
+debug = true
 damage = 3
 stats = SubResource("Resource_syucu")
 hurtbox = NodePath("HurtBox")
@@ -136,6 +140,3 @@ knock_back_strength = 0.6
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_vtclc")
-
-[connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]
-[connection signal="body_exited" from="DetectRange" to="." method="_on_detect_range_body_exited"]
