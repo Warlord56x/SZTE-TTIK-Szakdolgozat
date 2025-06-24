@@ -1,5 +1,13 @@
+@tool
 extends Area2D
 class_name BossZone
+
+
+@export var zone: Shape2D:
+	set(z):
+		zone = z
+		if col_shape:
+			col_shape.shape = z
 
 
 @onready var canvas_layer: CanvasLayer = $CanvasLayer

@@ -19,10 +19,10 @@ func enter() -> void:
 
 
 func physics_process(_delta: float) -> void:
-	if abs(boss.velocity.length()) > 0.001 and not boss.is_on_floor():
+	if abs(boss.velocity.length()) > 0.001:
 		if (boss.sprite as AnimatedSprite2D).animation != "attack_move":
 			boss_animation.play("attack_move")
-	else:
+	elif boss.is_on_floor():
 		if (boss.sprite as AnimatedSprite2D).animation != "attack":
 			boss_animation.play("attack")
 	boss.move()

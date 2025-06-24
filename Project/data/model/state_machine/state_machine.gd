@@ -63,9 +63,9 @@ func is_active(state: String) -> bool:
 
 
 func on_back(from: State) -> void:
-	if from == previous_state:
-		print("works, but not what I need")
-		from.travel(initial_state.name)
+	#if from == previous_state:
+		#print("works, but not what I need")
+		#travel(initial_state.name)
 	on_state_changed(from, previous_state.name)
 
 

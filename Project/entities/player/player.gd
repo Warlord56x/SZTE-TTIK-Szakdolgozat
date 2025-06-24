@@ -345,8 +345,25 @@ func update_max_resources() -> void:
 	stamina = stats.max_stamina
 
 
+func drop() -> void:
+	var coins := inventory.get_item_by_name("coin")
+	if not coins:
+		return
+
+	var _drop := DROP.instantiate()
+
+	_drop.top_level = true
+	_drop.item = coins
+	inventory.remove_item(coins, true)
+	_drop.global_position = global_position + Vector2(0, -15)
+	add_child(_drop)
+
+
 func items_changed(item: Item) -> void:
 	if not item:
+		return
+	if inventory.find_item(item) == -1:
+		_coins.value = 0
 		return
 	if item.name.to_lower() == "coin":
 		_coins.value = item.stack

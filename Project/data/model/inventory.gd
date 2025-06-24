@@ -17,7 +17,7 @@ func add_item(item: Item) -> bool:
 
 	if _item:
 		if _item.stack_size != _item.stack:
-			_item.stack += 1
+			_item.stack += item.stack
 		else:
 			return false
 	else:
@@ -36,12 +36,12 @@ func set_items(array: Array[Item]) -> void:
 		items_changed.emit(it)
 
 
-func remove_item(item: Item) -> void:
+func remove_item(item: Item, all: bool = false) -> void:
 	var it := find_item(item)
 	var _item = get_item(it)
 
 	if _item:
-		if _item.stack_size > 0:
+		if _item.stack_size > 0 and not all:
 			get_item(it).stack -= 1
 		else:
 			_items.remove_at(it)
@@ -72,6 +72,17 @@ func get_item(index: int) -> Item:
 	if index >= _items.size() or index < 0:
 		return null
 	return _items[index]
+
+
+func get_item_by_name(n: String) -> Item:
+	if n.strip_edges().is_empty():
+		return null
+	for it: int in len(_items):
+		if not _items[it]:
+			continue
+		if _items[it].name.to_lower() == n.to_lower():
+			return _items[it]
+	return null
 
 
 func get_items() -> Array[Item]:

@@ -182,13 +182,15 @@ func _physics_process(delta: float) -> void:
 		raycast.force_raycast_update()
 		if raycast.get_collider() == possible_target:
 			target = possible_target
-			if state_machine.current_state != travel_on_detect:
+			if state_machine.current_state.name.to_lower() == "idle":
 				state_machine.travel(travel_on_detect.name)
+				print("stucking")
 
 	physics_process(delta)
 	velocity += pushback_force
 
 	pushback_force = pushback_force.lerp(Vector2.ZERO, 0.5)
+
 	move_and_slide()
 
 

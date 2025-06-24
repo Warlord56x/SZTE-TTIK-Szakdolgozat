@@ -26,6 +26,9 @@ dexterity = 30
 intelligence = 30
 metadata/_custom_type_script = "uid://b3le6uphdtjhr"
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qvujr"]
+radius = 150.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8csyq"]
 shader = ExtResource("4_ri647")
 shader_parameter/blend = 0.0
@@ -168,9 +171,6 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8csyq"]
 height = 35.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8jyj3"]
-radius = 74.0
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_7xj2h"]
 atlas = ExtResource("1_r4bb6")
 region = Rect2(112, 0, 16, 32)
@@ -203,10 +203,12 @@ hitbox = NodePath("BossWeapon/WeaponAnimations/Hitbox")
 
 [node name="BossZone" parent="." instance=ExtResource("4_ptatw")]
 top_level = true
+zone = SubResource("CircleShape2D_qvujr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_8csyq")
 sprite_frames = SubResource("SpriteFrames_5ew54")
+animation = &"attack_move"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -218,6 +220,7 @@ path_postprocessing = 1
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_1cn55")
 initial_state = NodePath("Idle")
+debug = true
 metadata/_custom_type_script = "uid://qvs8u77e2ysl"
 
 [node name="Idle" type="Node" parent="StateMachine"]
@@ -231,11 +234,6 @@ metadata/_custom_type_script = "uid://bu4uuimjwcbhr"
 [node name="Knockback" type="Node" parent="StateMachine"]
 script = ExtResource("6_uuojr")
 metadata/_custom_type_script = "uid://cqs55okyqlc6y"
-
-[node name="DetectRange" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
-shape = SubResource("CircleShape2D_8jyj3")
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("parent_ref")]
 collision_layer = 0

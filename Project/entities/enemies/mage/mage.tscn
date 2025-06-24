@@ -111,6 +111,7 @@ hurtbox = NodePath("HurtBox")
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_2w5tj")
 initial_state = NodePath("Idle")
+debug = true
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("3_d63xr")

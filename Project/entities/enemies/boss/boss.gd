@@ -10,7 +10,7 @@ class_name Boss
 func _ready() -> void:
 	super._ready()
 	boss_zone.global_position = global_position
-	boss_zone.set_up_zone(0, health)
+	boss_zone.set_up_zone(0, stats.max_health)
 	random_zone_position()
 
 

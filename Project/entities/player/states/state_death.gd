@@ -13,6 +13,7 @@ func enter() -> void:
 	await player.anim_tree.animation_finished
 	GameEnv.fade_in_out(0.3, "You Died")
 	await GameEnv.fade_step_wait
+	player.drop()
 
 	var camps = get_tree().get_nodes_in_group("Camp").filter(func(c: Camp): return c.camp_name == player.camp)
 	if not camps.is_empty() and camps[0]:
