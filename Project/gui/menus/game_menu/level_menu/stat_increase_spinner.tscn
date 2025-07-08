@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c1fy87vwy6oos"]
 
-[ext_resource type="Script" uid="uid://vbbf6euikvdx" path="res://test_scenes/stat_increase_spinner.gd" id="1_ib184"]
+[ext_resource type="Script" uid="uid://vbbf6euikvdx" path="res://gui/menus/game_menu/level_menu/stat_increase_spinner.gd" id="1_ib184"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ec7q8"]
 

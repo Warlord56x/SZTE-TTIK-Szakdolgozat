@@ -1,7 +1,7 @@
 extends Node
 class_name BuffComponent
 
-const BUFF_ELEMENT := preload("res://test_scenes/UI/buff_element.tscn")
+const BUFF_ELEMENT := preload("res://gui/buff_element/buff_element.tscn")
 
 @export var display_element: Control
 @export var apply_to: Node

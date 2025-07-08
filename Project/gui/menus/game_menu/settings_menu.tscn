@@ -1,16 +1,16 @@
 [gd_scene load_steps=7 format=3 uid="uid://c02qudtqfyl0a"]
 
-[ext_resource type="Script" uid="uid://c683coswm0pys" path="res://gui/menus/game_menu/settings_menu.gd" id="1_ty0iu"]
-[ext_resource type="PackedScene" uid="uid://dmk3l27wkrb82" path="res://gui/menus/menu_elements/volume_slider.tscn" id="2_c3e3u"]
-[ext_resource type="Shader" uid="uid://c72gwv2qqo3o8" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_wtfp7"]
-[ext_resource type="Script" uid="uid://c7a5noibqs2p7" path="res://assets/effects/effect_layer.gd" id="4_qiejg"]
+[ext_resource type="Script" uid="uid://c683coswm0pys" path="res://gui/menus/game_menu/settings_menu.gd" id="1_v21cc"]
+[ext_resource type="PackedScene" uid="uid://dmk3l27wkrb82" path="res://gui/menus/menu_elements/volume_slider.tscn" id="2_0iykg"]
+[ext_resource type="Shader" uid="uid://c72gwv2qqo3o8" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_okvfl"]
+[ext_resource type="Script" uid="uid://c7a5noibqs2p7" path="res://assets/effects/effect_layer.gd" id="4_f2rab"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5jag3"]
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gal56"]
-shader = ExtResource("3_wtfp7")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y4vpe"]
+shader = ExtResource("3_okvfl")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
 shader_parameter/beam_size = 0.01
@@ -21,7 +21,7 @@ shader_parameter/invert = false
 
 [node name="Settings" type="PanelContainer" node_paths=PackedStringArray("effect")]
 size_flags_vertical = 3
-script = ExtResource("1_ty0iu")
+script = ExtResource("1_v21cc")
 effect = NodePath("Effect")
 
 [node name="Panel" type="Panel" parent="."]
@@ -47,7 +47,7 @@ horizontal_alignment = 1
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="MasterVolumeSlider" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_c3e3u")]
+[node name="MasterVolumeSlider" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_0iykg")]
 unique_name_in_owner = true
 layout_mode = 2
 
@@ -88,11 +88,11 @@ focus_neighbor_top = NodePath("../VsyncCheck")
 text = "apply"
 
 [node name="Effect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_gal56")
+material = SubResource("ShaderMaterial_y4vpe")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
-script = ExtResource("4_qiejg")
+script = ExtResource("4_f2rab")
 corner_radius = 0.01
 
 [connection signal="volume_changed" from="MarginContainer/VBoxContainer/MasterVolumeSlider" to="." method="_on_master_volume_slider_volume_changed"]

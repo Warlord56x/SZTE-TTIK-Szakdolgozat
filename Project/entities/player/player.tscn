@@ -30,7 +30,7 @@
 [ext_resource type="Shader" uid="uid://rasm7isai8jl" path="res://assets/effects/shaders/blinker.gdshader" id="21_hreuu"]
 [ext_resource type="Texture2D" uid="uid://b4s3ar3xvuca5" path="res://assets/light_masks/2d_lights_and_shadows_neutral_point_light.webp" id="21_jh63l"]
 [ext_resource type="Script" uid="uid://bcxfp4ofnox3f" path="res://entities/player/interactor.gd" id="23_ken48"]
-[ext_resource type="PackedScene" uid="uid://bngmpnj1xby7e" path="res://test_scenes/UI/inventory_menu.tscn" id="25_riq7e"]
+[ext_resource type="PackedScene" uid="uid://bngmpnj1xby7e" path="res://gui/inventory/inventory_menu.tscn" id="25_riq7e"]
 [ext_resource type="Script" uid="uid://cjfcf2q3lekt4" path="res://data/model/helpers/hitbox.gd" id="26_3ibsb"]
 [ext_resource type="Script" uid="uid://cmo2sh3hbcvve" path="res://data/model/helpers/hurtbox.gd" id="28_80a7v"]
 

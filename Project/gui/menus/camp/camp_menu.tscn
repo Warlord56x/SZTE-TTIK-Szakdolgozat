@@ -1,17 +1,17 @@
 [gd_scene load_steps=16 format=3 uid="uid://b4tbr1nbwy7tb"]
 
-[ext_resource type="Script" uid="uid://dg2dnry3h8cop" path="res://test_scenes/UI/camp_menu.gd" id="1_ea34l"]
+[ext_resource type="Script" uid="uid://dg2dnry3h8cop" path="res://gui/menus/camp/camp_menu.gd" id="1_ea34l"]
 [ext_resource type="Script" uid="uid://c3hpthf37lpnu" path="res://gui/menus/menu_container.gd" id="2_jxgan"]
 [ext_resource type="Script" uid="uid://bko38t0dow60s" path="res://gui/menus/menu.gd" id="2_kouvb"]
 [ext_resource type="Shader" uid="uid://c72gwv2qqo3o8" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_g52xf"]
 [ext_resource type="Script" uid="uid://c7a5noibqs2p7" path="res://assets/effects/effect_layer.gd" id="4_s1lth"]
-[ext_resource type="Script" uid="uid://c5n0gpae6oypk" path="res://test_scenes/UI/camp_menus.gd" id="6_dx3ak"]
-[ext_resource type="Script" uid="uid://dcibavxbu8gw7" path="res://test_scenes/UI/travel.gd" id="7_diu0e"]
-[ext_resource type="Script" uid="uid://bhm5j8l7ojiao" path="res://test_scenes/UI/level_up.gd" id="7_evkrb"]
-[ext_resource type="PackedScene" uid="uid://c1fy87vwy6oos" path="res://test_scenes/stat_increase_spinner.tscn" id="7_n88r1"]
-[ext_resource type="PackedScene" uid="uid://du16tb8p7npf3" path="res://test_scenes/item_status.tscn" id="10_qg2rr"]
+[ext_resource type="Script" uid="uid://c5n0gpae6oypk" path="res://gui/menus/camp/camp_menus.gd" id="6_dx3ak"]
+[ext_resource type="Script" uid="uid://dcibavxbu8gw7" path="res://gui/menus/game_menu/travel.gd" id="7_diu0e"]
+[ext_resource type="Script" uid="uid://bhm5j8l7ojiao" path="res://gui/menus/game_menu/level_menu/level_up.gd" id="7_evkrb"]
+[ext_resource type="PackedScene" uid="uid://c1fy87vwy6oos" path="res://gui/menus/game_menu/level_menu/stat_increase_spinner.tscn" id="7_n88r1"]
+[ext_resource type="PackedScene" uid="uid://du16tb8p7npf3" path="res://gui/item_status.tscn" id="10_qg2rr"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8npqd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0nih3"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -34,7 +34,7 @@ font_color = Color(0.803922, 0.811765, 0.823529, 1)
 font_size = 6
 font_color = Color(0.803922, 0.811765, 0.823529, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d7pvs"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j6y3i"]
 shader = ExtResource("3_g52xf")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -128,7 +128,7 @@ layout_mode = 2
 text = "Travel"
 
 [node name="EffectLayer" type="ColorRect" parent="MarginContainer/MenuContainer/MainCampMenu"]
-material = SubResource("ShaderMaterial_8npqd")
+material = SubResource("ShaderMaterial_0nih3")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -365,7 +365,7 @@ metadata/_tab_index = 2
 layout_mode = 2
 
 [node name="EffectLayer" type="ColorRect" parent="MarginContainer/MenuContainer/CampChildMenu"]
-material = SubResource("ShaderMaterial_d7pvs")
+material = SubResource("ShaderMaterial_j6y3i")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

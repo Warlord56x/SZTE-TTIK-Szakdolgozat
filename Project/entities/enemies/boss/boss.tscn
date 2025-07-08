@@ -220,7 +220,6 @@ path_postprocessing = 1
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_1cn55")
 initial_state = NodePath("Idle")
-debug = true
 metadata/_custom_type_script = "uid://qvs8u77e2ysl"
 
 [node name="Idle" type="Node" parent="StateMachine"]

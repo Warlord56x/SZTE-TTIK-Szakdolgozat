@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://c7a5noibqs2p7" path="res://assets/effects/effect_layer.gd" id="5_2fc8d"]
 [ext_resource type="Shader" uid="uid://c72gwv2qqo3o8" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="5_slrmh"]
 [ext_resource type="Script" uid="uid://bko38t0dow60s" path="res://gui/menus/menu.gd" id="5_vppl2"]
-[ext_resource type="PackedScene" uid="uid://c02qudtqfyl0a" path="res://test_scenes/UI/settings_menu.tscn" id="6_kvjup"]
+[ext_resource type="PackedScene" uid="uid://c02qudtqfyl0a" path="res://gui/menus/game_menu/settings_menu.tscn" id="6_kvjup"]
 [ext_resource type="Script" uid="uid://knp1a02uj5gk" path="res://gui/menus/main_menu/new_game_menu.gd" id="10_krkvj"]
 [ext_resource type="Script" uid="uid://c30dx1ijydnut" path="res://gui/menus/menu_elements/save_list.gd" id="10_n7fjc"]
 [ext_resource type="Script" uid="uid://d2umscn2ogaj" path="res://gui/menus/main_menu/load_game_menu.gd" id="10_wiy0f"]

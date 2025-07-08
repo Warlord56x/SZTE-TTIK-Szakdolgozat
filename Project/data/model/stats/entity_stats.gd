@@ -13,6 +13,13 @@ var max_stamina: int
 @export var base_max_stamina: int = 12
 
 
+func _init() -> void:
+	set_vitalaity(vitality)
+	set_strength(strength)
+	set_dexterity(dexterity)
+	set_intelligence(intelligence)
+
+
 func calc_next_lvl_up_coin_cost(new_level: int, next: int = 1) -> int:
 	var diff = next + abs(level - new_level)
 	if diff == 0:
@@ -62,4 +69,5 @@ func _to_string() -> String:
 	result += "  Strength: " + str(strength) + "\n"
 	result += "  Dexterity: " + str(dexterity) + "\n"
 	result += "  Intelligence: " + str(intelligence) + "\n"
+	result += "Coin cost for next level: " + str(calc_multi_lvl_up_coin_cost(level + 1)) + "\n"
 	return result

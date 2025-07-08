@@ -165,6 +165,7 @@ func _process(_delta : float) -> void:
 			"Target: ", target, "\n",
 			"Invincible: ", invincible, "\n",
 			"Attacking in: ", get_node_or_null("AttackTimer").time_left if get_node_or_null("AttackTimer") else 0, "\n",
+			"Chasing: ", chase_timer.time_left if chase_timer else 0.0, "\n",
 			"State: ", state_machine.current_state.name, "\n",
 			"Position: ", global_position, "\n",
 			"Knock_back: ", pushback_force, "\n",
@@ -184,7 +185,7 @@ func _physics_process(delta: float) -> void:
 			target = possible_target
 			if state_machine.current_state.name.to_lower() == "idle":
 				state_machine.travel(travel_on_detect.name)
-				print("stucking")
+				#print("stucking")
 
 	physics_process(delta)
 	velocity += pushback_force
@@ -221,6 +222,7 @@ func detection_exited(body) -> void:
 		return
 	if body == possible_target:
 		possible_target = null
+		#target = null
 	if body is Player and ai:
 		state_machine.travel("Chase")
 

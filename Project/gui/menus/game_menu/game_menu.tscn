@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://c3hpthf37lpnu" path="res://gui/menus/menu_container.gd" id="3_x1cqt"]
 [ext_resource type="Script" uid="uid://bt0h7lsw3h5cy" path="res://gui/menus/game_menu/main_game_menu.gd" id="4_f786d"]
 [ext_resource type="Script" uid="uid://xntaxdepy2hm" path="res://gui/menus/game_menu/status_menu.gd" id="5_d28p0"]
-[ext_resource type="PackedScene" uid="uid://c02qudtqfyl0a" path="res://test_scenes/UI/settings_menu.tscn" id="6_4evkw"]
-[ext_resource type="PackedScene" uid="uid://b1ymk23npn35b" path="res://test_scenes/stat_display.tscn" id="6_ugvnl"]
+[ext_resource type="PackedScene" uid="uid://c02qudtqfyl0a" path="res://gui/menus/game_menu/settings_menu.tscn" id="6_4evkw"]
+[ext_resource type="PackedScene" uid="uid://b1ymk23npn35b" path="res://gui/menus/game_menu/level_menu/stat_display.tscn" id="6_ugvnl"]
 [ext_resource type="Script" uid="uid://c7a5noibqs2p7" path="res://assets/effects/effect_layer.gd" id="6_wtw0d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qr1om"]
@@ -14,7 +14,7 @@
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ejmm7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x1jyd"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -28,7 +28,7 @@ shader_parameter/invert = false
 line_spacing = 0.0
 font_size = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xwae3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_no48n"]
 shader = ExtResource("3_5sbp6")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -126,7 +126,7 @@ layout_mode = 2
 text = "Save & Exit"
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/Main"]
-material = SubResource("ShaderMaterial_ejmm7")
+material = SubResource("ShaderMaterial_x1jyd")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -227,7 +227,7 @@ stat_name = "Stamina"
 stat = 20
 
 [node name="Effect" type="ColorRect" parent="Margin/MenuContainer/StatusMenu"]
-material = SubResource("ShaderMaterial_xwae3")
+material = SubResource("ShaderMaterial_no48n")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

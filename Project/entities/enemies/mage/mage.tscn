@@ -105,13 +105,13 @@ travel_on_detect = NodePath("StateMachine/Combat")
 chase_timer = NodePath("ChaseTimer")
 sprite = NodePath("Sprite")
 limit_nav_axis = Vector2i(1, 0)
+debug = true
 stats = SubResource("Resource_1rc8i")
 hurtbox = NodePath("HurtBox")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_2w5tj")
 initial_state = NodePath("Idle")
-debug = true
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("3_d63xr")

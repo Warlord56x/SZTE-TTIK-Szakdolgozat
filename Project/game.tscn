@@ -2,8 +2,8 @@
 
 [ext_resource type="FontFile" uid="uid://dlredfj6w44oh" path="res://assets/fonts/nin_font.png" id="2_qcju4"]
 [ext_resource type="PackedScene" uid="uid://b2qrpcmioix5b" path="res://gui/menus/game_menu/game_menu.tscn" id="3_fxh5a"]
-[ext_resource type="PackedScene" uid="uid://b4tbr1nbwy7tb" path="res://test_scenes/UI/camp_menu.tscn" id="3_vtc0b"]
-[ext_resource type="Script" uid="uid://fb75h858o17" path="res://test_scenes/labeldebug.gd" id="4_d83g2"]
+[ext_resource type="PackedScene" uid="uid://b4tbr1nbwy7tb" path="res://gui/menus/camp/camp_menu.tscn" id="3_vtc0b"]
+[ext_resource type="Script" uid="uid://fb75h858o17" path="res://experimental/labeldebug.gd" id="4_d83g2"]
 [ext_resource type="PackedScene" uid="uid://n7valmjwtbx1" path="res://map/tile_map.tscn" id="7_lc2xo"]
 [ext_resource type="PackedScene" uid="uid://ccnvol1i0rgkn" path="res://entities/enemies/boss/boss.tscn" id="8_lc2xo"]
 [ext_resource type="PackedScene" uid="uid://b25vye5etxi5" path="res://entities/enemies/swordsman/swordsman.tscn" id="9_80lmc"]
