@@ -1,0 +1,117 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfoaaq0jgdt7b"]
+
+[ext_resource type="Script" uid="uid://xntaxdepy2hm" path="res://gui/menus/game_menu/status_menu.gd" id="1_t3qx5"]
+[ext_resource type="PackedScene" uid="uid://b1ymk23npn35b" path="res://gui/menus/game_menu/level_menu/stat_display.tscn" id="2_ixmo6"]
+[ext_resource type="Shader" uid="uid://c72gwv2qqo3o8" path="res://assets/effects/shaders/ui_dissolve.gdshader" id="3_1c515"]
+[ext_resource type="Script" uid="uid://c7a5noibqs2p7" path="res://assets/effects/effect_layer.gd" id="4_kvnj4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p44gk"]
+line_spacing = 0.0
+font_size = 12
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t3qx5"]
+shader = ExtResource("3_1c515")
+shader_parameter/progress = 0.0
+shader_parameter/noise_desnity = 30.0
+shader_parameter/beam_size = 0.01
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pixel_size = 0.01
+shader_parameter/corner_radius = 0.01
+shader_parameter/invert = false
+
+[node name="StatusMenu" type="PanelContainer" node_paths=PackedStringArray("effect")]
+script = ExtResource("1_t3qx5")
+effect = NodePath("Effect")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Status"
+label_settings = SubResource("LabelSettings_p44gk")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CoreStatsLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Core stats:"
+
+[node name="StatLevel" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_ixmo6")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Level"
+stat = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StatVitality" parent="MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_ixmo6")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Vitality"
+stat = 10
+
+[node name="StatStrength" parent="MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_ixmo6")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Strength"
+stat = 10
+
+[node name="StatDexterity" parent="MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_ixmo6")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Dexterity"
+stat = 10
+
+[node name="StatIntelligence" parent="MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_ixmo6")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Intelligence"
+stat = 10
+
+[node name="BasicStatsLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Basic stats:"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StatHealth" parent="MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("2_ixmo6")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Health"
+stat = 20
+
+[node name="StatMana" parent="MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("2_ixmo6")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Mana"
+stat = 20
+
+[node name="StatStamina" parent="MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("2_ixmo6")]
+unique_name_in_owner = true
+layout_mode = 2
+stat_name = "Stamina"
+stat = 20
+
+[node name="Effect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_t3qx5")
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("4_kvnj4")
+corner_radius = 0.01

@@ -25,7 +25,7 @@ func initial_case() -> void:
 	assert(test_entity_stat.max_health == 28, "Max should be 28")
 	assert(test_entity_stat.max_mana == 28, "Max should be 28")
 	assert(test_entity_stat.max_stamina == 28, "Max should be 28")
-	
+
 	print("Initial test: Passed")
 
 
@@ -50,7 +50,7 @@ func low_level_case() -> void:
 
 	assert(test_entity_stat.calc_multi_lvl_up_coin_cost(6) == 24)
 	assert(test_entity_stat.calc_multi_lvl_up_coin_cost(40) == 2625)
-	
+
 	print("Low level test: Passed")
 
 

@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dq3r6eq5kcrtt" path="res://gui/action_mapper.tscn" id="9_uktdj"]
 [ext_resource type="PackedScene" uid="uid://du16tb8p7npf3" path="res://gui/item_status.tscn" id="12_c4nxq"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7nw1x"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c05o8"]
 shader = ExtResource("6_nxjw7")
 shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 30.0
@@ -94,7 +94,7 @@ layout_mode = 2
 category = ExtResource("7_sb7xk")
 
 [node name="EffectLayer" type="ColorRect" parent="MarginContainer/HBoxContainer/Menu"]
-material = SubResource("ShaderMaterial_7nw1x")
+material = SubResource("ShaderMaterial_c05o8")
 layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

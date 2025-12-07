@@ -24,11 +24,11 @@ func _on_delete_button_pressed() -> void:
 	del_conf_dialog.popup_centered()
 
 
-func load_done(status: ResourceLoader.ThreadLoadStatus) -> void:
+func load_done(scene_str: String, status: ResourceLoader.ThreadLoadStatus) -> void:
 	if status == ResourceLoader.THREAD_LOAD_FAILED:
 		printerr("Scene loading has been failed")
 		return
-	var scene: PackedScene = ResourceLoader.load_threaded_get(NodeLoader.GAME_SCENE)
+	var scene: PackedScene = ResourceLoader.load_threaded_get(scene_str)
 	if scene.resource_path == NodeLoader.GAME_SCENE:
 		SaveManager.change_to_loaded_game(scene, save_list.slot)
 		GameEnv.fade_out("Loading...")
